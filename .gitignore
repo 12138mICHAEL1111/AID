@@ -39,3 +39,7 @@ yarn-debug.log*
 *.DS_Store
 .vscode/
 settings.json
+
+# Ignore node-modules
+/STOP-SERVER/server/node_modules
+/STOP-SERVER/admin/node_modules
