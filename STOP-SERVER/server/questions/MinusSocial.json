@@ -1,0 +1,31 @@
+{
+    "Item":[
+        {"context":"You sit down to have your appraisal with your line manager. They show you your feedback scores and tell you that they are good scores but the scores aren't quite as high as you would have hoped for.",
+         "question1":"You decide your feedback scores are still",
+        "blank":"p-ea-ing",
+        "answer1":"ls",
+        "question2":"Are you unhappy with the feedback scores you obtained when your manager encourages you that you got good scores and will get better scores next time?",
+        "answer2":"No"},
+        {"context":"You go to dinner for the first time with your date.  You have a really niceevening but you spill your wine by accident.",
+          "question1":"Reflecting later on the evening you think it was",
+          "blank":"g-od",
+          "answer1":"o",
+           "question2":"Did you have an enjoyable dinner date?",
+           "answer2":"Yes"   
+        },
+        {"context":"You remember your parents making fun of you when you were younger when you did not know something.",
+            "question1":"When you ask your colleagues a question at work, you assume that everyone will think that what you have asked is",
+            "blank":"re-son-b-e",
+            "answer1":"aal",
+             "question2":"Did your colleagues think that your question was ridiculous?",
+             "answer2":"No"   
+          },
+          {"context":"You attend a conference where you know it is important to network. You feel a littleuncomfortable introducing yourself to new people but you manage to arrange to meet 2 people.",
+            "question1":"Despite your shyness you decide your efforts at networking were",
+            "blank":"u-e-ul",
+            "answer1":"sf",
+             "question2":"Did you network effectively despite your shyness when you check your emails and see you have been contacted by the people that you met?",
+             "answer2":"Yes"   
+          }
+    ]
+}

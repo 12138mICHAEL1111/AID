@@ -1,20 +1,20 @@
-
 module.exports= app=>{
     const express = require('express')
     const jwt = require('jsonwebtoken')
-    const User  = require('../../models/User')
+    const fs = require('fs')
+    const assert = require('http-assert')
     const router = express.Router({
         mergeParams : true
     })
     router.post("/signin",async(req,res)=>{    
-        const findUser = await User.findOne({email:req.body.email})
+        const findUser = await req.model.findOne({email:req.body.email})
         if(findUser!=null){
             res.send({"message":"email has been registered"});
         }
         else{
-            const model = await User.create(req.body)
+            const model = await req.model.create(req.body)
             const email = req.body.email
-            const currentUser = await User.find({email})
+            const currentUser = await req.model.find({email})
             const token = jwt.sign({
                 id: currentUser._id
             }, app.get('secret'))
@@ -22,8 +22,57 @@ module.exports= app=>{
         }   
     })
 
+    router.get("/:session",async(req,res)=>{
+        const totalItems = await req.Model.find()
+        var sessionItems = new Array()
+        if(req.params.session == "session1"){            
+            for(var i =0;i<18;i++){
+                sessionItems.push(totalItems[i])
+            }
+        }
+        else if(req.params.session == "session2"){
+            for(var i =18;i<36;i++){
+                sessionItems.push(totalItems[i])
+            }
+        }
+        else if(req.params.session == "session3"){
+            for(var i =36;i<54;i++){
+                sessionItems.push(totalItems[i])
+            }
+        }
+        else{
+            for(var i =54;i<72;i++){
+                sessionItems.push(totalItems[i])
+            }
+        }
+        res.send({"questions":sessionItems})
+    })
+    
+
+    router.post("/",async(req,res)=>{
+        const modelName = require('inflection').classify(req.params.resource)
+        const ItemPath = `./questions/${modelName}.json`
+        fs.readFile(ItemPath,'utf-8',  async function(err,data){
+            if(err){
+                console.log(err)
+            }
+           const Items = JSON.parse(data).Item
+           const firstContext = Items[0].context
+           const findFirst =  await req.Model.findOne({"context":firstContext})
+            if(findFirst){
+                res.status(403).send({"message":"就知道你会再点一次的!!"})
+            }else{
+                for(var i =0;i<Items.length;i++){
+                    req.Model.create(Items[i])
+                    }        
+                res.send({"message":"success"})
+            }
+        }
+        )
+    })
+    
     router.post("/login",async(req,res)=>{
-        const findUser = await User.findOne({email:req.body.email})
+        const findUser = await req.model.findOne({email:req.body.email})
         if(findUser==null){
             res.send({"message":"cannot find this email address"})
         }
@@ -37,7 +86,12 @@ module.exports= app=>{
           }
         }
     })
-    app.use('/stop/api',router)
+    const resource = require("../../middleware/resource")
+    app.use('/stop/api/rest/:resource',resource(),router)
 
-  
+    app.use(async(err,req,res,next)=>{
+        res.status(err.statusCode || 500).send({
+            message: err.message
+        })
+    })
 }
