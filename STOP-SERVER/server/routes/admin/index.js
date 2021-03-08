@@ -45,9 +45,13 @@ module.exports= app=>{
                 sessionItems.push(totalItems[i])
             }
         }
-        res.send({"questions":sessionItems})
+        res.send(sessionItems)
     })
     
+    router.get("/",async(req,res)=>{
+        const questions = await req.Model.find()
+        res.send(questions)
+    })
 
     router.post("/",async(req,res)=>{
         const modelName = require('inflection').classify(req.params.resource)

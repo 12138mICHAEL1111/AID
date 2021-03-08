@@ -42,8 +42,8 @@ export default {
              }
         },
         async testApi(){
-            const res = await this.$http.get('/rest/controlitems/session4')
-            console.log(res.data.questions)
+            const res = await this.$http.get('/rest/controlitems')
+            console.log(res.data)
         }
     }
 }
