@@ -5,15 +5,16 @@ module.exports= app=>{
     const router = express.Router({
         mergeParams : true
     })
-    router.post("/signup",async(req,res)=>{    
-        const findUser = await req.model.findOne({email:req.body.email})
+    router.post("/signup",async(req,res)=>{   
+        console.log("success") 
+        const findUser = await req.Model.findOne({email:req.body.email})
         if(findUser!=null){
             res.send({"message":"email has been registered"});
         }
         else{
-            const model = await req.model.create(req.body)
+            const model = await req.Model.create(req.body)
             const email = req.body.email
-            const currentUser = await req.model.find({email})
+            const currentUser = await req.Model.find({email})
             const token = jwt.sign({
                 id: currentUser._id
             }, app.get('secret'))
@@ -75,7 +76,7 @@ module.exports= app=>{
     })
     
     router.post("/login",async(req,res)=>{
-        const findUser = await req.model.findOne({email:req.body.email})
+        const findUser = await req.Model.findOne({email:req.body.email})
         if(findUser==null){
             res.send({"message":"cannot find this email address"})
         }
