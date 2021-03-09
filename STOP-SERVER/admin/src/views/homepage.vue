@@ -7,6 +7,12 @@
          <br><br>
          <el-button type="primary" @click="uploadMinusSocial">一键增加minus social</el-button>
          <br><br>
+         <el-button type="primary" @click="uploadMinusRelationship">一键增加minus relationship</el-button>
+         <br><br>
+         <el-button type="primary" @click="uploadMinusFamily">一键增加minus family</el-button>
+         <br><br>
+         <el-button type="primary" @click="uploadMinusWork">一键增加minus work</el-button>
+         <br><br>
          <el-button type="primary" @click="testApi">接口测试</el-button>
     </div>
 </template>
@@ -41,8 +47,35 @@ export default {
                  })
              }
         },
+        async uploadMinusRelationship(){
+            const res = await this.$http.post('/rest/minusrelationships')
+            if(res.data.message=="success"){
+                 this.$message({
+                     type: "success",
+                     message: "添加成功!"
+                 })
+             }
+        },
+        async uploadMinusFamily(){
+            const res = await this.$http.post('/rest/minusfamilies')
+            if(res.data.message=="success"){
+                 this.$message({
+                     type: "success",
+                     message: "添加成功!"
+                 })
+             }
+        },
+         async uploadMinusWork(){
+            const res = await this.$http.post('/rest/minusworks')
+            if(res.data.message=="success"){
+                 this.$message({
+                     type: "success",
+                     message: "添加成功!"
+                 })
+             }
+        },
         async testApi(){
-            const res = await this.$http.get('/rest/controlitems')
+            const res = await this.$http.get('/rest/minusrelationships/session4')
             console.log(res.data)
         }
     }

@@ -2,11 +2,10 @@ module.exports= app=>{
     const express = require('express')
     const jwt = require('jsonwebtoken')
     const fs = require('fs')
-    const assert = require('http-assert')
     const router = express.Router({
         mergeParams : true
     })
-    router.post("/signin",async(req,res)=>{    
+    router.post("/signup",async(req,res)=>{    
         const findUser = await req.model.findOne({email:req.body.email})
         if(findUser!=null){
             res.send({"message":"email has been registered"});
@@ -41,7 +40,7 @@ module.exports= app=>{
             }
         }
         else{
-            for(var i =54;i<72;i++){
+            for(var i =54;i<totalItems.length;i++){
                 sessionItems.push(totalItems[i])
             }
         }
