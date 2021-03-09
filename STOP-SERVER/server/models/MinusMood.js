@@ -28,4 +28,4 @@ const schema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('MinusSocial',schema)
+module.exports = mongoose.model('MinusMood',schema)

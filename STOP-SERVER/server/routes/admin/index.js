@@ -6,7 +6,6 @@ module.exports= app=>{
         mergeParams : true
     })
     router.post("/signup",async(req,res)=>{   
-        console.log("success") 
         const findUser = await req.Model.findOne({email:req.body.email})
         if(findUser!=null){
             res.send({"message":"email has been registered"});
