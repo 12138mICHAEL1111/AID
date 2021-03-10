@@ -4,6 +4,7 @@ import 'package:adobe_xd/page_link.dart';
 import 'package:adobe_xd/pinned.dart';
 import './Practicepage2.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screen_adapter/flutter_screen_adapter.dart';
 
 class Selectcategoriespage extends StatelessWidget {
   Selectcategoriespage({
@@ -11,6 +12,7 @@ class Selectcategoriespage extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    ScreenAdapter.init(context);
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       body: Stack(

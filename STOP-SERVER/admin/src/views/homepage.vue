@@ -109,7 +109,7 @@ export default {
              }
         },
         async testApi(){
-            const res = await this.$http.get('/rest/minusmoods/session1')
+            const res = await this.$http.get('/rest/minusfamilies/session1')
             console.log(res.data)
         }
     }
