@@ -1,6 +1,6 @@
-
-import 'package:adobe_xd/page_link.dart';
 import 'package:flutter/material.dart';
+import './Loginpage.dart';
+import 'package:adobe_xd/page_link.dart';
 
 class Start extends StatelessWidget {
   Start({
@@ -21,7 +21,7 @@ class Start extends StatelessWidget {
               height: 926.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage(''),
+                  image: const AssetImage('assets/images/background.jpg'),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -30,13 +30,14 @@ class Start extends StatelessWidget {
           Transform.translate(
             offset: Offset(96.0, 244.0),
             child:
+                // Adobe XD layer: 'WechatIMG1138的副本' (shape)
                 PageLink(
               links: [
                 PageLinkInfo(
                   transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  //pageBuilder: () => Loginpage(),
+                  pageBuilder: () => Loginpage(),
                 ),
               ],
               child: Container(
@@ -44,7 +45,7 @@ class Start extends StatelessWidget {
                 height: 219.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage(''),
+                    image: const AssetImage('assets/images/logoOfStart.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -59,7 +60,7 @@ class Start extends StatelessWidget {
                   transition: LinkTransition.Fade,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  //pageBuilder: () => Loginpage(),
+                  pageBuilder: () => Loginpage(),
                 ),
               ],
               child: Text(

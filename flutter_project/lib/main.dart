@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return MaterialApp(
-      initialRoute: '/',
+      initialRoute: '/select', //the page this app will start at
       onGenerateRoute: onGenerateRoute
     );
   }
