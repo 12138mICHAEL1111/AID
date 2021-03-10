@@ -3,13 +3,14 @@ import "../pages/Start.dart";
 import "../pages/Loginpage.dart";
 import "../pages/Selectcategoriespage.dart";
 
+// All the routes
 final routes = {
   '/': (context) => Start(),
   '/login': (context) => Loginpage(),
   '/select': (context) => Selectcategoriespage()
 };
 
-// 路由传值的固定代码
+// This block will handle routes with or without parameter
 var onGenerateRoute = (RouteSettings settings) {
   final String name = settings.name;
   final Function pageContentBuilder = routes[name];
