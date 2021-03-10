@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import "../pages/Start.dart";
+import "../pages/Loginpage.dart";
+import "../pages/Selectcategoriespage.dart";
 
 final routes = {
   '/': (context) => Start(),
+  '/login': (context) => Loginpage(),
+  '/select': (context) => Selectcategoriespage()
 };
 
 // 路由传值的固定代码
