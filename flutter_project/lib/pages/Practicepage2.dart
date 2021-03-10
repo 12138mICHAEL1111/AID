@@ -1,16 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import './Practice2Wrongpage.dart';
 import 'package:adobe_xd/page_link.dart';
-import './Practice2Correctpage.dart';
 import './Selectcategoriespage.dart';
-import './Practicepage1.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:dio/dio.dart';
 
-class Practicepage2 extends StatelessWidget {
-  Practicepage2({
-    Key key,
-  }) : super(key: key);
+class Practicepage2 extends StatefulWidget {
+  @override
+  _Practicepage2State createState() => _Practicepage2State();
+}
+
+class _Practicepage2State extends State<Practicepage2> {
+  var _answer = "";
+  var _next = false;
+  var _feedback = "";
+
+  _getData() async {
+    var api = 'http://192.168.3.17:3000/stop/api/rest/practiseitems';
+    var response = await Dio().get(api);
+    _answer = response.data[0]['answer2'];
+  }
+
+  bool _validateData(value) {
+    _getData();
+    if (_answer == value) {
+      setState(() {
+        _feedback = '✔ Great, this is a good answer!';
+      });
+      return _next = true;
+    } else {
+      setState(() {
+        _feedback = '✗ What would be a different answer?';
+      });
+      return _next = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -352,82 +377,98 @@ class Practicepage2 extends StatelessWidget {
               ),
             ),
           ),
+          // Transform.translate(
+          //   offset: Offset(109.0, 451.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.Fade,
+          //         ease: Curves.linear,
+          //         duration: 1.0,
+          //         pageBuilder: () => Practice2Wrongpage(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 218.0,
+          //       height: 41.0,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(20.0),
+          //         color: const Color(0xffffffff),
+          //         border:
+          //             Border.all(width: 1.0, color: const Color(0xff707070)),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Transform.translate(
-            offset: Offset(109.0, 451.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.Fade,
-                  ease: Curves.linear,
-                  duration: 1.0,
-                  pageBuilder: () => Practice2Wrongpage(),
+            offset: Offset(120.6, 458.0),
+            child: FlatButton(
+                minWidth: 180.0,
+                height: 50,
+                hoverColor: Color(0xfffaaf7b),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                color: Colors.grey[300],
+                child: Text(
+                  'Yes',
+                  style: TextStyle(
+                    fontFamily: 'ZiZhiQuXiMaiTi',
+                    fontSize: 21,
+                    color: const Color(0xff000000),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-              ],
-              child: Container(
-                width: 218.0,
-                height: 41.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.0),
-                  color: const Color(0xffffffff),
-                  border:
-                      Border.all(width: 1.0, color: const Color(0xff707070)),
-                ),
-              ),
-            ),
+                onPressed: () {
+                  _validateData("Yes");
+                }),
           ),
+          // Transform.translate(
+          //   offset: Offset(109.0, 524.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.Fade,
+          //         ease: Curves.linear,
+          //         duration: 1.0,
+          //         pageBuilder: () => Practice2Correctpage(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 218.0,
+          //       height: 41.0,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(20.0),
+          //         color: const Color(0xffffffff),
+          //         border:
+          //             Border.all(width: 1.0, color: const Color(0xff707070)),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+
           Transform.translate(
-            offset: Offset(77.6, 458.0),
-            child: SizedBox(
-              width: 273.0,
-              child: Text(
-                'Yes',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 21,
-                  color: const Color(0xff000000),
+            offset: Offset(120.6, 531.0),
+            child: FlatButton(
+                minWidth: 180.0,
+                height: 50,
+                hoverColor: Color(0xfffaaf7b),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                color: Colors.grey[300],
+                child: Text(
+                  'No',
+                  style: TextStyle(
+                    fontFamily: 'ZiZhiQuXiMaiTi',
+                    fontSize: 21,
+                    color: const Color(0xff000000),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ),
+                onPressed: () {
+                  _validateData("No");
+                }),
           ),
-          Transform.translate(
-            offset: Offset(109.0, 524.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.Fade,
-                  ease: Curves.linear,
-                  duration: 1.0,
-                  pageBuilder: () => Practice2Correctpage(),
-                ),
-              ],
-              child: Container(
-                width: 218.0,
-                height: 41.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20.0),
-                  color: const Color(0xffffffff),
-                  border:
-                      Border.all(width: 1.0, color: const Color(0xff707070)),
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(77.6, 531.0),
-            child: SizedBox(
-              width: 273.0,
-              child: Text(
-                'No',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 21,
-                  color: const Color(0xff000000),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+
           Transform.translate(
             offset: Offset(123.8, 596.0),
             child: SizedBox(
@@ -443,6 +484,23 @@ class Practicepage2 extends StatelessWidget {
               ),
             ),
           ),
+
+          Transform.translate(
+            offset: Offset(108.4, 685.0),
+            child: SizedBox(
+              width: 211.0,
+              child: Text(
+                "${_feedback}",
+                style: TextStyle(
+                  fontFamily: 'ZiZhiQuXiMaiTi',
+                  fontSize: 21,
+                  color: const Color(0xfff0660e),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+
           Transform.translate(
             offset: Offset(41.0, 763.0),
             child: PageLink(
@@ -479,8 +537,8 @@ class Practicepage2 extends StatelessWidget {
           ),
           Transform.translate(
             offset: Offset(156.3, 775.0),
-            child: SizedBox(
-              width: 116.0,
+            child: FlatButton(
+              color: Colors.transparent,
               child: Text(
                 'Next',
                 style: TextStyle(
@@ -490,33 +548,38 @@ class Practicepage2 extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
+              onPressed: () {
+                if (_next == true) {
+                  Navigator.pushNamed(context, '/select');
+                }
+              },
             ),
           ),
-          Transform.translate(
-            offset: Offset(20.0, 42.0),
-            child:
-                // Adobe XD layer: 'jiantou' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushRight,
-                  ease: Curves.easeIn,
-                  duration: 1.0,
-                  pageBuilder: () => Practicepage1(),
-                ),
-              ],
-              child: Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/images/goback.png'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // Transform.translate(
+          //   offset: Offset(20.0, 42.0),
+          //   child:
+          //       // Adobe XD layer: 'jiantou' (shape)
+          //       PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.PushRight,
+          //         ease: Curves.easeIn,
+          //         duration: 1.0,
+          //         pageBuilder: () => Practicepage1(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 50.0,
+          //       height: 50.0,
+          //       decoration: BoxDecoration(
+          //         image: DecorationImage(
+          //           image: const AssetImage('assets/images/goback.png'),
+          //           fit: BoxFit.fill,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
