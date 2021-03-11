@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context){
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: '/select', //the page this app will start at
       onGenerateRoute: onGenerateRoute
     );
