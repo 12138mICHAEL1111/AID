@@ -11,9 +11,20 @@ class Practicepage2 extends StatefulWidget {
 }
 
 class _Practicepage2State extends State<Practicepage2> {
-  var _answer = "";
-  var _next = false;
-  var _feedback = "";
+  var _answer;
+  var _next;
+  var _feedback;
+  var _pressed;
+
+  @override
+  void initState() {
+    super.initState();
+    _answer = "";
+    _next = false;
+    _feedback = "";
+    _pressed = false;
+    _getData();
+  }
 
   _getData() async {
     var api = 'http://192.168.3.17:3000/stop/api/rest/practiseitems';
@@ -22,7 +33,6 @@ class _Practicepage2State extends State<Practicepage2> {
   }
 
   bool _validateData(value) {
-    _getData();
     if (_answer == value) {
       setState(() {
         _feedback = '✔ Great, this is a good answer!';
@@ -551,6 +561,10 @@ class _Practicepage2State extends State<Practicepage2> {
               onPressed: () {
                 if (_next == true) {
                   Navigator.pushNamed(context, '/select');
+                } else if (_pressed == false) {
+                  setState(() {
+                    _feedback = '↺ Please select an option.';
+                  });
                 }
               },
             ),

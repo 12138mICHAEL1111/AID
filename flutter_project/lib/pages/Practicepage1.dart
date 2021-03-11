@@ -12,9 +12,20 @@ class Practicepage1 extends StatefulWidget {
 }
 
 class _Practicepage1State extends State<Practicepage1> {
-  var _answer = "";
-  var _next = false;
-  var _feedback = "";
+  var _answer;
+  var _next;
+  var _feedback;
+  var _length;
+
+  @override
+  void initState() {
+    super.initState();
+    _answer = "";
+    _next = false;
+    _feedback = "";
+    _length = 0;
+    _getData();
+  }
 
   _getData() async {
     var api = 'http://192.168.3.17:3000/stop/api/rest/practiseitems';
@@ -23,11 +34,13 @@ class _Practicepage1State extends State<Practicepage1> {
   }
 
   bool _compareData(String string1, String string2) {
-    return string1?.toLowerCase() == string2?.toLowerCase();
+    if (string1 == null || string2 == null) {
+      return false;
+    }
+    return string1.toLowerCase() == string2.toLowerCase();
   }
 
   bool _validateData(value) {
-    _getData();
     if (_compareData(_answer, value)) {
       setState(() {
         _feedback = '✔ Great, this is a good answer!';
@@ -35,7 +48,7 @@ class _Practicepage1State extends State<Practicepage1> {
       return true;
     } else {
       setState(() {
-        _feedback = '✗ What would be a different answer?';
+        _feedback = '✗ Good. But what would be a different answer?';
       });
       return false;
     }
@@ -381,14 +394,23 @@ class _Practicepage1State extends State<Practicepage1> {
           Transform.translate(
               offset: Offset(110, 503.0),
               child: Container(
+                width: 250.0,
                 child: TextField(
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
                   decoration: InputDecoration(
                       labelText: "M _ _ k",
                       contentPadding: EdgeInsets.all(0),
                       border: InputBorder.none),
                   onChanged: (value) {
-                    if (value.length >= _answer.length) {
+                    _length = value.length;
+                    if (_length >= _answer.length) {
                       _next = _validateData(value);
+                    }
+                    if (_length >= 6) {
+                      setState(() {
+                        _feedback = '↺ Please fill in less characters.';
+                      });
                     }
                   },
                   style: TextStyle(
@@ -495,6 +517,10 @@ class _Practicepage1State extends State<Practicepage1> {
               onPressed: () {
                 if (_next == true) {
                   Navigator.pushNamed(context, '/practice2');
+                } else if (_length == 0) {
+                  setState(() {
+                    _feedback = '↺ Please fill in the all missing characters.';
+                  });
                 }
               },
             ),
@@ -519,16 +545,16 @@ class _Practicepage1State extends State<Practicepage1> {
           //     ),
           //   ),
           // ),
-          Transform.translate(
-            offset: Offset(224.0, 568.0),
-            child: Container(
-              width: 37.0,
-              height: 33.0,
-              decoration: BoxDecoration(
-                color: const Color(0xffffffff),
-              ),
-            ),
-          ),
+          // Transform.translate(
+          //   offset: Offset(224.0, 568.0),
+          //   child: Container(
+          //     width: 37.0,
+          //     height: 33.0,
+          //     decoration: BoxDecoration(
+          //       color: const Color(0xffffffff),
+          //     ),
+          //   ),
+          // ),
           Transform.translate(
             offset: Offset(20.0, 42.0),
             child:
