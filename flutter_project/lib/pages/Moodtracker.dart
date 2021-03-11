@@ -1,11 +1,42 @@
 import 'package:flutter/material.dart';
 import './Item1.dart';
 import 'package:adobe_xd/page_link.dart';
+import 'package:flutter/rendering.dart';
 
-class Moodtracker extends StatelessWidget {
-  Moodtracker({
-    Key key,
-  }) : super(key: key);
+class Moodtracker extends StatefulWidget {
+  @override
+  _MoodtrackerState createState() => _MoodtrackerState();
+}
+
+class _MoodtrackerState extends State<Moodtracker> {
+  var images = [
+    "assets/images/1.png",
+    "assets/images/2.png",
+    "assets/images/3.png",
+    "assets/images/4.png",
+    "assets/images/5.png",
+  ];
+
+  var pressedImage = [
+    "assets/images/11.png",
+    "assets/images/22.png",
+    "assets/images/33.png",
+    "assets/images/44.png",
+    "assets/images/55.png",
+  ];
+
+  ImageRadioController aController;
+  ImageRadioController hController;
+  ImageRadioController sController;
+
+  @override
+  void initState() {
+    aController = new ImageRadioController();
+    hController = new ImageRadioController();
+    sController = new ImageRadioController();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,424 +123,236 @@ class Moodtracker extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(156.3, 775.0),
-            child: SizedBox(
-              width: 116.0,
-              child: Text(
-                'Next',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 43,
-                  color: const Color(0xffffffff),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+              offset: Offset(156.3, 775.0),
+              child: SizedBox(
+                  width: 116.0,
+                  child: OutlineButton(
+                    borderSide: BorderSide.none,
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/session');
+                    },
+                    child: Text(
+                      'Next',
+                      style: TextStyle(
+                        fontFamily: 'ZiZhiQuXiMaiTi',
+                        fontSize: 38,
+                        color: const Color(0xffffffff),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ))),
           Transform.translate(
-            offset: Offset(144.5, 157.0),
+            offset: Offset(149.5, 185.0),
             child: SizedBox(
-              width: 139.0,
-              child: Text(
-                'Paranoid',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 30,
-                  color: const Color(0xff000000),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(149.5, 298.0),
-            child: SizedBox(
-              width: 129.0,
+              width: 130.0,
               child: Text(
                 'Anxious',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 30,
-                  color: const Color(0xff000000),
+                  color: const Color.fromRGBO(32, 50, 80, 1.0),
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
           Transform.translate(
-            offset: Offset(181.5, 448.0),
+            offset: Offset(149.5, 370.0),
             child: SizedBox(
-              width: 65.0,
+              width: 130.0,
+              child: Text(
+                'Happy',
+                style: TextStyle(
+                  fontFamily: 'ZiZhiQuXiMaiTi',
+                  fontSize: 30,
+                  color: const Color.fromRGBO(32, 50, 80, 1.0),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(149.5, 555.0),
+            child: SizedBox(
+              width: 130.0,
               child: Text(
                 'Sad',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 30,
-                  color: const Color(0xff000000),
+                  color: const Color.fromRGBO(32, 50, 80, 1.0),
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
           Transform.translate(
-            offset: Offset(143.5, 597.0),
-            child: SizedBox(
-              width: 131.0,
-              child: Text(
-                'Friendly',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 30,
-                  color: const Color(0xff000000),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+              offset: Offset(315.0, 240.0),
+              child: ImageRadio(
+                images[4],
+                pressedImage[4],
+                controller: aController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(324.0, 195.0),
-            child:
-                // Adobe XD layer: 'kaixin' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/5.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(250.0, 240.0),
+              child: ImageRadio(
+                images[3],
+                pressedImage[3],
+                controller: aController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(254.0, 195.0),
-            child:
-                // Adobe XD layer: 'kaixin的副本' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/4.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(185.0, 240.0),
+              child: ImageRadio(
+                images[2],
+                pressedImage[2],
+                controller: aController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(185.0, 196.0),
-            child:
-                // Adobe XD layer: 'yiban' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/3.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(55.0, 240.0),
+              child: ImageRadio(
+                images[0],
+                pressedImage[0],
+                controller: aController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(45.0, 196.0),
-            child:
-                // Adobe XD layer: 'bukaixin的副本' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/1.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(123.0, 243.0),
+              child: ImageRadio(
+                images[1],
+                pressedImage[1],
+                controller: aController,
+                height: 54.0,
+                width: 53.7,
+              )),
           Transform.translate(
-            offset: Offset(119.0, 199.1),
-            child:
-                // Adobe XD layer: 'bukaixin' (shape)
-                Container(
-              width: 54.0,
-              height: 53.7,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/2.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(315.0, 425.0),
+              child: ImageRadio(
+                images[4],
+                pressedImage[4],
+                controller: hController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(324.0, 344.0),
-            child:
-                // Adobe XD layer: 'kaixin' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/5.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(250.0, 425.0),
+              child: ImageRadio(
+                images[3],
+                pressedImage[3],
+                controller: hController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(254.0, 346.0),
-            child:
-                // Adobe XD layer: 'kaixin的副本' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/4.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(185.0, 425.0),
+              child: ImageRadio(
+                images[2],
+                pressedImage[2],
+                controller: hController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(185.0, 346.0),
-            child:
-                // Adobe XD layer: 'yiban' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/3.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(55.0, 425.0),
+              child: ImageRadio(
+                images[0],
+                pressedImage[0],
+                controller: hController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(45.0, 346.0),
-            child:
-                // Adobe XD layer: 'bukaixin的副本' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/1.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(123.0, 428.0),
+              child: ImageRadio(
+                images[1],
+                pressedImage[1],
+                controller: hController,
+                height: 54.0,
+                width: 53.7,
+              )),
           Transform.translate(
-            offset: Offset(119.0, 348.1),
-            child:
-                // Adobe XD layer: 'bukaixin' (shape)
-                Container(
-              width: 54.0,
-              height: 53.7,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/2.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(315.0, 610.0),
+              child: ImageRadio(
+                images[4],
+                pressedImage[4],
+                controller: sController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(324.0, 493.0),
-            child:
-                // Adobe XD layer: 'kaixin' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/5.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(250.0, 610.0),
+              child: ImageRadio(
+                images[3],
+                pressedImage[3],
+                controller: sController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(254.0, 495.0),
-            child:
-                // Adobe XD layer: 'kaixin的副本' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/4.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(185.0, 610.0),
+              child: ImageRadio(
+                images[2],
+                pressedImage[2],
+                controller: sController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(184.0, 496.0),
-            child:
-                // Adobe XD layer: 'yiban' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/3.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(55.0, 610.0),
+              child: ImageRadio(
+                images[0],
+                pressedImage[0],
+                controller: sController,
+                height: 60.0,
+                width: 60.0,
+              )),
           Transform.translate(
-            offset: Offset(45.0, 495.0),
-            child:
-                // Adobe XD layer: 'bukaixin的副本' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/1.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(123.0, 613.0),
+              child: ImageRadio(
+                images[1],
+                pressedImage[1],
+                controller: sController,
+                height: 54.0,
+                width: 53.7,
+              )),
           Transform.translate(
-            offset: Offset(119.0, 497.1),
-            child:
-                // Adobe XD layer: 'bukaixin' (shape)
-                Container(
-              width: 54.0,
-              height: 53.7,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/2.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(324.0, 642.0),
-            child:
-                // Adobe XD layer: 'kaixin' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/5.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(254.0, 643.0),
-            child:
-                // Adobe XD layer: 'kaixin的副本' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/4.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(184.0, 645.0),
-            child:
-                // Adobe XD layer: 'yiban' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/3.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(45.0, 644.0),
-            child:
-                // Adobe XD layer: 'bukaixin的副本' (shape)
-                Container(
-              width: 60.0,
-              height: 60.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/1.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(119.0, 647.3),
-            child:
-                // Adobe XD layer: 'bukaixin' (shape)
-                Container(
-              width: 54.0,
-              height: 53.7,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/2.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(42.0, 263.0),
+            offset: Offset(42.0, 310.0),
             child: Text(
-              'Very much                  just so so                  Not at all',
+              '  Very much                Somewhat                 Not at all',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 15,
-                color: const Color(0xff000000),
+                color: const Color.fromRGBO(32, 50, 80, 1.0),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(42.0, 561.0),
+            offset: Offset(41.0, 495.0),
             child: Text(
-              'Very much                  just so so                  Not at all',
+              '  Very much                Somewhat                 Not at all',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 15,
-                color: const Color(0xff000000),
+                color: const Color.fromRGBO(32, 50, 80, 1.0),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(41.0, 412.0),
+            offset: Offset(42.0, 680.0),
             child: Text(
-              'Very much                  just so so                  Not at all',
+              '  Very much                Somewhat                 Not at all',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 15,
-                color: const Color(0xff000000),
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(42.0, 711.0),
-            child: Text(
-              'Very much                  just so so                  Not at all',
-              style: TextStyle(
-                fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 15,
-                color: const Color(0xff000000),
+                color: const Color.fromRGBO(32, 50, 80, 1.0),
               ),
               textAlign: TextAlign.left,
             ),
@@ -538,5 +381,117 @@ class Moodtracker extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class ImageRadio extends StatefulWidget {
+  ImageRadio(@required this.imageUrl, @required this.imageUrl2,
+      {this.isSeleted: false,
+      this.controller,
+      this.onChange,
+      this.width: 60.0,
+      this.height: 60.0});
+
+  bool isSeleted;
+
+  VoidCallback callMe;
+
+  final String imageUrl;
+  final String imageUrl2;
+
+  final ImageRadioController controller;
+  final ValueChanged<bool> onChange;
+  final double width;
+  final double height;
+
+  @override
+  _ImageRadioState createState() => _ImageRadioState();
+}
+
+class _ImageRadioState extends State<ImageRadio> {
+  VoidCallback makeMeUnselect;
+
+  @override
+  void initState() {
+    // init
+    makeMeUnselect = () {
+      setState(() {
+        widget.isSeleted = false;
+      });
+
+      if (widget.onChange != null) {
+        widget.onChange(false);
+      }
+    };
+
+    // backup
+    widget.callMe = makeMeUnselect;
+
+    // add
+    if (widget.controller != null) {
+      // print("initState() add callback--->$makeMeUnselect");
+      widget.controller.add(makeMeUnselect);
+    }
+
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          widget.isSeleted = true;
+        });
+
+        if (widget.onChange != null) {
+          widget.onChange(true);
+        }
+
+        widget.controller.unselectOthers(makeMeUnselect);
+      },
+      child: Container(
+        width: widget.width,
+        height: widget.height,
+        alignment: Alignment.center,
+        decoration: new BoxDecoration(
+          image: DecorationImage(
+            image: widget.isSeleted
+                ? AssetImage(widget.imageUrl2)
+                : AssetImage(widget.imageUrl),
+            fit: BoxFit.fill,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class ImageRadioController {
+  List<VoidCallback> _callbackList;
+
+  ImageRadioController() {
+    _callbackList = [];
+  }
+
+  void add(VoidCallback callback) {
+    if (_callbackList == null) _callbackList = [];
+    _callbackList.add(callback);
+  }
+
+  void remove(VoidCallback callback) {
+    if (_callbackList != null) _callbackList.remove(callback);
+  }
+
+  void unselectOthers(VoidCallback currentCallback) {
+    if (_callbackList != null && _callbackList.length > 0) {
+      for (int i = 0, len = _callbackList.length; i < len; i++) {
+        VoidCallback callback = _callbackList[i];
+
+        if (callback == currentCallback) continue;
+
+        callback();
+      }
+    }
   }
 }
