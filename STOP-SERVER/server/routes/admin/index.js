@@ -70,6 +70,11 @@ module.exports= app=>{
          }   
      })
 
+    router.post("/uploadcategory",async(req,res)=>{
+        await req.Model.findOneAndUpdate({userid:req.body.userid},{category:req.body.category})
+        res.send({"messgae":"success"})
+    })
+
     router.get("/:session",async(req,res)=>{
         const totalItems = await req.Model.find()
         var sessionItems = new Array()
