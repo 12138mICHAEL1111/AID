@@ -146,7 +146,8 @@ module.exports= app=>{
               res.send({"message":"wrong password"})
           }
           else{
-              res.send({"message":"success","userid":req.body.userid})
+              const controlitem = findUser.controlitem
+              res.send({"message":"success","userid":req.body.userid,"controlitem":controlitem})
           }
         }
     })

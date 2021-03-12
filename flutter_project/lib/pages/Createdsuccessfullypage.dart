@@ -1,14 +1,36 @@
 import 'package:flutter/material.dart';
 import './intrductionpage.dart';
 import 'package:adobe_xd/page_link.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Createdsuccessfullypage extends StatelessWidget {
-  Createdsuccessfullypage({
-    Key key,
-  }) : super(key: key);
+
+class Createdsuccessfullypage extends StatefulWidget {
+  Createdsuccessfullypage({Key key}) : super(key: key);
+
+  @override
+  _CreatedsuccessfullypageState createState() => _CreatedsuccessfullypageState();
+}
+
+class _CreatedsuccessfullypageState extends State<Createdsuccessfullypage> {
+  String id="";
+
+  @override
+  void initState() { 
+    super.initState();
+    getUserId();
+  }
+
+  getUserId() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    print(pref.getString('userid'));
+    setState(() {
+          this.id = pref.getString('userid');
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return  Scaffold(
       backgroundColor: const Color(0xffffffff),
       body: Stack(
         children: <Widget>[
@@ -131,7 +153,7 @@ class Createdsuccessfullypage extends StatelessWidget {
               width: 228.0,
               height: 25.0,
               child: Text(
-                'XXXXXXXXXXX',
+                this.id,
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 17,
