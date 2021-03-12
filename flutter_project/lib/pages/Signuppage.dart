@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import '../config/Config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_project/pages/Createdsuccessfullypage.dart';
 import 'package:adobe_xd/page_link.dart';
@@ -44,12 +44,13 @@ class _SignuppageState extends State<Signuppage> {
       );
     }
     else{
-       var api = 'http://192.168.3.50:3000/stop/api/rest/users/signup';
+       var api = '${Config.domain}/rest/users/signup';
        var response = await Dio().post(api,data:{"email":this.email,"password":this.password});
        if(response.data["message"]=='success'){
          print(response.data);
          SharedPreferences pref = await SharedPreferences.getInstance();
-         pref.setString('ID',json.encode(response.data['userid']));
+         pref.setString('userid',json.encode(response.data['userid']));
+         pref.setString('controlitem',json.encode(response.data['controlitem']));
          Navigator.of(context).pushReplacementNamed('/createdSuccessfully');
 
        }
@@ -70,10 +71,6 @@ class _SignuppageState extends State<Signuppage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Sign Up"),
-        backgroundColor: Colors.blue,
-      ),
       backgroundColor: const Color(0xffffffff),
       body: Stack(
         children: <Widget>[
@@ -122,7 +119,7 @@ class _SignuppageState extends State<Signuppage> {
           Transform.translate(
             offset: Offset(49.0, 419.0),
             child: Text(
-              'Password:',
+              'Email:',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 30,
@@ -136,13 +133,13 @@ class _SignuppageState extends State<Signuppage> {
             offset: Offset(69.0, 463.0),
             child: Container(
               child: TextField(
-                obscureText: true,
+                
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: "Password",
+                  labelText: "Email",
                 ),
                 onChanged: (value) {
-                  this.password = value;
+                  this.email = value;
                 },
               ),
               width: 276.0,
@@ -152,7 +149,7 @@ class _SignuppageState extends State<Signuppage> {
           Transform.translate(
             offset: Offset(49.0, 517.0),
             child: Text(
-              'Email:',
+              'Password:',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 30,
@@ -166,19 +163,20 @@ class _SignuppageState extends State<Signuppage> {
               offset: Offset(69.0, 561.0),
               child: Container(
                 child: TextField(
+                  obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: "Email",
+                    labelText: "Password",
                   ),
                   onChanged: (value) {
-                    this.email = value;
+                    this.password = value;
                   },
                 ),
                 width: 276.0,
                 height: 48.0,
               )),
           Transform.translate(
-            offset: Offset(100.0, 818.0),
+            offset: Offset(100.0, 718.0),
             child: PageLink(
               links: [
                 PageLinkInfo(
@@ -199,43 +197,18 @@ class _SignuppageState extends State<Signuppage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(139.5, 827.0),
+            offset: Offset(139.5, 723.0),
             child: SizedBox(
               width: 119.0,
-              child: Text(
-                'Sign up',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 30,
-                  color: const Color(0xffffffff),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Container(),
-          Transform.translate(
-            offset: Offset(49.0, 517.0),
-            child: Text(
-              'Email:',
-              style: TextStyle(
-                fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 30,
-                color: const Color(0xfff8c16f),
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
-          //submit button
-          Transform.translate(
-            offset: Offset(165.0, 650.0),
-            child: RaisedButton(
-              child: Text("Submit"),
-
+              child: FlatButton(
+              child: Text("Sign Up"),
               color: const Color(0xfffaaf7b),
               onPressed: submit,
             ),
+            ),
           ),
+          Container(),
+     
 
           //goback button
           Transform.translate(

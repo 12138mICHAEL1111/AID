@@ -4,7 +4,7 @@ import 'package:adobe_xd/page_link.dart';
 import './Selectcategoriespage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/dio.dart';
-
+import '../config/Config.dart';
 class Practicepage2 extends StatefulWidget {
   @override
   _Practicepage2State createState() => _Practicepage2State();
@@ -27,7 +27,7 @@ class _Practicepage2State extends State<Practicepage2> {
   }
 
   _getData() async {
-    var api = 'http://192.168.3.17:3000/stop/api/rest/practiseitems';
+    var api = '${Config.domain}/rest/practiseitems';
     var response = await Dio().get(api);
     _answer = response.data[0]['answer2'];
   }

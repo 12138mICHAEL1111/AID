@@ -1,14 +1,11 @@
 import 'dart:convert';
 
+import '../config/Config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import './Resetpasswordpage.dart';
-import 'package:adobe_xd/page_link.dart';
-import './Homepage.dart';
-import './Signuppage.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 
 //class Loginpage extends StatelessWidget {
   class Loginpage extends StatefulWidget {
@@ -25,23 +22,15 @@ import 'package:flutter_svg/flutter_svg.dart';
     String password;
 
     login() async {
-      if (password.length <= 6) {
-        Fluttertoast.showToast(
-            msg: 'password cannot be less than 6 digits',
-            toastLength: Toast.LENGTH_SHORT,
-            gravity: ToastGravity.CENTER
-        );
-      }
-      else {
-        var api = 'http://192.168.3.50:3000/stop/api/rest/users/login';
+        var api = '${Config.domain}/rest/users/login';
         var response = await Dio().post(
             api, data: {"userid": this.id, "password": this.password});
         if (response.data["message"] == 'success') {
           SharedPreferences pref = await SharedPreferences.getInstance();
-          pref.setString('ID', json.encode(response.data['userid']));
+          pref.setString('userid', response.data['userid']);
+          pref.setString('controlitem', json.encode(response.data['controlitem']));
           print("login successfully");
-
-          //Navigator.of(context).pushReplacementNamed('/main');
+          Navigator.of(context).pushReplacementNamed('/introductionpage');
         }
         else {
           Fluttertoast.showToast(
@@ -50,7 +39,7 @@ import 'package:flutter_svg/flutter_svg.dart';
               gravity: ToastGravity.CENTER
           );
         }
-      }
+      
     }
 
       @override
