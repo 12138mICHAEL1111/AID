@@ -69,7 +69,7 @@ import 'package:flutter_svg/flutter_svg.dart';
                     bottomLeft: Radius.circular(60.0),
                   ),
                   image: DecorationImage(
-                    image: const AssetImage('asset/images/background2.png'),
+                    image: const AssetImage('assets/images/background2.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -95,7 +95,7 @@ import 'package:flutter_svg/flutter_svg.dart';
                   height: 180.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: const AssetImage('asset/images/logoOfMenu.png'),
+                      image: const AssetImage('assets/images/logoOfMenu.png'),
                       fit: BoxFit.fill,
                     ),
                   ),

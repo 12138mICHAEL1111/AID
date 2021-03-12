@@ -87,7 +87,7 @@ class _SignuppageState extends State<Signuppage> {
                 bottomLeft: Radius.circular(60.0),
               ),
               image: DecorationImage(
-                image: const AssetImage('asset/images/background2.png'),
+                image: const AssetImage('assets/images/background2.png'),
                 fit: BoxFit.fill,
               ),
             ),
@@ -113,7 +113,7 @@ class _SignuppageState extends State<Signuppage> {
               height: 180.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage('asset/images/logoOfMenu.png'),
+                  image: const AssetImage('assets/images/logoOfMenu.png'),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -256,7 +256,7 @@ class _SignuppageState extends State<Signuppage> {
                 height: 50.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage('asset/images/goback.png'),
+                    image: const AssetImage('assets/images/goback.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
