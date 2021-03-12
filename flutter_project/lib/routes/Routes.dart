@@ -6,18 +6,15 @@ import "../pages/Practicepage1.dart";
 import "../pages/Practicepage2.dart";
 import '../pages/Moodtracker.dart';
 import '../pages/Item1.dart';
-import '../pages/Signuppage.dart';
 
 // All the routes
 final routes = {
   '/': (context) => Moodtracker(),
   '/login': (context) => Loginpage(),
-  '/start':(context)=> Start(),
   '/practice1': (context) => Practicepage1(),
   '/practice2': (context) => Practicepage2(),
   '/select': (context) => Selectcategoriespage(),
-  '/session': (context) => Item1(),
-  '/signup':(context) => Signuppage()
+  '/session': (context) => Item1()
 };
 
 // This block will handle routes with or without parameter

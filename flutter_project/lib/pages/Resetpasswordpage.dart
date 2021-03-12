@@ -1,12 +1,73 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './Loginpage.dart';
 import 'package:adobe_xd/page_link.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Resetpasswordpage extends StatelessWidget {
+// class Resetpasswordpage extends StatelessWidget {
+class Resetpasswordpage extends StatefulWidget {
   Resetpasswordpage({
     Key key,
   }) : super(key: key);
+
+  @override
+  _ResetpasswordpageState createState() => _ResetpasswordpageState();
+}
+
+class _ResetpasswordpageState extends State<Resetpasswordpage> {
+  String id;
+  String email;
+  String newPassword;
+  String repeatNewPassword;
+
+  bool validateEmail(String value) {
+    Pattern pattern =
+        r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
+    RegExp regex = new RegExp(pattern);
+    return (!regex.hasMatch(value)) ? false : true;
+  }
+
+  reset() async{
+    if(!validateEmail(email)){
+      Fluttertoast.showToast(
+          msg: 'Please enter valid email',
+          toastLength:Toast.LENGTH_SHORT,
+          gravity:ToastGravity.CENTER
+      );
+    }
+    else if(newPassword != repeatNewPassword){
+      Fluttertoast.showToast(
+        msg: 'Please enter same passowrd',
+        toastLength:Toast.LENGTH_SHORT,
+        gravity:ToastGravity.CENTER
+      );
+    }
+    else{
+      var api = 'http://192.168.3.50:3000/stop/api/rest/users/resetpassword';
+      var response = await Dio().post(api,data:{"userid":this.id,"email":this.email,"password":this.newPassword});
+      print(response.data);
+
+      if(response.data["message"]=='success'){
+        Navigator.of(context).pushReplacementNamed('/login');
+      }
+      else{
+        print(response.data);
+        Fluttertoast.showToast(
+            msg: '${response.data["message"]}',
+            toastLength:Toast.LENGTH_SHORT,
+            gravity:ToastGravity.CENTER
+        );
+      }
+
+
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,13 +104,13 @@ class Resetpasswordpage extends StatelessWidget {
           Transform.translate(
             offset: Offset(117.0, 208.0),
             child:
-                // Adobe XD layer: 'WechatIMG1138的副本' (shape)
-                Container(
+            // Adobe XD layer: 'WechatIMG1138的副本' (shape)
+            Container(
               width: 195.0,
               height: 180.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage('assets/images/logoOfStart.png'),
+                  image: const AssetImage('assets/images/logoOfMenu.png'),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -67,11 +128,21 @@ class Resetpasswordpage extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
           ),
+          //id textfield
           Transform.translate(
-            offset: Offset(76.0, 463.0),
-            child: SvgPicture.string(
-              _svg_ay0ahx,
-              allowDrawingOutsideViewBox: true,
+            offset: Offset(69.0, 463.0),
+            child: Container(
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "ID",
+                ),
+                onChanged: (value) {
+                    this.id = value;
+                },
+              ),
+              width: 276.0,
+              height: 48.0,
             ),
           ),
           Transform.translate(
@@ -87,15 +158,19 @@ class Resetpasswordpage extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(76.0, 561.0),
+            offset: Offset(69.0, 561.0),
             child: Container(
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Email",
+                ),
+                onChanged: (value) {
+                  this.email = value;
+                },
+              ),
               width: 276.0,
               height: 48.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24.0),
-                color: const Color(0xf2f4f4f4),
-                border: Border.all(width: 1.0, color: const Color(0xf2707070)),
-              ),
             ),
           ),
           Transform.translate(
@@ -110,16 +185,22 @@ class Resetpasswordpage extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
           ),
+          //Repeat password textfield
           Transform.translate(
             offset: Offset(69.0, 757.0),
             child: Container(
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Repeat Password",
+                ),
+                onChanged: (value) {
+                  this.repeatNewPassword = value;
+                },
+              ),
               width: 276.0,
               height: 48.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24.0),
-                color: const Color(0xf2f4f4f4),
-                border: Border.all(width: 1.0, color: const Color(0xf2707070)),
-              ),
             ),
           ),
           Transform.translate(
@@ -137,57 +218,36 @@ class Resetpasswordpage extends StatelessWidget {
           Transform.translate(
             offset: Offset(69.0, 659.0),
             child: Container(
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "New Password",
+                ),
+                onChanged: (value) {
+                  this.newPassword = value;
+                },
+              ),
               width: 276.0,
               height: 48.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24.0),
-                color: const Color(0xf2f4f4f4),
-                border: Border.all(width: 1.0, color: const Color(0xf2707070)),
-              ),
             ),
           ),
+          //Reset button
           Transform.translate(
-            offset: Offset(100.0, 818.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushDown,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => Loginpage(),
-                ),
-              ],
-              child: Container(
-                width: 197.0,
-                height: 56.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(23.0),
-                  color: const Color(0xfffaaf7b),
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(152.5, 827.0),
-            child: SizedBox(
-              width: 93.0,
-              child: Text(
-                'Reset',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 30,
-                  color: const Color(0xffffffff),
-                ),
-                textAlign: TextAlign.center,
-              ),
+            offset: Offset(165.0, 835.0),
+            child: RaisedButton(
+              child: Text("Reset"),
+
+              color: const Color(0xfffaaf7b),
+              onPressed: reset,
             ),
           ),
           Container(),
           Transform.translate(
             offset: Offset(20.0, 42.0),
             child:
-                // Adobe XD layer: 'jiantou' (shape)
-                PageLink(
+            // Adobe XD layer: 'jiantou' (shape)
+            PageLink(
               links: [
                 PageLinkInfo(
                   transition: LinkTransition.PushDown,
