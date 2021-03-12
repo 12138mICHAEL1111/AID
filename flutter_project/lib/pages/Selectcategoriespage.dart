@@ -61,6 +61,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenAdapter.init(context);
     return Scaffold(
       backgroundColor: const Color(0xffffffff),
       body: Stack(
@@ -93,7 +94,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
             child: SizedBox(
               width: 398.0,
               child: Text(
-                'You have completed your exercises, \nyou can choose 6 of the 7 categories \nbelow you like now.',
+                'You have completed your practice run. \nYou can now choose 6 most relevant categories from all 7 categories below.',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 21,
