@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import './intrductionpage.dart';
+import 'package:flutter_project/pages/IntroductionPage.dart';
 import 'package:adobe_xd/page_link.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -13,7 +13,9 @@ class Createdsuccessfullypage extends StatefulWidget {
 
 class _CreatedsuccessfullypageState extends State<Createdsuccessfullypage> {
   String id="";
-
+  next(){
+    Navigator.pushNamed(context,'/introductionpage');
+  }
   @override
   void initState() { 
     super.initState();
@@ -111,7 +113,7 @@ class _CreatedsuccessfullypageState extends State<Createdsuccessfullypage> {
                   transition: LinkTransition.PushLeft,
                   ease: Curves.easeOut,
                   duration: 1.0,
-                  pageBuilder: () => intrductionpage(),
+                  pageBuilder: () => IntroductionPage(),
                 ),
               ],
               child: Container(
@@ -132,20 +134,22 @@ class _CreatedsuccessfullypageState extends State<Createdsuccessfullypage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(51.8, 654.0),
+            offset: Offset(141.8, 654.0),
             child: SizedBox(
-              width: 223.0,
-              child: Text(
-                '           Next',
+              width: 140.0,
+              child: FlatButton(
+              child: Text("Next",
                 style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 41,
-                  color: const Color(0xfffdb56f),
+                  color: Color.fromRGBO(252,181,111,1.0),
+                  fontSize: 18
                 ),
-                textAlign: TextAlign.center,
               ),
+              color: Colors.white,
+              onPressed: next,
+            ),
             ),
           ),
+         
           Container(),
           Transform.translate(
             offset: Offset(100.0, 601.0),
@@ -156,7 +160,7 @@ class _CreatedsuccessfullypageState extends State<Createdsuccessfullypage> {
                 this.id,
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 17,
+                  fontSize: 25,
                   color: const Color(0xff9d9d9d),
                 ),
                 textAlign: TextAlign.center,

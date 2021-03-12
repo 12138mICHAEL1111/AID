@@ -1,12 +1,9 @@
-import 'dart:convert';
-
+import '../config/Config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import './Loginpage.dart';
 import 'package:adobe_xd/page_link.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 // class Resetpasswordpage extends StatelessWidget {
 class Resetpasswordpage extends StatefulWidget {
@@ -47,17 +44,20 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
       );
     }
     else{
-      var api = 'http://192.168.3.50:3000/stop/api/rest/users/resetpassword';
+      var api = '${Config.domain}/rest/users/resetpassword';
       var response = await Dio().post(api,data:{"userid":this.id,"email":this.email,"password":this.newPassword});
-      print(response.data);
 
       if(response.data["message"]=='success'){
+        Fluttertoast.showToast(
+            msg: 'successfully change your password',
+            toastLength:Toast.LENGTH_SHORT,
+            gravity:ToastGravity.CENTER
+        );
         Navigator.of(context).pushReplacementNamed('/login');
       }
       else{
-        print(response.data);
         Fluttertoast.showToast(
-            msg: '${response.data["message"]}',
+            msg: 'please input correct id and email',
             toastLength:Toast.LENGTH_SHORT,
             gravity:ToastGravity.CENTER
         );
@@ -234,7 +234,7 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
           ),
           //Reset button
           Transform.translate(
-            offset: Offset(165.0, 835.0),
+            offset: Offset(165.0, 735.0),
             child: RaisedButton(
               child: Text("Reset"),
 

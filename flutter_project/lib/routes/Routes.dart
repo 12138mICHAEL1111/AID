@@ -9,20 +9,20 @@ import "../pages/Practicepage1.dart";
 import "../pages/Practicepage2.dart";
 import '../pages/Moodtracker.dart';
 import '../pages/Item1.dart';
+import '../pages/IntroductionPage.dart';
 
 // All the routes
 final routes = {
-  '/': (context) => Moodtracker(),
-  '/login': (context) => Loginpage(),
+  '/moodtracker': (context) => Moodtracker(),
   '/practice1': (context) => Practicepage1(),
   '/practice2': (context) => Practicepage2(),
   '/select': (context) => Selectcategoriespage(),
   '/session': (context) => Item1(),
-  //login,signup and reset routes
   '/': (context) => Start(),
   '/login': (context) => Loginpage(),
   '/signup':(context) => Signuppage(),
   '/reset':(context) => Resetpasswordpage(),
+  '/introductionpage':(context) => IntroductionPage(),
   '/createdSuccessfully':(context) => Createdsuccessfullypage(),
 };
 

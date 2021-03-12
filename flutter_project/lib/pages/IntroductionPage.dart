@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 import './Practicepage1.dart';
 import 'package:adobe_xd/page_link.dart';
 
-class intrductionpage extends StatelessWidget {
-  intrductionpage({
-    Key key,
-  }) : super(key: key);
+
+class IntroductionPage extends StatefulWidget {
+  IntroductionPage({Key key}) : super(key: key);
+
+  @override
+  _IntroductionPageState createState() => _IntroductionPageState();
+}
+
+class _IntroductionPageState extends State<IntroductionPage> {
+  next(){
+    Navigator.pushNamed(context,'/practice1');
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -128,18 +136,19 @@ class intrductionpage extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(60.8, 654.0),
+            offset: Offset(130.8, 654.0),
             child: SizedBox(
-              width: 209.0,
-              child: Text(
-                '        Begin',
+              width: 139.0,
+              child: FlatButton(
+              child: Text("Next",
                 style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 41,
-                  color: const Color(0xfffdb56f),
+                  color: Color.fromRGBO(252,181,111,1.0),
+                  fontSize: 18
                 ),
-                textAlign: TextAlign.center,
               ),
+              color: Colors.white,
+              onPressed: next,
+            ),
             ),
           ),
         ],
