@@ -166,11 +166,11 @@ class _SelectPageState extends State<Selectcategoriespage> {
           Transform.translate(
               offset: Offset(232.0, 417.0), child: cons(5, "Work")),
           Transform.translate(
-              offset: Offset(222.0, 492.0), child: cons(6, "Relationships")),
+              offset: Offset(232.0, 492.0), child: cons(6, "Relationships")),
           Transform.translate(
-              offset: Offset(106.0, 565.0), child: cons(7, "Mood and Health")),
+              offset: Offset(136.5, 565.0), child: cons(7, "Mood and Health")),
           Transform.translate(
-            offset: Offset(129.0, 644.0),
+            offset: Offset(120.2, 644.0),
             child: InkWell(
               onTap: () {       
                 check();
@@ -251,7 +251,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
           //   ),
           // ),
           Transform.translate(
-            offset: Offset(158.8, 649.0),
+            offset: Offset(150.2, 649.0),
             child: SizedBox(
               width: 111.0,
               child: Text(
