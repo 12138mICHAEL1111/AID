@@ -109,7 +109,7 @@ export default {
              }
         },
         async testApi(){
-            const res = await this.$http.get('/rest/minusfamilies/session1')
+            const res = await this.$http.post('/rest/users/uploadcategory',{"userid":"AA002","category":"minussocials"})
             console.log(res.data)
         }
     }

@@ -70,6 +70,11 @@ module.exports= app=>{
          }   
      })
 
+    router.post("/uploadcategory",async(req,res)=>{
+        await req.Model.findOneAndUpdate({userid:req.body.userid},{category:req.body.category})
+        res.send({"messgae":"success"})
+    })
+
     router.get("/:session",async(req,res)=>{
         const totalItems = await req.Model.find()
         var sessionItems = new Array()
@@ -146,7 +151,8 @@ module.exports= app=>{
               res.send({"message":"wrong password"})
           }
           else{
-              res.send({"message":"success","userid":req.body.userid})
+              const controlitem = findUser.controlitem
+              res.send({"message":"success","userid":req.body.userid,"controlitem":controlitem})
           }
         }
     })

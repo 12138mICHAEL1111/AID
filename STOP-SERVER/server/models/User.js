@@ -8,6 +8,9 @@ const schema = new mongoose.Schema({
     controlitem:{
         type:Boolean
     },
+    category:{
+        type: String
+    },
     password:{
         type:String,
         set(val){

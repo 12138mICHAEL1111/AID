@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
+import 'package:flutter_project/pages/Introductionpage.dart';
 import './Practicepage2.dart';
 import 'package:adobe_xd/page_link.dart';
-import './intrductionpage.dart';
+import '../config/Config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/dio.dart';
 
@@ -28,7 +29,7 @@ class _Practicepage1State extends State<Practicepage1> {
   }
 
   _getData() async {
-    var api = 'http://192.168.3.17:3000/stop/api/rest/practiseitems';
+    var api = '${Config.domain}/rest/practiseitems';
     var response = await Dio().get(api);
     _answer = response.data[0]['answer1'];
   }
@@ -565,7 +566,7 @@ class _Practicepage1State extends State<Practicepage1> {
                   transition: LinkTransition.PushRight,
                   ease: Curves.easeIn,
                   duration: 1.0,
-                  pageBuilder: () => intrductionpage(),
+                  pageBuilder: () => IntroductionPage(),
                 ),
               ],
               child: Container(
