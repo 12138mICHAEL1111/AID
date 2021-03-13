@@ -111,7 +111,7 @@ export default {
              }
         },
         async uploadMinusMood(){
-            const res = await this.$http.post('/rest/users/signup', {"userid":"AA002","password":"123456"})
+            const res = await this.$http.post('/rest/users/signup', {"email" : "2609898395@qq.com","password":"q1w2asq1w2as"})
             if(res.data.message=="success"){
                  this.$message({
                      type: "success",
