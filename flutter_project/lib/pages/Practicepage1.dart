@@ -397,8 +397,6 @@ class _Practicepage1State extends State<Practicepage1> {
               child: Container(
                 width: 250.0,
                 child: TextField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
                   decoration: InputDecoration(
                       labelText: "M _ _ k",
                       contentPadding: EdgeInsets.all(0),
@@ -520,7 +518,7 @@ class _Practicepage1State extends State<Practicepage1> {
                   Navigator.pushNamed(context, '/practice2');
                 } else if (_length == 0) {
                   setState(() {
-                    _feedback = '↺ Please fill in the all missing characters.';
+                    _feedback = '↺ Please fill in all missing characters.';
                   });
                 }
               },

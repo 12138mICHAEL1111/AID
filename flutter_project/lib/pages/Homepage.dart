@@ -1,15 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import './Moodtracker.dart';
 import 'package:adobe_xd/page_link.dart';
 import './User.dart';
 import './Calendar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class Homepage extends StatelessWidget {
-  Homepage({
-    Key key,
-  }) : super(key: key);
+class Homepage extends StatefulWidget {
+  @override
+  _HomepageState createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+  var _sessionNumber;
+
+  @override
+  void initState() {
+    super.initState();
+    _sessionNumber = 1;
+  }
+
+  //void nextSession
+  //if(index % 18 == 0)
+  //_sessionNumber++;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -251,6 +264,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(168.8, 375.0),
             child: SizedBox(
@@ -266,6 +280,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(25.0, 56.0),
             child:
@@ -281,12 +296,13 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(38.0, 121.0),
             child: SizedBox(
               width: 352.0,
               child: Text(
-                'Welcome back，\nXXX！',
+                'Welcome back！',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 41,
@@ -296,6 +312,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(24.8, 225.0),
             child: SizedBox(
@@ -311,12 +328,13 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(24.3, 579.0),
             child: SizedBox(
               width: 188.0,
               child: Text(
-                'Session x',
+                "Session $_sessionNumber",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 39,
@@ -326,12 +344,13 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(233.1, 604.0),
             child: SizedBox(
               width: 152.0,
               child: Text(
-                'XXth，mtoth，year',
+                'day，month，year',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 15,
@@ -341,58 +360,74 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(34.0, 653.0),
             child: Text(
-              'Are you ready to start session x?\n How do you feel today?',
+              'Welcome! Are you ready to start\nsession $_sessionNumber today?',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 21,
+                fontSize: 23,
                 color: const Color(0xff000000),
               ),
               textAlign: TextAlign.left,
             ),
           ),
+
+          // Transform.translate(
+          //   offset: Offset(87.0, 731.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.PushDown,
+          //         ease: Curves.easeInOutExpo,
+          //         duration: 1.0,
+          //         pageBuilder: () => Moodtracker(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 254.0,
+          //       height: 59.0,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(23.0),
+          //         color: const Color(0xfffdb56f),
+          //         boxShadow: [
+          //           BoxShadow(
+          //             color: const Color(0x29000000),
+          //             offset: Offset(0, 13),
+          //             blurRadius: 6,
+          //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
+
           Transform.translate(
             offset: Offset(87.0, 731.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushDown,
-                  ease: Curves.easeInOutExpo,
-                  duration: 1.0,
-                  pageBuilder: () => Moodtracker(),
+            child: FlatButton(
+              minWidth: 254,
+              height: 59.0,
+              hoverColor: Color(0x29000000),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              color: const Color(0xfffdb56f),
+              child: Text(
+                '''Let's begin!''',
+                style: TextStyle(
+                  fontFamily: 'ZiZhiQuXiMaiTi',
+                  fontSize: 26,
+                  color: const Color(0xffffffff),
                 ),
-              ],
-              child: Container(
-                width: 254.0,
-                height: 59.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(23.0),
-                  color: const Color(0xfffdb56f),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0x29000000),
-                      offset: Offset(0, 13),
-                      blurRadius: 6,
-                    ),
-                  ],
-                ),
+                textAlign: TextAlign.center,
               ),
+              onPressed: () {
+                print("works");
+                Navigator.pushNamed(context, '/moodtracker');
+              }
             ),
           ),
-          Transform.translate(
-            offset: Offset(140.0, 744.0),
-            child: Text(
-              'Lets begin!',
-              style: TextStyle(
-                fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 26,
-                color: const Color(0xffffffff),
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
+
           Transform.translate(
             offset: Offset(0.0, 831.0),
             child: Container(
@@ -407,6 +442,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(42.0, 849.0),
             child:
@@ -422,6 +458,7 @@ class Homepage extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(328.0, 849.0),
             child:

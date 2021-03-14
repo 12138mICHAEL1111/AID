@@ -109,7 +109,23 @@ export default {
              }
         },
         async testApi(){
-            const res = await this.$http.post('/rest/users/uploadcategory',{"userid":"AA002","category":"minussocials"})
+            const res = await this.$http.post('/rest/response/senddata',
+            { "userid": "AA002", 
+              "trailNumber": "1",
+              "category": "minussocials",
+              "sessionNumber":  "1" ,
+              "readingDuration" : "10",
+              "wordRT1": "100" ,
+              "wordAccuracy1": "1" ,
+              "clueRequired": "0",
+              "wordRT2": "0",
+              "wordAccuracy2": "0",
+              "questionRT1": "100",
+              "questionAccuracy1": "1",
+              "questionRT2":  "0",
+              "questionAccuracy2":"0"
+             })
+
             console.log(res.data)
         }
     }
