@@ -1,5 +1,10 @@
+import 'dart:convert';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_screen_adapter/flutter_screen_adapter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './SchedulaerDatepage.dart';
 import 'package:adobe_xd/page_link.dart';
 import './Practicepage2.dart';
@@ -15,12 +20,12 @@ class Selectcategoriespage extends StatefulWidget {
 class _SelectPageState extends State<Selectcategoriespage> {
   //The list store all the option
   var _list = List<int>.filled(10, 0);
-  var _check = false;
+  var result;
+  var map = {1: "minussocial", 2: "minusacademic", 3: "minushobbies", 
+  4: "minusfamily", 5: "minusworks", 6: "minusrelationships", 7: "minusmood"};
   //user id
   ///////////////////////////////////////////////////////////////////////////////////
-  var _id = 24;
-  var _id1 = 23;
-  
+
   //Called when pressed, update the list
   void tap(int i) {
     if (_list[i] == 0) {
@@ -33,29 +38,40 @@ class _SelectPageState extends State<Selectcategoriespage> {
   }
 
   //Check if exactly 6 are selected
+  String cate() {
+    for(int i = 1; i < 8; ++i) {
+      if(_list[i] == 0) {
+        //////////////////////////////////////////////////////////////////////////////////////////////////
+        print("giao ${map[i]}");
+        return map[i];
+      }
+    }
+  }
+
   bool check() {
     int length = 0;
     for (int i = 0; i < _list.length; ++i) {
       if (_list[i] == 1) ++length;
     }
     if(length == 6) {
-      _check = true;
-      if(_id%2 == 1) {
-        print(0);
-      } else {
-        for(int i = 1; i < 8; ++i) {
-          if(_list[i] == 0) {
-            //////////////////////////////////////////////////////////////////////////////////////////////////
-            print("giao $i");
-          }
-        }
-      }
+      upload();
+      return true;
     } else {
-      _check =  false;
+      return false;
     }
-    return _check;
   }
 
+  upload() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var api = '${Config.domain}/rest/users/uploadcategory';
+    var id = pref.get("userid");
+    var response = await Dio().post(api,data:{"userid": id, "category": cate()});
+    if(response.data["message"]=='success'){
+      print(response.data);
+      pref.setString('category',cate());
+      Navigator.of(context).pushNamed('/introductionpage');
+    }
+  }
   //construct options
   Widget cons(int i, String str) {
     return InkWell(
@@ -95,18 +111,6 @@ class _SelectPageState extends State<Selectcategoriespage> {
         textColor: Colors.white,
         fontSize: 16.0
     );
-  }
-  //used to get the question number
-  int result() {
-    if(_id%2 == 1) {
-      return 0;
-    } else {
-      for(int i = 1; i < 8; ++i) {
-        if(_list[i] == 0) {
-          return i;
-        }
-      }
-    }
   }
 
   @override
@@ -169,30 +173,45 @@ class _SelectPageState extends State<Selectcategoriespage> {
               offset: Offset(232.0, 492.0), child: cons(6, "Relationships")),
           Transform.translate(
               offset: Offset(136.5, 565.0), child: cons(7, "Mood and Health")),
+
+          // Transform.translate(
+          //   offset: Offset(120.2, 644.0),
+          //   child: InkWell(
+          //     onTap: () {       
+          //       if(check()) {
+          //         upload();
+          //       } else {
+          //         _showToast();
+          //       } 
+          //     },
+          //       child: Container(
+          //         width: 171.0,
+          //         height: 62.0,
+          //         decoration: BoxDecoration(
+          //           borderRadius: BorderRadius.circular(23.0),
+          //           color: const Color(0xffffffff),
+          //           boxShadow: [
+          //             BoxShadow(
+          //               color: const Color(0x29000000),
+          //               offset: Offset(0, 13),
+          //               blurRadius: 6,
+          //             ),
+          //           ],
+          //         ),
+          //     ),
+          //   ),
+          // ),
           Transform.translate(
             offset: Offset(120.2, 644.0),
             child: InkWell(
               onTap: () {       
-                check();
                 print("tapped");
                 if(check()) {
-                  print(result());
+                  upload();
                 } else {
                   _showToast();
                 } 
               },
-
-              // child: PageLink(
-              //   links: [
-              //     check()
-              //     ?PageLinkInfo(
-              //       transition: LinkTransition.PushLeft,
-              //       ease: Curves.easeOut,
-              //       duration: 1.0,
-              //       pageBuilder: () => SchedulaerDatepage(),
-              //     )
-              //     :null
-              //   ],
                 child: Container(
                   width: 171.0,
                   height: 62.0,
@@ -207,7 +226,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
                       ),
                     ],
                   ),
-                  child: _check?PageLink(
+                  child: check()?PageLink(
                     links: [
                       PageLinkInfo(
                         transition: LinkTransition.PushLeft,
