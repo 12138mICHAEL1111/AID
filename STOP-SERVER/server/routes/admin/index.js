@@ -96,6 +96,16 @@ module.exports= app=>{
         res.send({"message":"success"})
     })
 
+    router.post("/uploadsessiontime",async(req,res)=>{
+        const finduser = await req.Model.findOneAndUpdate({userid:req.body.userid},{sessiontime:req.body.sessiontime})
+        if(finduser){
+            res.send({"messgae":"success"})
+        }
+        else{
+            res.send({"messgae":"fail"})
+        }
+    })
+
     router.get("/:session",async(req,res)=>{
         const totalItems = await req.Model.find()
         var sessionItems = new Array()

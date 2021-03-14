@@ -18,7 +18,6 @@
          <el-button type="primary" @click="uploadMinusHobby">一键增加minus hobby</el-button>
          <br><br>
          <el-button type="primary" @click="uploadMinusMood">一键增加minus mood</el-button>
-         <br><br>
          <el-button type="primary" @click="testApi">接口测试</el-button>
          <a>可以在admin/src/views/homepage.vue 里的testapi方法里更改接口 摁f12 console控制台查看输出</a>
     </div>
