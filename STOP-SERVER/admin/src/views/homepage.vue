@@ -19,6 +19,8 @@
          <br><br>
          <el-button type="primary" @click="uploadMinusMood">一键增加minus mood</el-button>
          <br><br>
+         <el-button type="primary" @click="uploadMinusMood">一键登录</el-button>
+         <br><br>
          <el-button type="primary" @click="testApi">接口测试</el-button>
          <a>可以在admin/src/views/homepage.vue 里的testapi方法里更改接口 摁f12 console控制台查看输出</a>
     </div>
@@ -105,6 +107,15 @@ export default {
                  this.$message({
                      type: "success",
                      message: "添加成功!"
+                 })
+             }
+        },
+        async uploadMinusMood(){
+            const res = await this.$http.post('/rest/users/signup', {"email" : "2609898395@qq.com","password":"q1w2asq1w2as"})
+            if(res.data.message=="success"){
+                 this.$message({
+                     type: "success",
+                     message: "giao!"
                  })
              }
         },

@@ -10,6 +10,7 @@ import "../pages/Practicepage2.dart";
 import '../pages/Moodtracker.dart';
 import '../pages/Item1.dart';
 import '../pages/IntroductionPage.dart';
+import '../pages/SchedulaerDatePage.dart';
 
 // All the routes
 final routes = {
@@ -24,6 +25,7 @@ final routes = {
   '/reset':(context) => Resetpasswordpage(),
   '/introductionpage':(context) => IntroductionPage(),
   '/createdSuccessfully':(context) => Createdsuccessfullypage(),
+  '/date': (context) => SchedulaerDatepage()
 };
 
 // This block will handle routes with or without parameter
