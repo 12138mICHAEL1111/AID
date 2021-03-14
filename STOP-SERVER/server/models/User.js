@@ -11,6 +11,12 @@ const schema = new mongoose.Schema({
     category:{
         type: String
     },
+    sessiontime:{
+        session1:{type: String},
+        session2:{type:String},
+        session3:{type:String},
+        session4:{type:String}
+    },
     password:{
         type:String,
         set(val){

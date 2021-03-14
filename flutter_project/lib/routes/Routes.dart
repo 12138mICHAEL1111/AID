@@ -11,7 +11,7 @@ import '../pages/Moodtracker.dart';
 import '../pages/Item1.dart';
 import '../pages/IntroductionPage.dart';
 import '../pages/SchedulaerDatePage.dart';
-
+import '../pages/Scheduler.dart';
 // All the routes
 final routes = {
   '/moodtracker': (context) => Moodtracker(),
@@ -25,7 +25,9 @@ final routes = {
   '/reset':(context) => Resetpasswordpage(),
   '/introductionpage':(context) => IntroductionPage(),
   '/createdSuccessfully':(context) => Createdsuccessfullypage(),
-  '/date': (context) => SchedulaerDatepage()
+  '/date': (context) => SchedulaerDatepage(),
+  '/schedulaerdatepage':(context)=> SchedulaerDatepage(),
+  '/scheduler':(context)=> Scheduler()
 };
 
 // This block will handle routes with or without parameter

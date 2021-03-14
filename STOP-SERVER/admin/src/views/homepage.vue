@@ -19,8 +19,7 @@
          <br><br>
          <el-button type="primary" @click="uploadMinusMood">一键增加minus mood</el-button>
          <br><br>
-         <el-button type="primary" @click="uploadMinusMood">一键登录</el-button>
-         <br><br>
+
          <el-button type="primary" @click="testApi">接口测试</el-button>
          <a>可以在admin/src/views/homepage.vue 里的testapi方法里更改接口 摁f12 console控制台查看输出</a>
     </div>
@@ -110,17 +109,9 @@ export default {
                  })
              }
         },
-        async uploadMinusMood(){
-            const res = await this.$http.post('/rest/users/signup', {"email" : "2609898395@qq.com","password":"q1w2asq1w2as"})
-            if(res.data.message=="success"){
-                 this.$message({
-                     type: "success",
-                     message: "giao!"
-                 })
-             }
-        },
         async testApi(){
-            const res = await this.$http.post('/rest/users/uploadcategory',{"userid":"AA002","category":"minussocials"})
+            const sessiontime={"session1":"2021-01-24","session2":"2021-01-25","session3":"2021-01-26","session4":"2021-01-27"}
+            const res = await this.$http.post('/rest/users/uploadsessiontime',{"userid":"AA001","sessiontime":sessiontime})
             console.log(res.data)
         }
     }

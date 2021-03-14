@@ -18,6 +18,9 @@ class Selectcategoriespage extends StatefulWidget {
 
 
 class _SelectPageState extends State<Selectcategoriespage> {
+  next(){
+    Navigator.pushNamed(context,'/schedulaerdatepage');
+  }
   //The list store all the option
   var _list = List<int>.filled(10, 0);
   var result;
@@ -273,15 +276,16 @@ class _SelectPageState extends State<Selectcategoriespage> {
             offset: Offset(150.2, 649.0),
             child: SizedBox(
               width: 111.0,
-              child: Text(
-                'Next',
+              child: FlatButton(
+              child: Text("Next",
                 style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 41,
-                  color: const Color(0xfffdb56f),
+                  color: Color.fromRGBO(252,181,111,1.0),
+                  fontSize: 25
                 ),
-                textAlign: TextAlign.center,
               ),
+              color: Colors.white,
+              onPressed: next,
+            ),
             ),
           ),
           Transform.translate(
