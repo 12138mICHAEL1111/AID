@@ -398,17 +398,21 @@ class _Practicepage1State extends State<Practicepage1> {
                 width: 250.0,
                 child: TextField(
                   decoration: InputDecoration(
-                      labelText: "M _ _ k",
+                      labelText: "m _ _ k",
                       contentPadding: EdgeInsets.all(0),
                       border: InputBorder.none),
                   onChanged: (value) {
                     _length = value.length;
-                    if (_length >= _answer.length) {
+                    if (_length == _answer.length) {
                       _next = _validateData(value);
-                    }
-                    if (_length >= 6) {
+                    } else if (_length > _answer.length) {
                       setState(() {
                         _feedback = '↺ Please fill in less characters.';
+                      });
+                    } else {
+                      _next = false;
+                      setState(() {
+                        _feedback = '↺ Please fill in more characters.';
                       });
                     }
                   },
@@ -524,6 +528,7 @@ class _Practicepage1State extends State<Practicepage1> {
               },
             ),
           ),
+
           // Transform.translate(
           //   offset: Offset(177.0, 568.0),
           //   child: PageLink(

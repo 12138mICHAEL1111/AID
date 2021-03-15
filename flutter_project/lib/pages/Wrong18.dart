@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import './Correct18.dart';
 import 'package:adobe_xd/page_link.dart';
-import './Seasonfinishedpage.dart';
+import 'Sessionfinishedpage.dart';
 import './Item17.dart';
 
 class Wrong18 extends StatelessWidget {
@@ -148,7 +148,7 @@ class Wrong18 extends StatelessWidget {
                   transition: LinkTransition.PushLeft,
                   ease: Curves.easeInOutExpo,
                   duration: 1.0,
-                  pageBuilder: () => Seasonfinishedpage(),
+                  pageBuilder: () => Sessionfinishedpage(),
                 ),
               ],
               child: Container(

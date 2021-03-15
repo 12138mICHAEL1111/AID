@@ -1,15 +1,345 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import './Item2.dart';
+import './itemImaginePage.dart';
 import 'package:adobe_xd/page_link.dart';
-import './Wrong1.dart';
 import './Moodtracker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../config/Config.dart';
+import 'package:dio/dio.dart';
+import 'SessionFinishedpage.dart';
 
-class Item1 extends StatelessWidget {
-  Item1({
-    Key key,
-  }) : super(key: key);
+class Item1 extends StatefulWidget {
+  int itemNumber;
+  int sessionNumber;
+  Item1({this.itemNumber, this.sessionNumber}); //Start from 1 and 1
+  @override
+  _Item1State createState() => _Item1State(itemNumber, sessionNumber);
+}
+
+class _Item1State extends State<Item1> {
+  var _answer;
+  var _displayQuestion;
+  var _displayOption2_1;
+  var _displayOption2_2;
+  var _displayOption1;
+  var _next;
+  var _feedback;
+  var _length;
+  var _items;
+  var _id;
+  var _category;
+  var _question;
+  var _questionNumber;
+  var _context;
+  var _blank;
+  var _itemNumber;
+  var _sessionNumber;
+  var _situation;
+  var _control;
+  var _displayText = '';
+  var _images = [
+    "assets/images/6%.png",
+    "assets/images/12%.png",
+    "assets/images/17%.png",
+    "assets/images/23%.png",
+    "assets/images/29%.png",
+    "assets/images/35%.png",
+    "assets/images/41%.png",
+    "assets/images/47%.png",
+    "assets/images/50%.png",
+    "assets/images/52%.png",
+    "assets/images/63%.png",
+    "assets/images/69%.png",
+    "assets/images/74%.png",
+    "assets/images/80%.png",
+    "assets/images/85%.png",
+    "assets/images/90%.png",
+    "assets/images/95%.png",
+    "assets/images/100%.png",
+  ];
+
+  _Item1State(this._itemNumber, this._sessionNumber);
+
+  @override
+  void initState() {
+    super.initState();
+    _answer = "";
+    _next = false;
+    _feedback = "";
+    _length = 0;
+    _items = [];
+    _id = "";
+    _control = false;
+    _category = "";
+    _question = "";
+    _situation = "";
+    if (_sessionNumber == null) {
+      _sessionNumber = 1;
+    }
+    if (_itemNumber == null) {
+      _itemNumber = 1;
+    }
+    print('''sessionnumber1 : $_sessionNumber''');
+    _questionNumber = 1;
+    _getData();
+  }
+
+  _sendData() async {
+    var api = '${Config.domain}/rest/response/senddata';
+    var response = await Dio().post(api, data: {
+      "userid": _id,
+      "trailNumber": _itemNumber,
+      "category": _category,
+      "sessionNumber": _sessionNumber,
+      // following could be implemented with stopWatch()
+      //             "readingDuration": "10",
+      //             "wordRT1": "100" ,
+      //             "wordAccuracy1": "1" ,
+      //             "clueRequired": "0",
+      //             "wordRT2": "0",
+      //             "wordAccuracy2": "0",
+      //             "questionRT1": "100",
+      //             "questionAccuracy1": "1",
+      //             "questionRT2":  "0",
+      //             "questionAccuracy2":"0"
+    });
+    if (response.data["message"] == 'success') {
+      print(response.data);
+    }
+  }
+
+  _getData() async {
+    var api = '${Config.domain}/rest/users/uploadcategory';
+    var response = await Dio().get(api);
+    var currentUser = response.data[0];
+    _id = currentUser["userid"];
+    print(_id);
+    var api2 = "";
+    _control = currentUser["controlitem"];
+    if (_control == false) {
+      print("training");
+      _category = currentUser["category"];
+      api2 = '${Config.domain}/rest/$_category/session$_sessionNumber';
+    } else {
+      print("control");
+      api2 = '${Config.domain}/rest/controlitems/session$_sessionNumber';
+    }
+    var response2 = await Dio().get(api2);
+    _items = response2.data;
+    _processData(_itemNumber - 1);
+  }
+
+  void _processData(int i) {
+    if (_sessionNumber == null) {
+      _sessionNumber = 1;
+    }
+    if (_itemNumber == null) {
+      _itemNumber = 1;
+    }
+    setState(() {
+      _context = _items[i]["context"];
+      _blank = _items[i]["blank"];
+      _situation = _items[i]["situation"];
+      _feedback = "";
+      _next = false;
+      if (_questionNumber == 1) {
+        print(0);
+        _question = _items[i]["question1"];
+        _answer = _items[i]["answer1"];
+        _displayText = '$_context\n\n$_question';
+        _displayOption2_1 = null;
+        _displayOption2_2 = null;
+        updateQuestion();
+        updateOption1();
+      } else {
+        print(3);
+        _question = _items[i]["question2"];
+        _answer = _items[i]["answer2"];
+        _displayText =
+            'Now use the passage to answer the following question: \n\n\n$_question';
+        _displayOption1 = null;
+        updateQuestion();
+        updateOption2();
+      }
+    });
+  }
+
+  void toggle() {
+    print("toggle");
+    print(_questionNumber);
+    if (_questionNumber == 1) {
+      _questionNumber = 2;
+    } else {
+      _questionNumber = 1;
+      _route();
+    }
+  }
+
+  void _route() {
+    if (_control == false) {
+      //training items have imagine page, control dont
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => itemImaginePage(
+                  situation: _situation,
+                  itemNumber: _itemNumber,
+                  sessionNumber: _sessionNumber,
+                )),
+      );
+    } else {
+      if (_itemNumber != 0 && _itemNumber % 18 == 0) {
+        print("here2");
+        print('$_itemNumber');
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Sessionfinishedpage(
+                    itemNumber: 1,
+                    sessionNumber: _sessionNumber,
+                  )),
+        );
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Item1(
+                    itemNumber: _itemNumber + 1,
+                    sessionNumber: _sessionNumber,
+                  )),
+        );
+      }
+    }
+  }
+
+  void updateQuestion() {
+    _displayQuestion = Transform.translate(
+      offset: Offset(45.9, 253.0),
+      child: SizedBox(
+        width: 320.0,
+        child: Text.rich(
+          TextSpan(
+            style: TextStyle(
+              fontFamily: 'ZiZhiQuXiMaiTi',
+              fontSize: 21,
+              color: const Color(0xff000000),
+            ),
+            children: [
+              TextSpan(
+                text: '$_displayText',
+              ),
+            ],
+          ),
+          // textHeightBehavior:
+          //     TextHeightBehavior(applyHeightToFirstAscent: false),
+          textAlign: TextAlign.center,
+        ),
+      ),
+    );
+  }
+
+  void updateOption1() {
+    _displayOption1 = Transform.translate(
+        offset: Offset(110, 513.0),
+        child: Container(
+          width: 250.0,
+          child: TextField(
+            decoration: InputDecoration(
+                labelText: "$_blank",
+                contentPadding: EdgeInsets.all(0),
+                border: InputBorder.none),
+            onChanged: (value) {
+              _length = value.length;
+              if (_length == _answer.length) {
+                _next = _validateData(value);
+              } else if (_length > _answer.length) {
+                setState(() {
+                  _feedback = '↺ Please fill in less characters.';
+                });
+              } else {
+                _next = false;
+                setState(() {
+                  _feedback = '↺ Please fill in more characters.';
+                });
+              }
+            },
+            style: TextStyle(
+              fontSize: 45,
+              color: const Color(0xfffaae7c),
+            ),
+          ),
+        ));
+  }
+
+  void updateOption2() {
+    _displayOption2_1 = Transform.translate(
+      offset: Offset(120.6, 458.0),
+      child: FlatButton(
+          minWidth: 180.0,
+          height: 50,
+          hoverColor: Color(0xfffaaf7b),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          color: Colors.grey[300],
+          child: Text(
+            'Yes',
+            style: TextStyle(
+              fontFamily: 'ZiZhiQuXiMaiTi',
+              fontSize: 21,
+              color: const Color(0xff000000),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          onPressed: () {
+            _next = _validateData("Yes");
+          }),
+    );
+
+    _displayOption2_2 = Transform.translate(
+      offset: Offset(120.6, 531.0),
+      child: FlatButton(
+          minWidth: 180.0,
+          height: 50,
+          hoverColor: Color(0xfffaaf7b),
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(20))),
+          color: Colors.grey[300],
+          child: Text(
+            'No',
+            style: TextStyle(
+              fontFamily: 'ZiZhiQuXiMaiTi',
+              fontSize: 21,
+              color: const Color(0xff000000),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          onPressed: () {
+            _next = _validateData("No");
+          }),
+    );
+  }
+
+  bool _compareData(String string1, String string2) {
+    if (string1 == null || string2 == null) {
+      return false;
+    }
+    return string1.toLowerCase() == string2.toLowerCase();
+  }
+
+  bool _validateData(value) {
+    if (_compareData(_answer, value)) {
+      setState(() {
+        _feedback = '✔ Great, this is a good answer!';
+      });
+      return true;
+    } else {
+      setState(() {
+        _feedback = '✗ Good. But what would be a different answer?';
+      });
+      return false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -166,20 +496,20 @@ class Item1 extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(23.0, 3.7, 1.3, 4.0),
-                                    size: Size(24.3, 11.3),
-                                    pinRight: true,
-                                    fixedWidth: true,
-                                    fixedHeight: true,
-                                    child:
-                                        // Adobe XD layer: 'Cap' (shape)
-                                        SvgPicture.string(
-                                      _svg_5e5um9,
-                                      allowDrawingOutsideViewBox: true,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
+                                  // Pinned.fromSize(
+                                  //   bounds: Rect.fromLTWH(23.0, 3.7, 1.3, 4.0),
+                                  //   size: Size(24.3, 11.3),
+                                  //   pinRight: true,
+                                  //   fixedWidth: true,
+                                  //   fixedHeight: true,
+                                  //   child:
+                                  //       // Adobe XD layer: 'Cap' (shape)
+                                  //       SvgPicture.string(
+                                  //     _svg_5e5um9,
+                                  //     allowDrawingOutsideViewBox: true,
+                                  //     fit: BoxFit.fill,
+                                  //   ),
+                                  // ),
                                   Pinned.fromSize(
                                     bounds: Rect.fromLTWH(2.0, 2.0, 18.0, 7.3),
                                     size: Size(24.3, 11.3),
@@ -301,7 +631,7 @@ class Item1 extends StatelessWidget {
             child: SizedBox(
               width: 136.0,
               child: Text(
-                'Session X',
+                'Session ${_sessionNumber}',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 28,
@@ -311,43 +641,111 @@ class Item1 extends StatelessWidget {
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(37.9, 253.0),
-            child: SizedBox(
-              width: 354.0,
-              child: Text.rich(
-                TextSpan(
-                  style: TextStyle(
-                    fontFamily: 'ZiZhiQuXiMaiTi',
-                    fontSize: 21,
-                    color: const Color(0xff000000),
-                  ),
-                  children: [
-                    TextSpan(
-                      text:
-                          '   You turn the kettle on and wait\n for the water to boil.\n\nYou get a teabag out of the tin ,\nwhich you put into a mug, and \npourThe boiling water onto the\n teabag.\n\nNext, you add the …\n\n\n',
-                    ),
-                    TextSpan(
-                      text: 'm _ _ k',
-                      style: TextStyle(
-                        fontSize: 55,
-                        color: const Color(0xfffaae7c),
-                      ),
-                    ),
-                  ],
-                ),
-                textHeightBehavior:
-                    TextHeightBehavior(applyHeightToFirstAscent: false),
-                textAlign: TextAlign.center,
-              ),
-            ),
+
+          Container(
+            child: _displayQuestion,
           ),
+
+          Container(
+            child: _displayOption1,
+          ),
+
+          Container(
+            child: _displayOption2_1,
+          ),
+
+          Container(
+            child: _displayOption2_2,
+          ),
+
+          // Transform.translate(
+          //   offset: Offset(45.9, 253.0),
+          //   child: SizedBox(
+          //     width: 320.0,
+          //     child: Text.rich(
+          //       TextSpan(
+          //         style: TextStyle(
+          //           fontFamily: 'ZiZhiQuXiMaiTi',
+          //           fontSize: 21,
+          //           color: const Color(0xff000000),
+          //         ),
+          //         children: [
+          //           TextSpan(
+          //             text: '${_context}\n\n${_question}',
+          //           ),
+          //         ],
+          //       ),
+          //       // textHeightBehavior:
+          //       //     TextHeightBehavior(applyHeightToFirstAscent: false),
+          //       textAlign: TextAlign.center,
+          //     ),
+          //   ),
+          // ),
+
+          // Transform.translate(
+          //     offset: Offset(110, 503.0),
+          //     child: Container(
+          //       width: 250.0,
+          //       child: TextField(
+          //         decoration: InputDecoration(
+          //             labelText: "${_blank}",
+          //             contentPadding: EdgeInsets.all(0),
+          //             border: InputBorder.none),
+          //         onChanged: (value) {
+          //           _length = value.length;
+          //           if (_length >= _answer.length) {
+          //             _next = _validateData(value);
+          //           }
+          //           if (_length >= 6) {
+          //             setState(() {
+          //               _feedback = '↺ Please fill in less characters.';
+          //             });
+          //           }
+          //         },
+          //         style: TextStyle(
+          //           fontSize: 55,
+          //           color: const Color(0xfffaae7c),
+          //         ),
+          //       ),
+          //     )),
+
+          // Transform.translate(
+          //   offset: Offset(37.9, 253.0),
+          //   child: SizedBox(
+          //     width: 354.0,
+          //     child: Text.rich(
+          //       TextSpan(
+          //         style: TextStyle(
+          //           fontFamily: 'ZiZhiQuXiMaiTi',
+          //           fontSize: 21,
+          //           color: const Color(0xff000000),
+          //         ),
+          //         children: [
+          //           TextSpan(
+          //             text: '${_context}',
+          //           ),
+          //           TextSpan(
+          //             text: '${_blank}',
+          //             style: TextStyle(
+          //               fontSize: 55,
+          //               color: const Color(0xfffaae7c),
+          //             ),
+          //           ),
+          //         ],
+          //       ),
+          //       textHeightBehavior:
+          //           TextHeightBehavior(applyHeightToFirstAscent: false),
+          //       textAlign: TextAlign.center,
+          //     ),
+          //   ),
+          // ),
+
           Transform.translate(
             offset: Offset(274.3, 89.0),
             child: SizedBox(
               width: 106.0,
               child: Text(
-                '1/18',
+                '${_itemNumber}/18',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 39,
@@ -374,42 +772,42 @@ class Item1 extends StatelessWidget {
           ),
           Transform.translate(
             offset: Offset(41.0, 763.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushLeft,
-                  ease: Curves.easeInOutExpo,
-                  duration: 1.0,
-                  pageBuilder: () => Item2(),
+            // child: PageLink(
+            //   links: [
+            //     PageLinkInfo(
+            //       transition: LinkTransition.PushLeft,
+            //       ease: Curves.easeInOutExpo,
+            //       duration: 1.0,
+            //       pageBuilder: () => Item2(),
+            //     ),
+            //   ],
+            child: Container(
+              width: 347.0,
+              height: 67.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30.0),
+                  bottomLeft: Radius.circular(30.0),
                 ),
-              ],
-              child: Container(
-                width: 347.0,
-                height: 67.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(30.0),
-                    bottomLeft: Radius.circular(30.0),
-                  ),
-                  gradient: LinearGradient(
-                    begin: Alignment(0.0, -1.0),
-                    end: Alignment(0.0, 1.0),
-                    colors: [
-                      const Color(0xfff0660e),
-                      const Color(0xfff4b77e),
-                      const Color(0xffffffff),
-                      const Color(0xfffaaf7b)
-                    ],
-                    stops: [0.0, 0.0, 0.0, 1.0],
-                  ),
+                gradient: LinearGradient(
+                  begin: Alignment(0.0, -1.0),
+                  end: Alignment(0.0, 1.0),
+                  colors: [
+                    const Color(0xfff0660e),
+                    const Color(0xfff4b77e),
+                    const Color(0xffffffff),
+                    const Color(0xfffaaf7b)
+                  ],
+                  stops: [0.0, 0.0, 0.0, 1.0],
                 ),
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(156.3, 775.0),
-            child: SizedBox(
-              width: 116.0,
+            child: FlatButton(
+              color: Colors.transparent,
               child: Text(
                 'Next',
                 style: TextStyle(
@@ -419,38 +817,64 @@ class Item1 extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
+              onPressed: () {
+                if (_next == true) {
+                  toggle();
+                  _processData(_itemNumber - 1);
+                } else if (_length == 0) {
+                  setState(() {
+                    _feedback = '↺ Please fill in all missing characters.';
+                  });
+                }
+              },
             ),
           ),
+
           Transform.translate(
-            offset: Offset(177.0, 568.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.Fade,
-                  ease: Curves.linear,
-                  duration: 1.0,
-                  pageBuilder: () => Wrong1(),
+            offset: Offset(108.4, 685.0),
+            child: SizedBox(
+              width: 211.0,
+              child: Text(
+                "${_feedback}",
+                style: TextStyle(
+                  fontFamily: 'ZiZhiQuXiMaiTi',
+                  fontSize: 21,
+                  color: const Color(0xfff0660e),
                 ),
-              ],
-              child: Container(
-                width: 38.0,
-                height: 33.0,
-                decoration: BoxDecoration(
-                  color: const Color(0xffffffff),
-                ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(224.0, 568.0),
-            child: Container(
-              width: 37.0,
-              height: 33.0,
-              decoration: BoxDecoration(
-                color: const Color(0xffffffff),
-              ),
-            ),
-          ),
+          // Transform.translate(
+          //   offset: Offset(177.0, 568.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.Fade,
+          //         ease: Curves.linear,
+          //         duration: 1.0,
+          //         pageBuilder: () => Wrong1(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 38.0,
+          //       height: 33.0,
+          //       decoration: BoxDecoration(
+          //         color: const Color(0xffffffff),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // Transform.translate(
+          //   offset: Offset(224.0, 568.0),
+          //   child: Container(
+          //     width: 37.0,
+          //     height: 33.0,
+          //     decoration: BoxDecoration(
+          //       color: const Color(0xffffffff),
+          //     ),
+          //   ),
+          // ),
           Transform.translate(
             offset: Offset(140.0, 107.0),
             child:
@@ -461,27 +885,29 @@ class Item1 extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(76.0),
                 image: DecorationImage(
-                  image: const AssetImage('assets/images/6%.png'),
+                  image: AssetImage('${_images[_itemNumber - 1]}'),
+                  //const AssetImage('assets/images/6%.png'),
                   fit: BoxFit.fill,
                 ),
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(365.0, 45.0),
-            child:
-                // Adobe XD layer: 'tingzhi' (shape)
-                Container(
-              width: 45.0,
-              height: 45.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/stop.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+          // Transform.translate(
+          //   offset: Offset(365.0, 45.0),
+          //   child:
+          //       // Adobe XD layer: 'tingzhi' (shape)
+          //       Container(
+          //     width: 45.0,
+          //     height: 45.0,
+          //     decoration: BoxDecoration(
+          //       image: DecorationImage(
+          //         image: const AssetImage('assets/images/stop.png'),
+          //         fit: BoxFit.fill,
+          //       ),
+          //     ),
+          //   ),
+          // ),
+
           Transform.translate(
             offset: Offset(20.0, 42.0),
             child:

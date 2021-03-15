@@ -4,6 +4,10 @@ import 'package:adobe_xd/page_link.dart';
 import 'package:flutter/rendering.dart';
 
 class Moodtracker extends StatefulWidget {
+  int itemNumber;
+  int sessionNumber;
+  Moodtracker({this.itemNumber, this.sessionNumber});
+
   @override
   _MoodtrackerState createState() => _MoodtrackerState();
 }
@@ -129,13 +133,20 @@ class _MoodtrackerState extends State<Moodtracker> {
                   child: OutlineButton(
                     borderSide: BorderSide.none,
                     onPressed: () {
-                      Navigator.pushNamed(context, '/session');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Item1(
+                                  itemNumber: widget.itemNumber,
+                                  sessionNumber: widget.sessionNumber,
+                                )),
+                      );
                     },
                     child: Text(
                       'Next',
                       style: TextStyle(
                         fontFamily: 'ZiZhiQuXiMaiTi',
-                        fontSize: 38,
+                        fontSize: 37,
                         color: const Color(0xffffffff),
                       ),
                       textAlign: TextAlign.center,

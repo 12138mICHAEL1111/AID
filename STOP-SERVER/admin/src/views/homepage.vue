@@ -18,6 +18,8 @@
          <el-button type="primary" @click="uploadMinusHobby">一键增加minus hobby</el-button>
          <br><br>
          <el-button type="primary" @click="uploadMinusMood">一键增加minus mood</el-button>
+         <br><br>
+
          <el-button type="primary" @click="testApi">接口测试</el-button>
          <a>可以在admin/src/views/homepage.vue 里的testapi方法里更改接口 摁f12 console控制台查看输出</a>
     </div>
@@ -108,22 +110,7 @@ export default {
              }
         },
         async testApi(){
-            const res = await this.$http.post('/rest/response/senddata',
-            { "userid": "AA002", 
-              "trailNumber": "1",
-              "category": "minussocials",
-              "sessionNumber":  "1" ,
-              "readingDuration" : "10",
-              "wordRT1": "100" ,
-              "wordAccuracy1": "1" ,
-              "clueRequired": "0",
-              "wordRT2": "0",
-              "wordAccuracy2": "0",
-              "questionRT1": "100",
-              "questionAccuracy1": "1",
-              "questionRT2":  "0",
-              "questionAccuracy2":"0"
-             })
+            const res = await this.$http.get('/rest/user/uploadcategory')
 
             console.log(res.data)
         }

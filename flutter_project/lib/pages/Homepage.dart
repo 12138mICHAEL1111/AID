@@ -5,23 +5,29 @@ import './User.dart';
 import './Calendar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'Moodtracker.dart';
+
 class Homepage extends StatefulWidget {
+  int sessionNumber;
+  int itemNumber;
+
+  Homepage({this.sessionNumber, this.itemNumber});
   @override
-  _HomepageState createState() => _HomepageState();
+  _HomepageState createState() => _HomepageState(sessionNumber);
 }
 
 class _HomepageState extends State<Homepage> {
   var _sessionNumber;
 
+  _HomepageState(this._sessionNumber);
+
   @override
   void initState() {
     super.initState();
-    _sessionNumber = 1;
+    if (_sessionNumber == null) {
+      _sessionNumber = 1;
+    }
   }
-
-  //void nextSession
-  //if(index % 18 == 0)
-  //_sessionNumber++;
 
   @override
   Widget build(BuildContext context) {
@@ -334,7 +340,7 @@ class _HomepageState extends State<Homepage> {
             child: SizedBox(
               width: 188.0,
               child: Text(
-                "Session $_sessionNumber",
+                "Session ${_sessionNumber}",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 39,
@@ -364,7 +370,7 @@ class _HomepageState extends State<Homepage> {
           Transform.translate(
             offset: Offset(34.0, 653.0),
             child: Text(
-              'Welcome! Are you ready to start\nsession $_sessionNumber today?',
+              'Welcome! Are you ready to start\nsession ${_sessionNumber} today?',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 23,
@@ -402,30 +408,33 @@ class _HomepageState extends State<Homepage> {
           //     ),
           //   ),
           // ),
-
-          Transform.translate(
-            offset: Offset(87.0, 731.0),
+          Container(
+            margin: EdgeInsets.fromLTRB(100, 730, 50, 50),
             child: FlatButton(
-              minWidth: 254,
-              height: 59.0,
-              hoverColor: Color(0x29000000),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              color: const Color(0xfffdb56f),
-              child: Text(
-                '''Let's begin!''',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 26,
-                  color: const Color(0xffffffff),
+                minWidth: 254,
+                height: 59.0,
+                hoverColor: Color(0x29000000),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                color: const Color(0xfffdb56f),
+                child: Text(
+                  '''Let's begin!''',
+                  style: TextStyle(
+                    fontFamily: 'ZiZhiQuXiMaiTi',
+                    fontSize: 26,
+                    color: const Color(0xffffffff),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              onPressed: () {
-                print("works");
-                Navigator.pushNamed(context, '/moodtracker');
-              }
-            ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => Moodtracker(
+                            itemNumber: widget.itemNumber,
+                            sessionNumber: widget.sessionNumber)),
+                  );
+                }),
           ),
 
           Transform.translate(
