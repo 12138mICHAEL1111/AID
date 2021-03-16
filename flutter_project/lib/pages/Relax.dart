@@ -321,17 +321,17 @@ class Relax extends StatelessWidget {
           ),
           Transform.translate(
             offset: Offset(20.0, 42.0),
-            child:
-                // Adobe XD layer: 'jiantou' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushUp,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => Item1(),
-                ),
-              ],
+            // child:
+            //     // Adobe XD layer: 'jiantou' (shape)
+            //     PageLink(
+            //   links: [
+            //     PageLinkInfo(
+            //       transition: LinkTransition.PushUp,
+            //       ease: Curves.easeOut,
+            //       duration: 1.0,
+            //       pageBuilder: () => Item1(),
+            //     ),
+            //   ],
               child: Container(
                 width: 50.0,
                 height: 50.0,
