@@ -99,13 +99,12 @@ class _SessionfinishedState extends State<Sessionfinishedpage> {
                   textAlign: TextAlign.center,
                 ),
                 onPressed: () {
-                  var number = widget.sessionNumber + 1;
-                  //Navigator.pushNamed(context, '/moodtracker');
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            Homepage(itemNumber: 1, sessionNumber: number)),
+                        builder: (context) => Homepage(
+                            itemNumber: 1,
+                            sessionNumber: widget.sessionNumber + 1)),
                   );
                 }),
           ),

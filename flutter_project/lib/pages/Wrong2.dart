@@ -213,17 +213,17 @@ class Wrong2 extends StatelessWidget {
           Container(),
           Transform.translate(
             offset: Offset(20.0, 42.0),
-            child:
-                // Adobe XD layer: 'jiantou' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushRight,
-                  ease: Curves.easeIn,
-                  duration: 1.0,
-                  pageBuilder: () => Item1(),
-                ),
-              ],
+            // child:
+            //     // Adobe XD layer: 'jiantou' (shape)
+            //     PageLink(
+            //   links: [
+            //     PageLinkInfo(
+            //       transition: LinkTransition.PushRight,
+            //       ease: Curves.easeIn,
+            //       duration: 1.0,
+            //       pageBuilder: () => Item1(),
+            //     ),
+            //   ],
               child: Container(
                 width: 50.0,
                 height: 50.0,
@@ -235,7 +235,7 @@ class Wrong2 extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          
           Transform.translate(
             offset: Offset(27.0, 97.0),
             child: SizedBox(
