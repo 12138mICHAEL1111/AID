@@ -24,7 +24,6 @@ class _Item1State extends State<Item1> {
   var _displayOption1;
   var _next;
   var _feedback;
-  var _length;
   var _items;
   var _id;
   var _category;
@@ -66,7 +65,6 @@ class _Item1State extends State<Item1> {
     _answer = "";
     _next = false;
     _feedback = "";
-    _length = 0;
     _items = [];
     _id = "";
     _control = false;
@@ -249,19 +247,7 @@ class _Item1State extends State<Item1> {
                 contentPadding: EdgeInsets.all(0),
                 border: InputBorder.none),
             onChanged: (value) {
-              _length = value.length;
-              if (_length == _answer.length) {
-                _next = _validateData(value);
-              } else if (_length > _answer.length) {
-                setState(() {
-                  _feedback = '↺ Please fill in less characters.';
-                });
-              } else {
-                _next = false;
-                setState(() {
-                  _feedback = '↺ Please fill in more characters.';
-                });
-              }
+              _validateData(value);
             },
             style: TextStyle(
               fontSize: 45,
@@ -327,16 +313,17 @@ class _Item1State extends State<Item1> {
   }
 
   bool _validateData(value) {
+    var _length = value.length;
     if (_compareData(_answer, value)) {
       setState(() {
         _feedback = '✔ Great, this is a good answer!';
       });
-      return true;
+      return _next = true;
     } else {
       setState(() {
         _feedback = '✗ Good. But what would be a different answer?';
       });
-      return false;
+      return _next = false;
     }
   }
 
@@ -821,10 +808,6 @@ class _Item1State extends State<Item1> {
                 if (_next == true) {
                   toggle();
                   _processData(_itemNumber - 1);
-                } else if (_length == 0) {
-                  setState(() {
-                    _feedback = '↺ Please fill in all missing characters.';
-                  });
                 }
               },
             ),
