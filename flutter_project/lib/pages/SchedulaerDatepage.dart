@@ -4,11 +4,25 @@ import './Overpage.dart';
 import 'package:adobe_xd/page_link.dart';
 import './Selectcategoriespage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:date_format/date_format.dart';
 
-class SchedulaerDatepage extends StatelessWidget {
-  SchedulaerDatepage({
-    Key key,
-  }) : super(key: key);
+class SchedulaerDatepage extends StatefulWidget {
+  SchedulaerDatepage({Key key}) : super(key: key);
+
+  @override
+  _SchedulaerDatePageState createState() => _SchedulaerDatePageState();
+}
+
+class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
+  DateTime _now = DateTime.now();
+  _showDatePicker() {
+    showDatePicker(
+      context: context,
+      initialDate: _now,
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2050)
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,214 +40,7 @@ class SchedulaerDatepage extends StatelessWidget {
             ),
           ),
           // Adobe XD layer: 'Status Bars - iPhon…' (group)
-          SizedBox(
-            width: 428.0,
-            height: 44.0,
-            child: Stack(
-              children: <Widget>[
-                Pinned.fromSize(
-                  bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
-                  size: Size(428.0, 44.0),
-                  pinLeft: true,
-                  pinRight: true,
-                  pinTop: true,
-                  pinBottom: true,
-                  child:
-                      // Adobe XD layer: 'Status Bar' (group)
-                      Stack(
-                    children: <Widget>[
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(0.5, 0.0, 427.5, 44.0),
-                        size: Size(428.0, 44.0),
-                        pinLeft: true,
-                        pinRight: true,
-                        pinTop: true,
-                        pinBottom: true,
-                        child:
-                            // Adobe XD layer: 'BG' (shape)
-                            Container(),
-                      ),
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
-                        size: Size(428.0, 44.0),
-                        pinLeft: true,
-                        pinRight: true,
-                        pinTop: true,
-                        pinBottom: true,
-                        child:
-                            // Adobe XD layer: 'Status Bar' (group)
-                            Stack(
-                          children: <Widget>[
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
-                              size: Size(428.0, 44.0),
-                              pinLeft: true,
-                              pinRight: true,
-                              pinTop: true,
-                              pinBottom: true,
-                              child:
-                                  // Adobe XD layer: 'Bars/Status Bars/iP…' (shape)
-                                  Container(),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(388.8, 17.3, 24.3, 11.3),
-                              size: Size(428.0, 44.0),
-                              pinRight: true,
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Battery' (group)
-                                  Stack(
-                                children: <Widget>[
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(0.0, 0.0, 22.0, 11.3),
-                                    size: Size(24.3, 11.3),
-                                    pinLeft: true,
-                                    pinRight: true,
-                                    pinTop: true,
-                                    pinBottom: true,
-                                    child:
-                                        // Adobe XD layer: 'Border' (shape)
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(2.67),
-                                        border: Border.all(
-                                            width: 1.0,
-                                            color: const Color(0x59ffffff)),
-                                      ),
-                                    ),
-                                  ),
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(23.0, 3.7, 1.3, 4.0),
-                                    size: Size(24.3, 11.3),
-                                    pinRight: true,
-                                    fixedWidth: true,
-                                    fixedHeight: true,
-                                    child:
-                                        // Adobe XD layer: 'Cap' (shape)
-                                        SvgPicture.string(
-                                      _svg_5e5um9,
-                                      allowDrawingOutsideViewBox: true,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(2.0, 2.0, 18.0, 7.3),
-                                    size: Size(24.3, 11.3),
-                                    pinLeft: true,
-                                    pinTop: true,
-                                    pinBottom: true,
-                                    fixedWidth: true,
-                                    child:
-                                        // Adobe XD layer: 'Capacity' (shape)
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(1.33),
-                                        color: const Color(0xffffffff),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(368.5, 17.3, 15.3, 11.0),
-                              size: Size(428.0, 44.0),
-                              pinRight: true,
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Wifi' (shape)
-                                  SvgPicture.string(
-                                _svg_ya1094,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(337.1, 17.7, 17.0, 10.7),
-                              size: Size(428.0, 44.0),
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Cellular Connection' (shape)
-                                  SvgPicture.string(
-                                _svg_gbmjcf,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(21.5, 13.0, 54.0, 21.0),
-                              size: Size(428.0, 44.0),
-                              pinLeft: true,
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Time Style' (group)
-                                  Stack(
-                                children: <Widget>[
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(0.0, 0.0, 54.0, 21.0),
-                                    size: Size(54.0, 21.0),
-                                    pinLeft: true,
-                                    pinRight: true,
-                                    pinTop: true,
-                                    pinBottom: true,
-                                    child:
-                                        // Adobe XD layer: 'Time - Dark' (group)
-                                        Stack(
-                                      children: <Widget>[
-                                        Pinned.fromSize(
-                                          bounds: Rect.fromLTWH(
-                                              0.0, 0.0, 54.0, 21.0),
-                                          size: Size(54.0, 21.0),
-                                          pinLeft: true,
-                                          pinRight: true,
-                                          pinTop: true,
-                                          pinBottom: true,
-                                          child:
-                                              // Adobe XD layer: 'Time - Light backgr…' (shape)
-                                              Container(),
-                                        ),
-                                        Pinned.fromSize(
-                                          bounds: Rect.fromLTWH(
-                                              0.0, 2.0, 54.0, 18.0),
-                                          size: Size(54.0, 21.0),
-                                          pinLeft: true,
-                                          pinRight: true,
-                                          pinTop: true,
-                                          pinBottom: true,
-                                          child:
-                                              // Adobe XD layer: 'Time' (text)
-                                              Text(
-                                            '9:41',
-                                            style: TextStyle(
-                                              fontFamily: 'SFProText-Semibold',
-                                              fontSize: 15,
-                                              color: const Color(0xffffffff),
-                                              letterSpacing: -0.3,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+
           Transform.translate(
             offset: Offset(91.3, 190.0),
             child: SizedBox(
@@ -264,6 +71,8 @@ class SchedulaerDatepage extends StatelessWidget {
               ),
             ),
           ),
+
+          //white background for box
           Transform.translate(
             offset: Offset(41.0, 292.0),
             child: Container(
@@ -358,19 +167,22 @@ class SchedulaerDatepage extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(313.0, 305.0),
-            child:
-                // Adobe XD layer: 'rili' (shape)
-                Container(
-              width: 54.0,
-              height: 54.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/schedulerDate.png'),
-                  fit: BoxFit.fill,
-                ),
+            offset: Offset(260, 320.0),
+            child: InkWell(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    "2020-01-4",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Icon(Icons.arrow_drop_down)
+                ],
               ),
-            ),
+              onTap: (){
+
+              }
+            )
           ),
           Transform.translate(
             offset: Offset(313.0, 416.0),

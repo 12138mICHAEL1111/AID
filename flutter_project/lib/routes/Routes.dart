@@ -10,7 +10,7 @@ import "../pages/Practicepage2.dart";
 import '../pages/Moodtracker.dart';
 import '../pages/Item1.dart';
 import '../pages/IntroductionPage.dart';
-import '../pages/SchedulaerDatePage.dart';
+import '../pages/SchedulaerDatepage.dart';
 import '../pages/Scheduler.dart';
 // All the routes
 final routes = {

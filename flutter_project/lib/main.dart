@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/', //the page this app will start at
+      initialRoute: '/schedulaerdatepage', //the page this app will start at
       onGenerateRoute: onGenerateRoute
     );
   }
