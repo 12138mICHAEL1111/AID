@@ -397,20 +397,22 @@ class _Practicepage1State extends State<Practicepage1> {
               child: Container(
                 width: 250.0,
                 child: TextField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
                   decoration: InputDecoration(
-                      labelText: "M _ _ k",
+                      labelText: "m _ _ k",
                       contentPadding: EdgeInsets.all(0),
                       border: InputBorder.none),
                   onChanged: (value) {
                     _length = value.length;
-                    if (_length >= _answer.length) {
+                    if (_length == _answer.length) {
                       _next = _validateData(value);
-                    }
-                    if (_length >= 6) {
+                    } else if (_length > _answer.length) {
                       setState(() {
                         _feedback = '↺ Please fill in less characters.';
+                      });
+                    } else {
+                      _next = false;
+                      setState(() {
+                        _feedback = '↺ Please fill in more characters.';
                       });
                     }
                   },
@@ -520,12 +522,13 @@ class _Practicepage1State extends State<Practicepage1> {
                   Navigator.pushNamed(context, '/practice2');
                 } else if (_length == 0) {
                   setState(() {
-                    _feedback = '↺ Please fill in the all missing characters.';
+                    _feedback = '↺ Please fill in all missing characters.';
                   });
                 }
               },
             ),
           ),
+
           // Transform.translate(
           //   offset: Offset(177.0, 568.0),
           //   child: PageLink(

@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
-import './Homepage.dart';
 import 'package:adobe_xd/page_link.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../pages/Homepage.dart';
 
-class Seasonfinishedpage extends StatelessWidget {
-  Seasonfinishedpage({
-    Key key,
-  }) : super(key: key);
+class Sessionfinishedpage extends StatefulWidget {
+  int itemNumber;
+  int sessionNumber;
+  Sessionfinishedpage({this.itemNumber, this.sessionNumber});
+
+  @override
+  _SessionfinishedState createState() => _SessionfinishedState();
+}
+
+class _SessionfinishedState extends State<Sessionfinishedpage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +48,7 @@ class Seasonfinishedpage extends StatelessWidget {
             child: SizedBox(
               width: 365.0,
               child: Text(
-                'Your have completed session X. \nNow you can go to Home Page!',
+                'Your have completed session ${widget.sessionNumber}. \nNow you can go to Home Page!',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 22,
@@ -54,47 +60,56 @@ class Seasonfinishedpage extends StatelessWidget {
           ),
           Transform.translate(
             offset: Offset(98.0, 659.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushUp,
-                  ease: Curves.easeInOutExpo,
-                  duration: 1.0,
-                  pageBuilder: () => Homepage(),
-                ),
-              ],
-              child: Container(
-                width: 233.0,
-                height: 71.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(23.0),
-                  color: const Color(0xffffffff),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0x29000000),
-                      offset: Offset(0, 13),
-                      blurRadius: 6,
-                    ),
-                  ],
-                ),
+            // child: PageLink(
+            //   links: [
+            //     PageLinkInfo(
+            //       transition: LinkTransition.PushUp,
+            //       ease: Curves.easeInOutExpo,
+            //       duration: 1.0,
+            //       pageBuilder: () => Homepage(1),
+            //     ),
+            //   ],
+            child: Container(
+              width: 233.0,
+              height: 71.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(23.0),
+                color: const Color(0xffffffff),
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0x29000000),
+                    offset: Offset(0, 13),
+                    blurRadius: 6,
+                  ),
+                ],
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(97.4, 669.0),
-            child: SizedBox(
-              width: 233.0,
-              child: Text(
-                'Home Page',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 41,
-                  color: const Color(0xfffdb56f),
+            child: FlatButton(
+                child: Text(
+                  'Home Page',
+                  style: TextStyle(
+                    fontFamily: 'ZiZhiQuXiMaiTi',
+                    fontSize: 40,
+                    color: Colors.black,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ),
+                onPressed: () {
+                  var number = widget.sessionNumber + 1;
+                  //Navigator.pushNamed(context, '/moodtracker');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Homepage(itemNumber: 1, sessionNumber: number)),
+                  );
+                }),
           ),
+
           // Adobe XD layer: 'Status Bars - iPhon…' (group)
           SizedBox(
             width: 428.0,

@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/pages/Item1.dart';
+import 'package:flutter_project/pages/SessionFinishedpage.dart';
 
-class itemImaginePage extends StatelessWidget {
-  itemImaginePage({
-    Key key,
-  }) : super(key: key);
+class itemImaginePage extends StatefulWidget {
+  String situation;
+  int itemNumber;
+  int sessionNumber;
+  itemImaginePage({this.situation, this.itemNumber, this.sessionNumber});
+
+  @override
+  _ImagineState createState() => _ImagineState();
+}
+
+class _ImagineState extends State<itemImaginePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,20 +45,51 @@ class itemImaginePage extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
-            offset: Offset(22.6, 683.0),
-            child: SizedBox(
-              width: 383.0,
-              child: Text(
-                'Press’SPACE’when you are ready to imagine….',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 15,
-                  color: const Color(0xffffffff),
+            offset: Offset(156.3, 775.0),
+            child: FlatButton(
+                color: Colors.transparent,
+                child: Text(
+                  'Next',
+                  style: TextStyle(
+                    fontFamily: 'ZiZhiQuXiMaiTi',
+                    fontSize: 43,
+                    color: const Color(0xffffffff),
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ),
+                onPressed: () {
+                  var number = 0;
+                  if (widget.itemNumber == 17) {
+                    number = 0;
+                  } else {
+                    number = widget.itemNumber;
+                  }
+                  var number1 = widget.sessionNumber;
+
+                  if (number != 0 && number % 18 == 0) {
+                    print("here2");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Sessionfinishedpage(
+                                itemNumber: 1,
+                                sessionNumber: number1,
+                              )),
+                    );
+                  } else {
+                    print("here");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Item1(
+                                itemNumber: number + 1,
+                                sessionNumber: number1,
+                              )),
+                    );
+                  }
+                }),
           ),
           Transform.translate(
             offset: Offset(33.0, 329.0),
@@ -62,11 +102,11 @@ class itemImaginePage extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(142.4, 354.0),
+            offset: Offset(16.0, 324.0),
             child: SizedBox(
-              width: 145.0,
+              width: 383.0,
               child: Text(
-                'Question here',
+                '${widget.situation}',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 20,

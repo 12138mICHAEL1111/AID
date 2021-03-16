@@ -69,14 +69,14 @@ class SideMenu extends StatelessWidget {
             child:
                 // Adobe XD layer: 'error' (shape)
                 PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.Fade,
-                  ease: Curves.easeOut,
-                  duration: 0.3,
-                  pageBuilder: () => Homepage(),
-                ),
-              ],
+              // links: [
+              //   PageLinkInfo(
+              //     transition: LinkTransition.Fade,
+              //     ease: Curves.easeOut,
+              //     duration: 0.3,
+              //     pageBuilder: () => Homepage(1),
+              //   ),
+              // ],
               child: Container(
                 width: 51.0,
                 height: 51.0,
