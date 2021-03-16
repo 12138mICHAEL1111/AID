@@ -14,15 +14,36 @@ class SchedulaerDatepage extends StatefulWidget {
 }
 
 class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
-  DateTime _now = DateTime.now();
-  _showDatePicker() {
-    showDatePicker(
+  DateTime _session1 =  DateTime.now();
+  DateTime _session2 =  DateTime.now();
+  DateTime _session3 =  DateTime.now();
+  DateTime _session4 =  DateTime.now();
+
+  _showDatePicker1() async{
+    var temp = await showDatePicker(
       context: context,
-      initialDate: _now,
+      initialDate: _session1,
       firstDate: DateTime(2021),
-      lastDate: DateTime(2050)
+      lastDate: DateTime(2050),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: const Color(0xfffda873),
+            accentColor: const Color(0xfffda873),
+            colorScheme: ColorScheme.light(primary: const Color(0xfffda873)),
+            buttonTheme: ButtonThemeData(
+              textTheme: ButtonTextTheme.primary
+            ),
+          ),
+          child: child,
+        );
+      },
     );
+    setState(() {
+      _session1 = temp;
+    });
   }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -173,14 +194,14 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "2020-01-4",
+                    "${formatDate(_session1, [yyyy, '-', mm, '-', dd])}",
                     style: TextStyle(fontSize: 20),
                   ),
                   Icon(Icons.arrow_drop_down)
                 ],
               ),
               onTap: (){
-
+                _showDatePicker1();
               }
             )
           ),
