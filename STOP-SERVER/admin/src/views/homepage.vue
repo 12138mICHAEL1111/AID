@@ -110,8 +110,8 @@ export default {
              }
         },
         async testApi(){
-            const sessiontime={"session1":"2021-01-24","session2":"2021-01-25","session3":"2021-01-26","session4":"2021-01-27"}
-            const res = await this.$http.post('/rest/users/uploadsessiontime',{"userid":"AA001","sessiontime":sessiontime})
+            const res = await this.$http.get('/rest/user/uploadcategory')
+
             console.log(res.data)
         }
     }

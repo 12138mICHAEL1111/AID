@@ -70,14 +70,14 @@ class Relax extends StatelessWidget {
           Transform.translate(
             offset: Offset(98.0, 659.0),
             child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushDown,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => Homepage(),
-                ),
-              ],
+              // links: [
+              //   PageLinkInfo(
+              //     transition: LinkTransition.PushDown,
+              //     ease: Curves.easeOut,
+              //     duration: 1.0,
+              //     pageBuilder: () => Homepage(1),
+              //   ),
+              // ],
               child: Container(
                 width: 233.0,
                 height: 71.0,
@@ -321,17 +321,17 @@ class Relax extends StatelessWidget {
           ),
           Transform.translate(
             offset: Offset(20.0, 42.0),
-            child:
-                // Adobe XD layer: 'jiantou' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushUp,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => Item1(),
-                ),
-              ],
+            // child:
+            //     // Adobe XD layer: 'jiantou' (shape)
+            //     PageLink(
+            //   links: [
+            //     PageLinkInfo(
+            //       transition: LinkTransition.PushUp,
+            //       ease: Curves.easeOut,
+            //       duration: 1.0,
+            //       pageBuilder: () => Item1(),
+            //     ),
+            //   ],
               child: Container(
                 width: 50.0,
                 height: 50.0,

@@ -16,7 +16,6 @@ class _Practicepage1State extends State<Practicepage1> {
   var _answer;
   var _next;
   var _feedback;
-  var _length;
 
   @override
   void initState() {
@@ -24,7 +23,6 @@ class _Practicepage1State extends State<Practicepage1> {
     _answer = "";
     _next = false;
     _feedback = "";
-    _length = 0;
     _getData();
   }
 
@@ -46,12 +44,12 @@ class _Practicepage1State extends State<Practicepage1> {
       setState(() {
         _feedback = '✔ Great, this is a good answer!';
       });
-      return true;
+      return _next = true;
     } else {
       setState(() {
         _feedback = '✗ Good. But what would be a different answer?';
       });
-      return false;
+      return _next = false;
     }
   }
 
@@ -397,22 +395,12 @@ class _Practicepage1State extends State<Practicepage1> {
               child: Container(
                 width: 250.0,
                 child: TextField(
-                  keyboardType: TextInputType.multiline,
-                  maxLines: null,
                   decoration: InputDecoration(
-                      labelText: "M _ _ k",
+                      labelText: "m _ _ k",
                       contentPadding: EdgeInsets.all(0),
                       border: InputBorder.none),
                   onChanged: (value) {
-                    _length = value.length;
-                    if (_length >= _answer.length) {
-                      _next = _validateData(value);
-                    }
-                    if (_length >= 6) {
-                      setState(() {
-                        _feedback = '↺ Please fill in less characters.';
-                      });
-                    }
+                    _validateData(value);
                   },
                   style: TextStyle(
                     fontSize: 55,
@@ -518,14 +506,11 @@ class _Practicepage1State extends State<Practicepage1> {
               onPressed: () {
                 if (_next == true) {
                   Navigator.pushNamed(context, '/practice2');
-                } else if (_length == 0) {
-                  setState(() {
-                    _feedback = '↺ Please fill in the all missing characters.';
-                  });
-                }
+                } 
               },
             ),
           ),
+
           // Transform.translate(
           //   offset: Offset(177.0, 568.0),
           //   child: PageLink(

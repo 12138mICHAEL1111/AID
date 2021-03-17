@@ -5,11 +5,128 @@ import 'package:adobe_xd/page_link.dart';
 import './Wrong2.dart';
 import './Item1.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import '../config/Config.dart';
+import 'package:dio/dio.dart';
 
-class Item2 extends StatelessWidget {
-  Item2({
-    Key key,
-  }) : super(key: key);
+class Item2 extends StatefulWidget {
+  int itemNumber;
+  int sessionNumber;
+  String image;
+  String situation;
+  String question2;
+  String answer2;
+  Item2(
+      {this.itemNumber,
+      this.sessionNumber,
+      this.image,
+      this.situation,
+      this.question2,
+      this.answer2});
+  @override
+  _Item2State createState() => _Item2State();
+}
+//pass session number/ item number
+
+class _Item2State extends State<Item2> {
+  var _answer;
+  var _next;
+  var _pressed = false;
+  var _feedback;
+  //var _length;
+  //var _items;
+  var _id;
+  //var _category;
+  //var _question;
+  //var _context;
+  //ar _blank;
+  //var _itemNumber;
+  //var _sessionNumber;
+  // //var _images = [
+  //   "assets/images/6%.png",
+  //   "assets/images/12%.png",
+  //   "assets/images/17%.png",
+  //   "assets/images/23%.png",
+  //   "assets/images/29%.png",
+  //   "assets/images/35%.png",
+  //   "assets/images/41%.png",
+  //   "assets/images/47%.png",
+  //   "assets/images/50%.png",
+  //   "assets/images/52%.png",
+  //   "assets/images/63%.png",
+  //   "assets/images/69%.png",
+  //   "assets/images/74%.png",
+  //   "assets/images/80%.png",
+  //   "assets/images/85%.png",
+  //   "assets/images/90%.png",
+  //   "assets/images/95%.png",
+  //   "assets/images/100%.png",
+  // ];
+
+  @override
+  void initState() {
+    super.initState();
+    // _answer = "";
+    // _next = false;
+    // _feedback = "";
+    // _length = 0;
+    // _items = [];
+    // _id = "";
+    // _category = "";
+    // _question = "";
+    // _sessionNumber = 1;
+    // _itemNumber = 1;
+    //_getData();
+  }
+
+  // _getData() async {
+  //   var api = '${Config.domain}/rest/users/uploadcategory';
+  //   var response = await Dio().get(api, queryParameters: {"currentuser": true});
+  //   var currentUser = response.data[0];
+  //   _id = currentUser["userid"];
+  //   //_answer = response.data[0]['answer1'];
+  //   //print(currentUser);
+  //   var api2 = "";
+  //   if (currentUser["controlitem"] == false) {
+  //     //print(false);
+  //     _category = currentUser["category"];
+  //     api2 = '${Config.domain}/rest/${currentUser["category"]}';
+  //   } else {
+  //     api2 = '${Config.domain}/rest/controlitems';
+  //   }
+  //   var response2 = await Dio().get(api2);
+  //   _items = response2.data;
+  //   _processData(0); // _processData(itemNumber);
+  // }
+
+  // void _processData(int i) {
+  //   if (i != 0 && i % 17 == 0) {
+  //     _sessionNumber++;
+  //     Navigator.pushNamed(context, '/sessionfinished');
+  //   }
+  //   //print(_items);
+  //   //print(true);
+  //   setState(() {
+  //     _context = _items[i]["context"];
+  //     _question = _items[i]["question1"];
+  //     _blank = _items[i]["blank"];
+  //     _answer = _items[i]["answer1"];
+  //   });
+  // }
+
+  bool _validateData(value) {
+    if (_answer == value) {
+      setState(() {
+        _feedback = '✔ Great, this is a good answer!';
+      });
+      return _next = true;
+    } else {
+      setState(() {
+        _feedback = '✗ What would be a different answer?';
+      });
+      return _next = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,27 +178,6 @@ class Item2 extends StatelessWidget {
                     color: const Color(0x5a000000),
                     offset: Offset(0, 3),
                     blurRadius: 40,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(409.0, 195.0),
-            child: Container(
-              width: 20.0,
-              height: 594.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30.0),
-                  bottomLeft: Radius.circular(30.0),
-                ),
-                color: const Color(0xffffffff),
-                boxShadow: [
-                  BoxShadow(
-                    color: const Color(0x29000000),
-                    offset: Offset(40, 3),
-                    blurRadius: 6,
                   ),
                 ],
               ),
@@ -297,42 +393,57 @@ class Item2 extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(37.9, 253.0),
+            offset: Offset(52.8, 82.0),
             child: SizedBox(
-              width: 354.0,
-              child: Text.rich(
-                TextSpan(
-                  style: TextStyle(
-                    fontFamily: 'ZiZhiQuXiMaiTi',
-                    fontSize: 21,
-                    color: const Color(0xff000000),
-                  ),
-                  children: [
-                    TextSpan(
-                      text:
-                          '   You turn the kettle on and wait\n for the water to boil.\n\nYou get a teabag out of the tin ,\nwhich you put into a mug, and \npourThe boiling water onto the\n teabag.\n\nNext, you add the …\n\n\n',
-                    ),
-                    TextSpan(
-                      text: 'm _ _ k',
-                      style: TextStyle(
-                        fontSize: 55,
-                        color: const Color(0xfffaae7c),
-                      ),
-                    ),
-                  ],
+              width: 113.0,
+              child: Text(
+                'Practice ',
+                style: TextStyle(
+                  fontFamily: 'ZiZhiQuXiMaiTi',
+                  fontSize: 25,
+                  color: const Color(0xfff7f7f7),
                 ),
-                textHeightBehavior:
-                    TextHeightBehavior(applyHeightToFirstAscent: false),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
           Transform.translate(
-            offset: Offset(273.3, 89.0),
+            offset: Offset(52.8, 114.0),
             child: SizedBox(
-              width: 108.0,
+              width: 77.0,
               child: Text(
-                '2/18',
+                'Items',
+                style: TextStyle(
+                  fontFamily: 'ZiZhiQuXiMaiTi',
+                  fontSize: 25,
+                  color: const Color(0xfff7f7f7),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(144.0, 113.0),
+            child:
+                // Adobe XD layer: '截屏2021-03-01 16.20.…' (shape)
+                Container(
+              width: 148.0,
+              height: 139.8,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(70.0),
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/100%.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(285.3, 89.0),
+            child: SizedBox(
+              width: 84.0,
+              child: Text(
+                '2/2',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 39,
@@ -343,11 +454,118 @@ class Item2 extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(97.4, 628.0),
+            offset: Offset(82.8, 258.0),
             child: SizedBox(
-              width: 233.0,
+              width: 268.0,
               child: Text(
-                'Type in the first missing letter',
+                'The second question：\n\n\nHave you made yourself \na cup of coffee?',
+                style: TextStyle(
+                  fontFamily: 'ZiZhiQuXiMaiTi',
+                  fontSize: 21,
+                  color: const Color(0xff000000),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          // Transform.translate(
+          //   offset: Offset(109.0, 451.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.Fade,
+          //         ease: Curves.linear,
+          //         duration: 1.0,
+          //         pageBuilder: () => Practice2Wrongpage(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 218.0,
+          //       height: 41.0,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(20.0),
+          //         color: const Color(0xffffffff),
+          //         border:
+          //             Border.all(width: 1.0, color: const Color(0xff707070)),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          Transform.translate(
+            offset: Offset(120.6, 458.0),
+            child: FlatButton(
+                minWidth: 180.0,
+                height: 50,
+                hoverColor: Color(0xfffaaf7b),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                color: Colors.grey[300],
+                child: Text(
+                  'Yes',
+                  style: TextStyle(
+                    fontFamily: 'ZiZhiQuXiMaiTi',
+                    fontSize: 21,
+                    color: const Color(0xff000000),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                onPressed: () {
+                  _validateData("Yes");
+                }),
+          ),
+          // Transform.translate(
+          //   offset: Offset(109.0, 524.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.Fade,
+          //         ease: Curves.linear,
+          //         duration: 1.0,
+          //         pageBuilder: () => Practice2Correctpage(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 218.0,
+          //       height: 41.0,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(20.0),
+          //         color: const Color(0xffffffff),
+          //         border:
+          //             Border.all(width: 1.0, color: const Color(0xff707070)),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+
+          Transform.translate(
+            offset: Offset(120.6, 531.0),
+            child: FlatButton(
+                minWidth: 180.0,
+                height: 50,
+                hoverColor: Color(0xfffaaf7b),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                color: Colors.grey[300],
+                child: Text(
+                  'No',
+                  style: TextStyle(
+                    fontFamily: 'ZiZhiQuXiMaiTi',
+                    fontSize: 21,
+                    color: const Color(0xff000000),
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+                onPressed: () {
+                  _validateData("No");
+                }),
+          ),
+
+          Transform.translate(
+            offset: Offset(123.8, 596.0),
+            child: SizedBox(
+              width: 180.0,
+              child: Text(
+                'Choose an option',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 15,
@@ -357,44 +575,61 @@ class Item2 extends StatelessWidget {
               ),
             ),
           ),
+
+          Transform.translate(
+            offset: Offset(108.4, 685.0),
+            child: SizedBox(
+              width: 211.0,
+              child: Text(
+                "${_feedback}",
+                style: TextStyle(
+                  fontFamily: 'ZiZhiQuXiMaiTi',
+                  fontSize: 21,
+                  color: const Color(0xfff0660e),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+
           Transform.translate(
             offset: Offset(41.0, 763.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushLeft,
-                  ease: Curves.easeInOutExpo,
-                  duration: 1.0,
-                  pageBuilder: () => Item3(),
+            // child: PageLink(
+            //   links: [
+            //     PageLinkInfo(
+            //       transition: LinkTransition.PushLeft,
+            //       ease: Curves.easeOut,
+            //       duration: 1.0,
+            //       pageBuilder: () => (),
+            //     ),
+            //   ],
+            child: Container(
+              width: 347.0,
+              height: 67.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30.0),
+                  bottomLeft: Radius.circular(30.0),
                 ),
-              ],
-              child: Container(
-                width: 347.0,
-                height: 67.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(30.0),
-                    bottomLeft: Radius.circular(30.0),
-                  ),
-                  gradient: LinearGradient(
-                    begin: Alignment(0.0, -1.0),
-                    end: Alignment(0.0, 1.0),
-                    colors: [
-                      const Color(0xfff0660e),
-                      const Color(0xfff4b77e),
-                      const Color(0xffffffff),
-                      const Color(0xfffaaf7b)
-                    ],
-                    stops: [0.0, 0.0, 0.0, 1.0],
-                  ),
+                gradient: LinearGradient(
+                  begin: Alignment(0.0, -1.0),
+                  end: Alignment(0.0, 1.0),
+                  colors: [
+                    const Color(0xfff0660e),
+                    const Color(0xfff4b77e),
+                    const Color(0xffffffff),
+                    const Color(0xfffaaf7b)
+                  ],
+                  stops: [0.0, 0.0, 0.0, 1.0],
                 ),
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(156.3, 775.0),
-            child: SizedBox(
-              width: 116.0,
+            child: FlatButton(
+              color: Colors.transparent,
               child: Text(
                 'Next',
                 style: TextStyle(
@@ -404,109 +639,42 @@ class Item2 extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
+              onPressed: () {
+                if (_next == true) {
+                  Navigator.pushNamed(context, '/select');
+                } else if (_pressed == false) {
+                  setState(() {
+                    _feedback = '↺ Please select an option.';
+                  });
+                }
+              },
             ),
           ),
-          Transform.translate(
-            offset: Offset(177.0, 568.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.Fade,
-                  ease: Curves.linear,
-                  duration: 1.0,
-                  pageBuilder: () => Wrong2(),
-                ),
-              ],
-              child: Container(
-                width: 38.0,
-                height: 33.0,
-                decoration: BoxDecoration(
-                  color: const Color(0xffffffff),
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(224.0, 568.0),
-            child: Container(
-              width: 37.0,
-              height: 33.0,
-              decoration: BoxDecoration(
-                color: const Color(0xffffffff),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(140.0, 107.0),
-            child:
-                // Adobe XD layer: '截屏2021-03-02 19.21.…' (shape)
-                Container(
-              width: 132.7,
-              height: 131.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(78.0),
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/12%.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(20.0, 42.0),
-            child:
-                // Adobe XD layer: 'jiantou' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushRight,
-                  ease: Curves.easeIn,
-                  duration: 1.0,
-                  pageBuilder: () => Item1(),
-                ),
-              ],
-              child: Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/images/goback.png'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(27.0, 97.0),
-            child: SizedBox(
-              width: 136.0,
-              child: Text(
-                'Session X',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 28,
-                  color: const Color(0xfff7f7f7),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(365.0, 45.0),
-            child:
-                // Adobe XD layer: 'tingzhi' (shape)
-                Container(
-              width: 45.0,
-              height: 45.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/stop.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+          // Transform.translate(
+          //   offset: Offset(20.0, 42.0),
+          //   child:
+          //       // Adobe XD layer: 'jiantou' (shape)
+          //       PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.PushRight,
+          //         ease: Curves.easeIn,
+          //         duration: 1.0,
+          //         pageBuilder: () => Practicepage1(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 50.0,
+          //       height: 50.0,
+          //       decoration: BoxDecoration(
+          //         image: DecorationImage(
+          //           image: const AssetImage('assets/images/goback.png'),
+          //           fit: BoxFit.fill,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

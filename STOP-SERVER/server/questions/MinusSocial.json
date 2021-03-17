@@ -1,7 +1,7 @@
   {
       "Item":[
           {
-              "context":"You sit down to have your appraisal with your line manager. They show you your feedback scores and tell you that they are good scores but the scores aren't quite ashigh as you would have hoped for.",
+              "context":"You sit down to have your appraisal with your line manager. They show you your feedback scores and tell you that they are good scores but the scores aren't quite as high as you would have hoped for.",
               "question1":"You decide your feedback scores are still",
               "blank":"p_ea_ing",
               "answer1":"ls",

@@ -9,9 +9,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/schedulaerdatepage', //the page this app will start at
-      onGenerateRoute: onGenerateRoute
-    );
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/login', //the page this app will start at
+        //initialRoute: '/item1',
+        onGenerateRoute: onGenerateRoute);
   }
 }

@@ -4,6 +4,10 @@ import 'package:adobe_xd/page_link.dart';
 import 'package:flutter/rendering.dart';
 
 class Moodtracker extends StatefulWidget {
+  int itemNumber;
+  int sessionNumber;
+  Moodtracker({this.itemNumber, this.sessionNumber});
+
   @override
   _MoodtrackerState createState() => _MoodtrackerState();
 }
@@ -90,34 +94,33 @@ class _MoodtrackerState extends State<Moodtracker> {
           ),
           Transform.translate(
             offset: Offset(34.0, 764.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushLeft,
-                  ease: Curves.easeInOutExpo,
-                  duration: 1.0,
-                  pageBuilder: () => Item1(),
+            // child: PageLink(
+            // links: [
+            //   PageLinkInfo(
+            //     transition: LinkTransition.PushLeft,
+            //     ease: Curves.easeInOutExpo,
+            //     duration: 1.0,
+            //     pageBuilder: () => Item1(),
+            //   ),
+            // ],
+            child: Container(
+              width: 362.0,
+              height: 67.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30.0),
+                  bottomLeft: Radius.circular(30.0),
                 ),
-              ],
-              child: Container(
-                width: 362.0,
-                height: 67.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(30.0),
-                    bottomLeft: Radius.circular(30.0),
-                  ),
-                  gradient: LinearGradient(
-                    begin: Alignment(0.0, -1.0),
-                    end: Alignment(0.0, 1.0),
-                    colors: [
-                      const Color(0xfff0660e),
-                      const Color(0xfff4b77e),
-                      const Color(0xffffffff),
-                      const Color(0xfffaaf7b)
-                    ],
-                    stops: [0.0, 0.0, 0.0, 1.0],
-                  ),
+                gradient: LinearGradient(
+                  begin: Alignment(0.0, -1.0),
+                  end: Alignment(0.0, 1.0),
+                  colors: [
+                    const Color(0xfff0660e),
+                    const Color(0xfff4b77e),
+                    const Color(0xffffffff),
+                    const Color(0xfffaaf7b)
+                  ],
+                  stops: [0.0, 0.0, 0.0, 1.0],
                 ),
               ),
             ),
@@ -129,13 +132,20 @@ class _MoodtrackerState extends State<Moodtracker> {
                   child: OutlineButton(
                     borderSide: BorderSide.none,
                     onPressed: () {
-                      Navigator.pushNamed(context, '/session');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Item1(
+                                  itemNumber: widget.itemNumber,
+                                  sessionNumber: widget.sessionNumber,
+                                )),
+                      );
                     },
                     child: Text(
                       'Next',
                       style: TextStyle(
                         fontFamily: 'ZiZhiQuXiMaiTi',
-                        fontSize: 38,
+                        fontSize: 37,
                         color: const Color(0xffffffff),
                       ),
                       textAlign: TextAlign.center,

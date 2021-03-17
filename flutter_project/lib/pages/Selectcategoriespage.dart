@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/config/Config.dart';
@@ -16,16 +14,23 @@ class Selectcategoriespage extends StatefulWidget {
   _SelectPageState createState() => _SelectPageState();
 }
 
-
 class _SelectPageState extends State<Selectcategoriespage> {
-  next(){
-    Navigator.pushNamed(context,'/schedulaerdatepage');
+  next() {
+    Navigator.pushNamed(context, '/schedulaerdatepage');
   }
+
   //The list store all the option
   var _list = List<int>.filled(10, 0);
   var result;
-  var map = {1: "minussocial", 2: "minusacademic", 3: "minushobbies", 
-  4: "minusfamily", 5: "minusworks", 6: "minusrelationships", 7: "minusmood"};
+  var map = {
+    1: "minussocial",
+    2: "minusacademic",
+    3: "minushobbies",
+    4: "minusfamily",
+    5: "minusworks",
+    6: "minusrelationships",
+    7: "minusmood"
+  };
   //user id
   ///////////////////////////////////////////////////////////////////////////////////
 
@@ -42,8 +47,8 @@ class _SelectPageState extends State<Selectcategoriespage> {
 
   //Check if exactly 6 are selected
   String cate() {
-    for(int i = 1; i < 8; ++i) {
-      if(_list[i] == 0) {
+    for (int i = 1; i < 8; ++i) {
+      if (_list[i] == 0) {
         //////////////////////////////////////////////////////////////////////////////////////////////////
         print("giao ${map[i]}");
         return map[i];
@@ -56,7 +61,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
     for (int i = 0; i < _list.length; ++i) {
       if (_list[i] == 1) ++length;
     }
-    if(length == 6) {
+    if (length == 6) {
       upload();
       return true;
     } else {
@@ -64,17 +69,19 @@ class _SelectPageState extends State<Selectcategoriespage> {
     }
   }
 
-  upload() async{
+  upload() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var api = '${Config.domain}/rest/users/uploadcategory';
     var id = pref.get("userid");
-    var response = await Dio().post(api,data:{"userid": id, "category": cate()});
-    if(response.data["message"]=='success'){
+    var response =
+        await Dio().post(api, data: {"userid": id, "category": cate()});
+    if (response.data["message"] == 'success') {
       print(response.data);
-      pref.setString('category',cate());
-      Navigator.of(context).pushNamed('/introductionpage');
+      pref.setString('category', cate());
+      Navigator.of(context).pushNamed('/homepage');
     }
   }
+
   //construct options
   Widget cons(int i, String str) {
     return InkWell(
@@ -104,6 +111,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
           ),
         ));
   }
+
   _showToast() {
     Fluttertoast.showToast(
         msg: "Please select 6 options",
@@ -112,8 +120,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
-        fontSize: 16.0
-    );
+        fontSize: 16.0);
   }
 
   @override
@@ -180,12 +187,12 @@ class _SelectPageState extends State<Selectcategoriespage> {
           // Transform.translate(
           //   offset: Offset(120.2, 644.0),
           //   child: InkWell(
-          //     onTap: () {       
+          //     onTap: () {
           //       if(check()) {
           //         upload();
           //       } else {
           //         _showToast();
-          //       } 
+          //       }
           //     },
           //       child: Container(
           //         width: 171.0,
@@ -207,15 +214,15 @@ class _SelectPageState extends State<Selectcategoriespage> {
           Transform.translate(
             offset: Offset(120.2, 644.0),
             child: InkWell(
-              onTap: () {       
+              onTap: () {
                 print("tapped");
-                if(check()) {
+                if (check()) {
                   upload();
                 } else {
                   _showToast();
-                } 
+                }
               },
-                child: Container(
+              child: Container(
                   width: 171.0,
                   height: 62.0,
                   decoration: BoxDecoration(
@@ -229,20 +236,20 @@ class _SelectPageState extends State<Selectcategoriespage> {
                       ),
                     ],
                   ),
-                  child: check()?PageLink(
-                    links: [
-                      PageLinkInfo(
-                        transition: LinkTransition.PushLeft,
-                        ease: Curves.easeOut,
-                        duration: 1.0,
-                        pageBuilder: () => SchedulaerDatepage(),
-                      )
-                    ],
-                  )
-                  :null
-                ),
-              ),
+                  child: check()
+                      ? PageLink(
+                          links: [
+                            PageLinkInfo(
+                              transition: LinkTransition.PushLeft,
+                              ease: Curves.easeOut,
+                              duration: 1.0,
+                              pageBuilder: () => SchedulaerDatepage(),
+                            )
+                          ],
+                        )
+                      : null),
             ),
+          ),
 
           // Transform.translate(
           //   offset: Offset(129.0, 644.0),
@@ -277,42 +284,41 @@ class _SelectPageState extends State<Selectcategoriespage> {
             child: SizedBox(
               width: 111.0,
               child: FlatButton(
-              child: Text("Next",
-                style: TextStyle(
-                  color: Color.fromRGBO(252,181,111,1.0),
-                  fontSize: 25
+                child: Text(
+                  "Next",
+                  style: TextStyle(
+                      color: Color.fromRGBO(252, 181, 111, 1.0), fontSize: 25),
                 ),
+                color: Colors.white,
+                onPressed: next,
               ),
-              color: Colors.white,
-              onPressed: next,
-            ),
             ),
           ),
           Transform.translate(
             offset: Offset(20.0, 42.0),
             child:
                 // Adobe XD layer: 'jiantou' (shape)
-              PageLink(
-                links: [
-                  PageLinkInfo(
-                    transition: LinkTransition.PushRight,
-                    ease: Curves.easeIn,
-                    duration: 1.0,
-                    pageBuilder: () => Practicepage2(),
-                  )
-                ],
-                child: Container(
-                  width: 50.0,
-                  height: 50.0,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: const AssetImage('assets/images/goback.png'),
-                      fit: BoxFit.fill,
-                    ),
+                PageLink(
+              links: [
+                PageLinkInfo(
+                  transition: LinkTransition.PushRight,
+                  ease: Curves.easeIn,
+                  duration: 1.0,
+                  pageBuilder: () => Practicepage2(),
+                )
+              ],
+              child: Container(
+                width: 50.0,
+                height: 50.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: const AssetImage('assets/images/goback.png'),
+                    fit: BoxFit.fill,
                   ),
                 ),
               ),
             ),
+          ),
         ],
       ),
     );

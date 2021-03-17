@@ -53,15 +53,15 @@ class Overpage extends StatelessWidget {
           ),
           Transform.translate(
             offset: Offset(98.0, 659.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushLeft,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => Homepage(),
-                ),
-              ],
+            // child: PageLink(
+            //   links: [
+            //     PageLinkInfo(
+            //       transition: LinkTransition.PushLeft,
+            //       ease: Curves.easeOut,
+            //       duration: 1.0,
+            //       pageBuilder: () => Homepage(),
+            //     ),
+            //   ],
               child: Container(
                 width: 233.0,
                 height: 71.0,
@@ -78,7 +78,7 @@ class Overpage extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          
           Transform.translate(
             offset: Offset(156.8, 669.0),
             child: SizedBox(
