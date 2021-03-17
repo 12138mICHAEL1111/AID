@@ -1,14 +1,92 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:adobe_xd/pinned.dart';
+import 'package:flutter_project/config/Config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './Overpage.dart';
 import 'package:adobe_xd/page_link.dart';
 import './Selectcategoriespage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:date_format/date_format.dart';
 
-class SchedulaerDatepage extends StatelessWidget {
-  SchedulaerDatepage({
-    Key key,
-  }) : super(key: key);
+class SchedulaerDatepage extends StatefulWidget {
+  SchedulaerDatepage({Key key}) : super(key: key);
+
+  @override
+  _SchedulaerDatePageState createState() => _SchedulaerDatePageState();
+}
+
+class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
+  var size = 4;
+  var _list;
+  SharedPreferences pref;
+
+  @override
+  void initState() {
+    super.initState();
+    _list = new List(size + 1);
+    _list[0] = DateTime.now();
+    _list[1] = DateTime.now();
+    _list[2] = DateTime.now();
+    _list[3] = DateTime.now();
+    _list[4] = DateTime.now();
+    init();
+  }
+
+  void init() async {
+    pref = await SharedPreferences.getInstance();
+    for(int i = 1; i <= size; ++i) {
+      if(pref.get("session$i") != null) {
+        _list[i] = DateTime.parse(pref.get("session$i"));
+      }
+    }
+  }
+
+  upload() async {
+    pref.setString("session1", formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
+    pref.setString("session2", formatDate(_list[2], [yyyy, '-', mm, '-', dd]));
+    pref.setString("session3", formatDate(_list[3], [yyyy, '-', mm, '-', dd]));
+    pref.setString("session4", formatDate(_list[4], [yyyy, '-', mm, '-', dd]));
+    Navigator.of(context).pushNamed('/Overpage');
+    var api = '${Config.domain}/rest/users/uploadsessiontime';
+    var id = pref.get("userid");
+    var response = await Dio().post(api, data: {
+      "userid": id,
+      "sessiontime": {
+        "session1": formatDate(_list[1], [yyyy, '-', mm, '-', dd]),
+        "session2": formatDate(_list[2], [yyyy, '-', mm, '-', dd]),
+        "session3": formatDate(_list[3], [yyyy, '-', mm, '-', dd]),
+        "session4": formatDate(_list[4], [yyyy, '-', mm, '-', dd])
+      }
+    });
+    if (response.data["message"] == 'success') {
+      print(response.data);
+    }
+  }
+
+  _showDatePicker1(int i) async {
+    var temp = await showDatePicker(
+      context: context,
+      initialDate: _list[i],
+      firstDate: DateTime(2021),
+      lastDate: DateTime(2050),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            primaryColor: const Color(0xfffda873),
+            accentColor: const Color(0xfffda873),
+            colorScheme: ColorScheme.light(primary: const Color(0xfffda873)),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child,
+        );
+      },
+    );
+    pref = await SharedPreferences.getInstance();
+    setState(() {
+      _list[i] = temp ?? _list[i];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,214 +104,7 @@ class SchedulaerDatepage extends StatelessWidget {
             ),
           ),
           // Adobe XD layer: 'Status Bars - iPhon…' (group)
-          SizedBox(
-            width: 428.0,
-            height: 44.0,
-            child: Stack(
-              children: <Widget>[
-                Pinned.fromSize(
-                  bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
-                  size: Size(428.0, 44.0),
-                  pinLeft: true,
-                  pinRight: true,
-                  pinTop: true,
-                  pinBottom: true,
-                  child:
-                      // Adobe XD layer: 'Status Bar' (group)
-                      Stack(
-                    children: <Widget>[
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(0.5, 0.0, 427.5, 44.0),
-                        size: Size(428.0, 44.0),
-                        pinLeft: true,
-                        pinRight: true,
-                        pinTop: true,
-                        pinBottom: true,
-                        child:
-                            // Adobe XD layer: 'BG' (shape)
-                            Container(),
-                      ),
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
-                        size: Size(428.0, 44.0),
-                        pinLeft: true,
-                        pinRight: true,
-                        pinTop: true,
-                        pinBottom: true,
-                        child:
-                            // Adobe XD layer: 'Status Bar' (group)
-                            Stack(
-                          children: <Widget>[
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
-                              size: Size(428.0, 44.0),
-                              pinLeft: true,
-                              pinRight: true,
-                              pinTop: true,
-                              pinBottom: true,
-                              child:
-                                  // Adobe XD layer: 'Bars/Status Bars/iP…' (shape)
-                                  Container(),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(388.8, 17.3, 24.3, 11.3),
-                              size: Size(428.0, 44.0),
-                              pinRight: true,
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Battery' (group)
-                                  Stack(
-                                children: <Widget>[
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(0.0, 0.0, 22.0, 11.3),
-                                    size: Size(24.3, 11.3),
-                                    pinLeft: true,
-                                    pinRight: true,
-                                    pinTop: true,
-                                    pinBottom: true,
-                                    child:
-                                        // Adobe XD layer: 'Border' (shape)
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(2.67),
-                                        border: Border.all(
-                                            width: 1.0,
-                                            color: const Color(0x59ffffff)),
-                                      ),
-                                    ),
-                                  ),
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(23.0, 3.7, 1.3, 4.0),
-                                    size: Size(24.3, 11.3),
-                                    pinRight: true,
-                                    fixedWidth: true,
-                                    fixedHeight: true,
-                                    child:
-                                        // Adobe XD layer: 'Cap' (shape)
-                                        SvgPicture.string(
-                                      _svg_5e5um9,
-                                      allowDrawingOutsideViewBox: true,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(2.0, 2.0, 18.0, 7.3),
-                                    size: Size(24.3, 11.3),
-                                    pinLeft: true,
-                                    pinTop: true,
-                                    pinBottom: true,
-                                    fixedWidth: true,
-                                    child:
-                                        // Adobe XD layer: 'Capacity' (shape)
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(1.33),
-                                        color: const Color(0xffffffff),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(368.5, 17.3, 15.3, 11.0),
-                              size: Size(428.0, 44.0),
-                              pinRight: true,
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Wifi' (shape)
-                                  SvgPicture.string(
-                                _svg_ya1094,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(337.1, 17.7, 17.0, 10.7),
-                              size: Size(428.0, 44.0),
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Cellular Connection' (shape)
-                                  SvgPicture.string(
-                                _svg_gbmjcf,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(21.5, 13.0, 54.0, 21.0),
-                              size: Size(428.0, 44.0),
-                              pinLeft: true,
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Time Style' (group)
-                                  Stack(
-                                children: <Widget>[
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(0.0, 0.0, 54.0, 21.0),
-                                    size: Size(54.0, 21.0),
-                                    pinLeft: true,
-                                    pinRight: true,
-                                    pinTop: true,
-                                    pinBottom: true,
-                                    child:
-                                        // Adobe XD layer: 'Time - Dark' (group)
-                                        Stack(
-                                      children: <Widget>[
-                                        Pinned.fromSize(
-                                          bounds: Rect.fromLTWH(
-                                              0.0, 0.0, 54.0, 21.0),
-                                          size: Size(54.0, 21.0),
-                                          pinLeft: true,
-                                          pinRight: true,
-                                          pinTop: true,
-                                          pinBottom: true,
-                                          child:
-                                              // Adobe XD layer: 'Time - Light backgr…' (shape)
-                                              Container(),
-                                        ),
-                                        Pinned.fromSize(
-                                          bounds: Rect.fromLTWH(
-                                              0.0, 2.0, 54.0, 18.0),
-                                          size: Size(54.0, 21.0),
-                                          pinLeft: true,
-                                          pinRight: true,
-                                          pinTop: true,
-                                          pinBottom: true,
-                                          child:
-                                              // Adobe XD layer: 'Time' (text)
-                                              Text(
-                                            '9:41',
-                                            style: TextStyle(
-                                              fontFamily: 'SFProText-Semibold',
-                                              fontSize: 15,
-                                              color: const Color(0xffffffff),
-                                              letterSpacing: -0.3,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+
           Transform.translate(
             offset: Offset(91.3, 190.0),
             child: SizedBox(
@@ -264,6 +135,8 @@ class SchedulaerDatepage extends StatelessWidget {
               ),
             ),
           ),
+
+          //white background for box
           Transform.translate(
             offset: Offset(41.0, 292.0),
             child: Container(
@@ -358,79 +231,73 @@ class SchedulaerDatepage extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(313.0, 305.0),
-            child:
-                // Adobe XD layer: 'rili' (shape)
-                Container(
-              width: 54.0,
-              height: 54.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/schedulerDate.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(260, 320.0),
+              child: InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${formatDate(_list[1], [yyyy, '-', mm, '-', dd])}",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Icon(Icons.arrow_drop_down)
+                    ],
+                  ),
+                  onTap: () {
+                    _showDatePicker1(1);
+                  })),
           Transform.translate(
-            offset: Offset(313.0, 416.0),
-            child:
-                // Adobe XD layer: 'rili' (shape)
-                Container(
-              width: 54.0,
-              height: 54.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19.0),
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/schedulerDate.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(260, 431.0),
+              child: InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${formatDate(_list[2], [yyyy, '-', mm, '-', dd])}",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Icon(Icons.arrow_drop_down)
+                    ],
+                  ),
+                  onTap: () {
+                    _showDatePicker1(2);
+                  })),
           Transform.translate(
-            offset: Offset(313.0, 527.0),
-            child:
-                // Adobe XD layer: 'rili' (shape)
-                Container(
-              width: 54.0,
-              height: 54.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19.0),
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/schedulerDate.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(260, 542.0),
+              child: InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${formatDate(_list[3], [yyyy, '-', mm, '-', dd])}",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Icon(Icons.arrow_drop_down)
+                    ],
+                  ),
+                  onTap: () {
+                    _showDatePicker1(3);
+                  })),
           Transform.translate(
-            offset: Offset(313.0, 638.0),
-            child:
-                // Adobe XD layer: 'rili' (shape)
-                Container(
-              width: 54.0,
-              height: 54.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19.0),
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/schedulerDate.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(260, 653.0),
+              child: InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${formatDate(_list[4], [yyyy, '-', mm, '-', dd])}",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Icon(Icons.arrow_drop_down)
+                    ],
+                  ),
+                  onTap: () {
+                    _showDatePicker1(4);
+                  })),
+
           Transform.translate(
             offset: Offset(129.0, 744.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushLeft,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => Overpage(),
-                ),
-              ],
+            child: GestureDetector(
               child: Container(
                 width: 171.0,
                 height: 62.0,
@@ -443,11 +310,40 @@ class SchedulaerDatepage extends StatelessWidget {
                       offset: Offset(0, 13),
                       blurRadius: 6,
                     ),
-                  ],
-                ),
+                  ]
+                )
               ),
-            ),
+              onTap: upload,
+            )
           ),
+          // Transform.translate(
+          //   offset: Offset(129.0, 744.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.PushLeft,
+          //         ease: Curves.easeOut,
+          //         duration: 1.0,
+          //         pageBuilder: () => Overpage(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 171.0,
+          //       height: 62.0,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(23.0),
+          //         color: const Color(0xffffffff),
+          //         boxShadow: [
+          //           BoxShadow(
+          //             color: const Color(0x29000000),
+          //             offset: Offset(0, 13),
+          //             blurRadius: 6,
+          // //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Transform.translate(
             offset: Offset(156.8, 751.0),
             child: SizedBox(

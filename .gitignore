@@ -45,5 +45,4 @@ settings.json
 /STOP-SERVER/admin/node_modules
 .metals/metals.h2.db
 .metals/metals.lock.db
-flutter_project/android/app/src/main/AndroidManifest.xml
 .metals/metals.log
