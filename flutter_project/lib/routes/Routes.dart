@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/pages/Createdsuccessfullypage.dart';
+import 'package:flutter_project/pages/Overpage.dart';
 import 'package:flutter_project/pages/Resetpasswordpage.dart';
 import 'package:flutter_project/pages/Signuppage.dart';
 import "../pages/Start.dart";
@@ -27,7 +28,8 @@ final routes = {
   '/createdSuccessfully':(context) => Createdsuccessfullypage(),
   '/date': (context) => SchedulaerDatepage(),
   '/schedulaerdatepage':(context)=> SchedulaerDatepage(),
-  '/scheduler':(context)=> Scheduler()
+  '/scheduler':(context)=> Scheduler(),
+  '/Overpage': (context) => Overpage()
 };
 
 // This block will handle routes with or without parameter

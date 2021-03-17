@@ -1,5 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:adobe_xd/pinned.dart';
+import 'package:flutter_project/config/Config.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './Overpage.dart';
 import 'package:adobe_xd/page_link.dart';
 import './Selectcategoriespage.dart';
@@ -14,15 +16,57 @@ class SchedulaerDatepage extends StatefulWidget {
 }
 
 class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
-  DateTime _session1 =  DateTime.now();
-  DateTime _session2 =  DateTime.now();
-  DateTime _session3 =  DateTime.now();
-  DateTime _session4 =  DateTime.now();
+  var size = 4;
+  var _list;
+  SharedPreferences pref;
 
-  _showDatePicker1() async{
+  @override
+  void initState() {
+    super.initState();
+    _list = new List(size + 1);
+    _list[0] = DateTime.now();
+    _list[1] = DateTime.now();
+    _list[2] = DateTime.now();
+    _list[3] = DateTime.now();
+    _list[4] = DateTime.now();
+    init();
+  }
+
+  void init() async {
+    pref = await SharedPreferences.getInstance();
+    for(int i = 1; i <= size; ++i) {
+      if(pref.get("session$i") != null) {
+        _list[i] = DateTime.parse(pref.get("session$i"));
+      }
+    }
+  }
+
+  upload() async {
+    pref.setString("session1", formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
+    pref.setString("session2", formatDate(_list[2], [yyyy, '-', mm, '-', dd]));
+    pref.setString("session3", formatDate(_list[3], [yyyy, '-', mm, '-', dd]));
+    pref.setString("session4", formatDate(_list[4], [yyyy, '-', mm, '-', dd]));
+    Navigator.of(context).pushNamed('/Overpage');
+    var api = '${Config.domain}/rest/users/uploadsessiontime';
+    var id = pref.get("userid");
+    var response = await Dio().post(api, data: {
+      "userid": id,
+      "sessiontime": {
+        "session1": formatDate(_list[1], [yyyy, '-', mm, '-', dd]),
+        "session2": formatDate(_list[2], [yyyy, '-', mm, '-', dd]),
+        "session3": formatDate(_list[3], [yyyy, '-', mm, '-', dd]),
+        "session4": formatDate(_list[4], [yyyy, '-', mm, '-', dd])
+      }
+    });
+    if (response.data["message"] == 'success') {
+      print(response.data);
+    }
+  }
+
+  _showDatePicker1(int i) async {
     var temp = await showDatePicker(
       context: context,
-      initialDate: _session1,
+      initialDate: _list[i],
       firstDate: DateTime(2021),
       lastDate: DateTime(2050),
       builder: (BuildContext context, Widget child) {
@@ -31,19 +75,18 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
             primaryColor: const Color(0xfffda873),
             accentColor: const Color(0xfffda873),
             colorScheme: ColorScheme.light(primary: const Color(0xfffda873)),
-            buttonTheme: ButtonThemeData(
-              textTheme: ButtonTextTheme.primary
-            ),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
           ),
           child: child,
         );
       },
     );
+    pref = await SharedPreferences.getInstance();
     setState(() {
-      _session1 = temp;
+      _list[i] = temp ?? _list[i];
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -188,82 +231,73 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(260, 320.0),
-            child: InkWell(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "${formatDate(_session1, [yyyy, '-', mm, '-', dd])}",
-                    style: TextStyle(fontSize: 20),
+              offset: Offset(260, 320.0),
+              child: InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${formatDate(_list[1], [yyyy, '-', mm, '-', dd])}",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Icon(Icons.arrow_drop_down)
+                    ],
                   ),
-                  Icon(Icons.arrow_drop_down)
-                ],
-              ),
-              onTap: (){
-                _showDatePicker1();
-              }
-            )
-          ),
+                  onTap: () {
+                    _showDatePicker1(1);
+                  })),
           Transform.translate(
-            offset: Offset(313.0, 416.0),
-            child:
-                // Adobe XD layer: 'rili' (shape)
-                Container(
-              width: 54.0,
-              height: 54.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19.0),
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/schedulerDate.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(260, 431.0),
+              child: InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${formatDate(_list[2], [yyyy, '-', mm, '-', dd])}",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Icon(Icons.arrow_drop_down)
+                    ],
+                  ),
+                  onTap: () {
+                    _showDatePicker1(2);
+                  })),
           Transform.translate(
-            offset: Offset(313.0, 527.0),
-            child:
-                // Adobe XD layer: 'rili' (shape)
-                Container(
-              width: 54.0,
-              height: 54.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19.0),
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/schedulerDate.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(260, 542.0),
+              child: InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${formatDate(_list[3], [yyyy, '-', mm, '-', dd])}",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Icon(Icons.arrow_drop_down)
+                    ],
+                  ),
+                  onTap: () {
+                    _showDatePicker1(3);
+                  })),
           Transform.translate(
-            offset: Offset(313.0, 638.0),
-            child:
-                // Adobe XD layer: 'rili' (shape)
-                Container(
-              width: 54.0,
-              height: 54.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(19.0),
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/schedulerDate.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+              offset: Offset(260, 653.0),
+              child: InkWell(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${formatDate(_list[4], [yyyy, '-', mm, '-', dd])}",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      Icon(Icons.arrow_drop_down)
+                    ],
+                  ),
+                  onTap: () {
+                    _showDatePicker1(4);
+                  })),
+
           Transform.translate(
             offset: Offset(129.0, 744.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushLeft,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => Overpage(),
-                ),
-              ],
+            child: GestureDetector(
               child: Container(
                 width: 171.0,
                 height: 62.0,
@@ -276,11 +310,40 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
                       offset: Offset(0, 13),
                       blurRadius: 6,
                     ),
-                  ],
-                ),
+                  ]
+                )
               ),
-            ),
+              onTap: upload,
+            )
           ),
+          // Transform.translate(
+          //   offset: Offset(129.0, 744.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.PushLeft,
+          //         ease: Curves.easeOut,
+          //         duration: 1.0,
+          //         pageBuilder: () => Overpage(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 171.0,
+          //       height: 62.0,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(23.0),
+          //         color: const Color(0xffffffff),
+          //         boxShadow: [
+          //           BoxShadow(
+          //             color: const Color(0x29000000),
+          //             offset: Offset(0, 13),
+          //             blurRadius: 6,
+          // //           ),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Transform.translate(
             offset: Offset(156.8, 751.0),
             child: SizedBox(
