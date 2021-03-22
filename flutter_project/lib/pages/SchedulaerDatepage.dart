@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_project/config/Config.dart';
+import 'package:flutter_project/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './Overpage.dart';
 import 'package:adobe_xd/page_link.dart';
@@ -18,12 +20,14 @@ class SchedulaerDatepage extends StatefulWidget {
 class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
   var size = 4;
   var _list;
+  var notificationList;
   SharedPreferences pref;
 
   @override
   void initState() {
     super.initState();
     _list = new List(size + 1);
+    notificationList = new List(size + 1);
     _list[0] = DateTime.now();
     _list[1] = DateTime.now();
     _list[2] = DateTime.now();
@@ -34,8 +38,8 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
 
   void init() async {
     pref = await SharedPreferences.getInstance();
-    for(int i = 1; i <= size; ++i) {
-      if(pref.get("session$i") != null) {
+    for (int i = 1; i <= size; ++i) {
+      if (pref.get("session$i") != null) {
         _list[i] = DateTime.parse(pref.get("session$i"));
       }
     }
@@ -296,26 +300,23 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
                   })),
 
           Transform.translate(
-            offset: Offset(129.0, 744.0),
-            child: GestureDetector(
-              child: Container(
-                width: 171.0,
-                height: 62.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(23.0),
-                  color: const Color(0xffffffff),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0x29000000),
-                      offset: Offset(0, 13),
-                      blurRadius: 6,
-                    ),
-                  ]
-                )
-              ),
-              onTap: upload,
-            )
-          ),
+              offset: Offset(129.0, 744.0),
+              child: GestureDetector(
+                child: Container(
+                    width: 171.0,
+                    height: 62.0,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(23.0),
+                        color: const Color(0xffffffff),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0x29000000),
+                            offset: Offset(0, 13),
+                            blurRadius: 6,
+                          ),
+                        ])),
+                onTap: upload,
+              )),
           // Transform.translate(
           //   offset: Offset(129.0, 744.0),
           //   child: PageLink(
@@ -387,6 +388,38 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
         ],
       ),
     );
+  }
+
+  void scheduleNotification() async {
+    for (int i = 0; i < _list.size(); ++i) {
+      var timeInseconds = _list(i).difference(DateTime.now()).inMinutes * 60;
+      notificationList[i] =
+          DateTime.now().add(Duration(seconds: timeInseconds));
+    }
+    var scheduledNotificationdateTime = notificationList;
+
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'notification', 'notification', 'Channel for notification',
+        icon: 'ic_launcher',
+        sound: RawResourceAndroidNotificationSound('sound'),
+        largeIcon: DrawableResourceAndroidBitmap('ic_laucher'));
+
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+      sound: 'sound',
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.schedule(
+        0,
+        'remainder',
+        'here is a remainder that you have tasks to do today,remember to finish them',
+        scheduledNotificationdateTime,
+        platformChannelSpecifics);
   }
 }
 
