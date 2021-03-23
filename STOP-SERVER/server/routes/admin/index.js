@@ -177,7 +177,11 @@ module.exports= app=>{
         }
 
     })
-
+    router.post("/getemail",async(req,res)=>{
+        const findUser = await req.Model.findOne({userid:req.body.userid})
+        const email = findUser.email
+        res.send({"email":email})
+    })
     router.post("/login",async(req,res)=>{
         const findUser = await req.Model.findOne({userid:req.body.userid})
         if(findUser==null){

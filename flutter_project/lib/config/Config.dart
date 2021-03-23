@@ -1,3 +1,3 @@
 class Config{
-  static String domain = "http://192.168.31.68:3000/stop/api";
+  static String domain = "http://172.20.8.110:3000/stop/api";
 }
