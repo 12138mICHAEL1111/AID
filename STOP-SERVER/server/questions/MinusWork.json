@@ -98,7 +98,7 @@
             },
             {
                 "context": "You are performing the lead role in a local play, which you have been practising for many months. On the opening night you remember almost all of your lines but stumble over one.",
-                "question1": "You think theaudience will think your performance is",
+                "question1": "You think the audience will think your performance is",
                 "blank": "o_ay",
                 "answer1": "k",
                 "word": "okay",
@@ -121,7 +121,7 @@
                 "number": "3"
             },
             {
-                "context": "Your're nervous as you're playing your favourite instrument to your friends. You make one small slip.",
+                "context": "You're nervous as you're playing your favorite instrument to your friends. You make one small slip.",
                 "question1": "This makes you think your music skills must be",
                 "blank": "dev_lo_ing",
                 "answer1": "e",
@@ -205,7 +205,7 @@
                 "number": "46"
             },
             {
-                "context": "when you recieve your 1st University exam results, you are disappointed to see you haven't done as well as you hoped.",
+                "context": "when you receive your 1st University exam results, you are disappointed to see you haven't done as well as you hoped.",
                 "question1": "You consider the long term consequences and forsee a future that is",
                 "blank": "u_affected",
                 "answer1": "n",
@@ -282,7 +282,7 @@
                 "blank":"a_e_uate",
                 "answer1":"d",
                 "word": "adequate",
-                "question2":"Were you dissatsfied with your performance in the quiz tournament?",
+                "question2":"Were you dissatisfied with your performance in the quiz tournament?",
                 "answer2":"No",
                 "situation": "when they announce the winners of the quiz",
                 "image": "T209.jpg",
@@ -326,7 +326,7 @@
             },
             {
                 "context":"You have an important dinner to attend and you want to look your best. You have been eating healthy and doing daily exercise for the last 6 months and you have bought a new outfit.",
-                "question1":"You put on your new oufit and look in the mirror and you think all your efforts were",
+                "question1":"You put on your new outfit and look in the mirror and you think all your efforts were",
                 "blank":"ad_q_ate",
                 "answer1":"e",
                 "word": "adequate",
