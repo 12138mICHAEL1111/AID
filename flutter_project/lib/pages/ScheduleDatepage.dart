@@ -8,14 +8,14 @@ import './Selectcategoriespage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:date_format/date_format.dart';
 
-class SchedulaerDatepage extends StatefulWidget {
-  SchedulaerDatepage({Key key}) : super(key: key);
+class ScheduleDatepage extends StatefulWidget {
+  ScheduleDatepage({Key key}) : super(key: key);
 
   @override
   _SchedulaerDatePageState createState() => _SchedulaerDatePageState();
 }
 
-class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
+class _SchedulaerDatePageState extends State<ScheduleDatepage> {
   var size = 4;
   var _list;
   SharedPreferences pref;

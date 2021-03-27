@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_screen_adapter/flutter_screen_adapter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import './SchedulaerDatepage.dart';
+import './ScheduleDatepage.dart';
 import 'package:adobe_xd/page_link.dart';
 import './Practicepage2.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -16,7 +16,7 @@ class Selectcategoriespage extends StatefulWidget {
 
 class _SelectPageState extends State<Selectcategoriespage> {
   next() {
-    Navigator.pushNamed(context, '/schedulaerdatepage');
+    Navigator.pushNamed(context, '/ScheduleDatepage');
   }
 
   //The list store all the option
@@ -243,7 +243,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
                               transition: LinkTransition.PushLeft,
                               ease: Curves.easeOut,
                               duration: 1.0,
-                              pageBuilder: () => SchedulaerDatepage(),
+                              pageBuilder: () => ScheduleDatepage(),
                             )
                           ],
                         )
@@ -259,7 +259,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
           //         transition: LinkTransition.PushLeft,
           //         ease: Curves.easeOut,
           //         duration: 1.0,
-          //         pageBuilder: () => SchedulaerDatepage(),
+          //         pageBuilder: () => ScheduleDatepage(),
           //       ),
           //     ],
           //     child: Container(
