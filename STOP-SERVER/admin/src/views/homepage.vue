@@ -110,7 +110,7 @@ export default {
              }
         },
         async testApi(){
-            const res = await this.$http.get('/rest/user/uploadcategory')
+            const res = await this.$http.post('/rest/users/uploadsessionmood',{"userid":"AA004","sessionmood":[4,2,5],"sessiontime":"session4"})
 
             console.log(res.data)
         }

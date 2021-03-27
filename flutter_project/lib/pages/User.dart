@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import './Homepage.dart';
-
 import '../config/Config.dart';
 import 'package:dio/dio.dart';
 import 'package:adobe_xd/page_link.dart';
@@ -174,7 +173,7 @@ class _UserState extends State<User> {
             ),
           ),
            Container(
-            margin: EdgeInsets.fromLTRB(350, 467, 10, 50),
+            margin: EdgeInsets.fromLTRB(365, 467, 10, 50),
             child: FlatButton(
               minWidth: 50,
               height: 59.0,
@@ -191,7 +190,9 @@ class _UserState extends State<User> {
                 textAlign: TextAlign.center,
               ),
               onPressed: (){
-                Navigator.pushNamed(context,'/reset');
+                Navigator.pushNamed(context,'/reset',arguments: {
+                  "isFromUser":true
+                });
               },
             ),
           ),
@@ -229,14 +230,14 @@ class _UserState extends State<User> {
             child:
                 // Adobe XD layer: '主页' (shape)
                 PageLink(
-              // links: [
-              //   PageLinkInfo(
-              //     transition: LinkTransition.PushRight,
-              //     ease: Curves.slowMiddle,
-              //     duration: 1.0,
-              //     pageBuilder: () => Homepage(1),
-              //   ),
-              // ],
+              links: [
+                PageLinkInfo(
+                  transition: LinkTransition.PushRight,
+                  ease: Curves.slowMiddle,
+                  duration: 1.0,
+                  pageBuilder: () => Homepage(),
+                ),
+              ],
               child: Container(
                 width: 58.0,
                 height: 58.0,
