@@ -176,7 +176,7 @@ class _LoginpageState extends State<Loginpage> {
                   child: Text("Reset Password"),
                   color: const Color(0xfffaaf7b),
                   onPressed: () {
-                    Navigator.of(context).pushReplacementNamed('/reset');
+                    Navigator.pushNamed(context,'/reset',arguments: {"isFromUser":false});
                   },
                 ),
               )),

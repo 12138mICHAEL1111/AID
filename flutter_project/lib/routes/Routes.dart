@@ -18,6 +18,7 @@ import '../pages/Item2.dart';
 import '../pages/itemimaginepage.dart';
 import '../pages/Overpage.dart';
 import '../pages/Homepage.dart';
+import '../pages/User.dart';
 
 // All the routes
 final routes = {
@@ -29,7 +30,7 @@ final routes = {
   '/': (context) => Start(),
   '/login': (context) => Loginpage(),
   '/signup': (context) => Signuppage(),
-  '/reset': (context) => Resetpasswordpage(),
+  '/reset': (context,{arguments}) => Resetpasswordpage(arguments:arguments),
   '/introductionpage': (context) => IntroductionPage(),
   '/createdSuccessfully': (context) => Createdsuccessfullypage(),
   '/date': (context) => SchedulaerDatepage(),
@@ -39,6 +40,7 @@ final routes = {
   '/imagination': (context) => itemImaginePage(),
   '/over': (context) => Overpage(),
   '/homepage': (context) => Homepage(),
+  '/user': (context) => User()
 };
 
 // This block will handle routes with or without parameter

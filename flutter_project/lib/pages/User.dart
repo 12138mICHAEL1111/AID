@@ -1,12 +1,38 @@
 import 'package:flutter/material.dart';
 import './Homepage.dart';
+import '../config/Config.dart';
+import 'package:dio/dio.dart';
 import 'package:adobe_xd/page_link.dart';
 import './Calendar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class User extends StatelessWidget {
-  User({
-    Key key,
-  }) : super(key: key);
+class User extends StatefulWidget {
+  User({Key key}) : super(key: key);
+
+  @override
+  _UserState createState() => _UserState();
+}
+
+class _UserState extends State<User> {
+  String id;
+  String email;
+  @override
+  void initState(){ 
+    super.initState();
+     getUserIdAndEmail();
+  }
+
+
+  getUserIdAndEmail() async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    var api = '${Config.domain}/rest/users/getemail';
+    var response = await Dio().post(api, data: {"userid": pref.getString('userid')});
+
+    setState(() {
+          this.id = pref.getString('userid');
+          this.email = response.data["email"];
+        });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +113,7 @@ class User extends StatelessWidget {
           Transform.translate(
             offset: Offset(311.0, 244.0),
             child: Text(
-              'XXXXXX',
+              this.id,
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 21,
@@ -109,9 +135,10 @@ class User extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(189.0, 364.0),
+            offset: Offset(210.0, 364.0),
+            
             child: Text(
-              'XXXXXX@xxx.com',
+              this.email,
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 21,
@@ -120,21 +147,7 @@ class User extends StatelessWidget {
               textAlign: TextAlign.left,
             ),
           ),
-          Transform.translate(
-            offset: Offset(380.0, 367.0),
-            child:
-                // Adobe XD layer: 'write' (shape)
-                Container(
-              width: 23.0,
-              height: 21.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/change.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+
           Transform.translate(
             offset: Offset(29.0, 476.0),
             child: Text(
@@ -157,6 +170,30 @@ class User extends StatelessWidget {
                 color: const Color(0xff888888),
               ),
               textAlign: TextAlign.left,
+            ),
+          ),
+           Container(
+            margin: EdgeInsets.fromLTRB(365, 467, 10, 50),
+            child: FlatButton(
+              minWidth: 50,
+              height: 59.0,
+             
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              child: Text(
+                '''''',
+                 style: TextStyle(
+                  fontFamily: 'ZiZhiQuXiMaiTi',
+                  fontSize: 26,
+                  color: const Color(0xffffffff),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              onPressed: (){
+                Navigator.pushNamed(context,'/reset',arguments: {
+                  "isFromUser":true
+                });
+              },
             ),
           ),
           Transform.translate(
@@ -193,14 +230,14 @@ class User extends StatelessWidget {
             child:
                 // Adobe XD layer: '主页' (shape)
                 PageLink(
-              // links: [
-              //   PageLinkInfo(
-              //     transition: LinkTransition.PushRight,
-              //     ease: Curves.slowMiddle,
-              //     duration: 1.0,
-              //     pageBuilder: () => Homepage(1),
-              //   ),
-              // ],
+              links: [
+                PageLinkInfo(
+                  transition: LinkTransition.PushRight,
+                  ease: Curves.slowMiddle,
+                  duration: 1.0,
+                  pageBuilder: () => Homepage(),
+                ),
+              ],
               child: Container(
                 width: 58.0,
                 height: 58.0,
