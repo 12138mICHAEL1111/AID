@@ -48,7 +48,7 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
     //notificationList[1] = DateTime.now().add(Duration(seconds: timeInseconds));
     //print(timeInseconds);
     // notificationList[1] = DateTime.now().add(Duration(seconds: 5));
-    var scheduledNotificationdateTime = _list[1].add(Duration(seconds: 1));
+    var scheduledNotificationdateTime = _list[1].add(Duration(seconds: 28800));
     debugPrint(formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
     debugPrint(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
 
@@ -118,7 +118,7 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
     //notificationList[1] = DateTime.now().add(Duration(seconds: timeInseconds));
     //print(timeInseconds);
     // notificationList[1] = DateTime.now().add(Duration(seconds: 5));
-    var scheduledNotificationdateTime = _list[3].add(Duration(seconds: 1));
+    var scheduledNotificationdateTime = _list[3].add(Duration(seconds: 28800));
     debugPrint(formatDate(_list[3], [yyyy, '-', mm, '-', dd]));
     debugPrint(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
 
@@ -153,7 +153,7 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
     //notificationList[1] = DateTime.now().add(Duration(seconds: timeInseconds));
     //print(timeInseconds);
     // notificationList[1] = DateTime.now().add(Duration(seconds: 5));
-    var scheduledNotificationdateTime = _list[4].add(Duration(seconds: 1));
+    var scheduledNotificationdateTime = _list[4].add(Duration(seconds: 28800));
     debugPrint(formatDate(_list[4], [yyyy, '-', mm, '-', dd]));
     debugPrint(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
 
