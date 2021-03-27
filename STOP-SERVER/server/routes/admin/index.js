@@ -1,3 +1,5 @@
+const { Model } = require('mongoose')
+
 module.exports= app=>{
     const express = require('express')
     const jwt = require('jsonwebtoken')
@@ -111,6 +113,11 @@ module.exports= app=>{
         else{
             res.send({"messgae":"fail"})
         }
+    })
+
+    router.post("/sessiontime",async(req,res)=>{
+        const user = await req.Model.findOne({userid:req.body.userid})
+        res.send(user.sessiontime)
     })
 
     router.post("/uploadsessionmood",async(req,res)=>{
