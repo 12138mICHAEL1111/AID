@@ -20,14 +20,12 @@ class SchedulaerDatepage extends StatefulWidget {
 class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
   var size = 4;
   var _list;
-  var notificationList;
   SharedPreferences pref;
 
   @override
   void initState() {
     super.initState();
     _list = new List(size + 1);
-    notificationList = new List(size + 1);
     _list[0] = DateTime.now();
     _list[1] = DateTime.now();
     _list[2] = DateTime.now();
@@ -45,14 +43,159 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
     }
   }
 
+  void scheduleNotificationOne() async {
+    // var timeInseconds = _list(1).difference(DateTime.now()).inSecond;
+    //notificationList[1] = DateTime.now().add(Duration(seconds: timeInseconds));
+    //print(timeInseconds);
+    // notificationList[1] = DateTime.now().add(Duration(seconds: 5));
+    var scheduledNotificationdateTime = _list[1].add(Duration(seconds: 1));
+    debugPrint(formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
+    debugPrint(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
+
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'notification', 'notification', 'Channel for notification',
+        icon: 'ic_launcher',
+        sound: RawResourceAndroidNotificationSound('sound'),
+        largeIcon: DrawableResourceAndroidBitmap('ic_laucher'),
+        priority: Priority.High,
+        importance: Importance.Max);
+
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+      sound: 'sound',
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.schedule(
+        0,
+        'remainder',
+        'here is a remainder that you have tasks to do today,remember to finish them',
+        scheduledNotificationdateTime,
+        platformChannelSpecifics);
+  }
+
+  void scheduleNotificationTwo() async {
+    // var timeInseconds = _list(1).difference(DateTime.now()).inSecond;
+    //notificationList[1] = DateTime.now().add(Duration(seconds: timeInseconds));
+    //print(timeInseconds);
+    // notificationList[1] = DateTime.now().add(Duration(seconds: 5));
+    var scheduledNotificationdateTime = _list[2].add(Duration(seconds: 28800));
+    debugPrint(formatDate(_list[2], [yyyy, '-', mm, '-', dd]));
+    debugPrint(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
+
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'notification', 'notification', 'Channel for notification',
+        icon: 'ic_launcher',
+        sound: RawResourceAndroidNotificationSound('sound'),
+        largeIcon: DrawableResourceAndroidBitmap('ic_laucher'),
+        priority: Priority.High,
+        importance: Importance.Max);
+
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+      sound: 'sound',
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.schedule(
+        1,
+        'remainder',
+        'here is a remainder that you have tasks to do today,remember to finish them',
+        scheduledNotificationdateTime,
+        platformChannelSpecifics);
+  }
+
+  void scheduleNotificationThree() async {
+    // var timeInseconds = _list(1).difference(DateTime.now()).inSecond;
+    //notificationList[1] = DateTime.now().add(Duration(seconds: timeInseconds));
+    //print(timeInseconds);
+    // notificationList[1] = DateTime.now().add(Duration(seconds: 5));
+    var scheduledNotificationdateTime = _list[3].add(Duration(seconds: 1));
+    debugPrint(formatDate(_list[3], [yyyy, '-', mm, '-', dd]));
+    debugPrint(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
+
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'notification', 'notification', 'Channel for notification',
+        icon: 'ic_launcher',
+        sound: RawResourceAndroidNotificationSound('sound'),
+        largeIcon: DrawableResourceAndroidBitmap('ic_laucher'),
+        priority: Priority.High,
+        importance: Importance.Max);
+
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+      sound: 'sound',
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.schedule(
+        2,
+        'remainder',
+        'here is a remainder that you have tasks to do today,remember to finish them',
+        scheduledNotificationdateTime,
+        platformChannelSpecifics);
+  }
+
+  void scheduleNotificationFour() async {
+    // var timeInseconds = _list(1).difference(DateTime.now()).inSecond;
+    //notificationList[1] = DateTime.now().add(Duration(seconds: timeInseconds));
+    //print(timeInseconds);
+    // notificationList[1] = DateTime.now().add(Duration(seconds: 5));
+    var scheduledNotificationdateTime = _list[4].add(Duration(seconds: 1));
+    debugPrint(formatDate(_list[4], [yyyy, '-', mm, '-', dd]));
+    debugPrint(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
+
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'notification', 'notification', 'Channel for notification',
+        icon: 'ic_launcher',
+        sound: RawResourceAndroidNotificationSound('sound'),
+        largeIcon: DrawableResourceAndroidBitmap('ic_laucher'),
+        priority: Priority.High,
+        importance: Importance.Max);
+
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
+      sound: 'sound',
+      presentAlert: true,
+      presentBadge: true,
+      presentSound: true,
+    );
+
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+
+    await flutterLocalNotificationsPlugin.schedule(
+        3,
+        'remainder',
+        'here is a remainder that you have tasks to do today,remember to finish them',
+        scheduledNotificationdateTime,
+        platformChannelSpecifics);
+  }
+
   upload() async {
     pref.setString("session1", formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
     pref.setString("session2", formatDate(_list[2], [yyyy, '-', mm, '-', dd]));
     pref.setString("session3", formatDate(_list[3], [yyyy, '-', mm, '-', dd]));
     pref.setString("session4", formatDate(_list[4], [yyyy, '-', mm, '-', dd]));
-    Navigator.of(context).pushNamed('/Overpage');
+    Navigator.of(context).pushNamed('/login');
     var api = '${Config.domain}/rest/users/uploadsessiontime';
     var id = pref.get("userid");
+    scheduleNotificationOne();
+    scheduleNotificationTwo();
+    scheduleNotificationThree();
+    scheduleNotificationFour();
+
     var response = await Dio().post(api, data: {
       "userid": id,
       "sessiontime": {
@@ -62,6 +205,7 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
         "session4": formatDate(_list[4], [yyyy, '-', mm, '-', dd])
       }
     });
+
     if (response.data["message"] == 'success') {
       print(response.data);
     }
@@ -129,7 +273,7 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
             child: SizedBox(
               width: 455.0,
               child: Text(
-                'Now you need to arrange the time \nyou want to complete for your four sessions',
+                'Now you need to arrange the time \n you want to complete for your four sessions',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 20,
@@ -302,21 +446,20 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
           Transform.translate(
               offset: Offset(129.0, 744.0),
               child: GestureDetector(
-                child: Container(
-                    width: 171.0,
-                    height: 62.0,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(23.0),
-                        color: const Color(0xffffffff),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0x29000000),
-                            offset: Offset(0, 13),
-                            blurRadius: 6,
-                          ),
-                        ])),
-                onTap: upload,
-              )),
+                  child: Container(
+                      width: 171.0,
+                      height: 62.0,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(23.0),
+                          color: const Color(0xffffffff),
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0x29000000),
+                              offset: Offset(0, 13),
+                              blurRadius: 6,
+                            ),
+                          ])),
+                  onTap: upload)),
           // Transform.translate(
           //   offset: Offset(129.0, 744.0),
           //   child: PageLink(
@@ -388,38 +531,6 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
         ],
       ),
     );
-  }
-
-  void scheduleNotification() async {
-    for (int i = 0; i < _list.size(); ++i) {
-      var timeInseconds = _list(i).difference(DateTime.now()).inMinutes * 60;
-      notificationList[i] =
-          DateTime.now().add(Duration(seconds: timeInseconds));
-    }
-    var scheduledNotificationdateTime = notificationList;
-
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'notification', 'notification', 'Channel for notification',
-        icon: 'ic_launcher',
-        sound: RawResourceAndroidNotificationSound('sound'),
-        largeIcon: DrawableResourceAndroidBitmap('ic_laucher'));
-
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
-      sound: 'sound',
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-    );
-
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-
-    await flutterLocalNotificationsPlugin.schedule(
-        0,
-        'remainder',
-        'here is a remainder that you have tasks to do today,remember to finish them',
-        scheduledNotificationdateTime,
-        platformChannelSpecifics);
   }
 }
 
