@@ -3,16 +3,18 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import './Loginpage.dart';
+import './User.dart';
 import 'package:adobe_xd/page_link.dart';
 
 // class Resetpasswordpage extends StatelessWidget {
 class Resetpasswordpage extends StatefulWidget {
+  Map arguments;
   Resetpasswordpage({
-    Key key,
+    Key key,this.arguments
   }) : super(key: key);
 
   @override
-  _ResetpasswordpageState createState() => _ResetpasswordpageState();
+  _ResetpasswordpageState createState() => _ResetpasswordpageState(arguments:this.arguments);
 }
 
 class _ResetpasswordpageState extends State<Resetpasswordpage> {
@@ -20,7 +22,15 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
   String email;
   String newPassword;
   String repeatNewPassword;
-
+  Map arguments;
+  bool flag = false;
+  _ResetpasswordpageState({this.arguments});
+  @override
+  void initState() { 
+    super.initState();
+    flag = arguments["isFromUser"];
+    print(flag);
+  }
   bool validateEmail(String value) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -62,8 +72,6 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
             gravity:ToastGravity.CENTER
         );
       }
-
-
     }
 
   }
@@ -249,11 +257,16 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
             // Adobe XD layer: 'jiantou' (shape)
             PageLink(
               links: [
-                PageLinkInfo(
+                !this.flag? PageLinkInfo(
                   transition: LinkTransition.PushDown,
                   ease: Curves.easeIn,
                   duration: 1.0,
                   pageBuilder: () => Loginpage(),
+                ) : PageLinkInfo(
+                  transition: LinkTransition.PushDown,
+                  ease: Curves.easeIn,
+                  duration: 1.0,
+                  pageBuilder: () => User(),
                 ),
               ],
               child: Container(

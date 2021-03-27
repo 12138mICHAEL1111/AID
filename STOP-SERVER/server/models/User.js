@@ -17,6 +17,12 @@ const schema = new mongoose.Schema({
         session3: { type: String },
         session4: { type: String }
     },
+    sessionmood:{
+        session1:[{type: Number}],
+        session2:[{type: Number}],
+        session3:[{type: Number}],
+        session4:[{type: Number}],
+    },
     password: {
         type: String,
         set(val) {

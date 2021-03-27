@@ -342,7 +342,7 @@ class Relax extends StatelessWidget {
                 ),
               ),
             ),
-          ),
+          
         ],
       ),
     );
