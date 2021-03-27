@@ -4,9 +4,9 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_project/main.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import './Overpage.dart';
+import './Homepage.dart';
 import 'package:adobe_xd/page_link.dart';
-import './Selectcategoriespage.dart';
+import './User.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:date_format/date_format.dart';
 
@@ -489,11 +489,100 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
           //   ),
           // ),
           Transform.translate(
+            offset: Offset(0.0, 831.0),
+            child: Container(
+              width: 428.0,
+              height: 95.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(45.0),
+                  topRight: Radius.circular(45.0),
+                ),
+                color: const Color(0xffffffff),
+              ),
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(42.0, 849.0),
+            child:
+                // Adobe XD layer: '主页' (shape)
+                PageLink(
+              links: [
+                PageLinkInfo(
+                  transition: LinkTransition.PushRight,
+                  ease: Curves.slowMiddle,
+                  duration: 1.0,
+                  pageBuilder: () => Homepage(),
+                ),
+              ],
+              child: Container(
+                width: 58.0,
+                height: 58.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: const AssetImage('assets/images/home.png'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          
+          Transform.translate(
+            offset: Offset(328.0, 849.0),
+             child:
+                PageLink(
+              links: [
+                PageLinkInfo(
+                  transition: LinkTransition.PushRight,
+                  ease: Curves.easeOut,
+                  duration: 1.0,
+                  pageBuilder: () => User(),
+                ),
+              ],
+              child:  Container(
+              width: 58.0,
+              height: 58.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/profile.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+                )
+          ),
+          Transform.translate(
+            offset: Offset(185.0, 850.0),
+            child:
+                // Adobe XD layer: '日历' (shape)
+                PageLink(
+              links: [
+                PageLinkInfo(
+                  transition: LinkTransition.PushRight,
+                  ease: Curves.easeOut,
+                  duration: 1.0,
+                  //pageBuilder: () => SchedulaerDatepage(),
+                ),
+              ],
+              child: Container(
+                width: 58.0,
+                height: 58.0,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: const AssetImage('assets/images/calendar.png'),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Transform.translate(
             offset: Offset(156.8, 751.0),
             child: SizedBox(
               width: 111.0,
               child: Text(
-                'Next',
+                'Save',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 41,
@@ -503,31 +592,32 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(20.0, 42.0),
-            child:
-                // Adobe XD layer: 'jiantou' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushRight,
-                  ease: Curves.easeIn,
-                  duration: 1.0,
-                  pageBuilder: () => Selectcategoriespage(),
-                ),
-              ],
-              child: Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/images/goback.png'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          
+          // Transform.translate(
+          //   offset: Offset(20.0, 42.0),
+          //   child:
+          //       // Adobe XD layer: 'jiantou' (shape)
+          //       PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.PushRight,
+          //         ease: Curves.easeIn,
+          //         duration: 1.0,
+          //         pageBuilder: () => Selectcategoriespage(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 50.0,
+          //       height: 50.0,
+          //       decoration: BoxDecoration(
+          //         image: DecorationImage(
+          //           image: const AssetImage('assets/images/goback.png'),
+          //           fit: BoxFit.fill,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
