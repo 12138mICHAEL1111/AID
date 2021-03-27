@@ -891,31 +891,31 @@ class _Item1State extends State<Item1> {
           //   ),
           // ),
 
-          Transform.translate(
-            offset: Offset(20.0, 42.0),
-            child:
-                // Adobe XD layer: 'jiantou' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushRight,
-                  ease: Curves.easeIn,
-                  duration: 1.0,
-                  pageBuilder: () => Moodtracker(),
-                ),
-              ],
-              child: Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/images/goback.png'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              ),
-            ),
-          ),
+          // Transform.translate(
+          //   offset: Offset(20.0, 42.0),
+          //   child:
+          //       // Adobe XD layer: 'jiantou' (shape)
+          //       PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.PushRight,
+          //         ease: Curves.easeIn,
+          //         duration: 1.0,
+          //         pageBuilder: () => Moodtracker(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 50.0,
+          //       height: 50.0,
+          //       decoration: BoxDecoration(
+          //         image: DecorationImage(
+          //           image: const AssetImage('assets/images/goback.png'),
+          //           fit: BoxFit.fill,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
