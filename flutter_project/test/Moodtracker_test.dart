@@ -9,7 +9,7 @@ void main() {
     );
   }
 
-  testWidgets('button test', (WidgetTester tester) async {
+  testWidgets('moodtracker page button test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Moodtracker()));
     await tester.pumpAndSettle();
     final fBtn = find.byType(FlatButton);
@@ -18,7 +18,7 @@ void main() {
     expect(oBtn, findsOneWidget);
   });
 
-  testWidgets('content test', (WidgetTester tester) async {
+  testWidgets('moodtracker page content test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Moodtracker()));
     await tester.pumpAndSettle();
     final anxiousFinder = find.text('Anxious');
@@ -29,7 +29,7 @@ void main() {
     expect(sadFinder, findsOneWidget);
   });
 
-  testWidgets('click test', (WidgetTester tester) async {
+  testWidgets('moodtracker page click test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Moodtracker()));
     await tester.pumpAndSettle();
     final oBtn = find.byType(OutlineButton);
