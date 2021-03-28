@@ -17,14 +17,13 @@ class _UserState extends State<User> {
   String id ;
   String email ;
   @override
-  void initState(){ 
+  void initState() {
     super.initState();
      getUserIdAndEmail();
 
   }
 
-
-  getUserIdAndEmail() async{
+  getUserIdAndEmail() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var api = '${Config.domain}/rest/users/getemail';
     String usid  =  pref.getString('userid');
@@ -36,6 +35,7 @@ class _UserState extends State<User> {
           this.email = response.data["email"];
         });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -139,7 +139,6 @@ class _UserState extends State<User> {
           ),
           Transform.translate(
             offset: Offset(210.0, 364.0),
-            
             child: Text(
               this.email,
               style: TextStyle(
@@ -175,27 +174,25 @@ class _UserState extends State<User> {
               textAlign: TextAlign.left,
             ),
           ),
-           Container(
+          Container(
             margin: EdgeInsets.fromLTRB(365, 467, 10, 50),
             child: FlatButton(
               minWidth: 50,
               height: 59.0,
-             
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Text(
                 '''''',
-                 style: TextStyle(
+                style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 26,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
               ),
-              onPressed: (){
-                Navigator.pushNamed(context,'/reset',arguments: {
-                  "isFromUser":true
-                });
+              onPressed: () {
+                Navigator.pushNamed(context, '/reset',
+                    arguments: {"isFromUser": true});
               },
             ),
           ),
@@ -246,7 +243,7 @@ class _UserState extends State<User> {
                 height: 58.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage('assets/images/home.png'),
+                    image: const AssetImage('assets/images/gray_home.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -286,7 +283,7 @@ class _UserState extends State<User> {
                 height: 58.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage('assets/images/calendar.png'),
+                    image: const AssetImage('assets/images/gray_calendar.png'),
                     fit: BoxFit.fill,
                   ),
                 ),

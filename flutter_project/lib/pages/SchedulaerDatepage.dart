@@ -520,38 +520,36 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
                 height: 58.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage('assets/images/home.png'),
+                    image: const AssetImage('assets/images/gray_home.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
               ),
             ),
           ),
-          
+
           Transform.translate(
-            offset: Offset(328.0, 849.0),
-             child:
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushRight,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => User(),
+              offset: Offset(328.0, 849.0),
+              child: PageLink(
+                links: [
+                  PageLinkInfo(
+                    transition: LinkTransition.PushRight,
+                    ease: Curves.easeOut,
+                    duration: 1.0,
+                    pageBuilder: () => User(),
+                  ),
+                ],
+                child: Container(
+                  width: 58.0,
+                  height: 58.0,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: const AssetImage('assets/images/gray_profile.png'),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
                 ),
-              ],
-              child:  Container(
-              width: 58.0,
-              height: 58.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/profile.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-                )
-          ),
+              )),
           Transform.translate(
             offset: Offset(185.0, 850.0),
             child:
@@ -592,7 +590,7 @@ class _SchedulaerDatePageState extends State<SchedulaerDatepage> {
               ),
             ),
           ),
-          
+
           // Transform.translate(
           //   offset: Offset(20.0, 42.0),
           //   child:
