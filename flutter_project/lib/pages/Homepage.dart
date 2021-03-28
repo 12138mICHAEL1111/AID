@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
+import 'package:flutter_project/pages/SchedulaerDatepage.dart';
 import './User.dart';
-import './Calendar.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'Moodtracker.dart';
@@ -468,6 +468,21 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
 
+          Container(
+            margin: EdgeInsets.fromLTRB(328, 849, 50, 50),
+            child: FlatButton(
+              minWidth: 254,
+              height: 59.0,
+              hoverColor: Color(0x29000000),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20))),
+              color: const Color(0xfffdb56f),
+              child: Text(
+                '''''',
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
           Transform.translate(
             offset: Offset(328.0, 849.0),
             child:
@@ -486,7 +501,7 @@ class _HomepageState extends State<Homepage> {
                 height: 58.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage('assets/images/profile.png'),
+                    image: const AssetImage('assets/images/gray_profile.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -503,7 +518,7 @@ class _HomepageState extends State<Homepage> {
                   transition: LinkTransition.PushLeft,
                   ease: Curves.easeOut,
                   duration: 1.0,
-                  pageBuilder: () => Calendar(),
+                  pageBuilder: () => SchedulaerDatepage(),
                 ),
               ],
               child: Container(
@@ -511,7 +526,7 @@ class _HomepageState extends State<Homepage> {
                 height: 58.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage('assets/images/calendar.png'),
+                    image: const AssetImage('assets/images/gray_calendar.png'),
                     fit: BoxFit.fill,
                   ),
                 ),

@@ -110,7 +110,7 @@ export default {
              }
         },
         async testApi(){
-            const res = await this.$http.get('/rest/user/uploadcategory')
+            const res = await this.$http.post('/rest/users/getemail',{"userid":"AA001"})
 
             console.log(res.data)
         }

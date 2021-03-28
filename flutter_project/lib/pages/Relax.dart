@@ -332,18 +332,19 @@ class Relax extends StatelessWidget {
             //       pageBuilder: () => Item1(),
             //     ),
             //   ],
-              child: Container(
-                width: 50.0,
-                height: 50.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/images/goback.png'),
-                    fit: BoxFit.fill,
-                  ),
+            child: Container(
+              width: 50.0,
+              height: 50.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/goback.png'),
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
-        ],
+          
+          )],
+          
       ),
     );
   }
