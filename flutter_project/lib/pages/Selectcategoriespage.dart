@@ -68,7 +68,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
     if(response.data["message"]=='success'){
       print(response.data);
       pref.setString('category',cate());
-      Navigator.of(context).pushNamed('/introductionpage');
+      Navigator.of(context).pushNamed('/date');
     }
   }
   //construct options
