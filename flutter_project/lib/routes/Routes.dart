@@ -11,7 +11,7 @@ import "../pages/Practicepage2.dart";
 import '../pages/Moodtracker.dart';
 import '../pages/Item1.dart';
 import '../pages/IntroductionPage.dart';
-import '../pages/SchedulaerDatepage.dart';
+import '../pages/ScheduleDatepage.dart';
 import '../pages/Scheduler.dart';
 import '../pages/Sessionfinishedpage.dart';
 import '../pages/Item2.dart';
@@ -33,8 +33,8 @@ final routes = {
   '/reset': (context,{arguments}) => Resetpasswordpage(arguments:arguments),
   '/introductionpage': (context) => IntroductionPage(),
   '/createdSuccessfully': (context) => Createdsuccessfullypage(),
-  '/date': (context) => SchedulaerDatepage(),
-  '/schedulaerdatepage': (context) => SchedulaerDatepage(),
+  '/date': (context) => ScheduleDatepage(),
+  '/ScheduleDatepage': (context) => ScheduleDatepage(),
   '/scheduler': (context) => Scheduler(),
   '/sessionfinished': (context) => Sessionfinishedpage(),
   '/imagination': (context) => itemImaginePage(),

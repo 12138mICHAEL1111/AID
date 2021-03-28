@@ -21,9 +21,9 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  flutter_svg: ^0.19.0
+  flutter_svg:
   adobe_xd: ^1.1.0+1
-  dio: ^3,0.9
+  dio: ^3,0.10
   fluttertoast: ^7.1.6
   shared_preferences: ^0.4.2
   event_bus: ^1.1.1
@@ -40,6 +40,7 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
+  test:
   flutter_test:
     sdk: flutter
 
