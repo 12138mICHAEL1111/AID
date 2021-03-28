@@ -1,7 +1,10 @@
+const { Model } = require('mongoose')
+
 module.exports= app=>{
     const express = require('express')
     const jwt = require('jsonwebtoken')
     const fs = require('fs')
+
     const router = express.Router({
         mergeParams : true
     })
@@ -15,7 +18,8 @@ module.exports= app=>{
             const lastInsertData = await req.Model.find().sort({_id:-1}).limit(1)
             if(lastInsertData.length==0){
                 const userid = "AA001"
-                await req.Model.create({email:req.body.email,password:req.body.password,userid:userid,controlitem:true})
+                await req.Model.updateMany({currentuser: true}, { currentuser: false })
+                await req.Model.create({ email: req.body.email, password: req.body.password, userid: userid, controlitem: true, currentuser: true })
                 res.send({"userid":userid,"message":"success","controlitem":true})
             }
             else{
@@ -55,7 +59,8 @@ module.exports= app=>{
                 else{
                     controlitem= true
                 }
-                await req.Model.create({email:req.body.email,password:req.body.password,userid:finalstr,controlitem:controlitem})
+                await req.Model.updateMany({currentuser: true}, { currentuser: false })
+                await req.Model.create({email:req.body.email,password:req.body.password,userid:finalstr,controlitem:controlitem,currentuser:true})
                 const email = req.body.email
                 res.send({"userid":finalstr,"message":"success","controlitem":controlitem})
             }
@@ -69,6 +74,73 @@ module.exports= app=>{
         //     res.send({"Token":token,"email":email,"message":"success"})
          }   
      })
+
+    router.post("/uploadcategory",async(req,res)=>{
+        await req.Model.findOneAndUpdate({userid:req.body.userid},{category:req.body.category})
+        res.send({"message":"success"})
+    })
+
+    router.get("/uploadcategory",async(req,res)=>{
+        const questions = await req.Model.find({ currentuser: true })
+        res.send(questions)
+    })
+
+    router.post("/senddata",async(req,res)=>{
+        await req.Model.create(
+            { userid: req.body.userid,
+            trailNumber: req.body.trailNumber ,
+            category: req.body.category ,
+            sessionNumber: req.body.sessionNumber ,
+            readingDuration : req.body.readingDuration,
+            wordRT1: req.body.wordRT1 ,
+            wordAccuracy1: req.body.wordAccuracy1 ,
+            clueRequired: req.body.clueRequired ,
+            wordRT2: req.body.wordRT2 ,
+            wordAccuracy2: req.body.wordAccuracy2 ,
+            questionRT1: req.body.questionRT1 ,
+            questionAccuracy1: req.body.questionAccuracy1 ,
+            questionRT2: req.body.questionRT2 ,
+            questionAccuracy2: req.body.questionAccuracy2
+            })
+        res.send({"message":"success"})
+    })
+
+    router.post("/uploadsessiontime",async(req,res)=>{
+        const finduser = await req.Model.findOneAndUpdate({userid:req.body.userid},{sessiontime:req.body.sessiontime})
+        if(finduser){
+            res.send({"messgae":"success"})
+        }
+        else{
+            res.send({"messgae":"fail"})
+        }
+    })
+
+    router.post("/sessiontime",async(req,res)=>{
+        const user = await req.Model.findOne({userid:req.body.userid})
+        res.send(user.sessiontime)
+    })
+
+    router.post("/uploadsessionmood",async(req,res)=>{
+        const user = await req.Model.findOne({userid:req.body.userid})
+        const session1mood = user.sessionmood.session1
+        const session2mood = user.sessionmood.session2
+        const session3mood = user.sessionmood.session3
+        const session4mood = user.sessionmood.session4
+        if(req.body.sessiontime == "session1"){
+            await req.Model.findOneAndUpdate({userid:req.body.userid},{sessionmood:{session1:req.body.sessionmood,session2:session2mood,session3:session3mood,session4:session4mood}})
+        }
+        else if(req.body.sessiontime == "session2"){
+            await req.Model.findOneAndUpdate({userid:req.body.userid},{sessionmood:{session1:session1mood,session2:req.body.sessionmood,session3:session3mood,session4:session4mood}})
+        }
+        else if(req.body.sessiontime == "session3"){
+            await req.Model.findOneAndUpdate({userid:req.body.userid},{sessionmood:{session1:session1mood,session2:session2mood,session3:req.body.sessionmood,session4:session4mood}})
+        }
+        else{
+            await req.Model.findOneAndUpdate({userid:req.body.userid},{sessionmood:{session1:session1mood,session2:session2mood,session3:session3mood,session4:req.body.sessionmood}}) 
+        }
+
+        res.sendStatus(200)
+    })
 
     router.get("/:session",async(req,res)=>{
         const totalItems = await req.Model.find()
@@ -101,26 +173,26 @@ module.exports= app=>{
         res.send(questions)
     })
 
-    router.post("/",async(req,res)=>{
+    router.post("/", async (req, res) => {
         const modelName = require('inflection').classify(req.params.resource)
-        const ItemPath = `./questions/${modelName}.json`
-        fs.readFile(ItemPath,'utf-8',  async function(err,data){
-            if(err){
-                console.log(err)
+            const ItemPath = `./questions/${modelName}.json`
+            fs.readFile(ItemPath, 'utf-8', async function (err, data) {
+                if (err) {
+                    console.log(err)
+                }
+                const Items = JSON.parse(data).Item
+                const firstContext = Items[0].context
+                const findFirst = await req.Model.findOne({ "context": firstContext })
+                if (findFirst) {
+                    res.status(403).send({ "message": "就知道你会再点一次的!!" })
+                } else {
+                    for (var i = 0; i < Items.length; i++) {
+                        req.Model.create(Items[i])
+                    }
+                    res.send({ "message": "success" })
+                }
             }
-           const Items = JSON.parse(data).Item
-           const firstContext = Items[0].context
-           const findFirst =  await req.Model.findOne({"context":firstContext})
-            if(findFirst){
-                res.status(403).send({"message":"就知道你会再点一次的!!"})
-            }else{
-                for(var i =0;i<Items.length;i++){
-                    req.Model.create(Items[i])
-                    }        
-                res.send({"message":"success"})
-            }
-        }
-        )
+            )
     })
 
     router.post("/resetpassword",async(req,res)=>{
@@ -134,7 +206,11 @@ module.exports= app=>{
         }
 
     })
-
+    router.post("/getemail",async(req,res)=>{
+        const findUser = await req.Model.findOne({userid:req.body.userid})
+        const email = findUser.email
+        res.send({"email":email})
+    })
     router.post("/login",async(req,res)=>{
         const findUser = await req.Model.findOne({userid:req.body.userid})
         if(findUser==null){
@@ -145,8 +221,11 @@ module.exports= app=>{
           if(!isValid){
               res.send({"message":"wrong password"})
           }
-          else{
-              res.send({"message":"success","userid":req.body.userid})
+          else {
+            await req.Model.updateMany({currentuser: true}, { currentuser: false })
+            await req.Model.findOneAndUpdate({userid:req.body.userid}, { currentuser: true })
+              const controlitem = findUser.controlitem
+              res.send({"message":"success","userid":req.body.userid,"controlitem":controlitem,"currentuser": true})
           }
         }
     })

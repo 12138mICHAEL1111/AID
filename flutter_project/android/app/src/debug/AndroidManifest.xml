@@ -4,4 +4,8 @@
          to allow setting breakpoints, to provide hot reload, etc.
     -->
     <uses-permission android:name="android.permission.INTERNET"/>
+    <!-- <android:name="io.flutter.app.FlutterApplication"
+            android:label="receipt"
+            android:usesCleartextTraffic="true"
+            android:icon="@mipmap/ic_launcher"> -->
 </manifest>

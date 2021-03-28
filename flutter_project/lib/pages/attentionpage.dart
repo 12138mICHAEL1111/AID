@@ -119,21 +119,20 @@ class attentionpage extends StatelessWidget {
                           pinRight: true,
                           pinTop: true,
                           pinBottom: true,
-                          child:
-                              // Adobe XD layer: 'Frame' (shape)
-                              PageLink(
-                            links: [
-                              PageLinkInfo(
-                                transition: LinkTransition.PushDown,
-                                ease: Curves.easeOut,
-                                duration: 1.0,
-                                pageBuilder: () => Item1(),
-                              ),
-                            ],
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: Colors.transparent,
-                              ),
+                          // child:
+                          // Adobe XD layer: 'Frame' (shape)
+                          //   PageLink(
+                          // // links: [
+                          // //   PageLinkInfo(
+                          // //     transition: LinkTransition.PushDown,
+                          // //     ease: Curves.easeOut,
+                          // //     duration: 1.0,
+                          // //     pageBuilder: () => Item1(),
+                          // //   ),
+                          // // ],
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.transparent,
                             ),
                           ),
                         ),

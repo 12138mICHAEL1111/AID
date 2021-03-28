@@ -1,14 +1,53 @@
-import 'package:flutter/material.dart';
-import './Resetpasswordpage.dart';
-import 'package:adobe_xd/page_link.dart';
-import './Homepage.dart';
-import './Signuppage.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'dart:convert';
 
-class Loginpage extends StatelessWidget {
+import 'package:flutter_project/pages/Homepage.dart';
+
+import '../config/Config.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+//class Loginpage extends StatelessWidget {
+class Loginpage extends StatefulWidget {
   Loginpage({
     Key key,
   }) : super(key: key);
+
+  @override
+  _LoginpageState createState() => _LoginpageState();
+}
+
+class _LoginpageState extends State<Loginpage> {
+  String id;
+  String password;
+
+  login() async {
+    var api = '${Config.domain}/rest/users/login';
+    var response = await Dio()
+        .post(api, data: {"userid": this.id, "password": this.password});
+    if (response.data["message"] == 'success') {
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      pref.setString('userid', response.data['userid']);
+      pref.setString('controlitem', json.encode(response.data['controlitem']));
+      print("login successfully");
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => Homepage(
+                  itemNumber: 1,
+                  sessionNumber: 1,
+                  // this is only temporary set to 1 and need to store user's session status later.
+                )),
+      );
+    } else {
+      Fluttertoast.showToast(
+          msg: '${response.data["message"]}',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +90,7 @@ class Loginpage extends StatelessWidget {
               height: 180.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage('assets/images/logoOfStart.png'),
+                  image: const AssetImage('assets/images/logoOfMenu.png'),
                   fit: BoxFit.fill,
                 ),
               ),
@@ -70,10 +109,19 @@ class Loginpage extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(76.0, 502.0),
-            child: SvgPicture.string(
-              _svg_1kkn3b,
-              allowDrawingOutsideViewBox: true,
+            offset: Offset(69.0, 502.0),
+            child: Container(
+              child: TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Account ID",
+                ),
+                onChanged: (value) {
+                  this.id = value;
+                },
+              ),
+              width: 276.0,
+              height: 48.0,
             ),
           ),
           Transform.translate(
@@ -89,127 +137,62 @@ class Loginpage extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(76.0, 628.0),
+            offset: Offset(69.0, 628.0),
             child: Container(
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: "Password",
+                ),
+                onChanged: (value) {
+                  this.password = value;
+                },
+              ),
               width: 276.0,
               height: 48.0,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24.0),
-                color: const Color(0xf2f4f4f4),
-                border: Border.all(width: 1.0, color: const Color(0xf2707070)),
-              ),
             ),
           ),
+
+          //Login button
           Transform.translate(
-            offset: Offset(152.0, 696.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushUp,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => Resetpasswordpage(),
-                ),
-              ],
-              child: Text(
-                'Forgot password?',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 15,
-                  color: const Color(0xffc7c7c7),
-                ),
-                textAlign: TextAlign.left,
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(109.0, 763.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushDown,
-                  ease: Curves.slowMiddle,
-                  duration: 1.0,
-                  pageBuilder: () => Homepage(),
-                ),
-              ],
-              child: Container(
-                width: 197.0,
-                height: 56.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(23.0),
+              offset: Offset(130.0, 710.0),
+              child: SizedBox(
+                width: 160,
+                height: 40,
+                child: RaisedButton(
+                  child: Text("Login"),
                   color: const Color(0xfffaaf7b),
+                  onPressed: login,
                 ),
-              ),
-            ),
-          ),
+              )),
+          //Reset password button
           Transform.translate(
-            offset: Offset(67.7, 772.0),
-            child: SizedBox(
-              width: 183.0,
-              child: Text(
-                '           Log In',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 30,
-                  color: const Color(0xffffffff),
+              offset: Offset(130.0, 760.0),
+              child: SizedBox(
+                width: 160,
+                height: 40,
+                child: RaisedButton(
+                  child: Text("Reset Password"),
+                  color: const Color(0xfffaaf7b),
+                  onPressed: () {
+                    Navigator.pushNamed(context,'/reset',arguments: {"isFromUser":false});
+                  },
                 ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+              )),
           Transform.translate(
-            offset: Offset(109.0, 837.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushLeft,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => Signuppage(),
+              offset: Offset(130.0, 810.0),
+              child: SizedBox(
+                width: 160,
+                height: 40,
+                child: RaisedButton(
+                  child: Text("Sign Up"),
+                  color: const Color(0xfffaaf7b),
+                  onPressed: () {
+                    Navigator.of(context).pushReplacementNamed('/signup');
+                  },
                 ),
-              ],
-              child: Container(
-                width: 197.0,
-                height: 47.0,
-                decoration: BoxDecoration(
-                  color: const Color(0xffffffff),
-                  border:
-                      Border.all(width: 1.0, color: const Color(0xfffca772)),
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(9.7, 854.0),
-            child: SizedBox(
-              width: 271.0,
-              child: Text.rich(
-                TextSpan(
-                  style: TextStyle(
-                    fontFamily: 'ZiZhiQuXiMaiTi',
-                    fontSize: 15,
-                    color: const Color(0xfffea672),
-                  ),
-                  children: [
-                    TextSpan(
-                      text:
-                          '                                 Need an account?\n',
-                    ),
-                    TextSpan(
-                      text: '\n',
-                      style: TextStyle(
-                        color: const Color(0xffffffff),
-                      ),
-                    ),
-                  ],
-                ),
-                textHeightBehavior:
-                    TextHeightBehavior(applyHeightToFirstAscent: false),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
+              )),
           Container(),
         ],
       ),

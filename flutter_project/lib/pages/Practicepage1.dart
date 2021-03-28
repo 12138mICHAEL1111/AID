@@ -1,15 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
+import 'package:flutter_project/pages/Introductionpage.dart';
 import './Practicepage2.dart';
 import 'package:adobe_xd/page_link.dart';
-import './Practice1Wrongpage.dart';
-import './intrductionpage.dart';
+import '../config/Config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:dio/dio.dart';
 
-class Practicepage1 extends StatelessWidget {
-  Practicepage1({
-    Key key,
-  }) : super(key: key);
+class Practicepage1 extends StatefulWidget {
+  @override
+  _Practicepage1State createState() => _Practicepage1State();
+}
+
+class _Practicepage1State extends State<Practicepage1> {
+  var _answer;
+  var _next;
+  var _feedback;
+
+  @override
+  void initState() {
+    super.initState();
+    _answer = "";
+    _next = false;
+    _feedback = "";
+    _getData();
+  }
+
+  _getData() async {
+    var api = '${Config.domain}/rest/practiseitems';
+    var response = await Dio().get(api);
+    _answer = response.data[0]['answer1'];
+  }
+
+  bool _compareData(String string1, String string2) {
+    if (string1 == null || string2 == null) {
+      return false;
+    }
+    return string1.toLowerCase() == string2.toLowerCase();
+  }
+
+  bool _validateData(value) {
+    if (_compareData(_answer, value)) {
+      setState(() {
+        _feedback = '✔ Great, this is a good answer!';
+      });
+      return _next = true;
+    } else {
+      setState(() {
+        _feedback = '✗ Good. But what would be a different answer?';
+      });
+      return _next = false;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -321,6 +364,7 @@ class Practicepage1 extends StatelessWidget {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(37.9, 253.0),
             child: SizedBox(
@@ -335,23 +379,36 @@ class Practicepage1 extends StatelessWidget {
                   children: [
                     TextSpan(
                       text:
-                          '   You turn the kettle on and wait\n for the water to boil.\n\nYou get a teabag out of the tin ,\nwhich you put into a mug, and \npourThe boiling water onto the\n teabag.\n\nNext, you add the …\n\n\n',
-                    ),
-                    TextSpan(
-                      text: 'm _ _ k',
-                      style: TextStyle(
-                        fontSize: 55,
-                        color: const Color(0xfffaae7c),
-                      ),
+                          'You turn the kettle on and wait\n for the water to boil.\n\nYou get a teabag out of the tin,\nwhich you put into a mug, and \npour the boiling water onto the\n teabag.\n\nNext, you add the…\n',
                     ),
                   ],
                 ),
-                textHeightBehavior:
-                    TextHeightBehavior(applyHeightToFirstAscent: false),
+                // textHeightBehavior:
+                //     TextHeightBehavior(applyHeightToFirstAscent: false),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
+
+          Transform.translate(
+              offset: Offset(110, 503.0),
+              child: Container(
+                width: 250.0,
+                child: TextField(
+                  decoration: InputDecoration(
+                      labelText: "m _ _ k",
+                      contentPadding: EdgeInsets.all(0),
+                      border: InputBorder.none),
+                  onChanged: (value) {
+                    _validateData(value);
+                  },
+                  style: TextStyle(
+                    fontSize: 55,
+                    color: const Color(0xfffaae7c),
+                  ),
+                ),
+              )),
+
           Transform.translate(
             offset: Offset(285.3, 89.0),
             child: SizedBox(
@@ -367,6 +424,23 @@ class Practicepage1 extends StatelessWidget {
               ),
             ),
           ),
+
+          Transform.translate(
+            offset: Offset(108.4, 685.0),
+            child: SizedBox(
+              width: 211.0,
+              child: Text(
+                "${_feedback}",
+                style: TextStyle(
+                  fontFamily: 'ZiZhiQuXiMaiTi',
+                  fontSize: 21,
+                  color: const Color(0xfff0660e),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+
           Transform.translate(
             offset: Offset(97.4, 628.0),
             child: SizedBox(
@@ -418,8 +492,8 @@ class Practicepage1 extends StatelessWidget {
           ),
           Transform.translate(
             offset: Offset(156.3, 775.0),
-            child: SizedBox(
-              width: 116.0,
+            child: FlatButton(
+              color: Colors.transparent,
               child: Text(
                 'Next',
                 style: TextStyle(
@@ -429,38 +503,44 @@ class Practicepage1 extends StatelessWidget {
                 ),
                 textAlign: TextAlign.center,
               ),
+              onPressed: () {
+                if (_next == true) {
+                  Navigator.pushNamed(context, '/practice2');
+                } 
+              },
             ),
           ),
-          Transform.translate(
-            offset: Offset(177.0, 568.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.Fade,
-                  ease: Curves.linear,
-                  duration: 1.0,
-                  pageBuilder: () => Practice1Wrongpage(),
-                ),
-              ],
-              child: Container(
-                width: 38.0,
-                height: 33.0,
-                decoration: BoxDecoration(
-                  color: const Color(0xffffffff),
-                ),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(224.0, 568.0),
-            child: Container(
-              width: 37.0,
-              height: 33.0,
-              decoration: BoxDecoration(
-                color: const Color(0xffffffff),
-              ),
-            ),
-          ),
+
+          // Transform.translate(
+          //   offset: Offset(177.0, 568.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.Fade,
+          //         ease: Curves.linear,
+          //         duration: 1.0,
+          //         pageBuilder: () => Practice1Wrongpage(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 38.0,
+          //       height: 33.0,
+          //       decoration: BoxDecoration(
+          //         color: const Color(0xffffffff),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+          // Transform.translate(
+          //   offset: Offset(224.0, 568.0),
+          //   child: Container(
+          //     width: 37.0,
+          //     height: 33.0,
+          //     decoration: BoxDecoration(
+          //       color: const Color(0xffffffff),
+          //     ),
+          //   ),
+          // ),
           Transform.translate(
             offset: Offset(20.0, 42.0),
             child:
@@ -471,7 +551,7 @@ class Practicepage1 extends StatelessWidget {
                   transition: LinkTransition.PushRight,
                   ease: Curves.easeIn,
                   duration: 1.0,
-                  pageBuilder: () => intrductionpage(),
+                  pageBuilder: () => IntroductionPage(),
                 ),
               ],
               child: Container(
