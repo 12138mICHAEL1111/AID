@@ -49,7 +49,7 @@ class _SignuppageState extends State<Signuppage> {
        if(response.data["message"]=='success'){
          print(response.data);
          SharedPreferences pref = await SharedPreferences.getInstance();
-         pref.setString('userid',json.encode(response.data['userid']));
+         pref.setString('userid',response.data['userid']);
          pref.setString('controlitem',json.encode(response.data['controlitem']));
          Navigator.of(context).pushReplacementNamed('/createdSuccessfully');
 

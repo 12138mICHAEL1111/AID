@@ -14,24 +14,26 @@ class User extends StatefulWidget {
 }
 
 class _UserState extends State<User> {
-  String id;
-  String email;
+  String id ;
+  String email ;
   @override
   void initState() {
     super.initState();
-    getUserIdAndEmail();
+     getUserIdAndEmail();
+
   }
 
   getUserIdAndEmail() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var api = '${Config.domain}/rest/users/getemail';
-    var response =
-        await Dio().post(api, data: {"userid": pref.getString('userid')});
-
+    String usid  =  pref.getString('userid');
+    var response = await Dio().post(api, data: {"userid": usid});
+    print("---");
+    print(response.data);
     setState(() {
-      this.id = pref.getString('userid');
-      this.email = response.data["email"];
-    });
+          this.id = usid;
+          this.email = response.data["email"];
+        });
   }
 
   @override
