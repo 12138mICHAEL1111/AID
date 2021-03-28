@@ -63,8 +63,8 @@ flutter:
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
- flutter:
- fonts:
+
+  fonts:
      - family: ZiZhiQuXiMaiTi
        fonts:
          - asset: fonts/ZiZhiQuXiMaiTi-Regular.ttf
