@@ -6,6 +6,7 @@ import 'package:adobe_xd/page_link.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 class Moodtracker extends StatefulWidget {
   int itemNumber;
   int sessionNumber;
@@ -31,27 +32,32 @@ class _MoodtrackerState extends State<Moodtracker> {
     "assets/images/44.png",
     "assets/images/55.png",
   ];
-  var temparrayA =[];
+  var temparrayA = [];
   var anixousScore;
 
-  var temparrayH =[];
+  var temparrayH = [];
   var happyScore;
 
   var temparrayS = [];
   var sadScore;
   String id;
-  var scoreArray=[];
+  var scoreArray = [];
   var flag = true;
-  uploadmood() async{
-        var api = '${Config.domain}/rest/users/uploadsessionmood';
-        var sessiontime = "session"+ widget.sessionNumber.toString();
-        await Dio().post(api, data: {"userid": this.id, "sessionmood": this.scoreArray, "sessiontime":sessiontime});
+  uploadmood() async {
+    var api = '${Config.domain}/rest/users/uploadsessionmood';
+    var sessiontime = "session" + widget.sessionNumber.toString();
+    await Dio().post(api, data: {
+      "userid": this.id,
+      "sessionmood": this.scoreArray,
+      "sessiontime": sessiontime
+    });
   }
 
-  getid() async{
+  getid() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     this.id = pref.getString('userid');
   }
+
   ImageRadioController aController;
   ImageRadioController hController;
   ImageRadioController sController;
@@ -65,34 +71,36 @@ class _MoodtrackerState extends State<Moodtracker> {
     getid();
   }
 
-  addToArrayA(int number){ 
+  addToArrayA(int number) {
     temparrayA.add(number);
     var newList = new List.from(temparrayA.reversed);
-    try{
-      anixousScore=newList[4];
-    }on RangeError{
-      anixousScore=-1;
+    try {
+      anixousScore = newList[4];
+    } on RangeError {
+      anixousScore = -1;
     }
   }
 
-  addToArrayS(int number){ 
+  addToArrayS(int number) {
     temparrayS.add(number);
     var newList = new List.from(temparrayS.reversed);
-    try{
-      sadScore=newList[4];
-    }on RangeError{
-      sadScore=-1;
+    try {
+      sadScore = newList[4];
+    } on RangeError {
+      sadScore = -1;
     }
   }
-   addToArrayH(int number){ 
+
+  addToArrayH(int number) {
     temparrayH.add(number);
     var newList = new List.from(temparrayH.reversed);
-     try{
-      happyScore=newList[4];
-    }on RangeError{
-      happyScore=-1;
+    try {
+      happyScore = newList[4];
+    } on RangeError {
+      happyScore = -1;
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,55 +192,49 @@ class _MoodtrackerState extends State<Moodtracker> {
                   child: OutlineButton(
                     borderSide: BorderSide.none,
                     onPressed: () {
-            
-                      if(anixousScore!=null){
-                         scoreArray.add(anixousScore);
+                      if (anixousScore != null) {
+                        scoreArray.add(anixousScore);
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: 'please fill anixous score',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER);
+                        flag = false;
                       }
-                      else{
-                         Fluttertoast.showToast(
-                          msg: 'please fill anixous score',
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER);
-                          flag=false;
+                      if (happyScore != null) {
+                        scoreArray.add(happyScore);
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: 'please fill happy field',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER);
+                        flag = false;
                       }
-                      if(happyScore!=null){
-                         scoreArray.add(happyScore);
+                      if (sadScore != null) {
+                        scoreArray.add(sadScore);
+                      } else {
+                        Fluttertoast.showToast(
+                            msg: 'please fill sad field',
+                            toastLength: Toast.LENGTH_SHORT,
+                            gravity: ToastGravity.CENTER);
+                        flag = false;
                       }
-                      else{
-                         Fluttertoast.showToast(
-                          msg: 'please fill happy field',
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER);
-                          flag=false;
-                      }
-                      if(sadScore!=null){
-                         scoreArray.add(sadScore);
-                      }
-                      else{
-                         Fluttertoast.showToast(
-                          msg: 'please fill sad field',
-                          toastLength: Toast.LENGTH_SHORT,
-                          gravity: ToastGravity.CENTER);
-                          flag=false;
-                      }
-                      if(scoreArray.length == 3){
+                      if (scoreArray.length == 3) {
                         flag = true;
                       }
-                      if(flag==true){
+                      if (flag == true) {
                         uploadmood();
-                         Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Item1(
-                                  itemNumber: widget.itemNumber,
-                                  sessionNumber: widget.sessionNumber,
-                                )),
-                      );
-                      }
-                      else{
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Item1(
+                                    itemNumber: widget.itemNumber,
+                                    sessionNumber: widget.sessionNumber,
+                                  )),
+                        );
+                      } else {
                         scoreArray.clear();
                       }
-                    
                     },
                     child: Text(
                       'Next',
@@ -295,7 +297,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[4],
                 pressedImage[4],
                 controller: aController,
-                onChange: (v)=>addToArrayA(1),
+                onChange: (v) => addToArrayA(1),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -305,7 +307,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[3],
                 pressedImage[3],
                 controller: aController,
-                onChange:(value) => addToArrayA(2),
+                onChange: (value) => addToArrayA(2),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -315,7 +317,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[2],
                 pressedImage[2],
                 controller: aController,
-                onChange:(value) => addToArrayA(3),
+                onChange: (value) => addToArrayA(3),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -325,7 +327,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[0],
                 pressedImage[0],
                 controller: aController,
-                onChange:(value) => addToArrayA(5),
+                onChange: (value) => addToArrayA(5),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -335,7 +337,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[1],
                 pressedImage[1],
                 controller: aController,
-                onChange:(value) => addToArrayA(4),
+                onChange: (value) => addToArrayA(4),
                 height: 54.0,
                 width: 53.7,
               )),
@@ -345,7 +347,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[4],
                 pressedImage[4],
                 controller: hController,
-                onChange:(value) => addToArrayH(5),
+                onChange: (value) => addToArrayH(1),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -355,7 +357,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[3],
                 pressedImage[3],
                 controller: hController,
-                 onChange:(value) => addToArrayH(4),
+                onChange: (value) => addToArrayH(2),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -365,7 +367,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[2],
                 pressedImage[2],
                 controller: hController,
-                 onChange:(value) => addToArrayH(3),
+                onChange: (value) => addToArrayH(3),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -375,7 +377,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[0],
                 pressedImage[0],
                 controller: hController,
-                 onChange:(value) => addToArrayH(1),
+                onChange: (value) => addToArrayH(5),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -385,7 +387,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[1],
                 pressedImage[1],
                 controller: hController,
-                 onChange:(value) => addToArrayH(2),
+                onChange: (value) => addToArrayH(4),
                 height: 54.0,
                 width: 53.7,
               )),
@@ -395,7 +397,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[4],
                 pressedImage[4],
                 controller: sController,
-                onChange:(value) => addToArrayS(1),
+                onChange: (value) => addToArrayS(1),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -405,7 +407,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[3],
                 pressedImage[3],
                 controller: sController,
-                onChange:(value) => addToArrayS(2),
+                onChange: (value) => addToArrayS(2),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -415,7 +417,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[2],
                 pressedImage[2],
                 controller: sController,
-                onChange:(value) => addToArrayS(3),
+                onChange: (value) => addToArrayS(3),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -425,7 +427,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[0],
                 pressedImage[0],
                 controller: sController,
-                onChange:(value) => addToArrayS(5),
+                onChange: (value) => addToArrayS(5),
                 height: 60.0,
                 width: 60.0,
               )),
@@ -435,7 +437,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 images[1],
                 pressedImage[1],
                 controller: sController,
-                onChange:(value) => addToArrayS(4),
+                onChange: (value) => addToArrayS(4),
                 height: 54.0,
                 width: 53.7,
               )),
