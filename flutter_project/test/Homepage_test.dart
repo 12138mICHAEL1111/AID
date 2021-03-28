@@ -7,9 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:flutter_project/main.dart';
-import '../lib/pages/Homepage.dart';
+import 'package:flutter_project/pages/Homepage.dart';
 
 void main() {
   testWidgets('content test', (WidgetTester tester) async {
@@ -19,7 +17,7 @@ void main() {
 
   testWidgets('button test', (WidgetTester tester) async {
     await tester.pumpWidget(new MaterialApp(home: new Homepage()));
-    expect(find.byType(FlatButton), findsWidgets);
+    expect(find.byType(FlatButton), findsOneWidget);
   });
 
   testWidgets('click test', (WidgetTester tester) async {
