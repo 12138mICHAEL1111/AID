@@ -1,13 +1,8 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_screen_adapter/flutter_screen_adapter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import './ScheduleDatepage.dart';
-import 'package:adobe_xd/page_link.dart';
-import './Practicepage2.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class Selectcategoriespage extends StatefulWidget {
@@ -173,102 +168,31 @@ class _SelectPageState extends State<Selectcategoriespage> {
           Transform.translate(
               offset: Offset(136.5, 565.0), child: cons(7, "Mood and Health")),
 
-          // Transform.translate(
-          //   offset: Offset(120.2, 644.0),
-          //   child: InkWell(
-          //     onTap: () {       
-          //       if(check()) {
-          //         upload();
-          //       } else {
-          //         _showToast();
-          //       } 
-          //     },
-          //       child: Container(
-          //         width: 171.0,
-          //         height: 62.0,
-          //         decoration: BoxDecoration(
-          //           borderRadius: BorderRadius.circular(23.0),
-          //           color: const Color(0xffffffff),
-          //           boxShadow: [
-          //             BoxShadow(
-          //               color: const Color(0x29000000),
-          //               offset: Offset(0, 13),
-          //               blurRadius: 6,
-          //             ),
-          //           ],
-          //         ),
-          //     ),
-          //   ),
-          // ),
+          
           Transform.translate(
             offset: Offset(120.2, 644.0),
-            child: InkWell(
-              onTap: () {       
-                print("tapped");
-                if(check()) {
-                  upload();
-                } else {
-                  _showToast();
-                } 
-              },
-                child: Container(
-                  width: 171.0,
-                  height: 62.0,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(23.0),
-                    color: const Color(0xffffffff),
-                    boxShadow: [
-                      BoxShadow(
-                        color: const Color(0x29000000),
-                        offset: Offset(0, 13),
-                        blurRadius: 6,
-                      ),
-                    ],
+            child: Container(
+              width: 171.0,
+              height: 62.0,
+              child: FlatButton(
+                onPressed: () {
+                  if(check()) upload();
+                  else _showToast();
+                },
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(25))),
+                    color: Color(0xffffffff),
+                child: Center(
+                  child: Text(
+                    "Next",
+                    style: TextStyle(
+                      fontFamily: 'ZiZhiQuXiMaiTi',
+                      fontSize: 24,
+                      color: Colors.black,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-              ),
-            ),
-
-          // Transform.translate(
-          //   offset: Offset(129.0, 644.0),
-          //   child: PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.PushLeft,
-          //         ease: Curves.easeOut,
-          //         duration: 1.0,
-          //         pageBuilder: () => SchedulaerDatepage(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 171.0,
-          //       height: 62.0,
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(23.0),
-          //         color: const Color(0xffffffff),
-          //         boxShadow: [
-          //           BoxShadow(
-          //             color: const Color(0x29000000),
-          //             offset: Offset(0, 13),
-          //             blurRadius: 6,
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          Transform.translate(
-            offset: Offset(150.2, 649.0),
-            child: SizedBox(
-              width: 111.0,
-              child: Text(
-                'Next',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 41,
-                  color: const Color(0xfffdb56f),
-                ),
-                textAlign: TextAlign.center,
               ),
             ),
           ),
