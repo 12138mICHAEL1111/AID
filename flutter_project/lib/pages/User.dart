@@ -14,26 +14,25 @@ class User extends StatefulWidget {
 }
 
 class _UserState extends State<User> {
-  String id ;
-  String email ;
+  String id;
+  String email;
   @override
   void initState() {
     super.initState();
-     getUserIdAndEmail();
-
+    getUserIdAndEmail();
   }
 
   getUserIdAndEmail() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     var api = '${Config.domain}/rest/users/getemail';
-    String usid  =  pref.getString('userid');
+    String usid = pref.getString('userid');
     var response = await Dio().post(api, data: {"userid": usid});
     print("---");
     print(response.data);
     setState(() {
-          this.id = usid;
-          this.email = response.data["email"];
-        });
+      this.id = usid;
+      this.email = response.data["email"];
+    });
   }
 
   @override
@@ -116,7 +115,7 @@ class _UserState extends State<User> {
           Transform.translate(
             offset: Offset(311.0, 244.0),
             child: Text(
-              this.id,
+              this.id ?? "",
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 21,
@@ -140,7 +139,7 @@ class _UserState extends State<User> {
           Transform.translate(
             offset: Offset(210.0, 364.0),
             child: Text(
-              this.email,
+              this.email ?? "",
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 21,
