@@ -54,7 +54,6 @@ class _SelectPageState extends State<Selectcategoriespage> {
       if (_list[i] == 1) ++length;
     }
     if(length == 6) {
-      upload();
       return true;
     } else {
       return false;
@@ -226,17 +225,6 @@ class _SelectPageState extends State<Selectcategoriespage> {
                       ),
                     ],
                   ),
-                  child: check()?PageLink(
-                    links: [
-                      PageLinkInfo(
-                        transition: LinkTransition.PushLeft,
-                        ease: Curves.easeOut,
-                        duration: 1.0,
-                        pageBuilder: () => ScheduleDatepage(),
-                      )
-                    ],
-                  )
-                  :null
                 ),
               ),
             ),
@@ -288,15 +276,10 @@ class _SelectPageState extends State<Selectcategoriespage> {
             offset: Offset(20.0, 42.0),
             child:
                 // Adobe XD layer: 'jiantou' (shape)
-              PageLink(
-                links: [
-                  PageLinkInfo(
-                    transition: LinkTransition.PushRight,
-                    ease: Curves.easeIn,
-                    duration: 1.0,
-                    pageBuilder: () => Practicepage2(),
-                  )
-                ],
+              InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
                 child: Container(
                   width: 50.0,
                   height: 50.0,
@@ -307,7 +290,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
                     ),
                   ),
                 ),
-              ),
+              )
             ),
         ],
       ),
