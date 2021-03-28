@@ -18,7 +18,7 @@ void main() {
   testWidgets('there should be exactly 1 next button to be clicked', (WidgetTester tester) async{
     await tester.pumpWidget(createWidgetForTesting(child: new ScheduleDatepage()));
     await tester.pumpAndSettle();
-    final list = find.text('Next');
+    final list = find.text('Save');
     expect(list,findsOneWidget);
   });
 }
