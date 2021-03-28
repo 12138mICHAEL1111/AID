@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
-import 'package:flutter_project/pages/SchedulaerDatepage.dart';
+import 'package:flutter_project/pages/ScheduleDatepage.dart';
 import './User.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -518,7 +518,7 @@ class _HomepageState extends State<Homepage> {
                   transition: LinkTransition.PushLeft,
                   ease: Curves.easeOut,
                   duration: 1.0,
-                  pageBuilder: () => SchedulaerDatepage(),
+                  pageBuilder: () => ScheduleDatepage(),
                 ),
               ],
               child: Container(
