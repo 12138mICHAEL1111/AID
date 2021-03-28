@@ -536,7 +536,7 @@ class _HomepageState extends State<Homepage> {
                   transition: LinkTransition.PushLeft,
                   ease: Curves.easeOut,
                   duration: 1.0,
-                  pageBuilder: () => SchedulaerDatepage(),
+                  pageBuilder: () => ScheduleDatepage(),
                 ),
               ],
               child: Container(

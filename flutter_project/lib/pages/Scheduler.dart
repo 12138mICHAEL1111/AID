@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import './SchedulaerDatepage.dart';
+import './ScheduleDatepage.dart';
 import 'package:adobe_xd/page_link.dart';
 
 class Scheduler extends StatelessWidget {
@@ -22,7 +22,7 @@ class Scheduler extends StatelessWidget {
                   transition: LinkTransition.SlideDown,
                   ease: Curves.easeOut,
                   duration: 0.3,
-                  pageBuilder: () => SchedulaerDatepage(),
+                  pageBuilder: () => ScheduleDatepage(),
                 ),
               ],
               child: SizedBox(
