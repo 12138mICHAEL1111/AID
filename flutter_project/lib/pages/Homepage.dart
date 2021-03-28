@@ -19,6 +19,7 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   var _sessionNumber;
+  var _itemNumber;
 
   _HomepageState(this._sessionNumber);
 
@@ -27,6 +28,9 @@ class _HomepageState extends State<Homepage> {
     super.initState();
     if (_sessionNumber == null) {
       _sessionNumber = 1;
+    }
+    if (_itemNumber == null) {
+      _itemNumber = 1;
     }
   }
 
@@ -480,7 +484,6 @@ class _HomepageState extends State<Homepage> {
               color: const Color(0xfffdb56f),
               child: Text(
                 '''''',
-               
                 textAlign: TextAlign.center,
               ),
             ),
