@@ -142,6 +142,28 @@ module.exports= app=>{
         res.sendStatus(200)
     })
 
+    router.post("/uploadaftersessionmood",async(req,res)=>{
+        const user = await req.Model.findOne({userid:req.body.userid})
+        const session1mood = user.aftersessionmood.session1
+        const session2mood = user.aftersessionmood.session2
+        const session3mood = user.aftersessionmood.session3
+        const session4mood = user.aftersessionmood.session4
+        if(req.body.sessiontime == "session1"){
+            await req.Model.findOneAndUpdate({userid:req.body.userid},{aftersessionmood:{session1:req.body.sessionmood,session2:session2mood,session3:session3mood,session4:session4mood}})
+        }
+        else if(req.body.sessiontime == "session2"){
+            await req.Model.findOneAndUpdate({userid:req.body.userid},{aftersessionmood:{session1:session1mood,session2:req.body.sessionmood,session3:session3mood,session4:session4mood}})
+        }
+        else if(req.body.sessiontime == "session3"){
+            await req.Model.findOneAndUpdate({userid:req.body.userid},{aftersessionmood:{session1:session1mood,session2:session2mood,session3:req.body.sessionmood,session4:session4mood}})
+        }
+        else{
+            await req.Model.findOneAndUpdate({userid:req.body.userid},{aftersessionmood:{session1:session1mood,session2:session2mood,session3:session3mood,session4:req.body.sessionmood}}) 
+        }
+
+        res.sendStatus(200)
+    })
+
     router.get("/:session",async(req,res)=>{
         const totalItems = await req.Model.find()
         var sessionItems = new Array()

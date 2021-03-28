@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
-import 'package:flutter_project/pages/SchedulaerDatepage.dart';
+import 'package:flutter_project/pages/ScheduleDatepage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './User.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,6 +19,8 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   var _sessionNumber;
+  var _itemNumber;
+  var _date;
 
   _HomepageState(this._sessionNumber);
 
@@ -27,6 +30,21 @@ class _HomepageState extends State<Homepage> {
     if (_sessionNumber == null) {
       _sessionNumber = 1;
     }
+    if (_itemNumber == null) {
+      _itemNumber = 1;
+    }
+    _getDate();
+  }
+
+  _getDate() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      _date = pref.get('session$_sessionNumber');
+      if (_date == null) {
+        _date = 'Not selected';
+      }
+      print(_date);
+    });
   }
 
   @override
@@ -356,7 +374,7 @@ class _HomepageState extends State<Homepage> {
             child: SizedBox(
               width: 152.0,
               child: Text(
-                'day，month，year',
+                '$_date',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 15,
@@ -518,7 +536,7 @@ class _HomepageState extends State<Homepage> {
                   transition: LinkTransition.PushLeft,
                   ease: Curves.easeOut,
                   duration: 1.0,
-                  pageBuilder: () => SchedulaerDatepage(),
+                  pageBuilder: () => ScheduleDatepage(),
                 ),
               ],
               child: Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/pages/Sessionfinishedpage.dart';
 import './Item1.dart';
 import '../config/Config.dart';
 import 'package:dio/dio.dart';
@@ -43,8 +44,14 @@ class _MoodtrackerState extends State<Moodtracker> {
   String id;
   var scoreArray = [];
   var flag = true;
+
   uploadmood() async {
-    var api = '${Config.domain}/rest/users/uploadsessionmood';
+    var api;
+    if (widget.itemNumber == 18) {
+      api = '${Config.domain}/rest/users/uploadaftersessionmood';
+    } else {
+      api = '${Config.domain}/rest/users/uploadsessionmood';
+    }
     var sessiontime = "session" + widget.sessionNumber.toString();
     await Dio().post(api, data: {
       "userid": this.id,
@@ -224,14 +231,27 @@ class _MoodtrackerState extends State<Moodtracker> {
                       }
                       if (flag == true) {
                         uploadmood();
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Item1(
-                                    itemNumber: widget.itemNumber,
-                                    sessionNumber: widget.sessionNumber,
-                                  )),
-                        );
+                        if (widget.itemNumber == 18) {
+                          // After a session finished
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Sessionfinishedpage(
+                                      itemNumber: 1,
+                                      sessionNumber: widget.sessionNumber + 1,
+                                    )),
+                          );
+                        } else {
+                          // Before a session starts
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Item1(
+                                      itemNumber: widget.itemNumber,
+                                      sessionNumber: widget.sessionNumber,
+                                    )),
+                          );
+                        }
                       } else {
                         scoreArray.clear();
                       }

@@ -3,7 +3,7 @@ import './Homepage.dart';
 import '../config/Config.dart';
 import 'package:dio/dio.dart';
 import 'package:adobe_xd/page_link.dart';
-import './SchedulaerDatepage.dart';
+import './ScheduleDatepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class User extends StatefulWidget {
@@ -274,7 +274,7 @@ class _UserState extends State<User> {
                   transition: LinkTransition.PushRight,
                   ease: Curves.easeOut,
                   duration: 1.0,
-                  pageBuilder: () => SchedulaerDatepage(),
+                  pageBuilder: () => ScheduleDatepage(),
                 ),
               ],
               child: Container(

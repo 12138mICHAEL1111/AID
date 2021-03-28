@@ -128,12 +128,6 @@ class _Item1State extends State<Item1> {
   }
 
   void _processData(int i) {
-    if (_sessionNumber == null) {
-      _sessionNumber = 1;
-    }
-    if (_itemNumber == null) {
-      _itemNumber = 1;
-    }
     setState(() {
       _context = _items[i]["context"];
       _blank = _items[i]["blank"];
@@ -175,7 +169,7 @@ class _Item1State extends State<Item1> {
 
   void _route() {
     if (_control == false) {
-      //training items have imagine page, control dont
+      //training items have imagination page, control dont
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -185,15 +179,15 @@ class _Item1State extends State<Item1> {
                   sessionNumber: _sessionNumber,
                 )),
       );
-    } else {
+    } else { //control items
       if (_itemNumber != 0 && _itemNumber % 18 == 0) {
         print("here2");
         print('$_itemNumber');
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => Sessionfinishedpage(
-                    itemNumber: 1,
+              builder: (context) => Moodtracker(
+                    itemNumber: _itemNumber,
                     sessionNumber: _sessionNumber,
                   )),
         );

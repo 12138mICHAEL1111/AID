@@ -53,47 +53,33 @@ class Overpage extends StatelessWidget {
           ),
           Transform.translate(
             offset: Offset(98.0, 659.0),
-            // child: PageLink(
-            //   links: [
-            //     PageLinkInfo(
-            //       transition: LinkTransition.PushLeft,
-            //       ease: Curves.easeOut,
-            //       duration: 1.0,
-            //       pageBuilder: () => Homepage(),
-            //     ),
-            //   ],
-              child: Container(
-                width: 233.0,
-                height: 71.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(23.0),
-                  color: const Color(0xffffffff),
-                  boxShadow: [
-                    BoxShadow(
-                      color: const Color(0x29000000),
-                      offset: Offset(0, 13),
-                      blurRadius: 6,
+            child: Container(
+              width: 233.0,
+              height: 71.0,
+              child: FlatButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(23))),
+                color: const Color(0xffffffff),
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/homepage');
+                },
+                child: Center(
+                  child : Text(
+                    'Start',
+                    style: TextStyle(
+                      fontFamily: 'ZiZhiQuXiMaiTi',
+                      fontSize: 41,
+                      color: const Color(0xfffdb56f),
                     ),
-                  ],
+                  )
                 ),
               ),
-            ),
-          
-          Transform.translate(
-            offset: Offset(156.8, 669.0),
-            child: SizedBox(
-              width: 115.0,
-              child: Text(
-                'Start',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 41,
-                  color: const Color(0xfffdb56f),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
+            )
           ),
+
+          
+
+
           // Adobe XD layer: 'Status Bars - iPhon…' (group)
           SizedBox(
             width: 428.0,

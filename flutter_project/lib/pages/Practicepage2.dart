@@ -514,34 +514,24 @@ class _Practicepage2State extends State<Practicepage2> {
 
           Transform.translate(
             offset: Offset(41.0, 763.0),
-            child: PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushLeft,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => Selectcategoriespage(),
+            child: Container(
+              width: 347.0,
+              height: 67.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30.0),
+                  bottomLeft: Radius.circular(30.0),
                 ),
-              ],
-              child: Container(
-                width: 347.0,
-                height: 67.0,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(30.0),
-                    bottomLeft: Radius.circular(30.0),
-                  ),
-                  gradient: LinearGradient(
-                    begin: Alignment(0.0, -1.0),
-                    end: Alignment(0.0, 1.0),
-                    colors: [
-                      const Color(0xfff0660e),
-                      const Color(0xfff4b77e),
-                      const Color(0xffffffff),
-                      const Color(0xfffaaf7b)
-                    ],
-                    stops: [0.0, 0.0, 0.0, 1.0],
-                  ),
+                gradient: LinearGradient(
+                  begin: Alignment(0.0, -1.0),
+                  end: Alignment(0.0, 1.0),
+                  colors: [
+                    const Color(0xfff0660e),
+                    const Color(0xfff4b77e),
+                    const Color(0xffffffff),
+                    const Color(0xfffaaf7b)
+                  ],
+                  stops: [0.0, 0.0, 0.0, 1.0],
                 ),
               ),
             ),
