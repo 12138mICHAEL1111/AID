@@ -103,7 +103,7 @@ class _UserState extends State<User> {
           Transform.translate(
             offset: Offset(29.0, 236.0),
             child: Text(
-              'Acount ID',
+              'Account ID',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 34,
