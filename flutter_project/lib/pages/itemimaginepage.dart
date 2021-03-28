@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project/pages/Item1.dart';
+import 'package:flutter_project/pages/Moodtracker.dart';
 import 'package:flutter_project/pages/SessionFinishedpage.dart';
 
 class itemImaginePage extends StatefulWidget {
@@ -60,21 +61,21 @@ class _ImagineState extends State<itemImaginePage> {
                   textAlign: TextAlign.center,
                 ),
                 onPressed: () {
-                  var number = 0;
-                  if (widget.itemNumber == 17) {
-                    number = 0;
-                  } else {
-                    number = widget.itemNumber;
-                  }
+                  var number =  widget.itemNumber;
+                  // if (widget.itemNumber == 17) {
+                  //   number = 0;
+                  // } else {
+                  //   number = widget.itemNumber;
+                  // }
                   var number1 = widget.sessionNumber;
 
-                  if (number != 0 && number % 18 == 0) {
+                  if (number != 0 && number % 18 == 0) {  //session finished
                     print("here2");
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => Sessionfinishedpage(
-                                itemNumber: 1,
+                          builder: (context) => Moodtracker(
+                                itemNumber: number,
                                 sessionNumber: number1,
                               )),
                     );

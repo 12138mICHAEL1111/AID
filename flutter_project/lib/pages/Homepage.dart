@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
-import 'package:flutter_project/pages/SchedulaerDatepage.dart';
+import 'package:flutter_project/pages/ScheduleDatepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './User.dart';
 import 'package:flutter_svg/flutter_svg.dart';

@@ -23,6 +23,12 @@ const schema = new mongoose.Schema({
         session3:[{type: Number}],
         session4:[{type: Number}],
     },
+    aftersessionmood:{
+        session1:[{type: Number}],
+        session2:[{type: Number}],
+        session3:[{type: Number}],
+        session4:[{type: Number}],
+    },
     password: {
         type: String,
         set(val) {
@@ -35,7 +41,16 @@ const addSchema = new mongoose.Schema({
     currentuser: {
         type: Boolean,
         default: false
+    },
+    currentsession: {
+        type: String,
+        default: 1
+    },
+    currentitem: {
+        type: String,
+        default: 1
     }
+
 })
 
 schema.add(addSchema)
