@@ -480,7 +480,6 @@ class _HomepageState extends State<Homepage> {
               color: const Color(0xfffdb56f),
               child: Text(
                 '''''',
-               
                 textAlign: TextAlign.center,
               ),
             ),
@@ -503,7 +502,7 @@ class _HomepageState extends State<Homepage> {
                 height: 58.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage('assets/images/profile.png'),
+                    image: const AssetImage('assets/images/gray_profile.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
@@ -528,7 +527,7 @@ class _HomepageState extends State<Homepage> {
                 height: 58.0,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: const AssetImage('assets/images/calendar.png'),
+                    image: const AssetImage('assets/images/gray_calendar.png'),
                     fit: BoxFit.fill,
                   ),
                 ),
