@@ -26,12 +26,12 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
   void initState() {
     super.initState();
     _list = new List(size + 1);
-    _list[0] = DateTime.now();
-    _list[1] = DateTime.now();
-    _list[2] = DateTime.now();
-    _list[3] = DateTime.now();
-    _list[4] = DateTime.now();
-    init();
+    _list[0] = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    _list[1] = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    _list[2] = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    _list[3] = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    _list[4] = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    //init();
   }
 
   bool check() {
@@ -406,6 +406,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
           Transform.translate(
               offset: Offset(260, 320.0),
               child: InkWell(
+                  key: Key("first"),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
