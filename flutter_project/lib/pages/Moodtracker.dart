@@ -14,7 +14,8 @@ class Moodtracker extends StatefulWidget {
   Moodtracker({this.itemNumber, this.sessionNumber});
 
   @override
-  _MoodtrackerState createState() => _MoodtrackerState();
+  _MoodtrackerState createState() =>
+      _MoodtrackerState(itemNumber, sessionNumber);
 }
 
 class _MoodtrackerState extends State<Moodtracker> {
@@ -44,8 +45,11 @@ class _MoodtrackerState extends State<Moodtracker> {
   String id;
   var scoreArray = [];
   var flag = true;
+
   var _session;
   var _item;
+
+  _MoodtrackerState(this._item, this._session);
 
   uploadmood() async {
     var api;
@@ -239,17 +243,27 @@ class _MoodtrackerState extends State<Moodtracker> {
                       }
                       if (flag == true) {
                         uploadmood();
-                        if (widget.itemNumber == 18) {
+                        if (_session != 4 && _item == 18) {
                           // After a session finished
                           _item = 1;
-                          _session = widget.sessionNumber + 1;
+                          _session = _session + 1;
                           _uploadProgress();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => Sessionfinishedpage(
-                                      itemNumber: 1,
-                                      sessionNumber: widget.sessionNumber + 1,
+                                      itemNumber: _item,
+                                      sessionNumber: _session,
+                                    )),
+                          );
+                        } else if (_session == 4 && _item == 18) {
+                          _uploadProgress();
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Sessionfinishedpage(
+                                      itemNumber: _item,
+                                      sessionNumber: _session + 1,
                                     )),
                           );
                         } else {
@@ -258,8 +272,8 @@ class _MoodtrackerState extends State<Moodtracker> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => Item1(
-                                      itemNumber: widget.itemNumber,
-                                      sessionNumber: widget.sessionNumber,
+                                      itemNumber: _item,
+                                      sessionNumber: _session,
                                     )),
                           );
                         }

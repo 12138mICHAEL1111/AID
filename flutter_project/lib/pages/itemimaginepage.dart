@@ -99,7 +99,9 @@ class _ImagineState extends State<ItemImaginePage> {
                               )),
                     );
                   } else {
-                    _item = _item + 1;
+                    if (!(_item == 18 && _session == 4)) {
+                      _item = _item + 1;
+                    }
                     _uploadProgress();
                     Navigator.push(
                       context,
