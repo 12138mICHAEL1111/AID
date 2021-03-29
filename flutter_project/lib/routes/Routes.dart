@@ -14,7 +14,6 @@ import '../pages/IntroductionPage.dart';
 import '../pages/ScheduleDatepage.dart';
 import '../pages/Scheduler.dart';
 import '../pages/Sessionfinishedpage.dart';
-import '../pages/Item2.dart';
 import '../pages/itemimaginepage.dart';
 import '../pages/Overpage.dart';
 import '../pages/Homepage.dart';

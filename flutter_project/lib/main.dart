@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        initialRoute: '/date', //the page this app will start at
+        initialRoute: '/', //the page this app will start at
         //initialRoute: '/item1',
         onGenerateRoute: onGenerateRoute);
   }
