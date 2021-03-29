@@ -14,7 +14,6 @@ import '../pages/IntroductionPage.dart';
 import '../pages/ScheduleDatepage.dart';
 import '../pages/Scheduler.dart';
 import '../pages/Sessionfinishedpage.dart';
-import '../pages/Item2.dart';
 import '../pages/itemimaginepage.dart';
 import '../pages/Overpage.dart';
 import '../pages/Homepage.dart';
@@ -30,7 +29,7 @@ final routes = {
   '/': (context) => Start(),
   '/login': (context) => Loginpage(),
   '/signup': (context) => Signuppage(),
-  '/reset': (context,{arguments}) => Resetpasswordpage(arguments:arguments),
+  '/reset': (context, {arguments}) => Resetpasswordpage(arguments: arguments),
   '/introductionpage': (context) => IntroductionPage(),
   '/createdSuccessfully': (context) => Createdsuccessfullypage(),
   '/date': (context) => ScheduleDatepage(),
