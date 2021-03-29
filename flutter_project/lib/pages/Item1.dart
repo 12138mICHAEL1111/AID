@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import './itemImaginePage.dart';
-import 'package:adobe_xd/page_link.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import './ItemImaginePage.dart';
 import './Moodtracker.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../config/Config.dart';
 import 'package:dio/dio.dart';
-import 'SessionFinishedpage.dart';
 
 class Item1 extends StatefulWidget {
   int itemNumber;
   int sessionNumber;
-  Item1({this.itemNumber, this.sessionNumber}); //Start from 1 and 1
+  Item1({this.itemNumber, this.sessionNumber}); // Start from 1 and 1
   @override
   _Item1State createState() => _Item1State(itemNumber, sessionNumber);
 }
@@ -77,7 +76,6 @@ class _Item1State extends State<Item1> {
     if (_itemNumber == null) {
       _itemNumber = 1;
     }
-    print('''sessionnumber1 : $_sessionNumber''');
     _questionNumber = 1;
     _getData();
   }
@@ -106,20 +104,26 @@ class _Item1State extends State<Item1> {
     }
   }
 
+  _uploadProgress() async {
+    // store current progress in the db
+    var api = '${Config.domain}/rest/users/uploadprogress';
+    await Dio().post(api,
+        data: {"id": _id, "session": _sessionNumber, "item": _itemNumber});
+  }
+
+  //could be improved by using shared preference
   _getData() async {
     var api = '${Config.domain}/rest/users/uploadcategory';
     var response = await Dio().get(api);
     var currentUser = response.data[0];
     _id = currentUser["userid"];
-    print(_id);
+
     var api2 = "";
     _control = currentUser["controlitem"];
     if (_control == false) {
-      print("training");
       _category = currentUser["category"];
       api2 = '${Config.domain}/rest/$_category/session$_sessionNumber';
     } else {
-      print("control");
       api2 = '${Config.domain}/rest/controlitems/session$_sessionNumber';
     }
     var response2 = await Dio().get(api2);
@@ -134,31 +138,31 @@ class _Item1State extends State<Item1> {
       _situation = _items[i]["situation"];
       _feedback = "";
       _next = false;
+
       if (_questionNumber == 1) {
-        print(0);
         _question = _items[i]["question1"];
         _answer = _items[i]["answer1"];
         _displayText = '$_context\n\n$_question';
         _displayOption2_1 = null;
         _displayOption2_2 = null;
-        updateQuestion();
-        updateOption1();
+
+        _updateQuestion();
+        _updateOption1();
       } else {
-        print(3);
         _question = _items[i]["question2"];
         _answer = _items[i]["answer2"];
         _displayText =
             'Now use the passage to answer the following question: \n\n\n$_question';
         _displayOption1 = null;
-        updateQuestion();
-        updateOption2();
+
+        _updateQuestion();
+        _updateOption2();
       }
     });
   }
 
-  void toggle() {
-    print("toggle");
-    print(_questionNumber);
+  // Toggle between 1st and 2nd question in a single item.
+  void _toggle() {
     if (_questionNumber == 1) {
       _questionNumber = 2;
     } else {
@@ -167,22 +171,23 @@ class _Item1State extends State<Item1> {
     }
   }
 
+  // Route according to whether current user has been given control items or training items.
   void _route() {
     if (_control == false) {
       //training items have imagination page, control dont
+      //_uploadProgress();
       Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => itemImaginePage(
+            builder: (context) => ItemImaginePage(
                   situation: _situation,
                   itemNumber: _itemNumber,
                   sessionNumber: _sessionNumber,
                 )),
       );
-    } else { //control items
+    } else {
+      //control items
       if (_itemNumber != 0 && _itemNumber % 18 == 0) {
-        print("here2");
-        print('$_itemNumber');
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -192,11 +197,13 @@ class _Item1State extends State<Item1> {
                   )),
         );
       } else {
+        _itemNumber = _itemNumber + 1;
+        _uploadProgress();
         Navigator.push(
           context,
           MaterialPageRoute(
               builder: (context) => Item1(
-                    itemNumber: _itemNumber + 1,
+                    itemNumber: _itemNumber,
                     sessionNumber: _sessionNumber,
                   )),
         );
@@ -204,7 +211,7 @@ class _Item1State extends State<Item1> {
     }
   }
 
-  void updateQuestion() {
+  void _updateQuestion() {
     _displayQuestion = Transform.translate(
       offset: Offset(45.9, 253.0),
       child: SizedBox(
@@ -230,7 +237,7 @@ class _Item1State extends State<Item1> {
     );
   }
 
-  void updateOption1() {
+  void _updateOption1() {
     _displayOption1 = Transform.translate(
         offset: Offset(110, 513.0),
         child: Container(
@@ -251,7 +258,7 @@ class _Item1State extends State<Item1> {
         ));
   }
 
-  void updateOption2() {
+  void _updateOption2() {
     _displayOption2_1 = Transform.translate(
       offset: Offset(120.6, 458.0),
       child: FlatButton(
@@ -800,7 +807,7 @@ class _Item1State extends State<Item1> {
               ),
               onPressed: () {
                 if (_next == true) {
-                  toggle();
+                  _toggle();
                   _processData(_itemNumber - 1);
                 }
               },

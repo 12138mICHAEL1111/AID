@@ -43,11 +43,11 @@ const addSchema = new mongoose.Schema({
         default: false
     },
     currentsession: {
-        type: String,
+        type: Number,
         default: 1
     },
     currentitem: {
-        type: String,
+        type: Number,
         default: 1
     }
 

@@ -1,19 +1,43 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_project/pages/Item1.dart';
 import 'package:flutter_project/pages/Moodtracker.dart';
-import 'package:flutter_project/pages/SessionFinishedpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class itemImaginePage extends StatefulWidget {
+class ItemImaginePage extends StatefulWidget {
   String situation;
   int itemNumber;
   int sessionNumber;
-  itemImaginePage({this.situation, this.itemNumber, this.sessionNumber});
+  ItemImaginePage({this.situation, this.itemNumber, this.sessionNumber});
 
   @override
   _ImagineState createState() => _ImagineState();
 }
 
-class _ImagineState extends State<itemImaginePage> {
+class _ImagineState extends State<ItemImaginePage> {
+  String _id;
+  var _session;
+  var _item;
+
+  @override
+  void initState() {
+    super.initState();
+    _getid();
+  }
+
+  _getid() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    _id = pref.getString('userid');
+  }
+
+  _uploadProgress() async {
+    // store current progress in the db
+    var api = '${Config.domain}/rest/users/uploadprogress';
+    await Dio()
+        .post(api, data: {"id": _id, "session": _session, "item": _item});
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,32 +85,28 @@ class _ImagineState extends State<itemImaginePage> {
                   textAlign: TextAlign.center,
                 ),
                 onPressed: () {
-                  var number =  widget.itemNumber;
-                  // if (widget.itemNumber == 17) {
-                  //   number = 0;
-                  // } else {
-                  //   number = widget.itemNumber;
-                  // }
-                  var number1 = widget.sessionNumber;
+                  _session = widget.sessionNumber;
+                  _item = widget.itemNumber;
 
-                  if (number != 0 && number % 18 == 0) {  //session finished
-                    print("here2");
+                  if (_item != 0 && _item % 18 == 0) {
+                    //session finished
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => Moodtracker(
-                                itemNumber: number,
-                                sessionNumber: number1,
+                                itemNumber: _item,
+                                sessionNumber: _session,
                               )),
                     );
                   } else {
-                    print("here");
+                    _item = _item + 1;
+                    _uploadProgress();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => Item1(
-                                itemNumber: number + 1,
-                                sessionNumber: number1,
+                                itemNumber: _item,
+                                sessionNumber: _session,
                               )),
                     );
                   }
