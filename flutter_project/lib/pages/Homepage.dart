@@ -15,7 +15,7 @@ class Homepage extends StatefulWidget {
 
   Homepage({this.sessionNumber, this.itemNumber});
   @override
-  _HomepageState createState() => _HomepageState(sessionNumber,itemNumber);
+  _HomepageState createState() => _HomepageState(sessionNumber, itemNumber);
 }
 
 class _HomepageState extends State<Homepage> {
@@ -23,11 +23,14 @@ class _HomepageState extends State<Homepage> {
   var _itemNumber;
   var _date;
 
-  _HomepageState(this._sessionNumber,this._itemNumber);
+  _HomepageState(this._sessionNumber, this._itemNumber);
 
   @override
   void initState() {
     super.initState();
+    if (_sessionNumber > 4) {
+      _sessionNumber = 4;
+    }
     if (_sessionNumber == null) {
       _sessionNumber = 1;
     }

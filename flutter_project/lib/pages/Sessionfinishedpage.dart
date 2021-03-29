@@ -48,7 +48,7 @@ class _SessionfinishedState extends State<Sessionfinishedpage> {
             child: SizedBox(
               width: 365.0,
               child: Text(
-                'Your have completed session ${widget.sessionNumber - 1}. \nNow you can go to Home Page!',
+                'Your have completed session ${widget.sessionNumber -1}. \nNow you can go to Home Page!',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 22,
