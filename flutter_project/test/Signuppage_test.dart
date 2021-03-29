@@ -42,4 +42,11 @@ void main() {
     await tester.tap(fBtn);
     await tester.pump();
   });
+
+  testWidgets('Sign up page input test', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new Signuppage()));
+    await tester.pumpAndSettle();
+    final inputFieldFinder = find.byType(TextField);
+    expect(inputFieldFinder, findsNWidgets(2));
+  });
 }

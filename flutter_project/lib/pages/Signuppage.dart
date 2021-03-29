@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 import 'Loginpage.dart';
 
 class Signuppage extends StatefulWidget {
@@ -27,46 +26,36 @@ class _SignuppageState extends State<Signuppage> {
     return (!regex.hasMatch(value)) ? false : true;
   }
 
-  submit() async{
-    if(password.length<6){
+  submit() async {
+    if (password.length < 6) {
       Fluttertoast.showToast(
           msg: 'password cannot be less than 6 digits',
-          toastLength:Toast.LENGTH_SHORT,
-          gravity:ToastGravity.CENTER
-      );
-    }
-
-    else if(!validateEmail(email) || email == null){
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER);
+    } else if (!validateEmail(email) || email == null) {
       Fluttertoast.showToast(
           msg: 'Please enter vaild email',
-          toastLength:Toast.LENGTH_SHORT,
-          gravity:ToastGravity.CENTER
-      );
-    }
-    else{
-       var api = '${Config.domain}/rest/users/signup';
-       var response = await Dio().post(api,data:{"email":this.email,"password":this.password});
-       if(response.data["message"]=='success'){
-         print(response.data);
-         SharedPreferences pref = await SharedPreferences.getInstance();
-         pref.setString('userid',response.data['userid']);
-         pref.setString('controlitem',json.encode(response.data['controlitem']));
-         Navigator.of(context).pushReplacementNamed('/createdSuccessfully');
-
-       }
-       else{
-         Fluttertoast.showToast(
-             msg: '${response.data["message"]}',
-             toastLength:Toast.LENGTH_SHORT,
-             gravity:ToastGravity.CENTER
-         );
-       }
-
-
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER);
+    } else {
+      var api = '${Config.domain}/rest/users/signup';
+      var response = await Dio()
+          .post(api, data: {"email": this.email, "password": this.password});
+      if (response.data["message"] == 'success') {
+        print(response.data);
+        SharedPreferences pref = await SharedPreferences.getInstance();
+        pref.setString('userid', response.data['userid']);
+        pref.setString(
+            'controlitem', json.encode(response.data['controlitem']));
+        Navigator.of(context).pushReplacementNamed('/createdSuccessfully');
+      } else {
+        Fluttertoast.showToast(
+            msg: '${response.data["message"]}',
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER);
+      }
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -133,7 +122,6 @@ class _SignuppageState extends State<Signuppage> {
             offset: Offset(69.0, 463.0),
             child: Container(
               child: TextField(
-                
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: "Email",
@@ -201,14 +189,13 @@ class _SignuppageState extends State<Signuppage> {
             child: SizedBox(
               width: 119.0,
               child: FlatButton(
-              child: Text("Sign Up"),
-              color: const Color(0xfffaaf7b),
-              onPressed: submit,
-            ),
+                child: Text("Sign Up"),
+                color: const Color(0xfffaaf7b),
+                onPressed: submit,
+              ),
             ),
           ),
           Container(),
-     
 
           //goback button
           Transform.translate(
