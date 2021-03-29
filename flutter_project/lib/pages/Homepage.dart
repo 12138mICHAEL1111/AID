@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
 import 'package:adobe_xd/page_link.dart';
+import 'package:flutter_project/pages/Item1.dart';
 import 'package:flutter_project/pages/ScheduleDatepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import './User.dart';
@@ -14,7 +15,7 @@ class Homepage extends StatefulWidget {
 
   Homepage({this.sessionNumber, this.itemNumber});
   @override
-  _HomepageState createState() => _HomepageState(sessionNumber);
+  _HomepageState createState() => _HomepageState(sessionNumber, itemNumber);
 }
 
 class _HomepageState extends State<Homepage> {
@@ -22,11 +23,14 @@ class _HomepageState extends State<Homepage> {
   var _itemNumber;
   var _date;
 
-  _HomepageState(this._sessionNumber);
+  _HomepageState(this._sessionNumber, this._itemNumber);
 
   @override
   void initState() {
     super.initState();
+    if (_sessionNumber > 4) {
+      _sessionNumber = 4;
+    }
     if (_sessionNumber == null) {
       _sessionNumber = 1;
     }
@@ -43,7 +47,6 @@ class _HomepageState extends State<Homepage> {
       if (_date == null) {
         _date = 'Not selected';
       }
-      print(_date);
     });
   }
 
@@ -445,13 +448,23 @@ class _HomepageState extends State<Homepage> {
                   textAlign: TextAlign.center,
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Moodtracker(
-                            itemNumber: widget.itemNumber,
-                            sessionNumber: widget.sessionNumber)),
-                  );
+                  if (_itemNumber == 1) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Moodtracker(
+                              itemNumber: _itemNumber,
+                              sessionNumber: _sessionNumber)),
+                    );
+                  } else {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Item1(
+                              itemNumber: _itemNumber,
+                              sessionNumber: _sessionNumber)),
+                    );
+                  }
                 }),
           ),
 
