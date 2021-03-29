@@ -21,23 +21,34 @@ class Loginpage extends StatefulWidget {
 class _LoginpageState extends State<Loginpage> {
   String id;
   String password;
+  var _itemNumber;
+  var _sessionNumber;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   login() async {
     var api = '${Config.domain}/rest/users/login';
     var response = await Dio()
         .post(api, data: {"userid": this.id, "password": this.password});
+    print(response.data);
     if (response.data["message"] == 'success') {
       SharedPreferences pref = await SharedPreferences.getInstance();
       pref.setString('userid', response.data['userid']);
       pref.setString('controlitem', json.encode(response.data['controlitem']));
+      pref.setString('item', json.encode(response.data['currentitem']));
+      pref.setString('session', json.encode(response.data['currentsession']));
+
       print("login successfully");
+
       Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => Homepage(
-                  itemNumber: 1,
-                  sessionNumber: 1,
-                  // this is only temporary set to 1 and need to store user's session status later.
+                  itemNumber: int.parse(pref.get('item')),
+                  sessionNumber: int.parse(pref.get('session')),
                 )),
       );
     } else {
@@ -176,7 +187,8 @@ class _LoginpageState extends State<Loginpage> {
                   child: Text("Reset Password"),
                   color: const Color(0xfffaaf7b),
                   onPressed: () {
-                    Navigator.pushNamed(context,'/reset',arguments: {"isFromUser":false});
+                    Navigator.pushNamed(context, '/reset',
+                        arguments: {"isFromUser": false});
                   },
                 ),
               )),

@@ -44,6 +44,8 @@ class _MoodtrackerState extends State<Moodtracker> {
   String id;
   var scoreArray = [];
   var flag = true;
+  var _session;
+  var _item;
 
   uploadmood() async {
     var api;
@@ -106,6 +108,12 @@ class _MoodtrackerState extends State<Moodtracker> {
     } on RangeError {
       happyScore = -1;
     }
+  }
+
+  _uploadProgress() async {
+    // store current progress in the db
+    var api = '${Config.domain}/rest/users/uploadprogress';
+    await Dio().post(api, data: {"id": id, "session": _session, "item": _item});
   }
 
   @override
@@ -233,6 +241,9 @@ class _MoodtrackerState extends State<Moodtracker> {
                         uploadmood();
                         if (widget.itemNumber == 18) {
                           // After a session finished
+                          _item = 1;
+                          _session = widget.sessionNumber + 1;
+                          _uploadProgress();
                           Navigator.push(
                             context,
                             MaterialPageRoute(

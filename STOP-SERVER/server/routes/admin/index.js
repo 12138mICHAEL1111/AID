@@ -85,6 +85,16 @@ module.exports= app=>{
         res.send(questions)
     })
 
+    router.post("/uploadprogress",async(req,res)=>{
+        const findUser = await req.Model.findOneAndUpdate({ userid: req.body.id }, { currentsession: req.body.session, currentitem: req.body.item })
+        if(findUser==null){
+            res.send({"message":"cannot find this id"})
+        }
+        else{
+            res.send({"message":"success"})
+        }
+    })
+
     router.post("/senddata",async(req,res)=>{
         await req.Model.create(
             { userid: req.body.userid,
@@ -246,8 +256,7 @@ module.exports= app=>{
           else {
             await req.Model.updateMany({currentuser: true}, { currentuser: false })
             await req.Model.findOneAndUpdate({userid:req.body.userid}, { currentuser: true })
-              const controlitem = findUser.controlitem
-              res.send({"message":"success","userid":req.body.userid,"controlitem":controlitem,"currentuser": true})
+              res.send({"message":"success","userid":req.body.userid,"controlitem":findUser.controlitem,"currentuser": true,"currentitem":findUser.currentitem, "currentsession":findUser.currentsession})
           }
         }
     })
