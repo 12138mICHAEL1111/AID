@@ -322,7 +322,7 @@ class _Item1State extends State<Item1> {
       return _next = true;
     } else {
       setState(() {
-        _feedback = '✗ Good. But what would be a different answer?';
+        _feedback = 'x Good. But what would be a different answer?';
       });
       return _next = false;
     }
