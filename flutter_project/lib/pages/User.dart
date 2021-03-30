@@ -300,26 +300,47 @@ class _UserState extends State<User> {
           ),
           Transform.translate(
             offset: Offset(185.0, 850.0),
-            child:
-                // Adobe XD layer: '日历' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushRight,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => ScheduleDatepage(),
+            // child:
+            //     // Adobe XD layer: '日历' (shape)
+            //     PageLink(
+            //   links: [
+            //     PageLinkInfo(
+            //       transition: LinkTransition.PushRight,
+            //       ease: Curves.easeOut,
+            //       duration: 1.0,
+            //       pageBuilder: () => ScheduleDatepage(),
+            //     ),
+            //   ],
+            child: Container(
+              width: 58.0,
+              height: 58.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/gray_calendar.png'),
+                  fit: BoxFit.fill,
                 ),
-              ],
-              child: Container(
-                width: 58.0,
-                height: 58.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/images/gray_calendar.png'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+              ),
+            ),
+          ),
+          // ),
+
+          Transform.translate(
+            offset: Offset(185.0, 850.0),
+            child: SizedBox(
+              width: 50,
+              height: 50,
+              child: OutlineButton(
+                borderSide: BorderSide.none,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ScheduleDatepage(),
+                    ),
+                  );
+                },
               ),
             ),
           ),
