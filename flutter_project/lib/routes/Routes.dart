@@ -37,6 +37,7 @@ final routes = {
   '/scheduler': (context) => Scheduler(),
   '/sessionfinished': (context) => Sessionfinishedpage(),
   '/over': (context) => Overpage(),
+  '/imagination': (context) => ItemImaginePage(),
   '/homepage': (context) => Homepage(),
   '/user': (context) => User()
 };
