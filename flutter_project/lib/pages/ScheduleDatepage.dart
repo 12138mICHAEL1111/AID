@@ -439,6 +439,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
           Transform.translate(
               offset: Offset(260, 542.0),
               child: InkWell(
+                  key: Key("third"),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -455,6 +456,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
           Transform.translate(
               offset: Offset(260, 653.0),
               child: InkWell(
+                  key: Key("4"),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
