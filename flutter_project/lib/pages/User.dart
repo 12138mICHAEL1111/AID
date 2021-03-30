@@ -16,10 +16,15 @@ class User extends StatefulWidget {
 class _UserState extends State<User> {
   String id;
   String email;
+  SharedPreferences pref;
   @override
   void initState() {
     super.initState();
     getUserIdAndEmail();
+    init();
+  }
+  init() async{
+    pref = await SharedPreferences.getInstance();
   }
 
   getUserIdAndEmail() async {
@@ -234,7 +239,8 @@ class _UserState extends State<User> {
                   transition: LinkTransition.PushRight,
                   ease: Curves.slowMiddle,
                   duration: 1.0,
-                  pageBuilder: () => Homepage(),
+                  pageBuilder: () => Homepage(itemNumber: int.parse(pref.get('item') ?? "1"),
+                        sessionNumber: int.parse(pref.get('session') ?? "1"),),
                 ),
               ],
               child: Container(
