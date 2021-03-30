@@ -41,7 +41,7 @@ class _Practicepage2State extends State<Practicepage2> {
       return _next = true;
     } else {
       setState(() {
-        _feedback = '✗ What would be a different answer?';
+        _feedback = 'x What would be a different answer?';
       });
       return _next = false;
     }
