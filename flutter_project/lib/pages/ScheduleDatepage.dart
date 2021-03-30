@@ -208,6 +208,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
     if(!check()) {
       _showToast();
     } else {
+      pref = await SharedPreferences.getInstance();
       pref.setString("session1", formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
       pref.setString("session2", formatDate(_list[2], [yyyy, '-', mm, '-', dd]));
       pref.setString("session3", formatDate(_list[3], [yyyy, '-', mm, '-', dd]));

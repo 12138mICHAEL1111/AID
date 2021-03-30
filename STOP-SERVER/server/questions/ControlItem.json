@@ -465,7 +465,7 @@
             "answer2": "Yes"
         },
         {
-            "context": "You check the clock at the train station and the time is 12.45. You check the time on your watch and it says it is 12.50.",
+            "context": "You check the clock at the train station and the time is 12:45. You check the time on your watch and it says it is 12:50.",
             "question1": "Your watch must be 5 minutes too",
             "blank": "f_st",
             "answer1": "a",
@@ -537,7 +537,7 @@
             "answer2": "No"
         },
         {
-            "context": "You look for a new telephone on the internet. You decide to buy the BT Home Hub 2.0 which is a wireless router and combined phone.",
+            "context": "You look for a new telephone on the internet. You decide to buy the BT Home Hub version 2 which is a wireless router and combined phone.",
             "question1": "The Hub connects to the internet using a standard ADSL",
             "blank": "c_nnec_ion",
             "answer1": "ot",

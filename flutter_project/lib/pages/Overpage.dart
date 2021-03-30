@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import './Homepage.dart';
 import 'package:adobe_xd/page_link.dart';
 import 'package:adobe_xd/pinned.dart';
@@ -60,8 +61,17 @@ class Overpage extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(23))),
                 color: const Color(0xffffffff),
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/homepage');
+                onPressed: () async{
+                  SharedPreferences pref = await SharedPreferences.getInstance();
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Homepage(
+                        itemNumber: int.parse(pref.get('item') ?? "1"),
+                        sessionNumber: int.parse(pref.get('session') ?? "1"),
+                      )
+                    ),
+                  );
                 },
                 child: Center(
                   child : Text(
