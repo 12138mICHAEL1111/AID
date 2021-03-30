@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/pages/Overpage.dart';
 import 'package:flutter_project/pages/ScheduleDatepage.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/mockito.dart';
 
-void main() {
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+void main() {  
+  final mockObserver = MockNavigatorObserver();
   Widget createWidgetForTesting({Widget child}){
     return MaterialApp(
       home: child,
+      navigatorObservers: [mockObserver],
   );}
 
   testWidgets('there should be exactly 4 DatePicker in this page', (WidgetTester tester) async{
@@ -48,7 +53,32 @@ void main() {
   expect(previousMonthIcon, findsNothing);
   });
 
-  
+  testWidgets('Cannot navigate to over page when breaks time order', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new ScheduleDatepage()));
+    await tester.tap(find.byKey(Key("third")));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('10'));
+    await tester.tap(find.text('OK'));
+    await tester.pumpAndSettle();
+    expect(find.text('Save'), findsOneWidget);
+    await tester.tap(find.text('Save'));
+    await tester.pumpAndSettle();
+    expect(find.byType(ScheduleDatepage), findsOneWidget);
+  });
 
+  testWidgets('Can navigate to next page', (WidgetTester tester) async {
+    await tester.pumpWidget(createWidgetForTesting(child: new ScheduleDatepage()));
+    // expect(find.byKey(Key("4")), findsOneWidget);
+    // await tester.tap(find.byKey(Key("4")));
+    // await tester.pumpAndSettle();
+    // await tester.tap(find.text('10'));
+    // await tester.tap(find.text('OK'));
+    // await tester.pumpAndSettle();
+    expect(find.text('Save'), findsOneWidget);
+    await tester.tap(find.text('Save'));
+    await tester.pumpAndSettle();
+    verify(mockObserver.didPush(any, any));
+  });
 
 }
+
