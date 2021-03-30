@@ -516,51 +516,94 @@ class _HomepageState extends State<Homepage> {
           ),
           Transform.translate(
             offset: Offset(328.0, 849.0),
-            child:
-                // Adobe XD layer: '用户' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushLeft,
-                  ease: Curves.slowMiddle,
-                  duration: 1.0,
-                  pageBuilder: () => User(),
-                ),
-              ],
-              child: Container(
-                width: 58.0,
-                height: 58.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/images/gray_profile.png'),
-                    fit: BoxFit.fill,
-                  ),
+            // child:
+            //     // Adobe XD layer: '用户' (shape)
+            //     PageLink(
+            //   links: [
+            //     PageLinkInfo(
+            //       transition: LinkTransition.PushLeft,
+            //       ease: Curves.slowMiddle,
+            //       duration: 1.0,
+            //       pageBuilder: () => User(),
+            //     ),
+            //   ],
+            child: Container(
+              width: 58.0,
+              height: 58.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/gray_profile.png'),
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
           ),
+          // ),
+
+          Transform.translate(
+            offset: Offset(328.0, 849.0),
+            child: SizedBox(
+              width: 58.0,
+              height: 58.0,
+              child: OutlineButton(
+                borderSide: BorderSide.none,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => User(),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+
           Transform.translate(
             offset: Offset(185.0, 850.0),
-            child:
-                // Adobe XD layer: '日历' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushLeft,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => ScheduleDatepage(),
+            // child:
+            //     // Adobe XD layer: '日历' (shape)
+            //     PageLink(
+            //   links: [
+            //     PageLinkInfo(
+            //       transition: LinkTransition.PushLeft,
+            //       ease: Curves.easeOut,
+            //       duration: 1.0,
+            //       pageBuilder: () => ScheduleDatepage(),
+            //     ),
+            //   ],
+            child: Container(
+              width: 58.0,
+              height: 58.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/gray_calendar.png'),
+                  fit: BoxFit.fill,
                 ),
-              ],
-              child: Container(
-                width: 58.0,
-                height: 58.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/images/gray_calendar.png'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+              ),
+            ),
+          ),
+          // ),
+
+          Transform.translate(
+            offset: Offset(185.0, 850.0),
+            child: SizedBox(
+              width: 58.0,
+              height: 58.0,
+              child: OutlineButton(
+                borderSide: BorderSide.none,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ScheduleDatepage(),
+                    ),
+                  );
+                },
               ),
             ),
           ),
