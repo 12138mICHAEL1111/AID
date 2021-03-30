@@ -121,7 +121,7 @@ class _Item2State extends State<Item2> {
       return _next = true;
     } else {
       setState(() {
-        _feedback = '✗ What would be a different answer?';
+        _feedback = 'x What would be a different answer?';
       });
       return _next = false;
     }
