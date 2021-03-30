@@ -262,8 +262,8 @@ class _UserState extends State<User> {
           Transform.translate(
             offset: Offset(42.0, 849.0),
             child: SizedBox(
-              width: 50,
-              height: 50,
+              width: 58.0,
+              height: 58.0,
               child: OutlineButton(
                 borderSide: BorderSide.none,
                 splashColor: Colors.transparent,
@@ -327,8 +327,8 @@ class _UserState extends State<User> {
           Transform.translate(
             offset: Offset(185.0, 850.0),
             child: SizedBox(
-              width: 50,
-              height: 50,
+              width: 58.0,
+              height: 58.0,
               child: OutlineButton(
                 borderSide: BorderSide.none,
                 splashColor: Colors.transparent,
