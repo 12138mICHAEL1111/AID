@@ -71,21 +71,21 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
 
-          Transform.translate(
-            offset: Offset(25.0, 56.0),
-            child:
-                // Adobe XD layer: 'caidan' (shape)
-                Container(
-              width: 53.0,
-              height: 53.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/menu.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
-            ),
-          ),
+          // Transform.translate(
+          //   offset: Offset(25.0, 56.0),
+          //   child:
+          //       // Adobe XD layer: 'caidan' (shape)
+          //       Container(
+          //     width: 53.0,
+          //     height: 53.0,
+          //     decoration: BoxDecoration(
+          //       image: DecorationImage(
+          //         image: const AssetImage('assets/images/menu.png'),
+          //         fit: BoxFit.fill,
+          //       ),
+          //     ),
+          //   ),
+          // ),
 
           Transform.translate(
             offset: Offset(38.0, 326.0),
