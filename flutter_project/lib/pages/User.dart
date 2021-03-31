@@ -119,7 +119,7 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(311.0, 244.0),
+            offset: Offset(322.0, 244.0),
             child: Text(
               this.id ?? "",
               style: TextStyle(
@@ -127,7 +127,7 @@ class _UserState extends State<User> {
                 fontSize: 21,
                 color: const Color(0xff888888),
               ),
-              textAlign: TextAlign.left,
+              textAlign: TextAlign.right,
             ),
           ),
           Transform.translate(
@@ -143,7 +143,7 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(214.0, 364.0),
+            offset: Offset(204.0, 364.0),
             child: Text(
               this.email ?? "",
               style: TextStyle(
