@@ -4,7 +4,8 @@
             "context": "You turn the kettle on and wait for the water to boil. You get a teabag out of the tin, which you put into a mug, and pour the boiling water onto the teabag.",
             "question1": "Next, you add the",
             "blank": "m__k",
-            "answer1": "il",
+            "answer1": "i",
+            "word": "milk",
             "question2": "Have you made a cup of tea?",
             "answer2": "Yes"
         },
@@ -12,15 +13,17 @@
             "context": "You get into the next lift down to the platform. You wait for four minutes until the next tube arrives. You get onto the tube and sit down.",
             "question1": "You get out your book and start",
             "blank": "re_di_g",
-            "answer1": "an",
+            "answer1": "a",
+            "word": "reading",
             "question2": "Did you get a seat on the tube?",
             "answer2": "Yes"
         },
         {
-            "context": "The first electronic digital computers were developed in the mid 20th century to efficiently carry out complex calculations. Originally, they were the size of a large room,",
+            "context": "The first electronic digital computers were developed in the mid 20th century to efficiently carry out complex calculations. Originally, they were the size of a large room.",
             "question1": "consuming as much power as several hundred modern personal",
             "blank": "c_m_u_e_s",
-            "answer1": "optr",
+            "answer1": "o",
+            "word": "computers",
             "question2": "Were the first computers the size of modern personal computers?",
             "answer2": "No"
         },
@@ -28,15 +31,17 @@
             "context": "Monarch butterflies are known for their lengthy migration. In North America they migrate downwards in August and northwards in the spring.",
             "question1": "The monarchs are the only butterflies known to migrate annually both north and south similarly to",
             "blank": "b_r_s",
-            "answer1": "id",
+            "answer1": "i",
+            "word": "birds",
             "question2": "Do the Monarchs migrate on an annual basis",
             "answer2": "Yes"
         },
         {
-            "context": "You are reading a book about the history of DNA. It describes how Watson and Crick deduced the double_helix structure with help from",
+            "context": "You are reading a book about the history of DNA. It describes how Watson and Crick deduced the double_helix structure with help from.",
             "question1": "their collaborator Rosalind Franklin at Cambridge",
             "blank": "u_ivers__y",
-            "answer1": "nit",
+            "answer1": "n",
+            "word": "university",
             "question2": "Are you reading a book about DNA?",
             "answer2": "Yes"
         },
@@ -44,7 +49,8 @@
             "context": "You are watching a clip on the internet about great engineering achievements. It describes the construction of the Golden Gate Bridge.",
             "question1": "The length of the bridge is over two and a half thousand",
             "blank": "met__s",
-            "answer1": "er",
+            "answer1": "e",
+            "word": "meters",
             "question2": "Have you been watching a clip about a bridge?",
             "answer2": "Yes"
         },
@@ -52,7 +58,8 @@
             "context": "You are watching a gardening program. The presenter is explaining how to grow fruit and vegetables.",
             "question1": "He explains that strawberries grow best in the",
             "blank": "su_m_r",
-            "answer1": "me",
+            "answer1": "m",
+            "word": "summer",
             "question2": "Does the program have a presenter?",
             "answer2": "Yes"
         },
@@ -60,15 +67,17 @@
             "context": "You sort out your dirty laundry in two piles, whites and colours. You put the whites in the washing machine and select the quick and cool program.",
             "question1": "When finished, you wash the other",
             "blank": "cl_th_s",
-            "answer1": "oe",
+            "answer1": "o",
+            "word": "clothes",
             "question2": "Have you been hoovering?",
             "answer2": "No"
         },
         {
-            "context": "A visual illusion is a distortion of the senses, revealing how the brain normally organises and interprets sensory stimulation. The information gathered by the eye,",
+            "context": "A visual illusion is a distortion of the senses, revealing how the brain normally organises and interprets sensory stimulation. The information gathered by the eye.",
             "question1": "does not tally with a physical measurement of the stimulus",
             "blank": "s_u_ce",
-            "answer1": "or",
+            "answer1": "o",
+            "word": "source",
             "question2": "Do visual illusions reveal how the brain normally organises information?",
             "answer2": "Yes"
         },
@@ -76,7 +85,8 @@
             "context": "You queue up at the checkout with your shopping trolley. As the person in front of you moves forward you start to put your shopping onto the conveyor belt.",
             "question1": "Soon the sales assistant starts scanning your",
             "blank": "sh_ppi_g",
-            "answer1": "on",
+            "answer1": "o",
+            "word": "shopping",
             "question2": "Did you join the queue?",
             "answer2": "Yes"
         },
@@ -84,7 +94,8 @@
             "context": "You ordered several DVDs and books from AMAZON but you missed them a few days ago. You notice that the deliveryman left a “something for you” memo card.",
             "question1": "You check your local delivery office to collect your",
             "blank": "pa_c_ls",
-            "answer1": "re",
+            "answer1": "r",
+            "word": "parcels",
             "question2": "Did you order music CDs and books from AMAZON?",
             "answer2": "No"
         },
@@ -92,31 +103,35 @@
             "context": "You preheat the oven to 200C to make chunky apple crumble cake. You peel and cut the apples into large chunks and add orange juice to the apples and mix them together.",
             "question1": "Next, you make the crumble",
             "blank": "t_pp_ng",
-            "answer1": "oi",
+            "answer1": "o",
+            "word": "topping",
             "question2": "Are you making an apple crumble cake? ",
             "answer2": "Yes"
         },
         {
-            "context": "You see your neighbour on a high street and talk about their new beagle dog. They explained that Beagles are very small, energetic and good with children, ",
+            "context": "You see your neighbour on a high street and talk about their new beagle dog. They explained that Beagles are very small, energetic and good with children.",
             "question1": "and most live 12 to 17 years on",
             "blank": "a_er_ge",
-            "answer1": "va",
+            "answer1": "v",
+            "word": "average",
             "question2": "Did your neighbour get a golden retriever?",
             "answer2": "No"
         },
         {
-            "context": "You are reading an article about the weather in a science magazine. The scientists report that low UV output from the sun might contribute to more cold winters than usual",
+            "context": "You are reading an article about the weather in a science magazine. The scientists report that low UV output from the sun might contribute to more cold winters than usual.",
             "question1": "whereas high UV output has the opposite",
             "blank": "ef_e_t",
-            "answer1": "fc",
+            "answer1": "f",
+            "word": "effect",
             "question2": "Do you review the weather broadcasting?",
             "answer2": "No"
         },
         {
-            "context": "Green tea originated in China and has become associated with many cultures throughout Asia. Lately its possible health benefits have been acknowledged in the Western world. ",
+            "context": "Green tea originated in China and has become associated with many cultures throughout Asia. Lately its possible health benefits have been acknowledged in the Western world.",
             "question1": "The polyphenols present in the tea are believed to have antioxidant effects on",
             "blank": "c_l_s",
-            "answer1": "el",
+            "answer1": "e",
+            "word": "cells",
             "question2": "Is it believed that polyphenols have antioxidant effects?",
             "answer2": "Yes"
         },
@@ -124,15 +139,17 @@
             "context": "You are ordering grocery items online. You turn on the computer, find the website and begin adding items to your shopping cart.",
             "question1": "You now decide the delivery date and time and finish",
             "blank": "pa_me_t",
-            "answer1": "yn",
+            "answer1": "y",
+            "word": "payment",
             "question2": "Do you go to the store for your grocery items?",
             "answer2": "No"
         },
         {
-            "context": "You find a book in the bookstore. The story starts when a British film producer moves to Los Angeles. They then make the film called Compton Cricket Club",
+            "context": "You find a book in the bookstore. The story starts when a British film producer moves to Los Angeles. They then make the film called Compton Cricket Club.",
             "question1": "which is about a group of young men from a homeless",
             "blank": "co_mu_ity",
-            "answer1": "mn",
+            "answer1": "m",
+            "word": "community",
             "question2": "Have you found an interesting book?",
             "answer2": "Yes"
         },
@@ -141,14 +158,16 @@
             "question1": "They take a picture of everyone in the",
             "blank": "of_ice",
             "answer1": "f",
+            "word": "office",
             "question2": "Does your colleague bring a phone to the office?",
             "answer2": "No"
         },
         {
-            "context": "You measure the width of wooden planks to make a fence. It will go around the whole garden and once finished it will be treated and painted in brown",
+            "context": "You measure the width of wooden planks to make a fence. It will go around the whole garden and once finished it will be treated and painted in brown.",
             "question1": "which is the same colour as the other fences in the",
             "blank": "ne_ghb_u_h_od",
-            "answer1": "ioro",
+            "answer1": "i",
+            "word": "neighbourhood",
             "question2": "Are you building a fence?",
             "answer2": "Yes"
         },
@@ -156,23 +175,26 @@
             "context": "You are building a sandcastle on the beach. You have buckets and spades varying in size and shape and you start by digging a little pit.",
             "question1": "Next you fill the buckets with sand mixed with water and create the castle",
             "blank": "fo_nd_tion",
-            "answer1": "ua",
+            "answer1": "u",
+            "word": "foundation",
             "question2": "Are you building a sandcastle?",
             "answer2": "Yes"
         },
         {
-            "context": "You listen to the weather report broadcasted on radio. The meteorologist reports that the weather will be mostly dry and cloudy in the east,",
+            "context": "You listen to the weather report broadcasted on radio. The meteorologist reports that the weather will be mostly dry and cloudy in the east.",
             "question1": "but spells of rain will continue in western areas, becoming heavy and",
             "blank": "pe_si_t_nt ",
-            "answer1": "rse",
+            "answer1": "r",
+            "word": "persistent",
             "question2": "Did you watch the weather report?",
             "answer2": "No"
         },
         {
-            "context": "You mix flour and baking powder to make muffins. You then add the butter, eggs and sugar and stir in some milk. Before pouring the mixture into the muffin cases,",
+            "context": "You mix flour and baking powder to make muffins. You then add the butter, eggs and sugar and stir in some milk. Before pouring the mixture into the muffin cases.",
             "question1": "you add the vanilla and the",
             "blank": "bl_eb_rr_es",
-            "answer1": "uei",
+            "answer1": "u",
+            "word": "blueberries",
             "question2": "Are you baking muffins?",
             "answer2": "Yes"
         },
@@ -181,14 +203,16 @@
             "question1": "You called the phone number and informed the",
             "blank": "ow_er",
             "answer1": "n",
+            "word": "owner",
             "question2": "Did you find a backpack?",
             "answer2": "No"
         },
         {
-            "context": "You are reading art magazine. An artist has embraced many different media since the 1950s, including painting, printmaking, installation and industrial design",
+            "context": "You are reading art magazine. An artist has embraced many different media since the 1950s, including painting, printmaking, installation and industrial design.",
             "question1": "and this exhibition focuses on his political",
             "blank": "wo_ks",
             "answer1": "r",
+            "word": "works",
             "question2": "Are you going to a gallery?",
             "answer2": "Yes"
         },
@@ -197,6 +221,7 @@
             "question1": "Common wheat is the most usual grain used for the preparation of",
             "blank": "br_ad",
             "answer1": "e",
+            "word": "bread",
             "question2": "Did you eat a fresh bagel?",
             "answer2": "No"
         },
@@ -205,6 +230,7 @@
             "question1": "thread brought in and out of the fabric in a particular",
             "blank": "w_y",
             "answer1": "a",
+            "word": "way",
             "question2": "Are you sewing a loose button?",
             "answer2": "Yes"
         },
@@ -212,7 +238,8 @@
             "context": "You are constructing a flat_packed chest of drawers. The instructions say that you will require a Phillips_head screwdriver and a hammer and",
             "question1": "estimate the construction takes sixty",
             "blank": "m_nut_s",
-            "answer1": "ie",
+            "answer1": "i",
+            "word": "minutes",
             "question2": "Are you constructing a desk?",
             "answer2": "No"
         },
@@ -220,7 +247,8 @@
             "context": "You have just finished writing your letter and so fold it up and put it into an envelope. You write the address on the front of the envelope in block capitals and",
             "question1": "fix a stamp to the top right hand",
             "blank": "c_rn_r",
-            "answer1": "oe",
+            "answer1": "o",
+            "word": "corner",
             "question2": "Did you write the address in capital letters?",
             "answer2": "Yes"
         },
@@ -228,7 +256,8 @@
             "context": "You collect your washing off the washing line and put it into a basket. You then carry the basket into the house and turn the iron on.",
             "question1": "You wait for the iron to heat up before beginning to iron a",
             "blank": "sh_r_",
-            "answer1": "it",
+            "answer1": "i",
+            "word": "shirt",
             "question2": "Have you been cleaning the house?",
             "answer2": "No"
         },
@@ -236,7 +265,8 @@
             "context": "You are watching BBC news. It reports that as technology improves, it is becoming more common for people to download bigger files.",
             "question1": "These include songs, videos and emails with large",
             "blank": "a_ta_hments",
-            "answer1": "tc",
+            "answer1": "t",
+            "word": "attachments",
             "question2": "Are you listening to BBC radio?",
             "answer2": "No"
         },
@@ -244,7 +274,8 @@
             "context": "You are planning your journey home from work. You check the train times and work out the journey on the internet. One option is to get the bus but the quicker and",
             "question1": "easiest form of transport is to get the direct",
             "blank": "t_a_n",
-            "answer1": "ri",
+            "answer1": "r",
+            "word": "train",
             "question2": "Did you plan your journey?",
             "answer2": "Yes"
         },
@@ -253,6 +284,7 @@
             "question1": "The referee blows the whistle because it is half",
             "blank": "t_me",
             "answer1": "i",
+            "word": "time",
             "question2": "Are you watching a baseball game?",
             "answer2": "No"
         },
@@ -260,7 +292,8 @@
             "context": "You are getting ready to cook a curry. You have been to the shop to get all the ingredients and laid them all out on the table. Next you take out the utensils and an apron but",
             "question1": "before you start cooking you double check the",
             "blank": "r_c_pe",
-            "answer1": "ei",
+            "answer1": "e",
+            "word": "recipe",
             "question2": "Are you cooking a curry?",
             "answer2": "Yes"
         },
@@ -269,14 +302,16 @@
             "question1": "as chemical changes on",
             "blank": "f_lm",
             "answer1": "i",
+            "word": "film",
             "question2": "Are you reading about photography?",
             "answer2": "Yes"
         },
         {
-            "context": "You are watching an episode of countdown on the television. One of the contestants is doing well and has a score of ninety_six,",
+            "context": "You are watching an episode of countdown on the television. One of the contestants is doing well and has a score of ninety_six.",
             "question1": "he longest word he made was seven",
             "blank": "l_tt_rs",
-            "answer1": "ee",
+            "answer1": "e",
+            "word": "letters",
             "question2": "Has the best contestant made a word longer than 5 letters?",
             "answer2": "Yes"
         },
@@ -284,15 +319,17 @@
             "context": "You are turning up the volume on the radio to hear the music. You are not familiar with the piece but you try to make out the instruments and",
             "question1": "can hear drums, horns, saxophone, trombone, megaphone and",
             "blank": "tr_mp_t",
-            "answer1": "ue",
+            "answer1": "u",
+            "word": "trumpet",
             "question2": "Did you turn the volume down?",
             "answer2": "No"
         },
         {
-            "context": "You watch a program about penguins. You learn that during the breeding season penguins form monogamous pairs and that with the exception of the Emperor penguin where the male does everything,",
+            "context": "You watch a program about penguins. You learn that during the breeding season penguins form monogamous pairs and that with the exception of the Emperor penguin where the male does everything.",
             "question1": "penguins share the incubation",
             "blank": "d_ti_s",
-            "answer1": "ue",
+            "answer1": "u",
+            "word": "duties",
             "question2": "Did you watch a program about seals?",
             "answer2": "No"
         },
@@ -300,7 +337,8 @@
             "context": "You find a magazine in the train on your way to work. You read about greenhouse gases which are gases in the atmosphere that absorbs and emits radiation within the infrared range and",
             "question1": "this process causes the greenhouse",
             "blank": "e_f_ct",
-            "answer1": "fe",
+            "answer1": "f",
+            "word": "effect",
             "question2": "Have you found a leaflet?",
             "answer2": "No"
         },
@@ -309,6 +347,7 @@
             "question1": "use it to walk all the way home to stop you from getting",
             "blank": "w–t",
             "answer1": "e",
+            "word": "wet",
             "question2": "Is it raining?",
             "answer2": "Yes"
         },
@@ -316,7 +355,8 @@
             "context": "You open the telephone directory and find the section beginning with: ‘T’. You then find the taxi service section.",
             "question1": "You find the nearest taxi service and make a note of their",
             "blank": "n_mb_r",
-            "answer1": "ue",
+            "answer1": "u",
+            "word": "number",
             "question2": "Were you looking for the bus timetable?",
             "answer2": "No"
         },
@@ -324,7 +364,8 @@
             "context": "You walk into the restaurant. The waitress takes you to your table. You sit down at your table and ask the waitress for an orange juice.",
             "question1": "In a few minutes the waitress comes back with your",
             "blank": "d__nk",
-            "answer1": "ir",
+            "answer1": "i",
+            "word": "drink",
             "question2": "Did you order a coke?",
             "answer2": "No"
         },
@@ -333,6 +374,7 @@
             "question1": "You are now looking at the menu and wait in the queue to get the food you",
             "blank": "c_ose",
             "answer1": "h",
+            "word": "chose",
             "question2": "Did you meet your boss in the canteen?",
             "answer2": "Yes"
         },
@@ -341,6 +383,7 @@
             "question1": "Finally, you are checking for a reasonable",
             "blank": "pr_ce",
             "answer1": "i",
+            "word": "price",
             "question2": "Are you going to buy a new desktop computer?",
             "answer2": "No"
         },
@@ -349,6 +392,7 @@
             "question1": "One Euro is equivalent to 0.86 British",
             "blank": "p_und",
             "answer1": "o",
+            "word": "pound",
             "question2": "Is the euro worth less than the dollar?",
             "answer2": "No"
         },
@@ -357,6 +401,7 @@
             "question1": "The emblem of Yorkshire is the white rose of the English royal House of",
             "blank": "Y_rk",
             "answer1": "o",
+            "word": "York",
             "question2": "Did you read about Yorkshire?",
             "answer2": "Yes"
         },
@@ -365,14 +410,16 @@
             "question1": "the seedling that will grow from the ",
             "blank": "em_ryo",
             "answer1": "b",
+            "word": "embryo",
             "question2": "Are you planting a seed?",
             "answer2": "Yes"
         },
         {
-            "context": "You are reading about the secret of Rolex watches and it says that Rolex’s secret is sports marketing. They advertised that a swimmer named Mercedes Gleitz crossed the English Channel in 1927,",
+            "context": "You are reading about the secret of Rolex watches and it says that Rolex’s secret is sports marketing. They advertised that a swimmer named Mercedes Gleitz crossed the English Channel in 1927.",
             "question1": "wearing a waterproof",
             "blank": "R_l_x",
-            "answer1": "oe",
+            "answer1": "o",
+            "word": "Rolex",
             "question2": "Is the secret of Rolex brand sport marketing?",
             "answer2": "Yes"
         },
@@ -380,7 +427,8 @@
             "context": "You watched a television programme on organic farming. It was suggested that conventional agriculture might be more energy efficient for certain foods.",
             "question1": "However, others have told you that organic really is better for the",
             "blank": "en_iron_ent",
-            "answer1": "vm",
+            "answer1": "v",
+            "word": "environment",
             "question2": "Is conventional agriculture really better for the environment?",
             "answer2": "No"
         },
@@ -388,7 +436,8 @@
             "context": "After months of use it is time for you to buy a new rucksack. You decide that you still prefer the company that you bought your original rucksack from.",
             "question1": "You buy the same model but one of a different",
             "blank": "c_lo_r",
-            "answer1": "ou",
+            "answer1": "o",
+            "word": "colour",
             "question2": "Are you buying a new rucksack?",
             "answer2": "Yes"
         },
@@ -397,6 +446,7 @@
             "question1": "his planet where everyone is looking for",
             "blank": "h_m",
             "answer1": "i",
+            "word": "him",
             "question2": "Did you read a science fiction book?",
             "answer2": "Yes"
         },
@@ -404,7 +454,8 @@
             "context": "You have done some research on birds. You find that migratory birds live in rainforests during the winter and return to cooler regions during the spring and summer, for example",
             "question1": "many songbirds that nest in the United States winter in the",
             "blank": "Am_z_n",
-            "answer1": "ao",
+            "answer1": "a",
+            "word": "Amazon",
             "question2": "Have you been researching reptiles?",
             "answer2": "No"
         },
@@ -412,7 +463,8 @@
             "context": "You are washing an old wool jumper by hand. You have heard that wool can easily lose its shape and become less defined if washed without care.",
             "question1": "That’s why you use a special laundry",
             "blank": "d_te_g_nt",
-            "answer1": "ere",
+            "answer1": "e",
+            "word": "detergent",
             "question2": "Did you wash it in the machine?",
             "answer2": "No"
         },
@@ -420,15 +472,17 @@
             "context": "You tried to solve a crossword puzzle during the bus ride. There was one word missing when you had to get off the bus and you decided to ask the person sitting next to you.",
             "question1": "He gave you the right",
             "blank": "an_w_r",
-            "answer1": "se",
+            "answer1": "s",
+            "word": "answer",
             "question2": "Did you try to solve a crossword puzzle?",
             "answer2": "Yes"
         },
         {
-            "context": "You are going to go food shopping this afternoon and check the items you have to buy and make a note of them. When you arrive at Sainsbury’s and start collecting vegetables first,",
+            "context": "You are going to go food shopping this afternoon and check the items you have to buy and make a note of them. When you arrive at Sainsbury’s and start collecting vegetables first.",
             "question1": "you notice your neighbor is in the opposite",
             "blank": "co_n_r ",
-            "answer1": "re",
+            "answer1": "r",
+            "word": "corner",
             "question2": "Are you shopping for food?",
             "answer2": "Yes"
         },
@@ -437,6 +491,7 @@
             "question1": "You are notified that this will now be done on a weekly",
             "blank": "b_sis",
             "answer1": "a",
+            "word": "basis",
             "question2": "Have you receieved new information about your taxes?",
             "answer2": "No"
         },
@@ -444,7 +499,8 @@
             "context": "You have recently finished construction work on your outside garden. You find that you are now left with an excess of broken bricks.",
             "question1": "You decide to take the rubbish to the tip this",
             "blank": "we_ke_d",
-            "answer1": "en",
+            "answer1": "e",
+            "word": "weekend",
             "question2": "Have you put a pool in your outside garden?",
             "answer2": "No"
         },
@@ -452,7 +508,8 @@
             "context": "You decide to update your appliances and go to the store and purchase a new washing machine. You ring the company to ask when you should it expect it to be delivered.",
             "question1": "You are told that it will arrive on",
             "blank": "M_nd_y ",
-            "answer1": "oa",
+            "answer1": "o",
+            "word": "Monday",
             "question2": "Have you bought a new dishwasher?",
             "answer2": "No"
         },
@@ -460,7 +517,8 @@
             "context": "You are watching the 6 O’Clock news. The news presenter is describing a story about recent changes to the government’s economic policy.",
             "question1": "An MP is being",
             "blank": "in_erv_ewed",
-            "answer1": "ti",
+            "answer1": "t",
+            "word": "interviewed",
             "question2": "Is it early evening?",
             "answer2": "Yes"
         },
@@ -469,6 +527,7 @@
             "question1": "Your watch must be 5 minutes too",
             "blank": "f_st",
             "answer1": "a",
+            "word": "fast",
             "question2": "Are you at the train station?",
             "answer2": "Yes"
         },
@@ -476,15 +535,17 @@
             "context": "You are using a compass. It has four different points, North, South, East and West and is a navigational instrument.",
             "question1": "There are two different kinds of compasses, gyro and",
             "blank": "m_gne_ic",
-            "answer1": "at",
+            "answer1": "a",
+            "word": "magnetic",
             "question2": "Are you using a telephone?",
             "answer2": "No"
         },
         {
-            "context": "You go onto the internet and use Bing. Bing is a web search engine from Microsoft. In October 2011,",
+            "context": "You go onto the internet and use Bing. Bing is a web search engine from Microsoft. In October 2011.",
             "question1": "Bing announced it is working on delivering faster and more relevant search",
             "blank": "re__lts",
-            "answer1": "su",
+            "answer1": "s",
+            "word": "results",
             "question2": "Did you use google?",
             "answer2": "No"
         },
@@ -492,23 +553,26 @@
             "context": "You look at the London underground tube map. You notice that there are four connections at Liverpool Street and three connections at Oxford circus.",
             "question1": "There are many tube lines and they all have different",
             "blank": "co_ou_s",
-            "answer1": "lr",
+            "answer1": "l",
+            "word": "colours",
             "question2": "Did you look at a tube map?",
             "answer2": "Yes"
         },
         {
-            "context": "You listen to a guitar playing. It is a plucked string instrument, usually played with fingers or a pick and consists of a body with a rigid neck to which the strings,",
+            "context": "You listen to a guitar playing. It is a plucked string instrument, usually played with fingers or a pick and consists of a body with a rigid neck to which the strings.",
             "question1": "generally six in number are",
             "blank": "att_ch_d",
-            "answer1": "ae",
+            "answer1": "a",
+            "word": "attached",
             "question2": "Did you listen to the piano?",
             "answer2": "No"
         },
         {
-            "context": "You are going for a walk. You pass by the local corner shop, a pub and charity shop. You walk down the street and when you make it to the crossing,",
+            "context": "You are going for a walk. You pass by the local corner shop, a pub and charity shop. You walk down the street and when you make it to the crossing.",
             "question1": "you turn",
             "blank": "l_ft",
             "answer1": "e",
+            "word": "left",
             "question2": "Did you turn right?",
             "answer2": "No"
         },
@@ -516,7 +580,8 @@
             "context": "You start reading a book about wildlife and learn that it includes all non_domesticated plants, animals and other organisms.",
             "question1": "Wildlife can be found in all ecosystems including fauna, rain forests and",
             "blank": "de_er_s",
-            "answer1": "st",
+            "answer1": "s",
+            "word": "deserts",
             "question2": "Are you reading about the weather?",
             "answer2": "No"
         },
@@ -524,7 +589,8 @@
             "context": "You are watching a documentary about evolution. The narrator mentions that evolution is a change across",
             "question1": "successive generations in the heritable characteristics of",
             "blank": "p_pulatio_s",
-            "answer1": "on",
+            "answer1": "o",
+            "word": "populations",
             "question2": "Is the documentary about evolution?",
             "answer2": "Yes"
         },
@@ -532,7 +598,8 @@
             "context": "You wait for a bus to go home in central London. The bus is approaching the bus stop. You get on the bus and look for a seat. You find one and sit down.",
             "question1": "You open your backpack get out your ipod and start listening to",
             "blank": "m_s_c",
-            "answer1": "ui",
+            "answer1": "u",
+            "word": "music",
             "question2": "Are you waiting for the train?",
             "answer2": "No"
         },
@@ -540,7 +607,8 @@
             "context": "You look for a new telephone on the internet. You decide to buy the BT Home Hub version 2 which is a wireless router and combined phone.",
             "question1": "The Hub connects to the internet using a standard ADSL",
             "blank": "c_nnec_ion",
-            "answer1": "ot",
+            "answer1": "o",
+            "word": "connection",
             "question2": "Are you looking for a radio?",
             "answer2": "No"
         },
@@ -548,7 +616,8 @@
             "context": "You read about The Great Wall of China. It was built in the 5th century BC. All the walls measure close to 9000 km and include actual wall and",
             "question1": "natural defence barriers such as hills and",
             "blank": " r_v_r_",
-            "answer1": "ies",
+            "answer1": "i",
+            "word": "rivers",
             "question2": "Does the Great Wall of China only consist of actual wall?",
             "answer2": "No"
         },
@@ -556,7 +625,8 @@
             "context": "You are reading about the solar system. It consists of the sun and the astronomical objects gravitationally bound in orbit around it.",
             "question1": "Of the many objects that orbit the sun most of the mass is contained within the",
             "blank": "p_an_ts",
-            "answer1": "le",
+            "answer1": "l",
+            "word": "planets",
             "question2": "Have you been reading about the solar system?",
             "answer2": "Yes"
         },
@@ -565,6 +635,7 @@
             "question1": "It takes you one hour to get ready in the morning so you set your alarm for 7.30",
             "blank": "a_",
             "answer1": "m",
+            "word": "am",
             "question2": "Are you going to get the bus tomorrow?",
             "answer2": "Yes"
         },
@@ -572,7 +643,8 @@
             "context": "You go onto the BBC iplayer website. Recent shows are displayed on the right hand corner of the web page.",
             "question1": "Two of the recent shows are “Frozen Planet” and “Children in",
             "blank": "N__d",
-            "answer1": "ee",
+            "answer1": "e",
+            "word": "Need",
             "question2": "Did you go on ITV player?",
             "answer2": "No"
         }
