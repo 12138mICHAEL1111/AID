@@ -68,7 +68,8 @@ class _HomepageState extends State<Homepage> {
                 bottomLeft: Radius.circular(70.0),
               ),
               image: DecorationImage(
-                image: const AssetImage('assets/images/homepage_background.jpg'),
+                image:
+                    const AssetImage('assets/images/homepage_background.jpg'),
                 fit: BoxFit.fill,
               ),
             ),
@@ -251,17 +252,23 @@ class _HomepageState extends State<Homepage> {
 
           Container(
             margin: EdgeInsets.fromLTRB(328, 849, 50, 50),
-            child: RaisedButton(
-              // minWidth: 254,
-              // height: 59.0,
-              hoverColor: Color(0x29000000),
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20))),
-              color: const Color(0xfffdb56f),
-              child: Text(
-                '''''',
-                textAlign: TextAlign.center,
-              ),
+            // child: RaisedButton(
+            //   // minWidth: 254,
+            //   // height: 59.0,
+
+            //   hoverColor: Color(0x29000000),
+            //   shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.all(Radius.circular(20))),
+            //   color: const Color(0xfffdb56f),
+            //   child: Text(
+            //     '''''',
+            //     textAlign: TextAlign.center,
+            //   ),
+            // ),
+            child: OutlineButton(
+              borderSide: BorderSide.none,
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
             ),
           ),
           Transform.translate(
