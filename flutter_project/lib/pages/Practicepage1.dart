@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import 'package:flutter_project/pages/Introductionpage.dart';
-import './Practicepage2.dart';
-import 'package:adobe_xd/page_link.dart';
 import '../config/Config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/dio.dart';

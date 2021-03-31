@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:adobe_xd/pinned.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import './ItemImaginePage.dart';
 import './Moodtracker.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../config/Config.dart';
 import 'package:dio/dio.dart';
 
@@ -33,8 +30,14 @@ class _Item1State extends State<Item1> {
   var _itemNumber;
   var _sessionNumber;
   var _situation;
+  var _tempBlank;
   var _control;
-  var _displayText = '';
+  var _text;
+  var _newText;
+  var _index;
+  var _hint;
+  var _word;
+  var _child;
   var _images = [
     "assets/images/6%.png",
     "assets/images/12%.png",
@@ -70,6 +73,11 @@ class _Item1State extends State<Item1> {
     _category = "";
     _question = "";
     _situation = "";
+    _newText = "";
+    _text = "";
+    _word = "";
+    _hint = "";
+    _index = 0;
     if (_sessionNumber == null) {
       _sessionNumber = 1;
     }
@@ -128,33 +136,43 @@ class _Item1State extends State<Item1> {
     }
     var response2 = await Dio().get(api2);
     _items = response2.data;
+
     _processData(_itemNumber - 1);
   }
 
   void _processData(int i) {
-    setState(() {
-      _context = _items[i]["context"];
-      _blank = _items[i]["blank"];
-      _situation = _items[i]["situation"];
-      _feedback = "";
-      _next = false;
+    _word = _items[i]["word"];
+    _tempBlank = _items[i]["blank"];
+    _situation = _items[i]["situation"];
+    _feedback = "";
+    _next = false;
 
+    var _temp = _items[i]['context'];
+    _context = _temp.split('.');
+    _context.removeWhere((value) => value == "");
+    for (var i = 0; i < _context.length; i++) {
+      _context[i] = _context[i] + ".";
+    }
+    _changeState(i);
+  }
+
+  void _changeState(int i) {
+    setState(() {
       if (_questionNumber == 1) {
         _question = _items[i]["question1"];
+        _context.add(_question);
         _answer = _items[i]["answer1"];
-        _displayText = '$_context\n\n$_question';
         _displayOption2_1 = null;
         _displayOption2_2 = null;
-
+        _displayText();
         _updateQuestion();
-        _updateOption1();
       } else {
         _question = _items[i]["question2"];
         _answer = _items[i]["answer2"];
-        _displayText =
-            'Now use the passage to answer the following question: \n\n\n$_question';
-        _displayOption1 = null;
-
+        _text = 'Now use the passage to answer the following question: \n\n\n';
+        _newText = _question;
+        _hint = "Please choose an option.";
+        _child = null;
         _updateQuestion();
         _updateOption2();
       }
@@ -165,6 +183,7 @@ class _Item1State extends State<Item1> {
   void _toggle() {
     if (_questionNumber == 1) {
       _questionNumber = 2;
+      _processData(_itemNumber - 1);
     } else {
       _questionNumber = 1;
       _route();
@@ -175,7 +194,6 @@ class _Item1State extends State<Item1> {
   void _route() {
     if (_control == false) {
       //training items have imagination page, control dont
-      //_uploadProgress();
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -211,6 +229,54 @@ class _Item1State extends State<Item1> {
     }
   }
 
+  void _displayText() {
+    if (_index == 0) {
+      _newText = _context[0];
+    } else {
+      _text = _text + _newText;
+      _newText = _context[_index];
+      if (_index == _context.length - 1) {
+        _blank = _tempBlank;
+        _hint = 'Type in the first missing letter';
+        _displayWord();
+      }
+    }
+  }
+
+  void _displayWord() {
+    if (_next == true) {
+      _child = Text.rich(
+        TextSpan(
+          style: TextStyle(
+            fontFamily: 'ZiZhiQuXiMaiTi',
+            fontSize: 55,
+            color: const Color(0xfffaae7c),
+          ),
+          children: [
+            TextSpan(text: _word),
+          ],
+        ),
+      );
+    } else {
+      _child = TextField(
+        decoration: InputDecoration(
+            labelText: _blank,
+            contentPadding: EdgeInsets.all(0),
+            border: InputBorder.none),
+        onChanged: (value) {
+          _validateData(value);
+          setState(() {
+            _displayWord();
+          });
+        },
+        style: TextStyle(
+          fontSize: 55,
+          color: const Color(0xfffaae7c),
+        ),
+      );
+    }
+  }
+
   void _updateQuestion() {
     _displayQuestion = Transform.translate(
       offset: Offset(45.9, 253.0),
@@ -225,37 +291,18 @@ class _Item1State extends State<Item1> {
             ),
             children: [
               TextSpan(
-                text: '$_displayText',
+                text: _text,
+              ),
+              TextSpan(
+                text: _newText,
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
           ),
-          // textHeightBehavior:
-          //     TextHeightBehavior(applyHeightToFirstAscent: false),
           textAlign: TextAlign.center,
         ),
       ),
     );
-  }
-
-  void _updateOption1() {
-    _displayOption1 = Transform.translate(
-        offset: Offset(110, 513.0),
-        child: Container(
-          width: 250.0,
-          child: TextField(
-            decoration: InputDecoration(
-                labelText: "$_blank",
-                contentPadding: EdgeInsets.all(0),
-                border: InputBorder.none),
-            onChanged: (value) {
-              _validateData(value);
-            },
-            style: TextStyle(
-              fontSize: 45,
-              color: const Color(0xfffaae7c),
-            ),
-          ),
-        ));
   }
 
   void _updateOption2() {
@@ -314,7 +361,6 @@ class _Item1State extends State<Item1> {
   }
 
   bool _validateData(value) {
-    var _length = value.length;
     if (_compareData(_answer, value)) {
       setState(() {
         _feedback = '✔ Great, this is a good answer!';
@@ -425,9 +471,15 @@ class _Item1State extends State<Item1> {
             child: _displayQuestion,
           ),
 
-          Container(
-            child: _displayOption1,
-          ),
+          // Container(
+          //   child: _displayOption1,
+          // ),
+          Transform.translate(
+              offset: Offset(110, 513.0),
+              child: Container(
+                width: 250.0,
+                child: _child,
+              )),
 
           Container(
             child: _displayOption2_1,
@@ -539,7 +591,7 @@ class _Item1State extends State<Item1> {
             child: SizedBox(
               width: 233.0,
               child: Text(
-                'Type in the first missing letter',
+                _hint,
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 15,
@@ -597,9 +649,14 @@ class _Item1State extends State<Item1> {
                 textAlign: TextAlign.center,
               ),
               onPressed: () {
-                if (_next == true) {
+                _index++;
+                if (_index < _context.length) {
+                  setState(() {
+                    _displayText();
+                    _updateQuestion();
+                  });
+                } else if (_next == true) {
                   _toggle();
-                  _processData(_itemNumber - 1);
                 }
               },
             ),
