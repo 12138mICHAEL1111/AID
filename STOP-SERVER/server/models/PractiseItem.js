@@ -16,6 +16,9 @@ const schema = new mongoose.Schema({
     },
     answer2:{
         type:String
+    },
+    word:{
+        type:String
     }
 })
 
