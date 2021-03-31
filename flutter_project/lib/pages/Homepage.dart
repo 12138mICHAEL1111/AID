@@ -28,16 +28,18 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    if (_sessionNumber > 4) {
-      _sessionNumber = 4;
-    }
     if (_sessionNumber == null) {
       _sessionNumber = 1;
+    }
+    if (_sessionNumber > 4) {
+      _sessionNumber = 4;
     }
     if (_itemNumber == null) {
       _itemNumber = 1;
     }
     _getDate();
+    print(_sessionNumber);
+    print(_itemNumber);
   }
 
   _getDate() async {
@@ -418,4 +420,3 @@ class _HomepageState extends State<Homepage> {
     );
   }
 }
-
