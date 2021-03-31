@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:adobe_xd/pinned.dart';
-import 'package:adobe_xd/page_link.dart';
 import 'package:flutter_project/pages/Item1.dart';
 import 'package:flutter_project/pages/ScheduleDatepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -38,8 +36,6 @@ class _HomepageState extends State<Homepage> {
       _itemNumber = 1;
     }
     _getDate();
-    print(_sessionNumber);
-    print(_itemNumber);
   }
 
   _getDate() async {
