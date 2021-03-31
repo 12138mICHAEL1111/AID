@@ -61,14 +61,14 @@ class _HomepageState extends State<Homepage> {
           // Adobe XD layer: 'WechatIMG1201' (shape)
           Container(
             width: 428.0,
-            height: 571.0,
+            height: 537.0,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(70.0),
                 bottomLeft: Radius.circular(70.0),
               ),
               image: DecorationImage(
-                image: const AssetImage('assets/images/background.jpg'),
+                image: const AssetImage('assets/images/homepage_background.jpg'),
                 fit: BoxFit.fill,
               ),
             ),
