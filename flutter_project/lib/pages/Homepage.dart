@@ -71,33 +71,6 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
-          Transform.translate(
-            offset: Offset(51.0, 304.0),
-            child: Container(
-              width: 327.0,
-              height: 221.0,
-              decoration: BoxDecoration(
-                color: const Color(0xffffffff),
-                border: Border.all(width: 30.0, color: const Color(0xfffdcf6b)),
-              ),
-            ),
-          ),
-
-          Transform.translate(
-            offset: Offset(168.8, 375.0),
-            child: SizedBox(
-              width: 91.0,
-              child: Text(
-                'XXXXXX',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 21,
-                  color: const Color(0xff000000),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
 
           Transform.translate(
             offset: Offset(25.0, 56.0),
@@ -116,7 +89,7 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(38.0, 121.0),
+            offset: Offset(38.0, 326.0),
             child: SizedBox(
               width: 352.0,
               child: Text(
@@ -132,23 +105,7 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(24.8, 225.0),
-            child: SizedBox(
-              width: 378.0,
-              child: Text(
-                'Here is your house',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 39,
-                  color: const Color(0xffffffff),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-
-          Transform.translate(
-            offset: Offset(24.3, 579.0),
+            offset: Offset(24.3, 549.0),
             child: SizedBox(
               width: 188.0,
               child: Text(
@@ -164,7 +121,7 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(233.1, 604.0),
+            offset: Offset(229.1, 574.0),
             child: SizedBox(
               width: 152.0,
               child: Text(
@@ -180,7 +137,7 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(34.0, 653.0),
+            offset: Offset(34.0, 623.0),
             child: Text(
               'Welcome! Are you ready to start\nsession ${_sessionNumber} today?',
               style: TextStyle(
@@ -221,7 +178,7 @@ class _HomepageState extends State<Homepage> {
           //   ),
           // ),
           Container(
-            margin: EdgeInsets.fromLTRB(100, 730, 50, 50),
+            margin: EdgeInsets.fromLTRB(87, 706, 50, 50),
             child: FlatButton(
                 minWidth: 254,
                 height: 59.0,
@@ -399,15 +356,30 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(61.0, 359.0),
+            offset: Offset(14.9, 403.0),
+            child: SizedBox(
+              width: 398.0,
+              child: Text(
+                'May you be full of sunshine\n like a sun.',
+                style: TextStyle(
+                  fontFamily: 'ZiZhiQuXiMaiTi',
+                  fontSize: 28,
+                  color: const Color(0xffffffff),
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(109.0, 121.0),
             child:
-                // Adobe XD layer: 'house-1444716_1280' (shape)
+                // Adobe XD layer: 'WechatIMG1138的副本' (shape)
                 Container(
-              width: 307.0,
-              height: 153.0,
+              width: 195.0,
+              height: 180.0,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: const AssetImage('assets/images/house.png'),
+                  image: const AssetImage('assets/images/logoOfStart.png'),
                   fit: BoxFit.fill,
                 ),
               ),
