@@ -71,7 +71,7 @@
                     </el-table>
                 </div>
         </div>
-        <span> * '1' means not at all, '5' means very much</span>
+        <span> * '1' means most negative, '5' means most postive</span>
         <hr>
         <div class='questiondeatil'>
             <span>detail data for specific questions</span>
