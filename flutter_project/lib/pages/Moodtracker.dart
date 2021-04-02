@@ -311,7 +311,7 @@ class _MoodtrackerState extends State<Moodtracker> {
             child: SizedBox(
               width: 130.0,
               child: Text(
-                'Happy',
+                'Sad',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 30,
@@ -326,7 +326,7 @@ class _MoodtrackerState extends State<Moodtracker> {
             child: SizedBox(
               width: 130.0,
               child: Text(
-                'Sad',
+                'Happy',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 30,
@@ -391,63 +391,13 @@ class _MoodtrackerState extends State<Moodtracker> {
               child: ImageRadio(
                 images[4],
                 pressedImage[4],
-                controller: hController,
-                onChange: (value) => addToArrayH(1),
-                height: 60.0,
-                width: 60.0,
-              )),
-          Transform.translate(
-              offset: Offset(250.0, 425.0),
-              child: ImageRadio(
-                images[3],
-                pressedImage[3],
-                controller: hController,
-                onChange: (value) => addToArrayH(2),
-                height: 60.0,
-                width: 60.0,
-              )),
-          Transform.translate(
-              offset: Offset(185.0, 425.0),
-              child: ImageRadio(
-                images[2],
-                pressedImage[2],
-                controller: hController,
-                onChange: (value) => addToArrayH(3),
-                height: 60.0,
-                width: 60.0,
-              )),
-          Transform.translate(
-              offset: Offset(55.0, 425.0),
-              child: ImageRadio(
-                images[0],
-                pressedImage[0],
-                controller: hController,
-                onChange: (value) => addToArrayH(5),
-                height: 60.0,
-                width: 60.0,
-              )),
-          Transform.translate(
-              offset: Offset(123.0, 428.0),
-              child: ImageRadio(
-                images[1],
-                pressedImage[1],
-                controller: hController,
-                onChange: (value) => addToArrayH(4),
-                height: 54.0,
-                width: 53.7,
-              )),
-          Transform.translate(
-              offset: Offset(315.0, 610.0),
-              child: ImageRadio(
-                images[4],
-                pressedImage[4],
                 controller: sController,
                 onChange: (value) => addToArrayS(1),
                 height: 60.0,
                 width: 60.0,
               )),
           Transform.translate(
-              offset: Offset(250.0, 610.0),
+              offset: Offset(250.0, 425.0),
               child: ImageRadio(
                 images[3],
                 pressedImage[3],
@@ -457,7 +407,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 width: 60.0,
               )),
           Transform.translate(
-              offset: Offset(185.0, 610.0),
+              offset: Offset(185.0, 425.0),
               child: ImageRadio(
                 images[2],
                 pressedImage[2],
@@ -467,7 +417,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 width: 60.0,
               )),
           Transform.translate(
-              offset: Offset(55.0, 610.0),
+              offset: Offset(55.0, 425.0),
               child: ImageRadio(
                 images[0],
                 pressedImage[0],
@@ -477,7 +427,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 width: 60.0,
               )),
           Transform.translate(
-              offset: Offset(123.0, 613.0),
+              offset: Offset(123.0, 428.0),
               child: ImageRadio(
                 images[1],
                 pressedImage[1],
@@ -487,9 +437,59 @@ class _MoodtrackerState extends State<Moodtracker> {
                 width: 53.7,
               )),
           Transform.translate(
+              offset: Offset(315.0, 610.0),
+              child: ImageRadio(
+                images[4],
+                pressedImage[4],
+                controller: hController,
+                onChange: (value) => addToArrayH(1),
+                height: 60.0,
+                width: 60.0,
+              )),
+          Transform.translate(
+              offset: Offset(250.0, 610.0),
+              child: ImageRadio(
+                images[3],
+                pressedImage[3],
+                controller: hController,
+                onChange: (value) => addToArrayH(2),
+                height: 60.0,
+                width: 60.0,
+              )),
+          Transform.translate(
+              offset: Offset(185.0, 610.0),
+              child: ImageRadio(
+                images[2],
+                pressedImage[2],
+                controller: hController,
+                onChange: (value) => addToArrayH(3),
+                height: 60.0,
+                width: 60.0,
+              )),
+          Transform.translate(
+              offset: Offset(55.0, 610.0),
+              child: ImageRadio(
+                images[0],
+                pressedImage[0],
+                controller: hController,
+                onChange: (value) => addToArrayH(5),
+                height: 60.0,
+                width: 60.0,
+              )),
+          Transform.translate(
+              offset: Offset(123.0, 613.0),
+              child: ImageRadio(
+                images[1],
+                pressedImage[1],
+                controller: hController,
+                onChange: (value) => addToArrayH(4),
+                height: 54.0,
+                width: 53.7,
+              )),
+          Transform.translate(
             offset: Offset(42.0, 310.0),
             child: Text(
-              '  Very much                Somewhat                 Not at all',
+              '  Very much                Somewhat                Not at all',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 15,
@@ -501,7 +501,7 @@ class _MoodtrackerState extends State<Moodtracker> {
           Transform.translate(
             offset: Offset(41.0, 495.0),
             child: Text(
-              '  Not at all                Somewhat                 Very much',
+              '  Very much                Somewhat                Not at all',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 15,
@@ -513,7 +513,7 @@ class _MoodtrackerState extends State<Moodtracker> {
           Transform.translate(
             offset: Offset(42.0, 680.0),
             child: Text(
-              '  Very much                Somewhat                 Not at all',
+              '  Not at all                  Somewhat               Very much',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 15,
