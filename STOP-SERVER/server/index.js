@@ -7,6 +7,7 @@ app.use(express.json())
 
 require('./plugins/db')(app)
 require("./routes/admin")(app)
+require("./routes/web")(app)
 
 app.set('secret', "er234r123fwer")
 

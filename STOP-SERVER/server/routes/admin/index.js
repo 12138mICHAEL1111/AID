@@ -261,7 +261,7 @@ module.exports= app=>{
         }
     })
     const resource = require("../../middleware/resource")
-    app.use('/stop/api/rest/:resource',resource(),router)
+    app.use('/stop/admin/api/rest/:resource',resource(),router)
 
     app.use(async(err,req,res,next)=>{
         res.status(err.statusCode || 500).send({
