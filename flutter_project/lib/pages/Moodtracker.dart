@@ -338,14 +338,28 @@ class _MoodtrackerState extends State<Moodtracker> {
           ),
           Transform.translate(
               offset: Offset(315.0, 240.0),
-              child: ImageRadio(
-                images[4],
-                pressedImage[4],
-                controller: aController,
-                onChange: (v) => addToArrayA(1),
-                height: 60.0,
-                width: 60.0,
-              )),
+              child: Stack(children: <Widget>[
+                ImageRadio(
+                  images[4],
+                  pressedImage[4],
+                  controller: aController,
+                  onChange: (v) => addToArrayA(1),
+                  height: 60.0,
+                  width: 60.0,
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
+                  child: Text(
+                    'Not at all',
+                    style: TextStyle(
+                      fontFamily: 'ZiZhiQuXiMaiTi',
+                      fontSize: 15,
+                      color: const Color.fromRGBO(32, 50, 80, 1.0),
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ])),
           Transform.translate(
               offset: Offset(250.0, 240.0),
               child: ImageRadio(
@@ -358,24 +372,52 @@ class _MoodtrackerState extends State<Moodtracker> {
               )),
           Transform.translate(
               offset: Offset(185.0, 240.0),
-              child: ImageRadio(
-                images[2],
-                pressedImage[2],
-                controller: aController,
-                onChange: (value) => addToArrayA(3),
-                height: 60.0,
-                width: 60.0,
-              )),
+              child: Stack(children: <Widget>[
+                ImageRadio(
+                  images[2],
+                  pressedImage[2],
+                  controller: aController,
+                  onChange: (value) => addToArrayA(3),
+                  height: 60.0,
+                  width: 60.0,
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
+                  child: Text(
+                    'Somewhat',
+                    style: TextStyle(
+                      fontFamily: 'ZiZhiQuXiMaiTi',
+                      fontSize: 15,
+                      color: const Color.fromRGBO(32, 50, 80, 1.0),
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ])),
           Transform.translate(
               offset: Offset(55.0, 240.0),
-              child: ImageRadio(
-                images[0],
-                pressedImage[0],
-                controller: aController,
-                onChange: (value) => addToArrayA(5),
-                height: 60.0,
-                width: 60.0,
-              )),
+              child: Stack(children: <Widget>[
+                ImageRadio(
+                  images[0],
+                  pressedImage[0],
+                  controller: aController,
+                  onChange: (value) => addToArrayA(5),
+                  height: 60.0,
+                  width: 60.0,
+                ),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
+                  child: Text(
+                    'Very much',
+                    style: TextStyle(
+                      fontFamily: 'ZiZhiQuXiMaiTi',
+                      fontSize: 15,
+                      color: const Color.fromRGBO(32, 50, 80, 1.0),
+                    ),
+                    textAlign: TextAlign.left,
+                  ),
+                ),
+              ])),
           Transform.translate(
               offset: Offset(123.0, 243.0),
               child: ImageRadio(
@@ -486,18 +528,18 @@ class _MoodtrackerState extends State<Moodtracker> {
                 height: 54.0,
                 width: 53.7,
               )),
-          Transform.translate(
-            offset: Offset(42.0, 310.0),
-            child: Text(
-              '  Very much                Somewhat                Not at all',
-              style: TextStyle(
-                fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 15,
-                color: const Color.fromRGBO(32, 50, 80, 1.0),
-              ),
-              textAlign: TextAlign.left,
-            ),
-          ),
+          // Transform.translate(
+          //   offset: Offset(42.0, 310.0),
+          //   child: Text(
+          //     '  Very much                Somewhat                Not at all',
+          //     style: TextStyle(
+          //       fontFamily: 'ZiZhiQuXiMaiTi',
+          //       fontSize: 15,
+          //       color: const Color.fromRGBO(32, 50, 80, 1.0),
+          //     ),
+          //     textAlign: TextAlign.left,
+          //   ),
+          // ),
           Transform.translate(
             offset: Offset(41.0, 495.0),
             child: Text(
