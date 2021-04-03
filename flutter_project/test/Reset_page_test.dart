@@ -11,13 +11,6 @@ void main() {
   dio.httpClientAdapter = dioAdapter;
   var path = '${Config.domain}/rest/users/resetpassword';
 
-  // Widget createWidgetForTesting({Widget child}) {
-  //   return MaterialApp(
-  //     home: child,
-  //
-  //   );
-  // }
-
   test('test Dio', () async{
     dioAdapter
         .onPost(path)
@@ -26,12 +19,4 @@ void main() {
     final onPostResponse = await dio.post(path);
     print(onPostResponse.data); // {message: Successfully mocked POST!}
   });
-
-  // testWidgets('Reset page content test', (WidgetTester tester) async {
-  //   await tester.pumpWidget(createWidgetForTesting(child: new Resetpasswordpage()));
-  //   await tester.pumpAndSettle();
-  //   final emailFinder = find.text('Email');
-  //   expect(emailFinder, findsOneWidget);
-  // });
-
 }
