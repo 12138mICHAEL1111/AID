@@ -9,7 +9,7 @@ void main() {
   final dio = Dio();
   final dioAdapter = DioAdapter();
   dio.httpClientAdapter = dioAdapter;
-  var path = '${Config.domain}/rest/users/login';
+  var path = '${Config.domain}/rest/users/signup';
 
   Widget createWidgetForTesting({Widget child}) {
     return MaterialApp(
