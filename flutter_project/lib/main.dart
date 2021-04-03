@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: '/', //the page this app will start at
         //initialRoute: '/item1',
+       // initialRoute: '/reset',
         onGenerateRoute: onGenerateRoute);
   }
 }
