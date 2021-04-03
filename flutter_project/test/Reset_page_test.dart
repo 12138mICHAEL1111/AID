@@ -1,11 +1,12 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project/config/Config.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_project/pages/Signuppage.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 
-void main() {
+void main(){
   final dio = Dio();
   final dioAdapter = DioAdapter();
   dio.httpClientAdapter = dioAdapter;
@@ -17,7 +18,6 @@ void main() {
     );
   }
 
-
   test('test Dio', () async{
     dioAdapter
         .onPost(path)
@@ -27,41 +27,37 @@ void main() {
     print(onPostResponse.data); // {message: Successfully mocked POST!}
   });
 
-  testWidgets('Sign up page content test', (WidgetTester tester) async {
+  testWidgets('Reset page content test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Signuppage()));
     await tester.pumpAndSettle();
-    final emailFinder = find.text('Email');
-    final psdFinder = find.text('Password');
-    final signupFinder = find.text('Sign Up');
-    final createFinder = find.text('Create your account');
-    final resetFinder = find.text('Reset your account');
-    expect(emailFinder, findsOneWidget);
-    expect(psdFinder, findsOneWidget);
-    expect(signupFinder, findsOneWidget);
-    expect(createFinder, findsOneWidget);
-    expect(resetFinder, findsNothing);
+    final accountIdFinder = find.text("Account ID");
+    final passwordFinder = find.text("Password");
+    expect(accountIdFinder, findsOneWidget);
+    expect(passwordFinder, findsOneWidget);
   });
 
-  testWidgets('Sign up page button test', (WidgetTester tester) async {
+  testWidgets('Login button test', (WidgetTester tester) async{
     await tester.pumpWidget(createWidgetForTesting(child: new Signuppage()));
     await tester.pumpAndSettle();
-    final fBtn = find.byType(FlatButton);
-    final oBtn = find.byType(OutlineButton);
-    final rBtn = find.byType(RaisedButton);
-    expect(fBtn, findsOneWidget);
-    expect(oBtn, findsNothing);
-    expect(rBtn, findsNothing);
+    final raisedButton = find.byType(RaisedButton);
+    expect(raisedButton, findsWidgets);
   });
 
-  testWidgets('Sign up page click test', (WidgetTester tester) async {
+  testWidgets('Login page click test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Signuppage()));
     await tester.pumpAndSettle();
-    final fBtn = find.byType(FlatButton);
-    await tester.tap(fBtn);
+    final loginButton = find.widgetWithText(RaisedButton,"Login");
+    await tester.tap(loginButton);
+    await tester.pump();
+    final signUpButton = find.widgetWithText(RaisedButton,"Sign Up");
+    await tester.tap(signUpButton);
+    await tester.pump();
+    final resetButton = find.widgetWithText(RaisedButton,"Reset Password");
+    await tester.tap(resetButton);
     await tester.pump();
   });
 
-  testWidgets('Sign up page input test', (WidgetTester tester) async {
+  testWidgets('Login page input test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Signuppage()));
     await tester.pumpAndSettle();
     final inputFieldFinder = find.byType(TextField);
