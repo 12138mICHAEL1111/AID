@@ -5,8 +5,12 @@ import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_project/pages/Loginpage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:mockito/mockito.dart';
 
-void main(){
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+
+void main() {
+  final mockObserver = MockNavigatorObserver();
   final dio = Dio();
   final dioAdapter = DioAdapter();
   dio.httpClientAdapter = dioAdapter;
@@ -15,13 +19,12 @@ void main(){
   Widget createWidgetForTesting({Widget child}) {
     return MaterialApp(
       home: child,
+      navigatorObservers: [mockObserver],
     );
   }
 
-  test('test Dio', () async{
-    dioAdapter
-        .onPost(path)
-        .reply(200, {'message': 'success'});
+  test('test Dio', () async {
+    dioAdapter.onPost(path).reply(200, {'message': 'success'});
 
     final onPostResponse = await dio.post(path);
     print(onPostResponse.data); // {message: Successfully mocked POST!}
@@ -36,25 +39,30 @@ void main(){
     expect(passwordFinder, findsOneWidget);
   });
 
-  testWidgets('Login button test', (WidgetTester tester) async{
+  testWidgets('Login button test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Loginpage()));
     await tester.pumpAndSettle();
     final raisedButton = find.byType(RaisedButton);
+    final flatButton = find.byType(FlatButton);
+    final outlineButton = find.byType(OutlineButton);
     expect(raisedButton, findsWidgets);
+    expect(flatButton, findsNothing);
+    expect(outlineButton, findsNothing);
   });
 
   testWidgets('Login page click test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Loginpage()));
     await tester.pumpAndSettle();
-    final loginButton = find.widgetWithText(RaisedButton,"Login");
+    final loginButton = find.widgetWithText(RaisedButton, "Login");
     await tester.tap(loginButton);
-    await tester.pump();
-    final signUpButton = find.widgetWithText(RaisedButton,"Sign Up");
+    await tester.pumpAndSettle();
+    final signUpButton = find.widgetWithText(RaisedButton, "Sign Up");
     await tester.tap(signUpButton);
-    await tester.pump();
-    final resetButton = find.widgetWithText(RaisedButton,"Reset Password");
+    await tester.pumpAndSettle();
+    final resetButton = find.widgetWithText(RaisedButton, "Reset Password");
     await tester.tap(resetButton);
-    await tester.pump();
+    await tester.pumpAndSettle();
+    verify(mockObserver.didPush(any, any));
   });
 
   testWidgets('Login page input test', (WidgetTester tester) async {

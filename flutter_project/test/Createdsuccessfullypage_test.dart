@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_project/pages/Createdsuccessfullypage.dart';
+import 'package:mockito/mockito.dart';
+
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
+  final mockObserver = MockNavigatorObserver();
   Widget createWidgetForTesting({Widget child}) {
     return MaterialApp(
       home: child,
+      navigatorObservers: [mockObserver],
     );
   }
 
@@ -37,8 +42,9 @@ void main() {
     await tester.pumpWidget(
         createWidgetForTesting(child: new Createdsuccessfullypage()));
     await tester.pumpAndSettle();
-    final fBtn = find.byType(FlatButton);
-    await tester.tap(fBtn);
-    await tester.pump();
+    final nextBtn = find.widgetWithText(FlatButton, "Next");
+    await tester.tap(nextBtn);
+    await tester.pumpAndSettle();
+    verify(mockObserver.didPush(any, any));
   });
 }
