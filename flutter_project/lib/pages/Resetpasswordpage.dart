@@ -242,7 +242,7 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
           ),
           //Reset button
           Transform.translate(
-            offset: Offset(165.0, 735.0),
+            offset: Offset(165.0, 840.0),
             child: RaisedButton(
               child: Text("Reset"),
 
