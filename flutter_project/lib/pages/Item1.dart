@@ -17,7 +17,6 @@ class _Item1State extends State<Item1> {
   var _displayQuestion;
   var _displayOption2_1;
   var _displayOption2_2;
-  var _displayOption1;
   var _next;
   var _feedback;
   var _items;
@@ -33,6 +32,7 @@ class _Item1State extends State<Item1> {
   var _tempBlank;
   var _control;
   var _text;
+
   var _newText;
   var _index;
   var _hint;
@@ -96,7 +96,7 @@ class _Item1State extends State<Item1> {
       "category": _category,
       "sessionNumber": _sessionNumber,
       // following could be implemented with stopWatch()
-      //             "readingDuration": "10",
+                  // "readingDuration": _readingDuration,
       //             "wordRT1": "100" ,
       //             "wordAccuracy1": "1" ,
       //             "clueRequired": "0",
@@ -119,7 +119,6 @@ class _Item1State extends State<Item1> {
         data: {"id": _id, "session": _sessionNumber, "item": _itemNumber});
   }
 
-  //could be improved by using shared preference
   _getData() async {
     var api = '${Config.domain}/rest/users/uploadcategory';
     var response = await Dio().get(api);
