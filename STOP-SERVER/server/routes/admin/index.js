@@ -85,6 +85,11 @@ module.exports= app=>{
         res.send(questions)
     })
 
+    router.get("/currentuser",async(req,res)=>{
+        const user = await req.Model.find({ currentuser: true })
+        res.send(user)
+    })
+
     router.post("/uploadprogress",async(req,res)=>{
         const findUser = await req.Model.findOneAndUpdate({ userid: req.body.id }, { currentsession: req.body.session, currentitem: req.body.item })
         if(findUser==null){

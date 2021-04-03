@@ -28,16 +28,20 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    if (_sessionNumber == null) {
-      _sessionNumber = 1;
-    }
-    if (_sessionNumber > 4) {
-      _sessionNumber = 4;
-    }
+    _getsession();
     if (_itemNumber == null) {
       _itemNumber = 1;
     }
     _getDate();
+  }
+
+  _getsession() async{
+    var api = '${Config.domain}/rest/users/currentuser';
+    var response =  await Dio().get(api);
+    var currentsession = response.data[0]["currentsession"];
+    setState(() {
+           _sessionNumber = currentsession;
+        });
   }
 
   _getDate() async {
@@ -49,6 +53,9 @@ class _HomepageState extends State<Homepage> {
       setState(() {
         _date = sessionTime["session$_sessionNumber"];
       });
+    }
+    else{
+      _date = '';
     }
   }
 
@@ -128,7 +135,7 @@ class _HomepageState extends State<Homepage> {
             child: SizedBox(
               width: 152.0,
               child: Text(
-                '$_date',
+                '$_date'??"",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 15,
