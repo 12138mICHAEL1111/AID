@@ -6,7 +6,7 @@ import 'package:flutter_project/pages/Signuppage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 
-void main(){
+void main() {
   final dio = Dio();
   final dioAdapter = DioAdapter();
   dio.httpClientAdapter = dioAdapter;
@@ -18,10 +18,8 @@ void main(){
     );
   }
 
-  test('test Dio', () async{
-    dioAdapter
-        .onPost(path)
-        .reply(200, {'message': 'success'});
+  test('test Dio', () async {
+    dioAdapter.onPost(path).reply(200, {'message': 'success'});
 
     final onPostResponse = await dio.post(path);
     print(onPostResponse.data); // {message: Successfully mocked POST!}
@@ -36,7 +34,7 @@ void main(){
     expect(passwordFinder, findsOneWidget);
   });
 
-  testWidgets('Login button test', (WidgetTester tester) async{
+  testWidgets('Login button test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Signuppage()));
     await tester.pumpAndSettle();
     final raisedButton = find.byType(RaisedButton);
@@ -46,13 +44,13 @@ void main(){
   testWidgets('Login page click test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Signuppage()));
     await tester.pumpAndSettle();
-    final loginButton = find.widgetWithText(RaisedButton,"Login");
+    final loginButton = find.widgetWithText(RaisedButton, "Login");
     await tester.tap(loginButton);
     await tester.pump();
-    final signUpButton = find.widgetWithText(RaisedButton,"Sign Up");
+    final signUpButton = find.widgetWithText(RaisedButton, "Sign Up");
     await tester.tap(signUpButton);
     await tester.pump();
-    final resetButton = find.widgetWithText(RaisedButton,"Reset Password");
+    final resetButton = find.widgetWithText(RaisedButton, "Reset Password");
     await tester.tap(resetButton);
     await tester.pump();
   });

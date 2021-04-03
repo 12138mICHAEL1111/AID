@@ -15,7 +15,7 @@ void main() {
     final fBtn = find.byType(FlatButton);
     final oBtn = find.byType(OutlineButton);
     expect(fBtn, findsOneWidget);
-    expect(oBtn, findsNothing);
+    expect(oBtn, findsWidgets);
   });
 
   testWidgets('user page content test', (WidgetTester tester) async {

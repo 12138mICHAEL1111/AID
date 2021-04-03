@@ -9,12 +9,11 @@ import 'package:adobe_xd/page_link.dart';
 // class Resetpasswordpage extends StatelessWidget {
 class Resetpasswordpage extends StatefulWidget {
   Map arguments;
-  Resetpasswordpage({
-    Key key,this.arguments
-  }) : super(key: key);
+  Resetpasswordpage({Key key, this.arguments}) : super(key: key);
 
   @override
-  _ResetpasswordpageState createState() => _ResetpasswordpageState(arguments:this.arguments);
+  _ResetpasswordpageState createState() =>
+      _ResetpasswordpageState(arguments: this.arguments);
 }
 
 class _ResetpasswordpageState extends State<Resetpasswordpage> {
@@ -26,11 +25,12 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
   bool flag = false;
   _ResetpasswordpageState({this.arguments});
   @override
-  void initState() { 
+  void initState() {
     super.initState();
     flag = arguments["isFromUser"];
     print(flag);
   }
+
   bool validateEmail(String value) {
     Pattern pattern =
         r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
@@ -38,42 +38,38 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
     return (!regex.hasMatch(value)) ? false : true;
   }
 
-  reset() async{
-    if(!validateEmail(email)){
+  reset() async {
+    if (!validateEmail(email)) {
       Fluttertoast.showToast(
           msg: 'Please enter valid email',
-          toastLength:Toast.LENGTH_SHORT,
-          gravity:ToastGravity.CENTER
-      );
-    }
-    else if(newPassword != repeatNewPassword){
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER);
+    } else if (newPassword != repeatNewPassword) {
       Fluttertoast.showToast(
-        msg: 'Please enter same passowrd',
-        toastLength:Toast.LENGTH_SHORT,
-        gravity:ToastGravity.CENTER
-      );
-    }
-    else{
+          msg: 'Please enter same passowrd',
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.CENTER);
+    } else {
       var api = '${Config.domain}/rest/users/resetpassword';
-      var response = await Dio().post(api,data:{"userid":this.id,"email":this.email,"password":this.newPassword});
+      var response = await Dio().post(api, data: {
+        "userid": this.id,
+        "email": this.email,
+        "password": this.newPassword
+      });
 
-      if(response.data["message"]=='success'){
+      if (response.data["message"] == 'success') {
         Fluttertoast.showToast(
             msg: 'successfully change your password',
-            toastLength:Toast.LENGTH_SHORT,
-            gravity:ToastGravity.CENTER
-        );
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER);
         Navigator.of(context).pushReplacementNamed('/login');
-      }
-      else{
+      } else {
         Fluttertoast.showToast(
             msg: 'please input correct id and email',
-            toastLength:Toast.LENGTH_SHORT,
-            gravity:ToastGravity.CENTER
-        );
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.CENTER);
       }
     }
-
   }
 
   @override
@@ -112,8 +108,8 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
           Transform.translate(
             offset: Offset(117.0, 208.0),
             child:
-            // Adobe XD layer: 'WechatIMG1138的副本' (shape)
-            Container(
+                // Adobe XD layer: 'WechatIMG1138的副本' (shape)
+                Container(
               width: 195.0,
               height: 180.0,
               decoration: BoxDecoration(
@@ -127,7 +123,7 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
           Transform.translate(
             offset: Offset(49.0, 419.0),
             child: Text(
-              'Your ID: ',
+              'Your ID:',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 30,
@@ -146,7 +142,7 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
                   labelText: "ID",
                 ),
                 onChanged: (value) {
-                    this.id = value;
+                  this.id = value;
                 },
               ),
               width: 276.0,
@@ -245,7 +241,6 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
             offset: Offset(165.0, 735.0),
             child: RaisedButton(
               child: Text("Reset"),
-
               color: const Color(0xfffaaf7b),
               onPressed: reset,
             ),
@@ -254,20 +249,22 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
           Transform.translate(
             offset: Offset(20.0, 42.0),
             child:
-            // Adobe XD layer: 'jiantou' (shape)
-            PageLink(
+                // Adobe XD layer: 'jiantou' (shape)
+                PageLink(
               links: [
-                !this.flag? PageLinkInfo(
-                  transition: LinkTransition.PushDown,
-                  ease: Curves.easeIn,
-                  duration: 1.0,
-                  pageBuilder: () => Loginpage(),
-                ) : PageLinkInfo(
-                  transition: LinkTransition.PushDown,
-                  ease: Curves.easeIn,
-                  duration: 1.0,
-                  pageBuilder: () => User(),
-                ),
+                !this.flag
+                    ? PageLinkInfo(
+                        transition: LinkTransition.PushDown,
+                        ease: Curves.easeIn,
+                        duration: 1.0,
+                        pageBuilder: () => Loginpage(),
+                      )
+                    : PageLinkInfo(
+                        transition: LinkTransition.PushDown,
+                        ease: Curves.easeIn,
+                        duration: 1.0,
+                        pageBuilder: () => User(),
+                      ),
               ],
               child: Container(
                 width: 50.0,
