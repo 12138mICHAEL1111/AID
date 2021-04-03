@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_project/pages/Item1.dart';
 import 'package:flutter_project/pages/ScheduleDatepage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,13 +41,15 @@ class _HomepageState extends State<Homepage> {
   }
 
   _getDate() async {
-    SharedPreferences pref = await SharedPreferences.getInstance();
-    setState(() {
-      _date = pref.get('session$_sessionNumber');
-      if (_date == null) {
-        _date = 'Not selected';
-      }
-    });
+    var api = '${Config.domain}/rest/users/uploadcategory';
+    var response = await Dio().get(api);
+    var sessionTime = response.data[0]["sessiontime"];
+    print(sessionTime);
+    if (sessionTime != null) {
+      setState(() {
+        _date = sessionTime["session$_sessionNumber"];
+      });
+    }
   }
 
   @override

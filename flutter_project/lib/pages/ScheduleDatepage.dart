@@ -26,6 +26,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
   void initState() {
     super.initState();
     _list = new List(size + 1);
+    init();
     _list[0] = new DateTime(
         DateTime.now().year, DateTime.now().month, DateTime.now().day);
     _list[1] = new DateTime(
@@ -36,7 +37,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
         DateTime.now().year, DateTime.now().month, DateTime.now().day);
     _list[4] = new DateTime(
         DateTime.now().year, DateTime.now().month, DateTime.now().day);
-    init();
+    //init();
   }
 
   bool check() {
@@ -62,11 +63,18 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
 
   void init() async {
     pref = await SharedPreferences.getInstance();
-    // for (int i = 1; i <= size; ++i) {
-    //   if (pref.get("session$i") != null) {
-    //     _list[i] = DateTime.parse(pref.get("session$i"));
-    //   }
-    // }
+    var api = '${Config.domain}/rest/users/uploadcategory';
+    var response = await Dio().get(api);
+    var sessionTime = response.data[0]["sessiontime"];
+    print(sessionTime);
+    if (sessionTime != null) {
+      for (int i = 1; i <= size; ++i) {
+        setState(() {
+          _list[i] = DateTime.parse(sessionTime["session$i"]);
+        });
+      }
+      //uploadLocal();
+    }
   }
 
   void scheduleNotificationOne() async {
@@ -209,40 +217,42 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
         platformChannelSpecifics);
   }
 
-  upload() async {
-    if (!check()) {
-      _showToast();
-    } else {
-      pref = await SharedPreferences.getInstance();
-      pref.setString(
-          "session1", formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
-      pref.setString(
-          "session2", formatDate(_list[2], [yyyy, '-', mm, '-', dd]));
-      pref.setString(
-          "session3", formatDate(_list[3], [yyyy, '-', mm, '-', dd]));
-      pref.setString(
-          "session4", formatDate(_list[4], [yyyy, '-', mm, '-', dd]));
-      Navigator.of(context).pushNamed('/over');
-      var api = '${Config.domain}/rest/users/uploadsessiontime';
-      var id = pref.get("userid");
-      scheduleNotificationOne();
-      scheduleNotificationTwo();
-      scheduleNotificationThree();
-      scheduleNotificationFour();
+  // uploadLocal() async {
+  //   if (!check()) {
+  //     _showToast();
+  //   } else {
+  //     pref = await SharedPreferences.getInstance();
+  //     pref.setString(
+  //         "session1", formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
+  //     pref.setString(
+  //         "session2", formatDate(_list[2], [yyyy, '-', mm, '-', dd]));
+  //     pref.setString(
+  //         "session3", formatDate(_list[3], [yyyy, '-', mm, '-', dd]));
+  //     pref.setString(
+  //         "session4", formatDate(_list[4], [yyyy, '-', mm, '-', dd]));
+  //   }
+  // }
 
-      var response = await Dio().post(api, data: {
-        "userid": id,
-        "sessiontime": {
-          "session1": formatDate(_list[1], [yyyy, '-', mm, '-', dd]),
-          "session2": formatDate(_list[2], [yyyy, '-', mm, '-', dd]),
-          "session3": formatDate(_list[3], [yyyy, '-', mm, '-', dd]),
-          "session4": formatDate(_list[4], [yyyy, '-', mm, '-', dd])
-        }
-      });
+  uploadRemote() async {
+    var api = '${Config.domain}/rest/users/uploadsessiontime';
+    var id = pref.get("userid");
+    scheduleNotificationOne();
+    scheduleNotificationTwo();
+    scheduleNotificationThree();
+    scheduleNotificationFour();
 
-      if (response.data["message"] == 'success') {
-        print(response.data);
+    var response = await Dio().post(api, data: {
+      "userid": id,
+      "sessiontime": {
+        "session1": formatDate(_list[1], [yyyy, '-', mm, '-', dd]),
+        "session2": formatDate(_list[2], [yyyy, '-', mm, '-', dd]),
+        "session3": formatDate(_list[3], [yyyy, '-', mm, '-', dd]),
+        "session4": formatDate(_list[4], [yyyy, '-', mm, '-', dd])
       }
+    });
+
+    if (response.data["message"] == 'success') {
+      print(response.data);
     }
   }
 
@@ -487,7 +497,11 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                   width: 171.0,
                   height: 62.0,
                   child: FlatButton(
-                    onPressed: upload,
+                    onPressed: () {
+                     // uploadLocal();
+                      uploadRemote();
+                      Navigator.of(context).pushNamed('/over');
+                    },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(25))),
                     color: const Color(0xffffffff),

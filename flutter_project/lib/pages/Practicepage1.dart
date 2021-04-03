@@ -48,7 +48,6 @@ class _Practicepage1State extends State<Practicepage1> {
     _answer = response.data[0]['answer1'];
     _question = response.data[0]['question1'];
     _tempBlank = response.data[0]['blank'];
-
     var _temp = response.data[0]['context'];
     _context = _temp.split('.');
     _context.removeWhere((value) => value == "");
@@ -56,8 +55,6 @@ class _Practicepage1State extends State<Practicepage1> {
       _context[i] = _context[i] + ".";
     }
     _context.add(_question);
-    print(_context);
-
     _displayText();
   }
 
