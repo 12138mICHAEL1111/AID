@@ -38,7 +38,7 @@
         },
         {
             "context": "You are reading a book about the history of DNA. It describes how Watson and Crick deduced the double_helix structure with help from.",
-            "question1": "their collaborator Rosalind Franklin at Cambridge",
+            "question1": "Their collaborator Rosalind Franklin at Cambridge",
             "blank": "u_ivers__y",
             "answer1": "n",
             "word": "university",

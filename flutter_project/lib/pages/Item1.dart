@@ -32,7 +32,6 @@ class _Item1State extends State<Item1> {
   var _tempBlank;
   var _control;
   var _text;
-
   var _newText;
   var _index;
   var _hint;
@@ -59,6 +58,43 @@ class _Item1State extends State<Item1> {
     "assets/images/100%.png",
   ];
 
+  // Time to start reading the first sentence.
+  var _startReading;
+  // Count how many time user gives input.
+  var _inputTimes;
+  // Count previous input's length.
+  int _lastInputLength = 0;
+  // Time to display blank word.
+  var _wordDisplay;
+
+  // Time in seconds measured from onset of first setence to click required to present the word.  (e.g. 3-30s)
+  Duration _readingDuration;
+  // Time in msec measured from onset of word display to entry click for first letter. (e.g. 100-15000)
+  Duration _wordRT1;
+  // Did user presse the correct letter? "1"=correct; "0"=incorrect.
+  var _wordAccuracy1;
+  // Did users have to make a second attempt at the word? "1"=yes; "0"=no.
+  var _clueRequired;
+  // Time to display feedback clue.
+  DateTime _clueDisplay;
+  // Did user press the correct letter? "1"=correct; "0"=incorrect. Missing if attempt 1 was correct .
+  var _wordAccuracy2;
+  // Time in msec measured from incorrect response click to second attempt click (e.g. 100-15000). Missing if attempt 1 was correct.
+  Duration _wordRT2;
+
+  // Count how many time user clicks option.
+  var _clickTimes;
+  // Time of fisrt clicking the option.
+  DateTime _optionClicked;
+  // Did users get the right answer? "1"=correct; "0"=incorrect.
+  var _questionAccuracy1;
+  // Time in msec measured from onset of question to first response (e.g. 100-15000).
+  Duration _questionRT1;
+  // Did users get the right answer? "1"=correct; "0"=incorrect. Missing if attempt 1 was correct.
+  var _questionAccuracy2;
+  // Time in msec measured from incorrect response click to second attempt click (e.g. 100-15000). Missing if attempt 1 was correct.
+  Duration _questionRT2;
+
   _Item1State(this._itemNumber, this._sessionNumber);
 
   @override
@@ -77,7 +113,10 @@ class _Item1State extends State<Item1> {
     _text = "";
     _word = "";
     _hint = "";
+    _inputTimes = 0;
+    _clickTimes = 0;
     _index = 0;
+    _startReading = DateTime.now();
     if (_sessionNumber == null) {
       _sessionNumber = 1;
     }
@@ -95,17 +134,16 @@ class _Item1State extends State<Item1> {
       "trailNumber": _itemNumber,
       "category": _category,
       "sessionNumber": _sessionNumber,
-      // following could be implemented with stopWatch()
-                  // "readingDuration": _readingDuration,
-      //             "wordRT1": "100" ,
-      //             "wordAccuracy1": "1" ,
-      //             "clueRequired": "0",
-      //             "wordRT2": "0",
-      //             "wordAccuracy2": "0",
-      //             "questionRT1": "100",
-      //             "questionAccuracy1": "1",
-      //             "questionRT2":  "0",
-      //             "questionAccuracy2":"0"
+      "readingDuration": _readingDuration?.inSeconds.toString(),
+      "wordRT1": _wordRT1.inMilliseconds.toString(),
+      "wordAccuracy1": _wordAccuracy1,
+      "clueRequired": _clueRequired,
+      "wordRT2": _wordRT2?.inMilliseconds.toString(),
+      "wordAccuracy2": _wordAccuracy2,
+      "questionRT1": _questionRT1.inMilliseconds.toString(),
+      "questionAccuracy1": _questionAccuracy1,
+      "questionRT2": _questionRT2?.inMilliseconds.toString(),
+      "questionAccuracy2": _questionAccuracy2
     });
     if (response.data["message"] == 'success') {
       print(response.data);
@@ -113,7 +151,6 @@ class _Item1State extends State<Item1> {
   }
 
   _uploadProgress() async {
-    // store current progress in the db
     var api = '${Config.domain}/rest/users/uploadprogress';
     await Dio().post(api,
         data: {"id": _id, "session": _sessionNumber, "item": _itemNumber});
@@ -131,6 +168,7 @@ class _Item1State extends State<Item1> {
       _category = currentUser["category"];
       api2 = '${Config.domain}/rest/$_category/session$_sessionNumber';
     } else {
+      _category = 'control';
       api2 = '${Config.domain}/rest/controlitems/session$_sessionNumber';
     }
     var response2 = await Dio().get(api2);
@@ -176,6 +214,7 @@ class _Item1State extends State<Item1> {
         _updateOption2();
       }
     });
+    _startReading = DateTime.now();
   }
 
   // Toggle between 1st and 2nd question in a single item.
@@ -185,6 +224,7 @@ class _Item1State extends State<Item1> {
       _processData(_itemNumber - 1);
     } else {
       _questionNumber = 1;
+      _sendData();
       _route();
     }
   }
@@ -237,42 +277,71 @@ class _Item1State extends State<Item1> {
       if (_index == _context.length - 1) {
         _blank = _tempBlank;
         _hint = 'Type in the first missing letter';
-        _displayWord();
+        _chooseToDisplayWord();
       }
     }
   }
 
-  void _displayWord() {
+  void _countReadingTime() {
+    _wordDisplay = DateTime.now();
+    _readingDuration = _wordDisplay.difference(_startReading);
+  }
+
+  void _chooseToDisplayWord() {
     if (_next == true) {
-      _child = Text.rich(
-        TextSpan(
-          style: TextStyle(
-            fontFamily: 'ZiZhiQuXiMaiTi',
-            fontSize: 55,
-            color: const Color(0xfffaae7c),
-          ),
-          children: [
-            TextSpan(text: _word),
-          ],
-        ),
-      );
+      _displayWord();
     } else {
-      _child = TextField(
-        decoration: InputDecoration(
-            labelText: _blank,
-            contentPadding: EdgeInsets.all(0),
-            border: InputBorder.none),
-        onChanged: (value) {
-          _validateData(value);
-          setState(() {
-            _displayWord();
-          });
-        },
+      _displayBlank();
+      _countReadingTime();
+    }
+  }
+
+  void _displayWord() {
+    _child = Text.rich(
+      TextSpan(
         style: TextStyle(
+          fontFamily: 'ZiZhiQuXiMaiTi',
           fontSize: 55,
           color: const Color(0xfffaae7c),
         ),
-      );
+        children: [
+          TextSpan(text: _word),
+        ],
+      ),
+    );
+  }
+
+  void _displayBlank() {
+    _child = TextField(
+      decoration: InputDecoration(
+          labelText: _blank,
+          contentPadding: EdgeInsets.all(0),
+          border: InputBorder.none),
+      onChanged: (value) {
+        // Increase one when user inputs letters instead of deleting.
+        if (_lastInputLength <= value.length) {
+          _inputTimes++;
+        }
+        _validateData(value);
+        _countWordRT();
+        _recordAnswer();
+        _lastInputLength = value.length;
+        setState(() {
+          _chooseToDisplayWord();
+        });
+      },
+      style: TextStyle(
+        fontSize: 55,
+        color: const Color(0xfffaae7c),
+      ),
+    );
+  }
+
+  void _countWordRT() {
+    if (_inputTimes == 1) {
+      _wordRT1 = DateTime.now().difference(_wordDisplay);
+    } else if (_inputTimes == 2) {
+      _wordRT2 = DateTime.now().difference(_clueDisplay);
     }
   }
 
@@ -324,7 +393,10 @@ class _Item1State extends State<Item1> {
             textAlign: TextAlign.center,
           ),
           onPressed: () {
+            _clickTimes++;
             _next = _validateData("Yes");
+            _countQuestionRT();
+            _recordAnswer();
           }),
     );
 
@@ -347,9 +419,21 @@ class _Item1State extends State<Item1> {
             textAlign: TextAlign.center,
           ),
           onPressed: () {
+            _clickTimes++;
             _next = _validateData("No");
+            _countQuestionRT();
+            _recordAnswer();
           }),
     );
+  }
+
+  void _countQuestionRT() {
+    if (_clickTimes == 1) {
+      _optionClicked = DateTime.now();
+      _questionRT1 = _optionClicked.difference(_startReading);
+    } else if (_clickTimes == 2) {
+      _questionRT2 = DateTime.now().difference(_optionClicked);
+    }
   }
 
   bool _compareData(String string1, String string2) {
@@ -357,6 +441,44 @@ class _Item1State extends State<Item1> {
       return false;
     }
     return string1.toLowerCase() == string2.toLowerCase();
+  }
+
+  void _recordAnswer() {
+    if (_questionNumber == 1) {
+      // question1
+      if (_inputTimes == 1) {
+        // answered once
+        if (_next == true) {
+          _wordAccuracy1 = "1";
+          _clueRequired = "0";
+        } else {
+          _wordAccuracy1 = "0";
+          _clueRequired = "1";
+        }
+      } else if (_inputTimes == 2) {
+        // answered twice
+        if (_next == true) {
+          _wordAccuracy2 = "1";
+        } else {
+          _wordAccuracy2 = "0";
+        }
+      }
+    } else {
+      // question2
+      if (_clickTimes == 1) {
+        if (_next == true) {
+          _questionAccuracy1 = "1";
+        } else {
+          _questionAccuracy1 = "0";
+        }
+      } else if (_clickTimes == 2) {
+        if (_next == true) {
+          _questionAccuracy2 = "1";
+        } else {
+          _questionAccuracy2 = "0";
+        }
+      }
+    }
   }
 
   bool _validateData(value) {
@@ -369,6 +491,9 @@ class _Item1State extends State<Item1> {
       setState(() {
         _feedback = 'x Good. But what would be a different answer?';
       });
+      if (_wordAccuracy1 == "0" && _questionNumber == 1) {
+        _clueDisplay = DateTime.now();
+      }
       return _next = false;
     }
   }
@@ -488,88 +613,6 @@ class _Item1State extends State<Item1> {
             child: _displayOption2_2,
           ),
 
-          // Transform.translate(
-          //   offset: Offset(45.9, 253.0),
-          //   child: SizedBox(
-          //     width: 320.0,
-          //     child: Text.rich(
-          //       TextSpan(
-          //         style: TextStyle(
-          //           fontFamily: 'ZiZhiQuXiMaiTi',
-          //           fontSize: 21,
-          //           color: const Color(0xff000000),
-          //         ),
-          //         children: [
-          //           TextSpan(
-          //             text: '${_context}\n\n${_question}',
-          //           ),
-          //         ],
-          //       ),
-          //       // textHeightBehavior:
-          //       //     TextHeightBehavior(applyHeightToFirstAscent: false),
-          //       textAlign: TextAlign.center,
-          //     ),
-          //   ),
-          // ),
-
-          // Transform.translate(
-          //     offset: Offset(110, 503.0),
-          //     child: Container(
-          //       width: 250.0,
-          //       child: TextField(
-          //         decoration: InputDecoration(
-          //             labelText: "${_blank}",
-          //             contentPadding: EdgeInsets.all(0),
-          //             border: InputBorder.none),
-          //         onChanged: (value) {
-          //           _length = value.length;
-          //           if (_length >= _answer.length) {
-          //             _next = _validateData(value);
-          //           }
-          //           if (_length >= 6) {
-          //             setState(() {
-          //               _feedback = '↺ Please fill in less characters.';
-          //             });
-          //           }
-          //         },
-          //         style: TextStyle(
-          //           fontSize: 55,
-          //           color: const Color(0xfffaae7c),
-          //         ),
-          //       ),
-          //     )),
-
-          // Transform.translate(
-          //   offset: Offset(37.9, 253.0),
-          //   child: SizedBox(
-          //     width: 354.0,
-          //     child: Text.rich(
-          //       TextSpan(
-          //         style: TextStyle(
-          //           fontFamily: 'ZiZhiQuXiMaiTi',
-          //           fontSize: 21,
-          //           color: const Color(0xff000000),
-          //         ),
-          //         children: [
-          //           TextSpan(
-          //             text: '${_context}',
-          //           ),
-          //           TextSpan(
-          //             text: '${_blank}',
-          //             style: TextStyle(
-          //               fontSize: 55,
-          //               color: const Color(0xfffaae7c),
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //       textHeightBehavior:
-          //           TextHeightBehavior(applyHeightToFirstAscent: false),
-          //       textAlign: TextAlign.center,
-          //     ),
-          //   ),
-          // ),
-
           Transform.translate(
             offset: Offset(282.0, 97.0),
             child: SizedBox(
@@ -585,6 +628,7 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(97.4, 628.0),
             child: SizedBox(
@@ -600,17 +644,9 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(41.0, 763.0),
-            // child: PageLink(
-            //   links: [
-            //     PageLinkInfo(
-            //       transition: LinkTransition.PushLeft,
-            //       ease: Curves.easeInOutExpo,
-            //       duration: 1.0,
-            //       pageBuilder: () => Item2(),
-            //     ),
-            //   ],
             child: Container(
               width: 347.0,
               height: 67.0,
@@ -666,7 +702,7 @@ class _Item1State extends State<Item1> {
             child: SizedBox(
               width: 211.0,
               child: Text(
-                "${_feedback}",
+                "$_feedback",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 21,
@@ -676,36 +712,7 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
-          // Transform.translate(
-          //   offset: Offset(177.0, 568.0),
-          //   child: PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.Fade,
-          //         ease: Curves.linear,
-          //         duration: 1.0,
-          //         pageBuilder: () => Wrong1(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 38.0,
-          //       height: 33.0,
-          //       decoration: BoxDecoration(
-          //         color: const Color(0xffffffff),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // Transform.translate(
-          //   offset: Offset(224.0, 568.0),
-          //   child: Container(
-          //     width: 37.0,
-          //     height: 33.0,
-          //     decoration: BoxDecoration(
-          //       color: const Color(0xffffffff),
-          //     ),
-          //   ),
-          // ),
+         
           Transform.translate(
             offset: Offset(140.0, 107.0),
             child:
@@ -723,47 +730,6 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
-          // Transform.translate(
-          //   offset: Offset(365.0, 45.0),
-          //   child:
-          //       // Adobe XD layer: 'tingzhi' (shape)
-          //       Container(
-          //     width: 45.0,
-          //     height: 45.0,
-          //     decoration: BoxDecoration(
-          //       image: DecorationImage(
-          //         image: const AssetImage('assets/images/stop.png'),
-          //         fit: BoxFit.fill,
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
-          // Transform.translate(
-          //   offset: Offset(20.0, 42.0),
-          //   child:
-          //       // Adobe XD layer: 'jiantou' (shape)
-          //       PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.PushRight,
-          //         ease: Curves.easeIn,
-          //         duration: 1.0,
-          //         pageBuilder: () => Moodtracker(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 50.0,
-          //       height: 50.0,
-          //       decoration: BoxDecoration(
-          //         image: DecorationImage(
-          //           image: const AssetImage('assets/images/goback.png'),
-          //           fit: BoxFit.fill,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
