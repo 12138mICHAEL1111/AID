@@ -14,7 +14,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.text("Type in the first missing letter"), findsOneWidget);
   });
-  testWidgets("item1 button test", (WidgetTester tester) async {
+  testWidgets("item1 button  test", (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Item1()));
     await tester.pumpAndSettle();
     expect(find.byType(FlatButton), findsOneWidget);
