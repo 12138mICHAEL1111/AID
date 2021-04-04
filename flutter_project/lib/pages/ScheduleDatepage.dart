@@ -498,9 +498,12 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                   height: 62.0,
                   child: FlatButton(
                     onPressed: () {
-                     // uploadLocal();
-                      uploadRemote();
-                      Navigator.of(context).pushNamed('/over');
+                      if (!check()) {
+                        _showToast();
+                      } else {
+                        uploadRemote();
+                        Navigator.of(context).pushNamed('/over');
+                      }
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(25))),
@@ -554,14 +557,9 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => Homepage(
-                        itemNumber: int.parse(pref.get('item') ?? "1"),
-                        sessionNumber: int.parse(pref.get('session') ?? "1"),
-                      ),
-                    ),
+                    "/homepage",
                   );
                 },
               ),

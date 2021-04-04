@@ -105,26 +105,30 @@ class _Practicepage1State extends State<Practicepage1> {
           TextSpan(
             style: TextStyle(
               fontFamily: 'ZiZhiQuXiMaiTi',
-              fontSize: 55,
+              fontSize: 43,
               color: const Color(0xfffaae7c),
             ),
-            children: [
-              TextSpan(text: _word),
-            ],
+            text: _word,
           ),
+          textAlign: TextAlign.center,
         );
       } else {
         _child = TextField(
+          textAlign: TextAlign.center,
           decoration: InputDecoration(
               labelText: _blank,
-              contentPadding: EdgeInsets.all(0),
+              labelStyle: TextStyle(
+                fontSize: 40,
+              ),
+              isDense: true,
+              contentPadding: EdgeInsets.symmetric(horizontal: 50),
               border: InputBorder.none),
           onChanged: (value) {
             _validateData(value);
             displayWord();
           },
           style: TextStyle(
-            fontSize: 55,
+            fontSize: 45,
             color: const Color(0xfffaae7c),
           ),
         );
@@ -489,9 +493,9 @@ class _Practicepage1State extends State<Practicepage1> {
           //     )),
 
           Transform.translate(
-              offset: Offset(110, 503.0),
+              offset: Offset(51, 513.0),
               child: Container(
-                width: 250.0,
+                width: 330.0,
                 child: _child,
               )),
 

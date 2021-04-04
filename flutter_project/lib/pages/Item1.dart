@@ -185,11 +185,12 @@ class _Item1State extends State<Item1> {
     _next = false;
 
     var _temp = _items[i]['context'];
-    _context = _temp.split('.');
+    _context = _temp.split('. ');
     _context.removeWhere((value) => value == "");
-    for (var i = 0; i < _context.length; i++) {
-      _context[i] = _context[i] + ".";
+    for (var i = 0; i < _context.length - 1; i++) {
+      _context[i] = _context[i] + ". ";
     }
+    print(_context);
     _changeState(i);
   }
 
@@ -197,7 +198,7 @@ class _Item1State extends State<Item1> {
     setState(() {
       if (_questionNumber == 1) {
         _question = _items[i]["question1"];
-        _context.add(_question);
+        _context.add(" " + _question);
         _answer = _items[i]["answer1"];
         _displayOption2_1 = null;
         _displayOption2_2 = null;
@@ -208,7 +209,7 @@ class _Item1State extends State<Item1> {
         _answer = _items[i]["answer2"];
         _text = 'Now use the passage to answer the following question: \n\n\n';
         _newText = _question;
-        _hint = "Please choose an option.";
+        _hint = "Choose an option";
         _child = null;
         _updateQuestion();
         _updateOption2();
@@ -301,21 +302,25 @@ class _Item1State extends State<Item1> {
       TextSpan(
         style: TextStyle(
           fontFamily: 'ZiZhiQuXiMaiTi',
-          fontSize: 55,
+          fontSize: 43,
           color: const Color(0xfffaae7c),
         ),
-        children: [
-          TextSpan(text: _word),
-        ],
+        text: _word,
       ),
+      textAlign: TextAlign.center,
     );
   }
 
   void _displayBlank() {
     _child = TextField(
+      textAlign: TextAlign.center,
       decoration: InputDecoration(
           labelText: _blank,
-          contentPadding: EdgeInsets.all(0),
+          labelStyle: TextStyle(
+            fontSize: 40,
+          ),
+          isDense: true,
+          contentPadding: EdgeInsets.symmetric(horizontal: 50),
           border: InputBorder.none),
       onChanged: (value) {
         // Increase one when user inputs letters instead of deleting.
@@ -331,7 +336,7 @@ class _Item1State extends State<Item1> {
         });
       },
       style: TextStyle(
-        fontSize: 55,
+        fontSize: 45,
         color: const Color(0xfffaae7c),
       ),
     );
@@ -575,6 +580,7 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(27.0, 97.0),
             child: SizedBox(
@@ -595,13 +601,10 @@ class _Item1State extends State<Item1> {
             child: _displayQuestion,
           ),
 
-          // Container(
-          //   child: _displayOption1,
-          // ),
           Transform.translate(
-              offset: Offset(110, 513.0),
+              offset: Offset(51, 513.0),
               child: Container(
-                width: 250.0,
+                width: 330.0, //use the white background width
                 child: _child,
               )),
 
@@ -616,7 +619,7 @@ class _Item1State extends State<Item1> {
           Transform.translate(
             offset: Offset(282.0, 97.0),
             child: SizedBox(
-              width: 76.0,
+              width: 90.0,
               child: Text(
                 '${_itemNumber}/18',
                 style: TextStyle(
@@ -712,7 +715,7 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
-         
+
           Transform.translate(
             offset: Offset(140.0, 107.0),
             child:

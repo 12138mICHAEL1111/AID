@@ -25,7 +25,7 @@
             "number": "8"
         },
         {
-            "context": "You remember your parents making fun of you when you were younger when you did not know something. When you ask your colleagues a question at work.",
+            "context": "You remember your parents making fun of you when you were younger when you did not know something. When you ask your colleagues a question at work ",
             "question1": "you assume that everyone will think that what you have asked is",
             "blank": "re_son_b_e",
             "answer1": "a",
@@ -350,7 +350,7 @@
         },
         {
             "context": "You remember your parents making fun of you when you were younger when you did not know something.",
-            "question1": "when you ask your colleagues a question at work, you assume that everyone will think that what you have asked is",
+            "question1": "When you ask your colleagues a question at work, you assume that everyone will think that what you have asked is",
             "blank": "cre_i_able",
             "answer1": "d",
             "word": "creditable",
@@ -362,7 +362,7 @@
         },
         {
             "context": "You have an important dinner to attend and you want to look your best. You have been eating healthy and doing daily exercise for the last 6 months and you have boughta new outfit.",
-            "question1": "You put on your new oufit and look in the mirror and you think all your efforts were",
+            "question1": "You put on your new outfit and look in the mirror and you think all your efforts were",
             "blank": "ad_q_ate",
             "answer1": "e",
             "word": "adequate",
@@ -397,8 +397,8 @@
             "number": "41"
         },
         {
-            "context": "You recognise that life is full of ups and downs.",
-            "question1": "when you evaluate and reflect on your experiences, you decide that your life is mostly",
+            "context": "You recognize that life is full of ups and downs.",
+            "question1": "When you evaluate and reflect on your experiences, you decide that your life is mostly",
             "blank": "sa_is_ac_ory",
             "answer1": "t",
             "word": "satisfactory",

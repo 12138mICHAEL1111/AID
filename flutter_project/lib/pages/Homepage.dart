@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_project/pages/Item1.dart';
 import 'package:flutter_project/pages/ScheduleDatepage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import './User.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import 'Moodtracker.dart';
 
@@ -22,39 +20,49 @@ class _HomepageState extends State<Homepage> {
   var _sessionNumber;
   var _itemNumber;
   var _date;
+  var _response;
+  var _api;
 
   _HomepageState(this._sessionNumber, this._itemNumber);
 
   @override
   void initState() {
     super.initState();
-    _getsession();
-    if (_itemNumber == null) {
-      _itemNumber = 1;
+    _getData();
+  }
+
+  _getData() async {
+    _api = '${Config.domain}/rest/users/uploadcategory';
+    _response = await Dio().get(_api);
+    if (_itemNumber == null || _sessionNumber == null) {
+      _getSession();
+      _getItem();
+    }
+    if (_sessionNumber > 4) {
+      _sessionNumber = 4;
     }
     _getDate();
   }
 
-  _getsession() async{
-    var api = '${Config.domain}/rest/users/currentuser';
-    var response =  await Dio().get(api);
-    var currentsession = response.data[0]["currentsession"];
+  _getSession() {
     setState(() {
-           _sessionNumber = currentsession;
-        });
+      _sessionNumber = _response.data[0]["currentsession"];
+    });
+  }
+
+  _getItem() {
+    setState(() {
+      _itemNumber = _response.data[0]["currentitem"];
+    });
   }
 
   _getDate() async {
-    var api = '${Config.domain}/rest/users/uploadcategory';
-    var response = await Dio().get(api);
-    var sessionTime = response.data[0]["sessiontime"];
-    print(sessionTime);
+    var sessionTime = _response.data[0]["sessiontime"];
     if (sessionTime != null) {
       setState(() {
         _date = sessionTime["session$_sessionNumber"];
       });
-    }
-    else{
+    } else {
       _date = '';
     }
   }
@@ -81,22 +89,6 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
-
-          // Transform.translate(
-          //   offset: Offset(25.0, 56.0),
-          //   child:
-          //       // Adobe XD layer: 'caidan' (shape)
-          //       Container(
-          //     width: 53.0,
-          //     height: 53.0,
-          //     decoration: BoxDecoration(
-          //       image: DecorationImage(
-          //         image: const AssetImage('assets/images/menu.png'),
-          //         fit: BoxFit.fill,
-          //       ),
-          //     ),
-          //   ),
-          // ),
 
           Transform.translate(
             offset: Offset(38.0, 326.0),
@@ -135,7 +127,7 @@ class _HomepageState extends State<Homepage> {
             child: SizedBox(
               width: 152.0,
               child: Text(
-                '$_date'??"",
+                '$_date' ?? "",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 15,
@@ -159,34 +151,6 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
 
-          // Transform.translate(
-          //   offset: Offset(87.0, 731.0),
-          //   child: PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.PushDown,
-          //         ease: Curves.easeInOutExpo,
-          //         duration: 1.0,
-          //         pageBuilder: () => Moodtracker(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 254.0,
-          //       height: 59.0,
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(23.0),
-          //         color: const Color(0xfffdb56f),
-          //         boxShadow: [
-          //           BoxShadow(
-          //             color: const Color(0x29000000),
-          //             offset: Offset(0, 13),
-          //             blurRadius: 6,
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
           Container(
             margin: EdgeInsets.fromLTRB(87, 706, 50, 50),
             child: FlatButton(
@@ -259,38 +223,15 @@ class _HomepageState extends State<Homepage> {
 
           Container(
             margin: EdgeInsets.fromLTRB(328, 849, 50, 50),
-            // child: RaisedButton(
-            //   // minWidth: 254,
-            //   // height: 59.0,
-
-            //   hoverColor: Color(0x29000000),
-            //   shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.all(Radius.circular(20))),
-            //   color: const Color(0xfffdb56f),
-            //   child: Text(
-            //     '''''',
-            //     textAlign: TextAlign.center,
-            //   ),
-            // ),
             child: OutlineButton(
               borderSide: BorderSide.none,
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
             ),
           ),
+
           Transform.translate(
             offset: Offset(328.0, 849.0),
-            // child:
-            //     // Adobe XD layer: '用户' (shape)
-            //     PageLink(
-            //   links: [
-            //     PageLinkInfo(
-            //       transition: LinkTransition.PushLeft,
-            //       ease: Curves.slowMiddle,
-            //       duration: 1.0,
-            //       pageBuilder: () => User(),
-            //     ),
-            //   ],
             child: Container(
               width: 58.0,
               height: 58.0,
@@ -327,17 +268,6 @@ class _HomepageState extends State<Homepage> {
 
           Transform.translate(
             offset: Offset(185.0, 850.0),
-            // child:
-            //     // Adobe XD layer: '日历' (shape)
-            //     PageLink(
-            //   links: [
-            //     PageLinkInfo(
-            //       transition: LinkTransition.PushLeft,
-            //       ease: Curves.easeOut,
-            //       duration: 1.0,
-            //       pageBuilder: () => ScheduleDatepage(),
-            //     ),
-            //   ],
             child: Container(
               width: 58.0,
               height: 58.0,
@@ -349,7 +279,6 @@ class _HomepageState extends State<Homepage> {
               ),
             ),
           ),
-          // ),
 
           Transform.translate(
             offset: Offset(185.0, 850.0),

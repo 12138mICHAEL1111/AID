@@ -163,7 +163,7 @@
             "answer2": "No"
         },
         {
-            "context": "You measure the width of wooden planks to make a fence. It will go around the whole garden and once finished it will be treated and painted in brown.",
+            "context": "You measure the width of wooden planks to make a fence. It will go around the whole garden and once finished it will be treated and painted in brown",
             "question1": "which is the same colour as the other fences in the",
             "blank": "ne_ghb_u_h_od",
             "answer1": "i",
@@ -182,7 +182,7 @@
         },
         {
             "context": "You listen to the weather report broadcasted on radio. The meteorologist reports that the weather will be mostly dry and cloudy in the east.",
-            "question1": "but spells of rain will continue in western areas, becoming heavy and",
+            "question1": "But spells of rain will continue in western areas, becoming heavy and",
             "blank": "pe_si_t_nt ",
             "answer1": "r",
             "word": "persistent",
@@ -190,7 +190,7 @@
             "answer2": "No"
         },
         {
-            "context": "You mix flour and baking powder to make muffins. You then add the butter, eggs and sugar and stir in some milk. Before pouring the mixture into the muffin cases.",
+            "context": "You mix flour and baking powder to make muffins. You then add the butter, eggs and sugar and stir in some milk. Before pouring the mixture into the muffin cases ",
             "question1": "you add the vanilla and the",
             "blank": "bl_eb_rr_es",
             "answer1": "u",
