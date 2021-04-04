@@ -192,48 +192,35 @@ export default {
             this.results = resultsres.data
             
             for(var x =0;x<this.results.length;x++){
-                var wordaccuracy
-                var clue
-                var questiona1
                 var questiona2
                 var worda2
-                if(this.results[x].wordAccuracy1 == '0'){
-                     wordaccuracy = "wrong"
+                var wordRT2
+                var questionRT2
+                if(this.results[x].wordRT2 == 'null'){
+                    wordRT2 = ''
                 }
                 else{
-                     wordaccuracy = "correct"
+                    wordRT2=this.results[x].wordRT2
                 }
-                if(this.results[x].clueRequired == '0'){
-                     clue = "No"
-                }
-                else{
-                     clue = "Yes"
-                }
-                 if(this.results[x].questionAccuracy1 == '0'){
-                     questiona1 = "wrong"
+                if(this.results[x].questionRT2 == 'null'){
+                    questionRT2 = ''
                 }
                 else{
-                     questiona1 = "correct"
+                    questionRT2=this.results[x].questionRT2
                 }
                 if(this.results[x].questionAccuracy2 == null){
-                     questiona2 = "null"
+                     questiona2 = ""
                 }
-                else if(this.results[x].questionAccuracy2 == '1'){
-                     questiona2 = "correct"
-                }
-                else{
-                    questiona2 = "wrong" 
+                else {
+                    questiona2 = this.results[x].questionAccuracy2
                 }
                  if(this.results[x].wordAccuracy2 == null){
-                     worda2 = "null"
+                     worda2 = ""
                 }
-                else if(this.results[x].wordAccuracy2 == '1'){
-                     worda2 = "correct"
+                else {
+                    worda2=this.results[x].wordAccuracy2
                 }
-                else{
-                    worda2 = "wrong" 
-                }
-                this.questionTable.push({'questionnumber':this.results[x].trailNumber,"sessionnumber":this.results[x].sessionNumber,"readingt":this.results[x].readingDuration,"wordrt1":this.results[x].wordRT1,"wordac1":wordaccuracy,"clue":clue,"wordrt2":this.results[x].wordRT2,"questionrt1":this.results[x].questionRT1,"questiona1":questiona1,"questionrt2":this.results[x].questionRT2,"questiona2":questiona2,'worda2':worda2})
+                this.questionTable.push({'questionnumber':this.results[x].trailNumber,"sessionnumber":this.results[x].sessionNumber,"readingt":this.results[x].readingDuration,"wordrt1":this.results[x].wordRT1,"wordac1":this.results[x].wordAccuracy1,"clue":this.results[x].clueRequired,"wordrt2":wordRT2,"questionrt1":this.results[x].questionRT1,"questiona1":this.results[x].questionAccuracy1,"questionrt2":questionRT2,"questiona2":questiona2,'worda2':worda2})
             }
         }
     },
