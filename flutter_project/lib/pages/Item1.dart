@@ -613,88 +613,6 @@ class _Item1State extends State<Item1> {
             child: _displayOption2_2,
           ),
 
-          // Transform.translate(
-          //   offset: Offset(45.9, 253.0),
-          //   child: SizedBox(
-          //     width: 320.0,
-          //     child: Text.rich(
-          //       TextSpan(
-          //         style: TextStyle(
-          //           fontFamily: 'ZiZhiQuXiMaiTi',
-          //           fontSize: 21,
-          //           color: const Color(0xff000000),
-          //         ),
-          //         children: [
-          //           TextSpan(
-          //             text: '${_context}\n\n${_question}',
-          //           ),
-          //         ],
-          //       ),
-          //       // textHeightBehavior:
-          //       //     TextHeightBehavior(applyHeightToFirstAscent: false),
-          //       textAlign: TextAlign.center,
-          //     ),
-          //   ),
-          // ),
-
-          // Transform.translate(
-          //     offset: Offset(110, 503.0),
-          //     child: Container(
-          //       width: 250.0,
-          //       child: TextField(
-          //         decoration: InputDecoration(
-          //             labelText: "${_blank}",
-          //             contentPadding: EdgeInsets.all(0),
-          //             border: InputBorder.none),
-          //         onChanged: (value) {
-          //           _length = value.length;
-          //           if (_length >= _answer.length) {
-          //             _next = _validateData(value);
-          //           }
-          //           if (_length >= 6) {
-          //             setState(() {
-          //               _feedback = '↺ Please fill in less characters.';
-          //             });
-          //           }
-          //         },
-          //         style: TextStyle(
-          //           fontSize: 55,
-          //           color: const Color(0xfffaae7c),
-          //         ),
-          //       ),
-          //     )),
-
-          // Transform.translate(
-          //   offset: Offset(37.9, 253.0),
-          //   child: SizedBox(
-          //     width: 354.0,
-          //     child: Text.rich(
-          //       TextSpan(
-          //         style: TextStyle(
-          //           fontFamily: 'ZiZhiQuXiMaiTi',
-          //           fontSize: 21,
-          //           color: const Color(0xff000000),
-          //         ),
-          //         children: [
-          //           TextSpan(
-          //             text: '${_context}',
-          //           ),
-          //           TextSpan(
-          //             text: '${_blank}',
-          //             style: TextStyle(
-          //               fontSize: 55,
-          //               color: const Color(0xfffaae7c),
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //       textHeightBehavior:
-          //           TextHeightBehavior(applyHeightToFirstAscent: false),
-          //       textAlign: TextAlign.center,
-          //     ),
-          //   ),
-          // ),
-
           Transform.translate(
             offset: Offset(282.0, 97.0),
             child: SizedBox(
@@ -710,6 +628,7 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(97.4, 628.0),
             child: SizedBox(
@@ -725,17 +644,9 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(41.0, 763.0),
-            // child: PageLink(
-            //   links: [
-            //     PageLinkInfo(
-            //       transition: LinkTransition.PushLeft,
-            //       ease: Curves.easeInOutExpo,
-            //       duration: 1.0,
-            //       pageBuilder: () => Item2(),
-            //     ),
-            //   ],
             child: Container(
               width: 347.0,
               height: 67.0,
@@ -791,7 +702,7 @@ class _Item1State extends State<Item1> {
             child: SizedBox(
               width: 211.0,
               child: Text(
-                "${_feedback}",
+                "$_feedback",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 21,
@@ -801,36 +712,7 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
-          // Transform.translate(
-          //   offset: Offset(177.0, 568.0),
-          //   child: PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.Fade,
-          //         ease: Curves.linear,
-          //         duration: 1.0,
-          //         pageBuilder: () => Wrong1(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 38.0,
-          //       height: 33.0,
-          //       decoration: BoxDecoration(
-          //         color: const Color(0xffffffff),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // Transform.translate(
-          //   offset: Offset(224.0, 568.0),
-          //   child: Container(
-          //     width: 37.0,
-          //     height: 33.0,
-          //     decoration: BoxDecoration(
-          //       color: const Color(0xffffffff),
-          //     ),
-          //   ),
-          // ),
+         
           Transform.translate(
             offset: Offset(140.0, 107.0),
             child:
@@ -848,47 +730,6 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
-          // Transform.translate(
-          //   offset: Offset(365.0, 45.0),
-          //   child:
-          //       // Adobe XD layer: 'tingzhi' (shape)
-          //       Container(
-          //     width: 45.0,
-          //     height: 45.0,
-          //     decoration: BoxDecoration(
-          //       image: DecorationImage(
-          //         image: const AssetImage('assets/images/stop.png'),
-          //         fit: BoxFit.fill,
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
-          // Transform.translate(
-          //   offset: Offset(20.0, 42.0),
-          //   child:
-          //       // Adobe XD layer: 'jiantou' (shape)
-          //       PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.PushRight,
-          //         ease: Curves.easeIn,
-          //         duration: 1.0,
-          //         pageBuilder: () => Moodtracker(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 50.0,
-          //       height: 50.0,
-          //       decoration: BoxDecoration(
-          //         image: DecorationImage(
-          //           image: const AssetImage('assets/images/goback.png'),
-          //           fit: BoxFit.fill,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
