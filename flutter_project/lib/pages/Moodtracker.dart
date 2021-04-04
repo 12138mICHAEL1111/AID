@@ -534,7 +534,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
                   child: Text(
-                    'Not at all',
+                    'Very much', 
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
                       fontSize: 15,
@@ -592,7 +592,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
                   child: Text(
-                    'Very much',
+                    'Not at all',
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
                       fontSize: 15,

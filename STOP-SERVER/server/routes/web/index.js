@@ -29,6 +29,12 @@ module.exports= app=>{
         const findUser = await req.Model.findOne({userid:req.params.id})      
         res.send({"sessionmood":findUser.sessionmood})
     })
+
+    router.post('/',async(req,res)=>{
+        const results = await req.Model.find({userid:req.body.userid})
+        res.send(results)
+    })
+
     const resource = require("../../middleware/resource")
     app.use('/stop/web/api/rest/:resource',resource(),router)
 }

@@ -122,7 +122,7 @@
         },
         {
             "context": "You are performing the lead role in a local play, which you have been practising for many months. On the opening night you remember almost all of your lines but stumble over one.",
-            "question1": "You think theaudience will think your performance is",
+            "question1": "You think the audience will think your performance is",
             "blank": "o_ay",
             "answer1": "k",
             "word": "okay",
