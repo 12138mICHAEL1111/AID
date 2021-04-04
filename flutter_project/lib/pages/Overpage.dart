@@ -60,14 +60,7 @@ class Overpage extends StatelessWidget {
                       borderRadius: BorderRadius.all(Radius.circular(23))),
                   color: const Color(0xffffffff),
                   onPressed: () async {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => Homepage(
-                                itemNumber: 1,
-                                sessionNumber: 1,
-                              )),
-                    );
+                    Navigator.pushNamed(context, '/homepage');
                   },
                   child: Center(
                       child: Text(

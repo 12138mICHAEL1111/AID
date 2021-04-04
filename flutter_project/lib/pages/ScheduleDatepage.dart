@@ -498,9 +498,12 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                   height: 62.0,
                   child: FlatButton(
                     onPressed: () {
-                     // uploadLocal();
-                      uploadRemote();
-                      Navigator.of(context).pushNamed('/over');
+                      if (!check()) {
+                        _showToast();
+                      } else {
+                        uploadRemote();
+                        Navigator.of(context).pushNamed('/over');
+                      }
                     },
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(25))),
