@@ -205,21 +205,21 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
 
-          // Transform.translate(
-          //   offset: Offset(42.0, 849.0),
-          //   child:
-          //       // Adobe XD layer: '主页' (shape)
-          //       Container(
-          //     width: 58.0,
-          //     height: 58.0,
-          //     decoration: BoxDecoration(
-          //       image: DecorationImage(
-          //         image: const AssetImage('assets/images/home.png'),
-          //         fit: BoxFit.fill,
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          Transform.translate(
+            offset: Offset(42.0, 849.0),
+            child:
+                // Adobe XD layer: '主页' (shape)
+                Container(
+              width: 58.0,
+              height: 58.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/home.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
 
           Container(
             margin: EdgeInsets.fromLTRB(328, 849, 50, 50),
@@ -229,6 +229,7 @@ class _HomepageState extends State<Homepage> {
               highlightColor: Colors.transparent,
             ),
           ),
+
           Transform.translate(
             offset: Offset(328.0, 849.0),
             child: Container(

@@ -232,20 +232,6 @@ class _UserState extends State<User> {
           ),
           Transform.translate(
             offset: Offset(42.0, 849.0),
-            // child:
-            //     // Adobe XD layer: '主页' (shape)
-            //     PageLink(
-            //   links: [
-            //     PageLinkInfo(
-            //       transition: LinkTransition.PushRight,
-            //       ease: Curves.slowMiddle,
-            //       duration: 1.0,
-            //       pageBuilder: () => Homepage(
-            //         itemNumber: int.parse(pref.get('item') ?? "1"),
-            //         sessionNumber: int.parse(pref.get('session') ?? "1"),
-            //       ),
-            //     ),
-            //   ],
             child: Container(
               width: 58.0,
               height: 58.0,
@@ -269,14 +255,9 @@ class _UserState extends State<User> {
                 splashColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushNamed(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => Homepage(
-                        itemNumber: int.parse(pref.get('item') ?? "1"),
-                        sessionNumber: int.parse(pref.get('session') ?? "1"),
-                      ),
-                    ),
+                    "/homepage",
                   );
                 },
               ),
