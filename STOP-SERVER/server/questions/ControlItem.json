@@ -38,7 +38,7 @@
         },
         {
             "context": "You are reading a book about the history of DNA. It describes how Watson and Crick deduced the double_helix structure with help from.",
-            "question1": "their collaborator Rosalind Franklin at Cambridge",
+            "question1": "Their collaborator Rosalind Franklin at Cambridge",
             "blank": "u_ivers__y",
             "answer1": "n",
             "word": "university",
@@ -364,7 +364,7 @@
             "context": "You walk into the restaurant. The waitress takes you to your table. You sit down at your table and ask the waitress for an orange juice.",
             "question1": "In a few minutes the waitress comes back with your",
             "blank": "d__nk",
-            "answer1": "i",
+            "answer1": "r",
             "word": "drink",
             "question2": "Did you order a coke?",
             "answer2": "No"
