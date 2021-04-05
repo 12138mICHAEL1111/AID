@@ -12,6 +12,7 @@ class Homepage extends StatefulWidget {
   int itemNumber;
 
   Homepage({this.sessionNumber, this.itemNumber});
+
   @override
   _HomepageState createState() => _HomepageState(sessionNumber, itemNumber);
 }
@@ -75,8 +76,8 @@ class _HomepageState extends State<Homepage> {
         children: <Widget>[
           // Adobe XD layer: 'WechatIMG1201' (shape)
           Container(
-            width: 428.0,
-            height: 537.0,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.6116,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(70.0),
@@ -91,14 +92,15 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(38.0, 326.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.05,
+                MediaQuery.of(context).size.height * 0.3713),
             child: SizedBox(
-              width: 352.0,
+              width: MediaQuery.of(context).size.width * 0.99,
               child: Text(
                 'Welcome back！',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 41,
+                  fontSize: MediaQuery.of(context).size.height * 0.055,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
@@ -107,14 +109,15 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(24.3, 549.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.05677,
+                MediaQuery.of(context).size.height * 0.62528),
             child: SizedBox(
               width: 188.0,
               child: Text(
                 "Session ${_sessionNumber}",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 39,
+                  fontSize: MediaQuery.of(context).size.height * 0.045,
                   color: const Color(0xfff6c16d),
                 ),
                 textAlign: TextAlign.center,
@@ -123,14 +126,15 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(229.1, 574.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.53528,
+                MediaQuery.of(context).size.height * 0.65376),
             child: SizedBox(
               width: 152.0,
               child: Text(
                 '$_date' ?? "",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 15,
+                  fontSize: MediaQuery.of(context).size.height * 0.033,
                   color: const Color(0xfff6c16d),
                 ),
                 textAlign: TextAlign.center,
@@ -139,12 +143,13 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(34.0, 623.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.07944,
+                MediaQuery.of(context).size.height * 0.7096),
             child: Text(
-              'Welcome! Are you ready to start\nsession ${_sessionNumber} today?',
+              'Welcome! Are you ready to \nstart session ${_sessionNumber} today?',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 23,
+                fontSize: MediaQuery.of(context).size.height * 0.03,
                 color: const Color(0xff000000),
               ),
               textAlign: TextAlign.left,
@@ -152,10 +157,14 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Container(
-            margin: EdgeInsets.fromLTRB(87, 706, 50, 50),
+            margin: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.20327,
+                MediaQuery.of(context).size.height * 0.8041,
+                MediaQuery.of(context).size.width * 0.11682,
+                MediaQuery.of(context).size.height * 0.05695),
             child: FlatButton(
                 minWidth: 254,
-                height: 59.0,
+                height: MediaQuery.of(context).size.height * 0.0672,
                 hoverColor: Color(0x29000000),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -164,7 +173,7 @@ class _HomepageState extends State<Homepage> {
                   '''Let's begin!''',
                   style: TextStyle(
                     fontFamily: 'ZiZhiQuXiMaiTi',
-                    fontSize: 26,
+                    fontSize: MediaQuery.of(context).size.height * 0.033,
                     color: const Color(0xffffffff),
                   ),
                   textAlign: TextAlign.center,
@@ -191,10 +200,10 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(0.0, 831.0),
+            offset: Offset(0.0, MediaQuery.of(context).size.height * 0.91647),
             child: Container(
-              width: 428.0,
-              height: 95.0,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.1082,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(45.0),
@@ -206,12 +215,13 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(42.0, 849.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.09813,
+                MediaQuery.of(context).size.height * 0.93),
             child:
                 // Adobe XD layer: '主页' (shape)
                 Container(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.1355,
+              height: MediaQuery.of(context).size.height * 0.06606,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/home.png'),
@@ -222,7 +232,11 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Container(
-            margin: EdgeInsets.fromLTRB(328, 849, 50, 50),
+            margin: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.76636,
+                MediaQuery.of(context).size.height * 0.93,
+                MediaQuery.of(context).size.width * 0.11682,
+                MediaQuery.of(context).size.height * 0.05695),
             child: OutlineButton(
               borderSide: BorderSide.none,
               splashColor: Colors.transparent,
@@ -231,10 +245,11 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(328.0, 849.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.766355,
+                MediaQuery.of(context).size.height * 0.93),
             child: Container(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.1355,
+              height: MediaQuery.of(context).size.height * 0.06606,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/gray_profile.png'),
@@ -246,7 +261,8 @@ class _HomepageState extends State<Homepage> {
           // ),
 
           Transform.translate(
-            offset: Offset(328.0, 849.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.766355,
+                MediaQuery.of(context).size.height * 0.93),
             child: SizedBox(
               width: 58.0,
               height: 58.0,
@@ -267,10 +283,11 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(185.0, 850.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.432243,
+                MediaQuery.of(context).size.height * 0.93),
             child: Container(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.1355,
+              height: MediaQuery.of(context).size.height * 0.06606,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/gray_calendar.png'),
@@ -281,7 +298,8 @@ class _HomepageState extends State<Homepage> {
           ),
 
           Transform.translate(
-            offset: Offset(185.0, 850.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.432243,
+                MediaQuery.of(context).size.height * 0.93),
             child: SizedBox(
               width: 58.0,
               height: 58.0,
@@ -301,14 +319,15 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(14.9, 403.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.034813,
+                MediaQuery.of(context).size.height * 0.458998),
             child: SizedBox(
               width: 398.0,
               child: Text(
                 'May you be full of sunshine\n like a sun.',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 28,
+                  fontSize: MediaQuery.of(context).size.height * 0.033,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
@@ -316,12 +335,13 @@ class _HomepageState extends State<Homepage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(109.0, 121.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.254673,
+                MediaQuery.of(context).size.height * 0.13781),
             child:
                 // Adobe XD layer: 'WechatIMG1138的副本' (shape)
                 Container(
-              width: 195.0,
-              height: 180.0,
+              width: MediaQuery.of(context).size.width * 0.4556,
+              height: MediaQuery.of(context).size.height * 0.205,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/logoOfStart.png'),
