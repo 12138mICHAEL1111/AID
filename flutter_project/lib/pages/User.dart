@@ -17,6 +17,7 @@ class _UserState extends State<User> {
   String id;
   String email;
   SharedPreferences pref;
+
   @override
   void initState() {
     super.initState();
@@ -49,8 +50,8 @@ class _UserState extends State<User> {
         children: <Widget>[
           // Adobe XD layer: 'WechatIMG1201' (shape)
           Container(
-            width: 428.0,
-            height: 926.0,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: const AssetImage('assets/images/background.jpg'),
@@ -59,14 +60,15 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(89.0, 106.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.20794,
+                MediaQuery.of(context).size.height * 0.12073),
             child: SizedBox(
               width: 250.0,
               child: Text(
                 'Profile',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 68,
+                  fontSize: MediaQuery.of(context).size.height * 0.08,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
@@ -74,10 +76,11 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(14.0, 218.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.03271,
+                MediaQuery.of(context).size.height * 0.24829),
             child: Container(
-              width: 400.0,
-              height: 79.0,
+              width: MediaQuery.of(context).size.width * 0.93458,
+              height: MediaQuery.of(context).size.height * 0.08998,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(26.0),
                 color: const Color(0xffffffff),
@@ -85,10 +88,11 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(14.0, 338.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.03271,
+                MediaQuery.of(context).size.height * 0.384966),
             child: Container(
-              width: 400.0,
-              height: 79.0,
+              width: MediaQuery.of(context).size.width * 0.93458,
+              height: MediaQuery.of(context).size.height * 0.08998,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(26.0),
                 color: const Color(0xffffffff),
@@ -96,10 +100,11 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(14.0, 458.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.03271,
+                MediaQuery.of(context).size.height * 0.52164),
             child: Container(
-              width: 400.0,
-              height: 79.0,
+              width: MediaQuery.of(context).size.width * 0.93458,
+              height: MediaQuery.of(context).size.height * 0.08998,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(26.0),
                 color: const Color(0xffffffff),
@@ -107,48 +112,52 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(29.0, 236.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.067757,
+                MediaQuery.of(context).size.height * 0.26879),
             child: Text(
               'Account ID',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 34,
+                fontSize: MediaQuery.of(context).size.height * 0.04,
                 color: const Color(0xff000000),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(322.0, 244.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.752336,
+                MediaQuery.of(context).size.height * 0.2779),
             child: Text(
               this.id ?? "",
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 21,
+                fontSize: MediaQuery.of(context).size.height * 0.022,
                 color: const Color(0xff888888),
               ),
               textAlign: TextAlign.right,
             ),
           ),
           Transform.translate(
-            offset: Offset(29.0, 356.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.067757,
+                MediaQuery.of(context).size.height * 0.405467),
             child: Text(
               'Email',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 34,
+                fontSize: MediaQuery.of(context).size.height * 0.04,
                 color: const Color(0xff000000),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(204.0, 364.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.47664,
+                MediaQuery.of(context).size.height * 0.41458),
             child: Text(
               this.email ?? "",
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 21,
+                fontSize: MediaQuery.of(context).size.height * 0.022,
                 color: const Color(0xff888888),
               ),
               textAlign: TextAlign.right,
@@ -156,34 +165,40 @@ class _UserState extends State<User> {
           ),
 
           Transform.translate(
-            offset: Offset(29.0, 476.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.067757,
+                MediaQuery.of(context).size.height * 0.54214),
             child: Text(
               'Password',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 34,
+                fontSize: MediaQuery.of(context).size.height * 0.04,
                 color: const Color(0xff000000),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(270.0, 492.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.63084,
+                MediaQuery.of(context).size.height * 0.56036),
             child: Text(
               '********',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 21,
+                fontSize: MediaQuery.of(context).size.height * 0.022,
                 color: const Color(0xff888888),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Container(
-            margin: EdgeInsets.fromLTRB(365, 467, 10, 50),
+            margin: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.8528,
+                MediaQuery.of(context).size.height * 0.53189,
+                MediaQuery.of(context).size.width * 0.02336,
+                MediaQuery.of(context).size.height * 0.05695),
             child: FlatButton(
               minWidth: 50,
-              height: 59.0,
+              height: MediaQuery.of(context).size.height * 0.0672,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.all(Radius.circular(20))),
               child: Text(
@@ -202,12 +217,13 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(380.0, 487.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.88785,
+                MediaQuery.of(context).size.height * 0.55467),
             child:
                 // Adobe XD layer: 'write' (shape)
                 Container(
-              width: 23.0,
-              height: 21.0,
+              width: MediaQuery.of(context).size.width * 0.05374,
+              height: MediaQuery.of(context).size.height * 0.02392,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/change.png'),
@@ -217,10 +233,10 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(0.0, 831.0),
+            offset: Offset(0.0, MediaQuery.of(context).size.height * 0.91647),
             child: Container(
-              width: 428.0,
-              height: 95.0,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.1082,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(45.0),
@@ -231,10 +247,11 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(42.0, 849.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.09813,
+                MediaQuery.of(context).size.height * 0.93),
             child: Container(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.135514,
+              height: MediaQuery.of(context).size.height * 0.06606,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/gray_home.png'),
@@ -246,10 +263,11 @@ class _UserState extends State<User> {
           // ),
 
           Transform.translate(
-            offset: Offset(42.0, 849.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.09813,
+                MediaQuery.of(context).size.height * 0.93),
             child: SizedBox(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.135514,
+              height: MediaQuery.of(context).size.height * 0.06606,
               child: OutlineButton(
                 borderSide: BorderSide.none,
                 splashColor: Colors.transparent,
@@ -265,12 +283,13 @@ class _UserState extends State<User> {
           ),
 
           Transform.translate(
-            offset: Offset(328.0, 849.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.766355,
+                MediaQuery.of(context).size.height * 0.93),
             child:
                 // Adobe XD layer: '用户' (shape)
                 Container(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.135514,
+              height: MediaQuery.of(context).size.height * 0.06606,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/profile.png'),
@@ -280,7 +299,8 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(185.0, 850.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.432243,
+                MediaQuery.of(context).size.height * 0.93),
             // child:
             //     // Adobe XD layer: '日历' (shape)
             //     PageLink(
@@ -293,8 +313,8 @@ class _UserState extends State<User> {
             //     ),
             //   ],
             child: Container(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.135514,
+              height: MediaQuery.of(context).size.height * 0.06606,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/gray_calendar.png'),
@@ -306,10 +326,11 @@ class _UserState extends State<User> {
           // ),
 
           Transform.translate(
-            offset: Offset(185.0, 850.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.432243,
+                MediaQuery.of(context).size.height * 0.93),
             child: SizedBox(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.135514,
+              height: MediaQuery.of(context).size.height * 0.06606,
               child: OutlineButton(
                 borderSide: BorderSide.none,
                 splashColor: Colors.transparent,
