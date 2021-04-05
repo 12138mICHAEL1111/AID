@@ -24,8 +24,8 @@
                     </el-table-column>
                     <el-table-column
                     prop="axious"
-                    label="axious"
-                    width="70">
+                    label="anxious"
+                    width="75">
                     </el-table-column>
                     <el-table-column
                     prop="happy"
@@ -55,8 +55,8 @@
                         </el-table-column>
                         <el-table-column
                         prop="axious"
-                        label="axious"
-                        width="70">
+                        label="anxious"
+                        width="75">
                         </el-table-column>
                         <el-table-column
                         prop="happy"
