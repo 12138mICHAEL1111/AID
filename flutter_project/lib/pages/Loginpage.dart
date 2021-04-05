@@ -81,13 +81,13 @@ class _LoginpageState extends State<Loginpage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(MediaQuery.of(context).size.width * 0.142,
+            offset: Offset(MediaQuery.of(context).size.width * 0.071,
                 MediaQuery.of(context).size.height * 0.039),
             child: Text(
               '\nWelcome back to \n        A•I•D!',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: MediaQuery.of(context).size.height * 0.0888,
+                fontSize: MediaQuery.of(context).size.height * 0.05,
                 color: const Color(0xfff8f4f4),
               ),
               textAlign: TextAlign.left,
@@ -116,7 +116,7 @@ class _LoginpageState extends State<Loginpage> {
               'Account ID: ',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: MediaQuery.of(context).size.height * 0.092,
+                fontSize: MediaQuery.of(context).size.height * 0.04,
                 color: const Color(0xfff8c16f),
               ),
               textAlign: TextAlign.left,
@@ -146,7 +146,7 @@ class _LoginpageState extends State<Loginpage> {
               'Password:',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: MediaQuery.of(context).size.height * 0.092,
+                fontSize: MediaQuery.of(context).size.height * 0.04,
                 color: const Color(0xfff8c16f),
               ),
               textAlign: TextAlign.left,
