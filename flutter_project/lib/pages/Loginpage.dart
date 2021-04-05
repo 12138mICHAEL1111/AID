@@ -67,8 +67,8 @@ class _LoginpageState extends State<Loginpage> {
         children: <Widget>[
           // Adobe XD layer: '007 Sunny Morning' (shape)
           Container(
-            width: 428.0,
-            height: 419.0,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.4572,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(60.0),
@@ -81,7 +81,8 @@ class _LoginpageState extends State<Loginpage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(49.0, 55.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.142,
+                MediaQuery.of(context).size.height * 0.039),
             child: Text(
               '\nWelcome back to \n        A•I•D!',
               style: TextStyle(
@@ -93,12 +94,13 @@ class _LoginpageState extends State<Loginpage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(117.0, 208.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.2734,
+                MediaQuery.of(context).size.height * 0.2369),
             child:
                 // Adobe XD layer: 'WechatIMG1138的副本' (shape)
                 Container(
-              width: 195.0,
-              height: 180.0,
+              width: MediaQuery.of(context).size.width * 0.4556,
+              height: MediaQuery.of(context).size.height * 0.205,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/logoOfMenu.png'),
@@ -108,7 +110,8 @@ class _LoginpageState extends State<Loginpage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(49.0, 444.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.1145,
+                MediaQuery.of(context).size.height * 0.5057),
             child: Text(
               'Account ID: ',
               style: TextStyle(
@@ -120,7 +123,8 @@ class _LoginpageState extends State<Loginpage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(69.0, 502.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.1612,
+                MediaQuery.of(context).size.height * 0.57175),
             child: Container(
               child: TextField(
                 decoration: InputDecoration(
@@ -131,12 +135,13 @@ class _LoginpageState extends State<Loginpage> {
                   this.id = value;
                 },
               ),
-              width: 276.0,
-              height: 48.0,
+              width: MediaQuery.of(context).size.width * 0.64486,
+              height: MediaQuery.of(context).size.height * 0.05467,
             ),
           ),
           Transform.translate(
-            offset: Offset(49.0, 570.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.1145,
+                MediaQuery.of(context).size.height * 0.6492),
             child: Text(
               'Password:',
               style: TextStyle(
@@ -148,7 +153,8 @@ class _LoginpageState extends State<Loginpage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(69.0, 628.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.1612,
+                MediaQuery.of(context).size.height * 0.71526),
             child: Container(
               child: TextField(
                 obscureText: true,
@@ -160,14 +166,15 @@ class _LoginpageState extends State<Loginpage> {
                   this.password = value;
                 },
               ),
-              width: 276.0,
-              height: 48.0,
+              width: MediaQuery.of(context).size.width * 0.64486,
+              height: MediaQuery.of(context).size.height * 0.05467,
             ),
           ),
 
           //Login button
           Transform.translate(
-              offset: Offset(130.0, 710.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.3037,
+                  MediaQuery.of(context).size.height * 0.80866),
               child: SizedBox(
                 width: 160,
                 height: 40,
@@ -179,7 +186,8 @@ class _LoginpageState extends State<Loginpage> {
               )),
           //Reset password button
           Transform.translate(
-              offset: Offset(130.0, 760.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.3037,
+                  MediaQuery.of(context).size.height * 0.8656),
               child: SizedBox(
                 width: 160,
                 height: 40,
@@ -193,7 +201,8 @@ class _LoginpageState extends State<Loginpage> {
                 ),
               )),
           Transform.translate(
-              offset: Offset(130.0, 810.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.3037,
+                  MediaQuery.of(context).size.height * 0.92255),
               child: SizedBox(
                 width: 160,
                 height: 40,
