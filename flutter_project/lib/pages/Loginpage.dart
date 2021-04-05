@@ -87,7 +87,7 @@ class _LoginpageState extends State<Loginpage> {
               '\nWelcome back to \n        A•I•D!',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 40,
+                fontSize: MediaQuery.of(context).size.height * 0.0888,
                 color: const Color(0xfff8f4f4),
               ),
               textAlign: TextAlign.left,
@@ -116,7 +116,7 @@ class _LoginpageState extends State<Loginpage> {
               'Account ID: ',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 30,
+                fontSize: MediaQuery.of(context).size.height * 0.092,
                 color: const Color(0xfff8c16f),
               ),
               textAlign: TextAlign.left,
@@ -146,7 +146,7 @@ class _LoginpageState extends State<Loginpage> {
               'Password:',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 30,
+                fontSize: MediaQuery.of(context).size.height * 0.092,
                 color: const Color(0xfff8c16f),
               ),
               textAlign: TextAlign.left,
