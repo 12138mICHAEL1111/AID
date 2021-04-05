@@ -83,7 +83,7 @@ class _LoginpageState extends State<Loginpage> {
           Transform.translate(
             offset: Offset(49.0, 55.0),
             child: Text(
-              '\nWelcome back to \n        Traveling!',
+              '\nWelcome back to \n        A•I•D!',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 40,

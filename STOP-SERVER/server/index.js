@@ -10,7 +10,9 @@ require("./routes/admin")(app)
 require("./routes/web")(app)
 
 app.set('secret', "er234r123fwer")
-
-app.listen(3000,()=>{
+app.use('/admin',express.static(__dirname+'/admin'))
+app.use('/',express.static(__dirname+'/web'))
+var PORT = process.env.PORT || 3000
+app.listen(PORT,()=>{
     console.log('http://localhost:3000');
 });
