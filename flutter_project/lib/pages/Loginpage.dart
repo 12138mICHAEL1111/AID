@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_project/pages/Homepage.dart';
 
 import '../config/Config.dart';
@@ -23,10 +24,29 @@ class _LoginpageState extends State<Loginpage> {
   String password;
   var _itemNumber;
   var _sessionNumber;
+  //var _categorySelected;
 
   @override
   void initState() {
     super.initState();
+    //_categorySelected = false;
+  }
+
+  // categorySelected() async {
+  //   var api = '${Config.domain}/rest/users/uploadcategory';
+  //   var response = await Dio().get(api);
+  //   if (compareData(response.data[0]["category"], "Not selected") == false) {
+  //     _categorySelected = true;
+  //   }
+  //   print(response.data[0]["category"]);
+  //   print(compareData(response.data[0]["category"], "Not selected"));
+  // }
+
+  bool compareString(String string1, String string2) {
+    if (string1 == null || string2 == null) {
+      return false;
+    }
+    return string1.toLowerCase() == string2.toLowerCase();
   }
 
   login() async {
@@ -41,16 +61,18 @@ class _LoginpageState extends State<Loginpage> {
       pref.setString('item', json.encode(response.data['currentitem']));
       pref.setString('session', json.encode(response.data['currentsession']));
 
-      print("login successfully");
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => Homepage(
-                  itemNumber: int.parse(pref.get('item')),
-                  sessionNumber: int.parse(pref.get('session')),
-                )),
-      );
+      if (compareString(response.data['category'], 'Not selected') == true) {
+        Navigator.pushNamed(context, '/select');
+      } else {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => Homepage(
+                    itemNumber: int.parse(pref.get('item')),
+                    sessionNumber: int.parse(pref.get('session')),
+                  )),
+        );
+      }
     } else {
       Fluttertoast.showToast(
           msg: '${response.data["message"]}',

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import 'package:adobe_xd/page_link.dart';
-import './Selectcategoriespage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/dio.dart';
 import '../config/Config.dart';
@@ -24,16 +22,16 @@ class _Practicepage2State extends State<Practicepage2> {
     _next = false;
     _feedback = "";
     _pressed = false;
-    _getData();
+    getData();
   }
 
-  _getData() async {
+  getData() async {
     var api = '${Config.domain}/rest/practiseitems';
     var response = await Dio().get(api);
     _answer = response.data[0]['answer2'];
   }
 
-  bool _validateData(value) {
+  bool validateData(value) {
     if (_answer == value) {
       setState(() {
         _feedback = '✔ Great, this is a good answer!';
@@ -134,6 +132,7 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(144.0, 113.0),
             child:
@@ -150,6 +149,7 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(285.3, 89.0),
             child: SizedBox(
@@ -165,6 +165,7 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
+          
           Transform.translate(
             offset: Offset(82.8, 258.0),
             child: SizedBox(
@@ -180,29 +181,7 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
-          // Transform.translate(
-          //   offset: Offset(109.0, 451.0),
-          //   child: PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.Fade,
-          //         ease: Curves.linear,
-          //         duration: 1.0,
-          //         pageBuilder: () => Practice2Wrongpage(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 218.0,
-          //       height: 41.0,
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(20.0),
-          //         color: const Color(0xffffffff),
-          //         border:
-          //             Border.all(width: 1.0, color: const Color(0xff707070)),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+ 
           Transform.translate(
             offset: Offset(120.6, 458.0),
             child: FlatButton(
@@ -222,33 +201,10 @@ class _Practicepage2State extends State<Practicepage2> {
                   textAlign: TextAlign.center,
                 ),
                 onPressed: () {
-                  _validateData("Yes");
+                  validateData("Yes");
                 }),
           ),
-          // Transform.translate(
-          //   offset: Offset(109.0, 524.0),
-          //   child: PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.Fade,
-          //         ease: Curves.linear,
-          //         duration: 1.0,
-          //         pageBuilder: () => Practice2Correctpage(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 218.0,
-          //       height: 41.0,
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(20.0),
-          //         color: const Color(0xffffffff),
-          //         border:
-          //             Border.all(width: 1.0, color: const Color(0xff707070)),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
+          
           Transform.translate(
             offset: Offset(120.6, 531.0),
             child: FlatButton(
@@ -268,7 +224,7 @@ class _Practicepage2State extends State<Practicepage2> {
                   textAlign: TextAlign.center,
                 ),
                 onPressed: () {
-                  _validateData("No");
+                  validateData("No");
                 }),
           ),
 
@@ -293,7 +249,7 @@ class _Practicepage2State extends State<Practicepage2> {
             child: SizedBox(
               width: 211.0,
               child: Text(
-                "${_feedback}",
+                "$_feedback",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 21,
@@ -352,31 +308,6 @@ class _Practicepage2State extends State<Practicepage2> {
               },
             ),
           ),
-          // Transform.translate(
-          //   offset: Offset(20.0, 42.0),
-          //   child:
-          //       // Adobe XD layer: 'jiantou' (shape)
-          //       PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.PushRight,
-          //         ease: Curves.easeIn,
-          //         duration: 1.0,
-          //         pageBuilder: () => Practicepage1(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 50.0,
-          //       height: 50.0,
-          //       decoration: BoxDecoration(
-          //         image: DecorationImage(
-          //           image: const AssetImage('assets/images/goback.png'),
-          //           fit: BoxFit.fill,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

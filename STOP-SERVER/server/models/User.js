@@ -9,7 +9,8 @@ const schema = new mongoose.Schema({
         type: Boolean
     },
     category: {
-        type: String
+        type: String,
+        default: "Not selected"
     },
     sessiontime: {
         session1: { type: String },

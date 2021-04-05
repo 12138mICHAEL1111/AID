@@ -261,7 +261,7 @@ module.exports= app=>{
           else {
             await req.Model.updateMany({currentuser: true}, { currentuser: false })
             await req.Model.findOneAndUpdate({userid:req.body.userid}, { currentuser: true })
-              res.send({"message":"success","userid":req.body.userid,"controlitem":findUser.controlitem,"currentuser": true,"currentitem":findUser.currentitem, "currentsession":findUser.currentsession})
+              res.send({"message":"success","userid":req.body.userid,"controlitem":findUser.controlitem,"currentuser": true,"currentitem":findUser.currentitem, "currentsession":findUser.currentsession, "category":findUser.category})
           }
         }
     })

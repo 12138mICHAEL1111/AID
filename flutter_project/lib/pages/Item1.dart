@@ -124,12 +124,12 @@ class _Item1State extends State<Item1> {
       _itemNumber = 1;
     }
     _questionNumber = 1;
-    _getData();
+    getData();
   }
 
-  _sendData() async {
+  sendData() async {
     var api = '${Config.domain}/rest/response/senddata';
-    var response = await Dio().post(api, data: {
+    await Dio().post(api, data: {
       "userid": _id,
       "trailNumber": _itemNumber,
       "category": _category,
@@ -145,18 +145,15 @@ class _Item1State extends State<Item1> {
       "questionRT2": _questionRT2?.inMilliseconds.toString(),
       "questionAccuracy2": _questionAccuracy2
     });
-    if (response.data["message"] == 'success') {
-      print(response.data);
-    }
   }
 
-  _uploadProgress() async {
+  uploadProgress() async {
     var api = '${Config.domain}/rest/users/uploadprogress';
     await Dio().post(api,
         data: {"id": _id, "session": _sessionNumber, "item": _itemNumber});
   }
 
-  _getData() async {
+  getData() async {
     var api = '${Config.domain}/rest/users/uploadcategory';
     var response = await Dio().get(api);
     var currentUser = response.data[0];
@@ -174,10 +171,10 @@ class _Item1State extends State<Item1> {
     var response2 = await Dio().get(api2);
     _items = response2.data;
 
-    _processData(_itemNumber - 1);
+    processData(_itemNumber - 1);
   }
 
-  void _processData(int i) {
+  void processData(int i) {
     _word = _items[i]["word"];
     _tempBlank = _items[i]["blank"];
     _situation = _items[i]["situation"];
@@ -190,11 +187,10 @@ class _Item1State extends State<Item1> {
     for (var i = 0; i < _context.length - 1; i++) {
       _context[i] = _context[i] + ". ";
     }
-    print(_context);
-    _changeState(i);
+    changeState(i);
   }
 
-  void _changeState(int i) {
+  void changeState(int i) {
     setState(() {
       if (_questionNumber == 1) {
         _question = _items[i]["question1"];
@@ -202,8 +198,8 @@ class _Item1State extends State<Item1> {
         _answer = _items[i]["answer1"];
         _displayOption2_1 = null;
         _displayOption2_2 = null;
-        _displayText();
-        _updateQuestion();
+        displayText();
+        updateQuestion();
       } else {
         _question = _items[i]["question2"];
         _answer = _items[i]["answer2"];
@@ -211,27 +207,27 @@ class _Item1State extends State<Item1> {
         _newText = _question;
         _hint = "Choose an option";
         _child = null;
-        _updateQuestion();
-        _updateOption2();
+        updateQuestion();
+        updateOption2();
       }
     });
     _startReading = DateTime.now();
   }
 
   // Toggle between 1st and 2nd question in a single item.
-  void _toggle() {
+  void toggle() {
     if (_questionNumber == 1) {
       _questionNumber = 2;
-      _processData(_itemNumber - 1);
+      processData(_itemNumber - 1);
     } else {
       _questionNumber = 1;
-      _sendData();
-      _route();
+      sendData();
+      route();
     }
   }
 
   // Route according to whether current user has been given control items or training items.
-  void _route() {
+  void route() {
     if (_control == false) {
       //training items have imagination page, control dont
       Navigator.push(
@@ -256,7 +252,7 @@ class _Item1State extends State<Item1> {
         );
       } else {
         _itemNumber = _itemNumber + 1;
-        _uploadProgress();
+        uploadProgress();
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -269,7 +265,7 @@ class _Item1State extends State<Item1> {
     }
   }
 
-  void _displayText() {
+  void displayText() {
     if (_index == 0) {
       _newText = _context[0];
     } else {
@@ -278,26 +274,21 @@ class _Item1State extends State<Item1> {
       if (_index == _context.length - 1) {
         _blank = _tempBlank;
         _hint = 'Type in the first missing letter';
-        _chooseToDisplayWord();
+        chooseToDisplayWord();
       }
     }
   }
 
-  void _countReadingTime() {
-    _wordDisplay = DateTime.now();
-    _readingDuration = _wordDisplay.difference(_startReading);
-  }
-
-  void _chooseToDisplayWord() {
+  void chooseToDisplayWord() {
     if (_next == true) {
-      _displayWord();
+      displayWord();
     } else {
-      _displayBlank();
-      _countReadingTime();
+      displayBlank();
+      countReadingTime();
     }
   }
 
-  void _displayWord() {
+  void displayWord() {
     _child = Text.rich(
       TextSpan(
         style: TextStyle(
@@ -311,7 +302,7 @@ class _Item1State extends State<Item1> {
     );
   }
 
-  void _displayBlank() {
+  void displayBlank() {
     _child = TextField(
       textAlign: TextAlign.center,
       decoration: InputDecoration(
@@ -327,12 +318,12 @@ class _Item1State extends State<Item1> {
         if (_lastInputLength <= value.length) {
           _inputTimes++;
         }
-        _validateData(value);
-        _countWordRT();
-        _recordAnswer();
+        validateData(value);
+        countWordRT();
+        recordAnswer();
         _lastInputLength = value.length;
         setState(() {
-          _chooseToDisplayWord();
+          chooseToDisplayWord();
         });
       },
       style: TextStyle(
@@ -342,15 +333,7 @@ class _Item1State extends State<Item1> {
     );
   }
 
-  void _countWordRT() {
-    if (_inputTimes == 1) {
-      _wordRT1 = DateTime.now().difference(_wordDisplay);
-    } else if (_inputTimes == 2) {
-      _wordRT2 = DateTime.now().difference(_clueDisplay);
-    }
-  }
-
-  void _updateQuestion() {
+  void updateQuestion() {
     _displayQuestion = Transform.translate(
       offset: Offset(45.9, 253.0),
       child: SizedBox(
@@ -378,7 +361,7 @@ class _Item1State extends State<Item1> {
     );
   }
 
-  void _updateOption2() {
+  void updateOption2() {
     _displayOption2_1 = Transform.translate(
       offset: Offset(120.6, 458.0),
       child: FlatButton(
@@ -399,9 +382,9 @@ class _Item1State extends State<Item1> {
           ),
           onPressed: () {
             _clickTimes++;
-            _next = _validateData("Yes");
-            _countQuestionRT();
-            _recordAnswer();
+            _next = validateData("Yes");
+            countQuestionRT();
+            recordAnswer();
           }),
     );
 
@@ -425,14 +408,14 @@ class _Item1State extends State<Item1> {
           ),
           onPressed: () {
             _clickTimes++;
-            _next = _validateData("No");
-            _countQuestionRT();
-            _recordAnswer();
+            _next = validateData("No");
+            countQuestionRT();
+            recordAnswer();
           }),
     );
   }
 
-  void _countQuestionRT() {
+  void countQuestionRT() {
     if (_clickTimes == 1) {
       _optionClicked = DateTime.now();
       _questionRT1 = _optionClicked.difference(_startReading);
@@ -441,14 +424,20 @@ class _Item1State extends State<Item1> {
     }
   }
 
-  bool _compareData(String string1, String string2) {
-    if (string1 == null || string2 == null) {
-      return false;
+  void countWordRT() {
+    if (_inputTimes == 1) {
+      _wordRT1 = DateTime.now().difference(_wordDisplay);
+    } else if (_inputTimes == 2) {
+      _wordRT2 = DateTime.now().difference(_clueDisplay);
     }
-    return string1.toLowerCase() == string2.toLowerCase();
   }
 
-  void _recordAnswer() {
+  void countReadingTime() {
+    _wordDisplay = DateTime.now();
+    _readingDuration = _wordDisplay.difference(_startReading);
+  }
+
+  void recordAnswer() {
     if (_questionNumber == 1) {
       // question1
       if (_inputTimes == 1) {
@@ -486,8 +475,15 @@ class _Item1State extends State<Item1> {
     }
   }
 
-  bool _validateData(value) {
-    if (_compareData(_answer, value)) {
+  bool compareData(String string1, String string2) {
+    if (string1 == null || string2 == null) {
+      return false;
+    }
+    return string1.toLowerCase() == string2.toLowerCase();
+  }
+
+  bool validateData(value) {
+    if (compareData(_answer, value)) {
       setState(() {
         _feedback = '✔ Great, this is a good answer!';
       });
@@ -690,11 +686,11 @@ class _Item1State extends State<Item1> {
                 _index++;
                 if (_index < _context.length) {
                   setState(() {
-                    _displayText();
-                    _updateQuestion();
+                    displayText();
+                    updateQuestion();
                   });
                 } else if (_next == true) {
-                  _toggle();
+                  toggle();
                 }
               },
             ),
