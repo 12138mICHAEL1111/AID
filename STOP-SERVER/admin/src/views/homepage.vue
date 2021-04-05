@@ -21,6 +21,7 @@
          <br><br>
 
          <el-button type="primary" @click="testApi">接口测试</el-button>
+         <el-button type="primary" @click="testApi2">接口测试2</el-button>
          <a>可以在admin/src/views/homepage.vue 里的testapi方法里更改接口 摁f12 console控制台查看输出</a>
     </div>
 </template>
@@ -110,8 +111,11 @@ export default {
              }
         },
         async testApi(){
-            const res = await this.$http.post('/rest/users/getemail',{"userid":"AA001"})
-
+            const res = await this.$http.post('/rest/users/signup',{"email":"AA001","password":'123456'})
+            console.log(res.data)
+        },
+        async testApi2(){
+             const res = await this.$http.get('/rest/controlitems')
             console.log(res.data)
         }
     }
