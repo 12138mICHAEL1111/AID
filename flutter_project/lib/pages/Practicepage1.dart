@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
-import 'package:flutter_project/pages/Introductionpage.dart';
-import './Practicepage2.dart';
-import 'package:adobe_xd/page_link.dart';
 import '../config/Config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/dio.dart';
@@ -14,8 +11,18 @@ class Practicepage1 extends StatefulWidget {
 
 class _Practicepage1State extends State<Practicepage1> {
   var _answer;
+  var _question;
   var _next;
   var _feedback;
+  var _context;
+  var _text;
+  var _newText;
+  var _blank;
+  var _tempBlank;
+  var _index;
+  var _hint;
+  var _word;
+  var _child;
 
   @override
   void initState() {
@@ -23,6 +30,15 @@ class _Practicepage1State extends State<Practicepage1> {
     _answer = "";
     _next = false;
     _feedback = "";
+    _context = [];
+    _text = "";
+    _question = "";
+    _blank = "";
+    _tempBlank = "";
+    _newText = "";
+    _index = 0;
+    _hint = "";
+    _word = "";
     _getData();
   }
 
@@ -30,6 +46,16 @@ class _Practicepage1State extends State<Practicepage1> {
     var api = '${Config.domain}/rest/practiseitems';
     var response = await Dio().get(api);
     _answer = response.data[0]['answer1'];
+    _question = response.data[0]['question1'];
+    _tempBlank = response.data[0]['blank'];
+    var _temp = response.data[0]['context'];
+    _context = _temp.split('.');
+    _context.removeWhere((value) => value == "");
+    for (var i = 0; i < _context.length; i++) {
+      _context[i] = _context[i] + ".";
+    }
+    _context.add(_question);
+    _displayText();
   }
 
   bool _compareData(String string1, String string2) {
@@ -42,6 +68,7 @@ class _Practicepage1State extends State<Practicepage1> {
   bool _validateData(value) {
     if (_compareData(_answer, value)) {
       setState(() {
+        _word = "milk";
         _feedback = '✔ Great, this is a good answer!';
       });
       return _next = true;
@@ -51,6 +78,62 @@ class _Practicepage1State extends State<Practicepage1> {
       });
       return _next = false;
     }
+  }
+
+  void _displayText() {
+    if (_index == 0) {
+      setState(() {
+        _newText = _context[0];
+      });
+    } else {
+      setState(() {
+        _text = _text + _newText;
+        _newText = _context[_index];
+        if (_index == _context.length - 1) {
+          _blank = _tempBlank;
+          _hint = 'Type in the first missing letter';
+          displayWord();
+        }
+      });
+    }
+  }
+
+  void displayWord() {
+    setState(() {
+      if (_next == true) {
+        _child = Text.rich(
+          TextSpan(
+            style: TextStyle(
+              fontFamily: 'ZiZhiQuXiMaiTi',
+              fontSize: 43,
+              color: const Color(0xfffaae7c),
+            ),
+            text: _word,
+          ),
+          textAlign: TextAlign.center,
+        );
+      } else {
+        _child = TextField(
+          textAlign: TextAlign.center,
+          decoration: InputDecoration(
+              labelText: _blank,
+              labelStyle: TextStyle(
+                fontSize: 40,
+              ),
+              isDense: true,
+              contentPadding: EdgeInsets.symmetric(horizontal: 50),
+              border: InputBorder.none),
+          onChanged: (value) {
+            _validateData(value);
+            displayWord();
+          },
+          style: TextStyle(
+            fontSize: 45,
+            color: const Color(0xfffaae7c),
+          ),
+        );
+      }
+    });
   }
 
   @override
@@ -377,9 +460,10 @@ class _Practicepage1State extends State<Practicepage1> {
                     color: const Color(0xff000000),
                   ),
                   children: [
+                    TextSpan(text: _text),
                     TextSpan(
-                      text:
-                          'You turn the kettle on and wait\n for the water to boil.\n\nYou get a teabag out of the tin,\nwhich you put into a mug, and \npour the boiling water onto the\n teabag.\n\nNext, you add the…\n',
+                      text: _newText,
+                      style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),
@@ -390,23 +474,29 @@ class _Practicepage1State extends State<Practicepage1> {
             ),
           ),
 
+          // Transform.translate(
+          //     offset: Offset(110, 503.0),
+          //     child: Container(
+          //       width: 250.0,
+          //       child: Text.rich(
+          //         TextSpan(
+          //           style: TextStyle(
+          //             fontFamily: 'ZiZhiQuXiMaiTi',
+          //             fontSize: 21,
+          //             color: const Color(0xff000000),
+          //           ),
+          //           children: [
+          //             TextSpan(text: _word),
+          //           ],
+          //         ),
+          //       ),
+          //     )),
+
           Transform.translate(
-              offset: Offset(110, 503.0),
+              offset: Offset(51, 513.0),
               child: Container(
-                width: 250.0,
-                child: TextField(
-                  decoration: InputDecoration(
-                      labelText: "m _ _ k",
-                      contentPadding: EdgeInsets.all(0),
-                      border: InputBorder.none),
-                  onChanged: (value) {
-                    _validateData(value);
-                  },
-                  style: TextStyle(
-                    fontSize: 55,
-                    color: const Color(0xfffaae7c),
-                  ),
-                ),
+                width: 330.0,
+                child: _child,
               )),
 
           Transform.translate(
@@ -446,7 +536,7 @@ class _Practicepage1State extends State<Practicepage1> {
             child: SizedBox(
               width: 233.0,
               child: Text(
-                'Type in the first missing letter',
+                _hint,
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 15,
@@ -494,6 +584,10 @@ class _Practicepage1State extends State<Practicepage1> {
                 textAlign: TextAlign.center,
               ),
               onPressed: () {
+                _index++;
+                if (_index < _context.length) {
+                  _displayText();
+                }
                 if (_next == true) {
                   Navigator.pushNamed(context, '/practice2');
                 }

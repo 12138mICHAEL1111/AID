@@ -37,21 +37,6 @@ class _IntroductionPageState extends State<IntroductionPage> {
           ),
           Container(),
           Transform.translate(
-            offset: Offset(-66.1, 95.0),
-            child: SizedBox(
-              width: 398.0,
-              child: Text(
-                '                     <Island Here>',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 30,
-                  color: const Color(0xffffffff),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Transform.translate(
             offset: Offset(40.0, 152.0),
             child: Container(
               width: 331.0,
@@ -59,36 +44,6 @@ class _IntroductionPageState extends State<IntroductionPage> {
               decoration: BoxDecoration(
                 color: const Color(0x01ffffff),
                 border: Border.all(width: 1.0, color: const Color(0x01707070)),
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(-6.0, 152.0),
-            child: SizedBox(
-              width: 440.0,
-              child: Text(
-                'This is a game that takes you around the UK. \nWe will go to four famous cities in the UK:\n London, Cardiff, Edinburgh and Belfast. \nWhenever you complete a session, \nwe will appreciate the scenery of a city (region)！',
-                style: TextStyle(
-                  fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 17,
-                  color: const Color(0xffffffff),
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(41.0, 274.0),
-            child:
-                // Adobe XD layer: 'tower-bridge-441853…' (shape)
-                Container(
-              width: 347.0,
-              height: 230.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage(''),
-                  fit: BoxFit.fill,
-                ),
               ),
             ),
           ),
@@ -149,6 +104,20 @@ class _IntroductionPageState extends State<IntroductionPage> {
               color: Colors.white,
               onPressed: next,
             ),
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(117.0, 209.0),
+            child:
+                Container(
+              width: 195.0,
+              height: 180.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/logoOfStart.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
             ),
           ),
         ],

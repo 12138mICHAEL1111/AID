@@ -1,13 +1,33 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_project/pages/Signuppage.dart';
+import 'package:http_mock_adapter/http_mock_adapter.dart';
+import 'package:mockito/mockito.dart';
+
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
+  final mockObserver = MockNavigatorObserver();
+  final dio = Dio();
+  final dioAdapter = DioAdapter();
+  dio.httpClientAdapter = dioAdapter;
+  var path = '${Config.domain}/rest/users/signup';
+
   Widget createWidgetForTesting({Widget child}) {
     return MaterialApp(
       home: child,
+      navigatorObservers: [mockObserver],
     );
   }
+
+  test('test Dio', () async {
+    dioAdapter.onPost(path).reply(200, {'message': 'success'});
+
+    final onPostResponse = await dio.post(path);
+    print(onPostResponse.data); // {message: Successfully mocked POST!}
+  });
 
   testWidgets('Sign up page content test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Signuppage()));
@@ -38,9 +58,10 @@ void main() {
   testWidgets('Sign up page click test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Signuppage()));
     await tester.pumpAndSettle();
-    final fBtn = find.byType(FlatButton);
-    await tester.tap(fBtn);
-    await tester.pump();
+    final signUpBtn = find.widgetWithText(FlatButton, "Sign Up");
+    await tester.tap(signUpBtn);
+    await tester.pumpAndSettle();
+    verify(mockObserver.didPush(any, any));
   });
 
   testWidgets('Sign up page input test', (WidgetTester tester) async {

@@ -26,23 +26,30 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
   void initState() {
     super.initState();
     _list = new List(size + 1);
-    _list[0] = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-    _list[1] = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-    _list[2] = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-    _list[3] = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
-    _list[4] = new DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    init();
+    _list[0] = new DateTime(
+        DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    _list[1] = new DateTime(
+        DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    _list[2] = new DateTime(
+        DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    _list[3] = new DateTime(
+        DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    _list[4] = new DateTime(
+        DateTime.now().year, DateTime.now().month, DateTime.now().day);
     //init();
   }
 
   bool check() {
-    for(int i = 4; i > 1; --i) {
+    for (int i = 4; i > 1; --i) {
       print(_list[i].toUtc().millisecondsSinceEpoch);
-      print(_list[i-1].toUtc().millisecondsSinceEpoch);
-      if(_list[i].toUtc().millisecondsSinceEpoch < _list[i-1].toUtc().millisecondsSinceEpoch) return false;
+      print(_list[i - 1].toUtc().millisecondsSinceEpoch);
+      if (_list[i].toUtc().millisecondsSinceEpoch <
+          _list[i - 1].toUtc().millisecondsSinceEpoch) return false;
     }
     return true;
   }
-  
+
   _showToast() {
     Fluttertoast.showToast(
         msg: "Please select in chronological order",
@@ -51,16 +58,22 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
         timeInSecForIosWeb: 1,
         backgroundColor: Colors.red,
         textColor: Colors.white,
-        fontSize: 16.0
-    );
+        fontSize: 16.0);
   }
 
   void init() async {
     pref = await SharedPreferences.getInstance();
-    for (int i = 1; i <= size; ++i) {
-      if (pref.get("session$i") != null) {
-        _list[i] = DateTime.parse(pref.get("session$i"));
+    var api = '${Config.domain}/rest/users/uploadcategory';
+    var response = await Dio().get(api);
+    var sessionTime = response.data[0]["sessiontime"];
+    print(sessionTime);
+    if (sessionTime != null) {
+      for (int i = 1; i <= size; ++i) {
+        setState(() {
+          _list[i] = DateTime.parse(sessionTime["session$i"]);
+        });
       }
+      //uploadLocal();
     }
   }
 
@@ -204,36 +217,42 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
         platformChannelSpecifics);
   }
 
-  upload() async {
-    if(!check()) {
-      _showToast();
-    } else {
-      pref = await SharedPreferences.getInstance();
-      pref.setString("session1", formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
-      pref.setString("session2", formatDate(_list[2], [yyyy, '-', mm, '-', dd]));
-      pref.setString("session3", formatDate(_list[3], [yyyy, '-', mm, '-', dd]));
-      pref.setString("session4", formatDate(_list[4], [yyyy, '-', mm, '-', dd]));
-      Navigator.of(context).pushNamed('/over');
-      var api = '${Config.domain}/rest/users/uploadsessiontime';
-      var id = pref.get("userid");
-      scheduleNotificationOne();
-      scheduleNotificationTwo();
-      scheduleNotificationThree();
-      scheduleNotificationFour();
+  // uploadLocal() async {
+  //   if (!check()) {
+  //     _showToast();
+  //   } else {
+  //     pref = await SharedPreferences.getInstance();
+  //     pref.setString(
+  //         "session1", formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
+  //     pref.setString(
+  //         "session2", formatDate(_list[2], [yyyy, '-', mm, '-', dd]));
+  //     pref.setString(
+  //         "session3", formatDate(_list[3], [yyyy, '-', mm, '-', dd]));
+  //     pref.setString(
+  //         "session4", formatDate(_list[4], [yyyy, '-', mm, '-', dd]));
+  //   }
+  // }
 
-      var response = await Dio().post(api, data: {
-        "userid": id,
-        "sessiontime": {
-          "session1": formatDate(_list[1], [yyyy, '-', mm, '-', dd]),
-          "session2": formatDate(_list[2], [yyyy, '-', mm, '-', dd]),
-          "session3": formatDate(_list[3], [yyyy, '-', mm, '-', dd]),
-          "session4": formatDate(_list[4], [yyyy, '-', mm, '-', dd])
-        }
-      });
+  uploadRemote() async {
+    var api = '${Config.domain}/rest/users/uploadsessiontime';
+    var id = pref.get("userid");
+    scheduleNotificationOne();
+    scheduleNotificationTwo();
+    scheduleNotificationThree();
+    scheduleNotificationFour();
 
-      if (response.data["message"] == 'success') {
-        print(response.data);
+    var response = await Dio().post(api, data: {
+      "userid": id,
+      "sessiontime": {
+        "session1": formatDate(_list[1], [yyyy, '-', mm, '-', dd]),
+        "session2": formatDate(_list[2], [yyyy, '-', mm, '-', dd]),
+        "session3": formatDate(_list[3], [yyyy, '-', mm, '-', dd]),
+        "session4": formatDate(_list[4], [yyyy, '-', mm, '-', dd])
       }
+    });
+
+    if (response.data["message"] == 'success') {
+      print(response.data);
     }
   }
 
@@ -473,159 +492,130 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                   })),
 
           Transform.translate(
-            offset: Offset(129.0, 744.0),
+              offset: Offset(129.0, 744.0),
+              child: Container(
+                  width: 171.0,
+                  height: 62.0,
+                  child: FlatButton(
+                    onPressed: () {
+                      if (!check()) {
+                        _showToast();
+                      } else {
+                        uploadRemote();
+                        Navigator.of(context).pushNamed('/over');
+                      }
+                    },
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(25))),
+                    color: const Color(0xffffffff),
+                    child: Center(
+                        child: Text(
+                      "Save",
+                      style: TextStyle(
+                        fontFamily: 'ZiZhiQuXiMaiTi',
+                        fontSize: 41,
+                        color: const Color(0xfffdb56f),
+                      ),
+                    )),
+                  ))),
+
+          Transform.translate(
+            offset: Offset(0.0, 831.0),
             child: Container(
-              width: 171.0,
-              height: 62.0,
-              child: FlatButton(
-                onPressed: upload,
-                shape: 
-                  RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(25))),
-                color: const Color(0xffffffff),
-                child: Center(
-                  child: Text(
-                    "Save",
-                    style: TextStyle(
-                    fontFamily: 'ZiZhiQuXiMaiTi',
-                    fontSize: 41,
-                    color: const Color(0xfffdb56f),
-                    ),
-                  )
+              width: 428.0,
+              height: 95.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(45.0),
+                  topRight: Radius.circular(45.0),
                 ),
-              )
-            )
-          )
+                color: const Color(0xffffffff),
+              ),
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(42.0, 849.0),
+            child: Container(
+              width: 58.0,
+              height: 58.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/gray_home.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
 
-          // Transform.translate(
-          //   offset: Offset(120.2, 644.0),
-          //   child: Container(
-          //     width: 171.0,
-          //     height: 62.0,
-          //     child: FlatButton(
-          //       onPressed: () {
-          //         if(check()) upload();
-          //         else _showToast();
-          //       },
-          //       shape: RoundedRectangleBorder(
-          //           borderRadius: BorderRadius.all(Radius.circular(25))),
-          //           color: Color(0xffffffff),
-          //       child: Center(
-          //         child: Text(
-          //           "Next",
-          //           style: TextStyle(
-          //             fontFamily: 'ZiZhiQuXiMaiTi',
-          //             fontSize: 24,
-          //             color: Colors.black,
-          //           ),
-          //           textAlign: TextAlign.center,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // Transform.translate(
-          //   offset: Offset(0.0, 831.0),
-          //   child: Container(
-          //     width: 428.0,
-          //     height: 95.0,
-          //     decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.only(
-          //         topLeft: Radius.circular(45.0),
-          //         topRight: Radius.circular(45.0),
-          //       ),
-          //       color: const Color(0xffffffff),
-          //     ),
-          //   ),
-          // ),
-          // Transform.translate(
-          //   offset: Offset(42.0, 849.0),
-          //   child:
-          //       // Adobe XD layer: '主页' (shape)
-          //       PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.PushRight,
-          //         ease: Curves.slowMiddle,
-          //         duration: 1.0,
-          //         pageBuilder: () => Homepage(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 58.0,
-          //       height: 58.0,
-          //       decoration: BoxDecoration(
-          //         image: DecorationImage(
-          //           image: const AssetImage('assets/images/gray_home.png'),
-          //           fit: BoxFit.fill,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
+          Transform.translate(
+            offset: Offset(42.0, 849.0),
+            child: SizedBox(
+              width: 58.0,
+              height: 58.0,
+              child: OutlineButton(
+                borderSide: BorderSide.none,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    "/homepage",
+                  );
+                },
+              ),
+            ),
+          ),
 
-          // Transform.translate(
-          //     offset: Offset(328.0, 849.0),
-          //     child: PageLink(
-          //       links: [
-          //         PageLinkInfo(
-          //           transition: LinkTransition.PushRight,
-          //           ease: Curves.easeOut,
-          //           duration: 1.0,
-          //           pageBuilder: () => User(),
-          //         ),
-          //       ],
-          //       child: Container(
-          //         width: 58.0,
-          //         height: 58.0,
-          //         decoration: BoxDecoration(
-          //           image: DecorationImage(
-          //             image: const AssetImage('assets/images/gray_profile.png'),
-          //             fit: BoxFit.fill,
-          //           ),
-          //         ),
-          //       ),
-          //     )),
-          // Transform.translate(
-          //   offset: Offset(185.0, 850.0),
-          //   child:
-          //       // Adobe XD layer: '日历' (shape)
-          //       PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.PushRight,
-          //         ease: Curves.easeOut,
-          //         duration: 1.0,
-          //         //pageBuilder: () => SchedulaerDatepage(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 58.0,
-          //       height: 58.0,
-          //       decoration: BoxDecoration(
-          //         image: DecorationImage(
-          //           image: const AssetImage('assets/images/calendar.png'),
-          //           fit: BoxFit.fill,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // Transform.translate(
-          //   offset: Offset(156.8, 751.0),
-          //   child: SizedBox(
-          //     width: 111.0,
-          //     child: Text(
-          //       'Save',
-          //       style: TextStyle(
-          //         fontFamily: 'ZiZhiQuXiMaiTi',
-          //         fontSize: 41,
-          //         color: const Color(0xfffdb56f),
-          //       ),
-          //       textAlign: TextAlign.center,
-          //     ),
-          //   ),
-          // ),
+          Transform.translate(
+            offset: Offset(328.0, 849.0),
+            child:
+                // Adobe XD layer: '用户' (shape)
+                Container(
+              width: 58.0,
+              height: 58.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/gray_profile.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
+
+          Transform.translate(
+            offset: Offset(328.0, 849.0),
+            child: SizedBox(
+              width: 58.0,
+              height: 58.0,
+              child: OutlineButton(
+                borderSide: BorderSide.none,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => User(),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+
+          Transform.translate(
+            offset: Offset(185.0, 850.0),
+            child: Container(
+              width: 58.0,
+              height: 58.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/calendar.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );

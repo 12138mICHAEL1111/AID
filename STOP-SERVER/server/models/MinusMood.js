@@ -25,6 +25,9 @@ const schema = new mongoose.Schema({
     },
     number:{
         type:String
+    },
+    word:{
+        type:String
     }
 })
 

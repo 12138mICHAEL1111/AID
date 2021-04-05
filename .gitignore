@@ -43,6 +43,7 @@ settings.json
 # Ignore node-modules
 /STOP-SERVER/server/node_modules
 /STOP-SERVER/admin/node_modules
+/STOP-SERVER/web/node_modules
 .metals/metals.h2.db
 .metals/metals.lock.db
 .metals/metals.log

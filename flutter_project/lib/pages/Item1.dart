@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:adobe_xd/pinned.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import './ItemImaginePage.dart';
 import './Moodtracker.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import '../config/Config.dart';
 import 'package:dio/dio.dart';
 
@@ -20,7 +17,6 @@ class _Item1State extends State<Item1> {
   var _displayQuestion;
   var _displayOption2_1;
   var _displayOption2_2;
-  var _displayOption1;
   var _next;
   var _feedback;
   var _items;
@@ -33,8 +29,14 @@ class _Item1State extends State<Item1> {
   var _itemNumber;
   var _sessionNumber;
   var _situation;
+  var _tempBlank;
   var _control;
-  var _displayText = '';
+  var _text;
+  var _newText;
+  var _index;
+  var _hint;
+  var _word;
+  var _child;
   var _images = [
     "assets/images/6%.png",
     "assets/images/12%.png",
@@ -56,6 +58,43 @@ class _Item1State extends State<Item1> {
     "assets/images/100%.png",
   ];
 
+  // Time to start reading the first sentence.
+  var _startReading;
+  // Count how many time user gives input.
+  var _inputTimes;
+  // Count previous input's length.
+  int _lastInputLength = 0;
+  // Time to display blank word.
+  var _wordDisplay;
+
+  // Time in seconds measured from onset of first setence to click required to present the word.  (e.g. 3-30s)
+  Duration _readingDuration;
+  // Time in msec measured from onset of word display to entry click for first letter. (e.g. 100-15000)
+  Duration _wordRT1;
+  // Did user presse the correct letter? "1"=correct; "0"=incorrect.
+  var _wordAccuracy1;
+  // Did users have to make a second attempt at the word? "1"=yes; "0"=no.
+  var _clueRequired;
+  // Time to display feedback clue.
+  DateTime _clueDisplay;
+  // Did user press the correct letter? "1"=correct; "0"=incorrect. Missing if attempt 1 was correct .
+  var _wordAccuracy2;
+  // Time in msec measured from incorrect response click to second attempt click (e.g. 100-15000). Missing if attempt 1 was correct.
+  Duration _wordRT2;
+
+  // Count how many time user clicks option.
+  var _clickTimes;
+  // Time of fisrt clicking the option.
+  DateTime _optionClicked;
+  // Did users get the right answer? "1"=correct; "0"=incorrect.
+  var _questionAccuracy1;
+  // Time in msec measured from onset of question to first response (e.g. 100-15000).
+  Duration _questionRT1;
+  // Did users get the right answer? "1"=correct; "0"=incorrect. Missing if attempt 1 was correct.
+  var _questionAccuracy2;
+  // Time in msec measured from incorrect response click to second attempt click (e.g. 100-15000). Missing if attempt 1 was correct.
+  Duration _questionRT2;
+
   _Item1State(this._itemNumber, this._sessionNumber);
 
   @override
@@ -70,6 +109,14 @@ class _Item1State extends State<Item1> {
     _category = "";
     _question = "";
     _situation = "";
+    _newText = "";
+    _text = "";
+    _word = "";
+    _hint = "";
+    _inputTimes = 0;
+    _clickTimes = 0;
+    _index = 0;
+    _startReading = DateTime.now();
     if (_sessionNumber == null) {
       _sessionNumber = 1;
     }
@@ -87,17 +134,16 @@ class _Item1State extends State<Item1> {
       "trailNumber": _itemNumber,
       "category": _category,
       "sessionNumber": _sessionNumber,
-      // following could be implemented with stopWatch()
-      //             "readingDuration": "10",
-      //             "wordRT1": "100" ,
-      //             "wordAccuracy1": "1" ,
-      //             "clueRequired": "0",
-      //             "wordRT2": "0",
-      //             "wordAccuracy2": "0",
-      //             "questionRT1": "100",
-      //             "questionAccuracy1": "1",
-      //             "questionRT2":  "0",
-      //             "questionAccuracy2":"0"
+      "readingDuration": _readingDuration?.inSeconds.toString(),
+      "wordRT1": _wordRT1.inMilliseconds.toString(),
+      "wordAccuracy1": _wordAccuracy1,
+      "clueRequired": _clueRequired,
+      "wordRT2": _wordRT2?.inMilliseconds.toString(),
+      "wordAccuracy2": _wordAccuracy2,
+      "questionRT1": _questionRT1.inMilliseconds.toString(),
+      "questionAccuracy1": _questionAccuracy1,
+      "questionRT2": _questionRT2?.inMilliseconds.toString(),
+      "questionAccuracy2": _questionAccuracy2
     });
     if (response.data["message"] == 'success') {
       print(response.data);
@@ -105,13 +151,11 @@ class _Item1State extends State<Item1> {
   }
 
   _uploadProgress() async {
-    // store current progress in the db
     var api = '${Config.domain}/rest/users/uploadprogress';
     await Dio().post(api,
         data: {"id": _id, "session": _sessionNumber, "item": _itemNumber});
   }
 
-  //could be improved by using shared preference
   _getData() async {
     var api = '${Config.domain}/rest/users/uploadcategory';
     var response = await Dio().get(api);
@@ -124,49 +168,64 @@ class _Item1State extends State<Item1> {
       _category = currentUser["category"];
       api2 = '${Config.domain}/rest/$_category/session$_sessionNumber';
     } else {
+      _category = 'control';
       api2 = '${Config.domain}/rest/controlitems/session$_sessionNumber';
     }
     var response2 = await Dio().get(api2);
     _items = response2.data;
+
     _processData(_itemNumber - 1);
   }
 
   void _processData(int i) {
-    setState(() {
-      _context = _items[i]["context"];
-      _blank = _items[i]["blank"];
-      _situation = _items[i]["situation"];
-      _feedback = "";
-      _next = false;
+    _word = _items[i]["word"];
+    _tempBlank = _items[i]["blank"];
+    _situation = _items[i]["situation"];
+    _feedback = "";
+    _next = false;
 
+    var _temp = _items[i]['context'];
+    _context = _temp.split('. ');
+    _context.removeWhere((value) => value == "");
+    for (var i = 0; i < _context.length - 1; i++) {
+      _context[i] = _context[i] + ". ";
+    }
+    print(_context);
+    _changeState(i);
+  }
+
+  void _changeState(int i) {
+    setState(() {
       if (_questionNumber == 1) {
         _question = _items[i]["question1"];
+        _context.add(" " + _question);
         _answer = _items[i]["answer1"];
-        _displayText = '$_context\n\n$_question';
         _displayOption2_1 = null;
         _displayOption2_2 = null;
-
+        _displayText();
         _updateQuestion();
-        _updateOption1();
       } else {
         _question = _items[i]["question2"];
         _answer = _items[i]["answer2"];
-        _displayText =
-            'Now use the passage to answer the following question: \n\n\n$_question';
-        _displayOption1 = null;
-
+        _text = 'Now use the passage to answer the following question: \n\n\n';
+        _newText = _question;
+        _hint = "Choose an option";
+        _child = null;
         _updateQuestion();
         _updateOption2();
       }
     });
+    _startReading = DateTime.now();
   }
 
   // Toggle between 1st and 2nd question in a single item.
   void _toggle() {
     if (_questionNumber == 1) {
       _questionNumber = 2;
+      _processData(_itemNumber - 1);
     } else {
       _questionNumber = 1;
+      _sendData();
       _route();
     }
   }
@@ -175,7 +234,6 @@ class _Item1State extends State<Item1> {
   void _route() {
     if (_control == false) {
       //training items have imagination page, control dont
-      //_uploadProgress();
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -211,6 +269,87 @@ class _Item1State extends State<Item1> {
     }
   }
 
+  void _displayText() {
+    if (_index == 0) {
+      _newText = _context[0];
+    } else {
+      _text = _text + _newText;
+      _newText = _context[_index];
+      if (_index == _context.length - 1) {
+        _blank = _tempBlank;
+        _hint = 'Type in the first missing letter';
+        _chooseToDisplayWord();
+      }
+    }
+  }
+
+  void _countReadingTime() {
+    _wordDisplay = DateTime.now();
+    _readingDuration = _wordDisplay.difference(_startReading);
+  }
+
+  void _chooseToDisplayWord() {
+    if (_next == true) {
+      _displayWord();
+    } else {
+      _displayBlank();
+      _countReadingTime();
+    }
+  }
+
+  void _displayWord() {
+    _child = Text.rich(
+      TextSpan(
+        style: TextStyle(
+          fontFamily: 'ZiZhiQuXiMaiTi',
+          fontSize: 43,
+          color: const Color(0xfffaae7c),
+        ),
+        text: _word,
+      ),
+      textAlign: TextAlign.center,
+    );
+  }
+
+  void _displayBlank() {
+    _child = TextField(
+      textAlign: TextAlign.center,
+      decoration: InputDecoration(
+          labelText: _blank,
+          labelStyle: TextStyle(
+            fontSize: 40,
+          ),
+          isDense: true,
+          contentPadding: EdgeInsets.symmetric(horizontal: 50),
+          border: InputBorder.none),
+      onChanged: (value) {
+        // Increase one when user inputs letters instead of deleting.
+        if (_lastInputLength <= value.length) {
+          _inputTimes++;
+        }
+        _validateData(value);
+        _countWordRT();
+        _recordAnswer();
+        _lastInputLength = value.length;
+        setState(() {
+          _chooseToDisplayWord();
+        });
+      },
+      style: TextStyle(
+        fontSize: 45,
+        color: const Color(0xfffaae7c),
+      ),
+    );
+  }
+
+  void _countWordRT() {
+    if (_inputTimes == 1) {
+      _wordRT1 = DateTime.now().difference(_wordDisplay);
+    } else if (_inputTimes == 2) {
+      _wordRT2 = DateTime.now().difference(_clueDisplay);
+    }
+  }
+
   void _updateQuestion() {
     _displayQuestion = Transform.translate(
       offset: Offset(45.9, 253.0),
@@ -225,37 +364,18 @@ class _Item1State extends State<Item1> {
             ),
             children: [
               TextSpan(
-                text: '$_displayText',
+                text: _text,
+              ),
+              TextSpan(
+                text: _newText,
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
           ),
-          // textHeightBehavior:
-          //     TextHeightBehavior(applyHeightToFirstAscent: false),
           textAlign: TextAlign.center,
         ),
       ),
     );
-  }
-
-  void _updateOption1() {
-    _displayOption1 = Transform.translate(
-        offset: Offset(110, 513.0),
-        child: Container(
-          width: 250.0,
-          child: TextField(
-            decoration: InputDecoration(
-                labelText: "$_blank",
-                contentPadding: EdgeInsets.all(0),
-                border: InputBorder.none),
-            onChanged: (value) {
-              _validateData(value);
-            },
-            style: TextStyle(
-              fontSize: 45,
-              color: const Color(0xfffaae7c),
-            ),
-          ),
-        ));
   }
 
   void _updateOption2() {
@@ -278,7 +398,10 @@ class _Item1State extends State<Item1> {
             textAlign: TextAlign.center,
           ),
           onPressed: () {
+            _clickTimes++;
             _next = _validateData("Yes");
+            _countQuestionRT();
+            _recordAnswer();
           }),
     );
 
@@ -301,9 +424,21 @@ class _Item1State extends State<Item1> {
             textAlign: TextAlign.center,
           ),
           onPressed: () {
+            _clickTimes++;
             _next = _validateData("No");
+            _countQuestionRT();
+            _recordAnswer();
           }),
     );
+  }
+
+  void _countQuestionRT() {
+    if (_clickTimes == 1) {
+      _optionClicked = DateTime.now();
+      _questionRT1 = _optionClicked.difference(_startReading);
+    } else if (_clickTimes == 2) {
+      _questionRT2 = DateTime.now().difference(_optionClicked);
+    }
   }
 
   bool _compareData(String string1, String string2) {
@@ -313,8 +448,45 @@ class _Item1State extends State<Item1> {
     return string1.toLowerCase() == string2.toLowerCase();
   }
 
+  void _recordAnswer() {
+    if (_questionNumber == 1) {
+      // question1
+      if (_inputTimes == 1) {
+        // answered once
+        if (_next == true) {
+          _wordAccuracy1 = "1";
+          _clueRequired = "0";
+        } else {
+          _wordAccuracy1 = "0";
+          _clueRequired = "1";
+        }
+      } else if (_inputTimes == 2) {
+        // answered twice
+        if (_next == true) {
+          _wordAccuracy2 = "1";
+        } else {
+          _wordAccuracy2 = "0";
+        }
+      }
+    } else {
+      // question2
+      if (_clickTimes == 1) {
+        if (_next == true) {
+          _questionAccuracy1 = "1";
+        } else {
+          _questionAccuracy1 = "0";
+        }
+      } else if (_clickTimes == 2) {
+        if (_next == true) {
+          _questionAccuracy2 = "1";
+        } else {
+          _questionAccuracy2 = "0";
+        }
+      }
+    }
+  }
+
   bool _validateData(value) {
-    var _length = value.length;
     if (_compareData(_answer, value)) {
       setState(() {
         _feedback = '✔ Great, this is a good answer!';
@@ -324,6 +496,9 @@ class _Item1State extends State<Item1> {
       setState(() {
         _feedback = 'x Good. But what would be a different answer?';
       });
+      if (_wordAccuracy1 == "0" && _questionNumber == 1) {
+        _clueDisplay = DateTime.now();
+      }
       return _next = false;
     }
   }
@@ -405,215 +580,7 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
-          // Adobe XD layer: 'Status Bars - iPhon…' (group)
-          SizedBox(
-            width: 428.0,
-            height: 44.0,
-            child: Stack(
-              children: <Widget>[
-                Pinned.fromSize(
-                  bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
-                  size: Size(428.0, 44.0),
-                  pinLeft: true,
-                  pinRight: true,
-                  pinTop: true,
-                  pinBottom: true,
-                  child:
-                      // Adobe XD layer: 'Status Bar' (group)
-                      Stack(
-                    children: <Widget>[
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(0.5, 0.0, 427.5, 44.0),
-                        size: Size(428.0, 44.0),
-                        pinLeft: true,
-                        pinRight: true,
-                        pinTop: true,
-                        pinBottom: true,
-                        child:
-                            // Adobe XD layer: 'BG' (shape)
-                            Container(),
-                      ),
-                      Pinned.fromSize(
-                        bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
-                        size: Size(428.0, 44.0),
-                        pinLeft: true,
-                        pinRight: true,
-                        pinTop: true,
-                        pinBottom: true,
-                        child:
-                            // Adobe XD layer: 'Status Bar' (group)
-                            Stack(
-                          children: <Widget>[
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
-                              size: Size(428.0, 44.0),
-                              pinLeft: true,
-                              pinRight: true,
-                              pinTop: true,
-                              pinBottom: true,
-                              child:
-                                  // Adobe XD layer: 'Bars/Status Bars/iP…' (shape)
-                                  Container(),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(388.8, 17.3, 24.3, 11.3),
-                              size: Size(428.0, 44.0),
-                              pinRight: true,
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Battery' (group)
-                                  Stack(
-                                children: <Widget>[
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(0.0, 0.0, 22.0, 11.3),
-                                    size: Size(24.3, 11.3),
-                                    pinLeft: true,
-                                    pinRight: true,
-                                    pinTop: true,
-                                    pinBottom: true,
-                                    child:
-                                        // Adobe XD layer: 'Border' (shape)
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(2.67),
-                                        border: Border.all(
-                                            width: 1.0,
-                                            color: const Color(0x59ffffff)),
-                                      ),
-                                    ),
-                                  ),
-                                  // Pinned.fromSize(
-                                  //   bounds: Rect.fromLTWH(23.0, 3.7, 1.3, 4.0),
-                                  //   size: Size(24.3, 11.3),
-                                  //   pinRight: true,
-                                  //   fixedWidth: true,
-                                  //   fixedHeight: true,
-                                  //   child:
-                                  //       // Adobe XD layer: 'Cap' (shape)
-                                  //       SvgPicture.string(
-                                  //     _svg_5e5um9,
-                                  //     allowDrawingOutsideViewBox: true,
-                                  //     fit: BoxFit.fill,
-                                  //   ),
-                                  // ),
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(2.0, 2.0, 18.0, 7.3),
-                                    size: Size(24.3, 11.3),
-                                    pinLeft: true,
-                                    pinTop: true,
-                                    pinBottom: true,
-                                    fixedWidth: true,
-                                    child:
-                                        // Adobe XD layer: 'Capacity' (shape)
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(1.33),
-                                        color: const Color(0xffffffff),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(368.5, 17.3, 15.3, 11.0),
-                              size: Size(428.0, 44.0),
-                              pinRight: true,
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Wifi' (shape)
-                                  SvgPicture.string(
-                                _svg_ya1094,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(337.1, 17.7, 17.0, 10.7),
-                              size: Size(428.0, 44.0),
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Cellular Connection' (shape)
-                                  SvgPicture.string(
-                                _svg_gbmjcf,
-                                allowDrawingOutsideViewBox: true,
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            Pinned.fromSize(
-                              bounds: Rect.fromLTWH(21.5, 13.0, 54.0, 21.0),
-                              size: Size(428.0, 44.0),
-                              pinLeft: true,
-                              fixedWidth: true,
-                              fixedHeight: true,
-                              child:
-                                  // Adobe XD layer: 'Time Style' (group)
-                                  Stack(
-                                children: <Widget>[
-                                  Pinned.fromSize(
-                                    bounds: Rect.fromLTWH(0.0, 0.0, 54.0, 21.0),
-                                    size: Size(54.0, 21.0),
-                                    pinLeft: true,
-                                    pinRight: true,
-                                    pinTop: true,
-                                    pinBottom: true,
-                                    child:
-                                        // Adobe XD layer: 'Time - Dark' (group)
-                                        Stack(
-                                      children: <Widget>[
-                                        Pinned.fromSize(
-                                          bounds: Rect.fromLTWH(
-                                              0.0, 0.0, 54.0, 21.0),
-                                          size: Size(54.0, 21.0),
-                                          pinLeft: true,
-                                          pinRight: true,
-                                          pinTop: true,
-                                          pinBottom: true,
-                                          child:
-                                              // Adobe XD layer: 'Time - Light backgr…' (shape)
-                                              Container(),
-                                        ),
-                                        Pinned.fromSize(
-                                          bounds: Rect.fromLTWH(
-                                              0.0, 2.0, 54.0, 18.0),
-                                          size: Size(54.0, 21.0),
-                                          pinLeft: true,
-                                          pinRight: true,
-                                          pinTop: true,
-                                          pinBottom: true,
-                                          child:
-                                              // Adobe XD layer: 'Time' (text)
-                                              Text(
-                                            '9:41',
-                                            style: TextStyle(
-                                              fontFamily: 'SFProText-Semibold',
-                                              fontSize: 15,
-                                              color: const Color(0xffffffff),
-                                              letterSpacing: -0.3,
-                                            ),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+
           Transform.translate(
             offset: Offset(27.0, 97.0),
             child: SizedBox(
@@ -623,7 +590,7 @@ class _Item1State extends State<Item1> {
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 28,
-                  color: const Color(0xfff7f7f7),
+                  color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -634,9 +601,12 @@ class _Item1State extends State<Item1> {
             child: _displayQuestion,
           ),
 
-          Container(
-            child: _displayOption1,
-          ),
+          Transform.translate(
+              offset: Offset(51, 513.0),
+              child: Container(
+                width: 330.0, //use the white background width
+                child: _child,
+              )),
 
           Container(
             child: _displayOption2_1,
@@ -646,109 +616,28 @@ class _Item1State extends State<Item1> {
             child: _displayOption2_2,
           ),
 
-          // Transform.translate(
-          //   offset: Offset(45.9, 253.0),
-          //   child: SizedBox(
-          //     width: 320.0,
-          //     child: Text.rich(
-          //       TextSpan(
-          //         style: TextStyle(
-          //           fontFamily: 'ZiZhiQuXiMaiTi',
-          //           fontSize: 21,
-          //           color: const Color(0xff000000),
-          //         ),
-          //         children: [
-          //           TextSpan(
-          //             text: '${_context}\n\n${_question}',
-          //           ),
-          //         ],
-          //       ),
-          //       // textHeightBehavior:
-          //       //     TextHeightBehavior(applyHeightToFirstAscent: false),
-          //       textAlign: TextAlign.center,
-          //     ),
-          //   ),
-          // ),
-
-          // Transform.translate(
-          //     offset: Offset(110, 503.0),
-          //     child: Container(
-          //       width: 250.0,
-          //       child: TextField(
-          //         decoration: InputDecoration(
-          //             labelText: "${_blank}",
-          //             contentPadding: EdgeInsets.all(0),
-          //             border: InputBorder.none),
-          //         onChanged: (value) {
-          //           _length = value.length;
-          //           if (_length >= _answer.length) {
-          //             _next = _validateData(value);
-          //           }
-          //           if (_length >= 6) {
-          //             setState(() {
-          //               _feedback = '↺ Please fill in less characters.';
-          //             });
-          //           }
-          //         },
-          //         style: TextStyle(
-          //           fontSize: 55,
-          //           color: const Color(0xfffaae7c),
-          //         ),
-          //       ),
-          //     )),
-
-          // Transform.translate(
-          //   offset: Offset(37.9, 253.0),
-          //   child: SizedBox(
-          //     width: 354.0,
-          //     child: Text.rich(
-          //       TextSpan(
-          //         style: TextStyle(
-          //           fontFamily: 'ZiZhiQuXiMaiTi',
-          //           fontSize: 21,
-          //           color: const Color(0xff000000),
-          //         ),
-          //         children: [
-          //           TextSpan(
-          //             text: '${_context}',
-          //           ),
-          //           TextSpan(
-          //             text: '${_blank}',
-          //             style: TextStyle(
-          //               fontSize: 55,
-          //               color: const Color(0xfffaae7c),
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //       textHeightBehavior:
-          //           TextHeightBehavior(applyHeightToFirstAscent: false),
-          //       textAlign: TextAlign.center,
-          //     ),
-          //   ),
-          // ),
-
           Transform.translate(
-            offset: Offset(274.3, 89.0),
+            offset: Offset(282.0, 97.0),
             child: SizedBox(
-              width: 106.0,
+              width: 90.0,
               child: Text(
                 '${_itemNumber}/18',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 39,
-                  color: const Color(0xfff8eaea),
+                  fontSize: 28,
+                  color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(97.4, 628.0),
             child: SizedBox(
               width: 233.0,
               child: Text(
-                'Type in the first missing letter',
+                _hint,
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 15,
@@ -758,17 +647,9 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(41.0, 763.0),
-            // child: PageLink(
-            //   links: [
-            //     PageLinkInfo(
-            //       transition: LinkTransition.PushLeft,
-            //       ease: Curves.easeInOutExpo,
-            //       duration: 1.0,
-            //       pageBuilder: () => Item2(),
-            //     ),
-            //   ],
             child: Container(
               width: 347.0,
               height: 67.0,
@@ -806,9 +687,14 @@ class _Item1State extends State<Item1> {
                 textAlign: TextAlign.center,
               ),
               onPressed: () {
-                if (_next == true) {
+                _index++;
+                if (_index < _context.length) {
+                  setState(() {
+                    _displayText();
+                    _updateQuestion();
+                  });
+                } else if (_next == true) {
                   _toggle();
-                  _processData(_itemNumber - 1);
                 }
               },
             ),
@@ -819,7 +705,7 @@ class _Item1State extends State<Item1> {
             child: SizedBox(
               width: 211.0,
               child: Text(
-                "${_feedback}",
+                "$_feedback",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 21,
@@ -829,36 +715,7 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
-          // Transform.translate(
-          //   offset: Offset(177.0, 568.0),
-          //   child: PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.Fade,
-          //         ease: Curves.linear,
-          //         duration: 1.0,
-          //         pageBuilder: () => Wrong1(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 38.0,
-          //       height: 33.0,
-          //       decoration: BoxDecoration(
-          //         color: const Color(0xffffffff),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // Transform.translate(
-          //   offset: Offset(224.0, 568.0),
-          //   child: Container(
-          //     width: 37.0,
-          //     height: 33.0,
-          //     decoration: BoxDecoration(
-          //       color: const Color(0xffffffff),
-          //     ),
-          //   ),
-          // ),
+
           Transform.translate(
             offset: Offset(140.0, 107.0),
             child:
@@ -876,47 +733,6 @@ class _Item1State extends State<Item1> {
               ),
             ),
           ),
-          // Transform.translate(
-          //   offset: Offset(365.0, 45.0),
-          //   child:
-          //       // Adobe XD layer: 'tingzhi' (shape)
-          //       Container(
-          //     width: 45.0,
-          //     height: 45.0,
-          //     decoration: BoxDecoration(
-          //       image: DecorationImage(
-          //         image: const AssetImage('assets/images/stop.png'),
-          //         fit: BoxFit.fill,
-          //       ),
-          //     ),
-          //   ),
-          // ),
-
-          // Transform.translate(
-          //   offset: Offset(20.0, 42.0),
-          //   child:
-          //       // Adobe XD layer: 'jiantou' (shape)
-          //       PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.PushRight,
-          //         ease: Curves.easeIn,
-          //         duration: 1.0,
-          //         pageBuilder: () => Moodtracker(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 50.0,
-          //       height: 50.0,
-          //       decoration: BoxDecoration(
-          //         image: DecorationImage(
-          //           image: const AssetImage('assets/images/goback.png'),
-          //           fit: BoxFit.fill,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_project/pages/Moodtracker.dart';
+import 'package:mockito/mockito.dart';
+
+class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
+  final mockObserver = MockNavigatorObserver();
   Widget createWidgetForTesting({Widget child}) {
     return MaterialApp(
       home: child,
+      navigatorObservers: [mockObserver],
     );
   }
 
@@ -32,8 +37,9 @@ void main() {
   testWidgets('moodtracker page click test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Moodtracker()));
     await tester.pumpAndSettle();
-    final oBtn = find.byType(OutlineButton);
-    await tester.tap(oBtn);
-    await tester.pump();
+    final nextBtn = find.widgetWithText(OutlineButton, "Next");
+    await tester.tap(nextBtn);
+    await tester.pumpAndSettle();
+    verify(mockObserver.didPush(any, any));
   });
 }

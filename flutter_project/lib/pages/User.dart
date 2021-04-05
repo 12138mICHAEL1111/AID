@@ -23,7 +23,8 @@ class _UserState extends State<User> {
     getUserIdAndEmail();
     init();
   }
-  init() async{
+
+  init() async {
     pref = await SharedPreferences.getInstance();
   }
 
@@ -118,7 +119,7 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(311.0, 244.0),
+            offset: Offset(322.0, 244.0),
             child: Text(
               this.id ?? "",
               style: TextStyle(
@@ -126,7 +127,7 @@ class _UserState extends State<User> {
                 fontSize: 21,
                 color: const Color(0xff888888),
               ),
-              textAlign: TextAlign.left,
+              textAlign: TextAlign.right,
             ),
           ),
           Transform.translate(
@@ -142,7 +143,7 @@ class _UserState extends State<User> {
             ),
           ),
           Transform.translate(
-            offset: Offset(210.0, 364.0),
+            offset: Offset(204.0, 364.0),
             child: Text(
               this.email ?? "",
               style: TextStyle(
@@ -150,7 +151,7 @@ class _UserState extends State<User> {
                 fontSize: 21,
                 color: const Color(0xff888888),
               ),
-              textAlign: TextAlign.left,
+              textAlign: TextAlign.right,
             ),
           ),
 
@@ -231,30 +232,38 @@ class _UserState extends State<User> {
           ),
           Transform.translate(
             offset: Offset(42.0, 849.0),
-            child:
-                // Adobe XD layer: '主页' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushRight,
-                  ease: Curves.slowMiddle,
-                  duration: 1.0,
-                  pageBuilder: () => Homepage(itemNumber: int.parse(pref.get('item') ?? "1"),
-                        sessionNumber: int.parse(pref.get('session') ?? "1"),),
-                ),
-              ],
-              child: Container(
-                width: 58.0,
-                height: 58.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/images/gray_home.png'),
-                    fit: BoxFit.fill,
-                  ),
+            child: Container(
+              width: 58.0,
+              height: 58.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/gray_home.png'),
+                  fit: BoxFit.fill,
                 ),
               ),
             ),
           ),
+          // ),
+
+          Transform.translate(
+            offset: Offset(42.0, 849.0),
+            child: SizedBox(
+              width: 58.0,
+              height: 58.0,
+              child: OutlineButton(
+                borderSide: BorderSide.none,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    "/homepage",
+                  );
+                },
+              ),
+            ),
+          ),
+
           Transform.translate(
             offset: Offset(328.0, 849.0),
             child:
@@ -272,26 +281,47 @@ class _UserState extends State<User> {
           ),
           Transform.translate(
             offset: Offset(185.0, 850.0),
-            child:
-                // Adobe XD layer: '日历' (shape)
-                PageLink(
-              links: [
-                PageLinkInfo(
-                  transition: LinkTransition.PushRight,
-                  ease: Curves.easeOut,
-                  duration: 1.0,
-                  pageBuilder: () => ScheduleDatepage(),
+            // child:
+            //     // Adobe XD layer: '日历' (shape)
+            //     PageLink(
+            //   links: [
+            //     PageLinkInfo(
+            //       transition: LinkTransition.PushRight,
+            //       ease: Curves.easeOut,
+            //       duration: 1.0,
+            //       pageBuilder: () => ScheduleDatepage(),
+            //     ),
+            //   ],
+            child: Container(
+              width: 58.0,
+              height: 58.0,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/gray_calendar.png'),
+                  fit: BoxFit.fill,
                 ),
-              ],
-              child: Container(
-                width: 58.0,
-                height: 58.0,
-                decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: const AssetImage('assets/images/gray_calendar.png'),
-                    fit: BoxFit.fill,
-                  ),
-                ),
+              ),
+            ),
+          ),
+          // ),
+
+          Transform.translate(
+            offset: Offset(185.0, 850.0),
+            child: SizedBox(
+              width: 58.0,
+              height: 58.0,
+              child: OutlineButton(
+                borderSide: BorderSide.none,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ScheduleDatepage(),
+                    ),
+                  );
+                },
               ),
             ),
           ),
