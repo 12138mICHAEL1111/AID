@@ -53,7 +53,7 @@ class Start extends StatelessWidget {
             ),
           ),
           Transform.translate(
-            offset: Offset(103.0, 495.0),
+            offset: Offset(123.0, 495.0),
             child: PageLink(
               links: [
                 PageLinkInfo(
@@ -72,6 +72,18 @@ class Start extends StatelessWidget {
                 ),
                 textAlign: TextAlign.left,
               ),
+            ),
+          ),
+          Transform.translate(
+            offset: Offset(60.0, 579.0),
+            child: Text(
+              '(App for Intervening depression)',
+              style: TextStyle(
+                fontFamily: 'ZiZhiQuXiMaiTi',
+                fontSize: 20,
+                color: const Color(0xffffffff),
+              ),
+              textAlign: TextAlign.left,
             ),
           ),
         ],
