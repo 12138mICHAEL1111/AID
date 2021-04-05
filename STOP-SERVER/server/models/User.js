@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const brcypt = require('brcypt')
+const bcrypt = require('bcrypt')
 const schema = new mongoose.Schema({
     email: { type: String },
     userid: {
@@ -32,7 +32,7 @@ const schema = new mongoose.Schema({
     password: {
         type: String,
         set(val) {
-            return brcypt.hashSync(val, 10)
+            return bcrypt.hashSync(val, 10)
     }
 }
 })
