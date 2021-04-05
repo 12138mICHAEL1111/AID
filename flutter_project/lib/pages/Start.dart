@@ -77,7 +77,7 @@ class Start extends StatelessWidget {
           Transform.translate(
             offset: Offset(60.0, 579.0),
             child: Text(
-              '(App for Intervening depression)',
+              '(App for Intervening Depression)',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
                 fontSize: 20,
