@@ -64,7 +64,7 @@ class Start extends StatelessWidget {
                 ),
               ],
               child: Text(
-                'Traveling',
+                'A•I•D',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 50,
