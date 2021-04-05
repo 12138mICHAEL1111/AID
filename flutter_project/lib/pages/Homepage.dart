@@ -28,35 +28,35 @@ class _HomepageState extends State<Homepage> {
   @override
   void initState() {
     super.initState();
-    _getData();
+    getData();
   }
 
-  _getData() async {
+  getData() async {
     _api = '${Config.domain}/rest/users/uploadcategory';
     _response = await Dio().get(_api);
     if (_itemNumber == null || _sessionNumber == null) {
-      _getSession();
-      _getItem();
+      getSession();
+      getItem();
     }
     if (_sessionNumber > 4) {
       _sessionNumber = 4;
     }
-    _getDate();
+    getDate();
   }
 
-  _getSession() {
+  getSession() {
     setState(() {
       _sessionNumber = _response.data[0]["currentsession"];
     });
   }
 
-  _getItem() {
+  getItem() {
     setState(() {
       _itemNumber = _response.data[0]["currentitem"];
     });
   }
 
-  _getDate() async {
+  getDate() async {
     var sessionTime = _response.data[0]["sessiontime"];
     if (sessionTime != null) {
       setState(() {
