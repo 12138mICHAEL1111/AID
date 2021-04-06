@@ -73,7 +73,6 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
           _list[i] = DateTime.parse(sessionTime["session$i"]);
         });
       }
-      //uploadLocal();
     }
   }
 
@@ -217,22 +216,6 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
         platformChannelSpecifics);
   }
 
-  // uploadLocal() async {
-  //   if (!check()) {
-  //     _showToast();
-  //   } else {
-  //     pref = await SharedPreferences.getInstance();
-  //     pref.setString(
-  //         "session1", formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
-  //     pref.setString(
-  //         "session2", formatDate(_list[2], [yyyy, '-', mm, '-', dd]));
-  //     pref.setString(
-  //         "session3", formatDate(_list[3], [yyyy, '-', mm, '-', dd]));
-  //     pref.setString(
-  //         "session4", formatDate(_list[4], [yyyy, '-', mm, '-', dd]));
-  //   }
-  // }
-
   uploadRemote() async {
     var api = '${Config.domain}/rest/users/uploadsessiontime';
     var id = pref.get("userid");
@@ -241,7 +224,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
     scheduleNotificationThree();
     scheduleNotificationFour();
 
-    var response = await Dio().post(api, data: {
+    await Dio().post(api, data: {
       "userid": id,
       "sessiontime": {
         "session1": formatDate(_list[1], [yyyy, '-', mm, '-', dd]),
@@ -250,10 +233,6 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
         "session4": formatDate(_list[4], [yyyy, '-', mm, '-', dd])
       }
     });
-
-    if (response.data["message"] == 'success') {
-      print(response.data);
-    }
   }
 
   _showDatePicker1(int i) async {

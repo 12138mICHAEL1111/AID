@@ -36,8 +36,6 @@ class _SelectPageState extends State<Selectcategoriespage> {
   String cate() {
     for(int i = 1; i < 8; ++i) {
       if(_list[i] == 0) {
-        //////////////////////////////////////////////////////////////////////////////////////////////////
-        print("giao ${map[i]}");
         return map[i];
       }
     }

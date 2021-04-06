@@ -39,10 +39,10 @@ class _Practicepage1State extends State<Practicepage1> {
     _index = 0;
     _hint = "";
     _word = "";
-    _getData();
+    getData();
   }
 
-  _getData() async {
+  getData() async {
     var api = '${Config.domain}/rest/practiseitems';
     var response = await Dio().get(api);
     _answer = response.data[0]['answer1'];
@@ -55,18 +55,18 @@ class _Practicepage1State extends State<Practicepage1> {
       _context[i] = _context[i] + ".";
     }
     _context.add(_question);
-    _displayText();
+    displayText();
   }
 
-  bool _compareData(String string1, String string2) {
+  bool compareData(String string1, String string2) {
     if (string1 == null || string2 == null) {
       return false;
     }
     return string1.toLowerCase() == string2.toLowerCase();
   }
 
-  bool _validateData(value) {
-    if (_compareData(_answer, value)) {
+  bool validateData(value) {
+    if (compareData(_answer, value)) {
       setState(() {
         _word = "milk";
         _feedback = '✔ Great, this is a good answer!';
@@ -80,7 +80,7 @@ class _Practicepage1State extends State<Practicepage1> {
     }
   }
 
-  void _displayText() {
+  void displayText() {
     if (_index == 0) {
       setState(() {
         _newText = _context[0];
@@ -124,7 +124,7 @@ class _Practicepage1State extends State<Practicepage1> {
               contentPadding: EdgeInsets.symmetric(horizontal: 50),
               border: InputBorder.none),
           onChanged: (value) {
-            _validateData(value);
+            validateData(value);
             displayWord();
           },
           style: TextStyle(
@@ -171,6 +171,7 @@ class _Practicepage1State extends State<Practicepage1> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(409.0, 195.0),
             child: Container(
@@ -192,6 +193,7 @@ class _Practicepage1State extends State<Practicepage1> {
               ),
             ),
           ),
+          
           // Adobe XD layer: 'Status Bars - iPhon…' (group)
           SizedBox(
             width: 428.0,
@@ -401,6 +403,7 @@ class _Practicepage1State extends State<Practicepage1> {
               ],
             ),
           ),
+
           Transform.translate(
             offset: Offset(52.8, 82.0),
             child: SizedBox(
@@ -416,6 +419,7 @@ class _Practicepage1State extends State<Practicepage1> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(52.8, 114.0),
             child: SizedBox(
@@ -431,6 +435,7 @@ class _Practicepage1State extends State<Practicepage1> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(140.0, 107.0),
             child:
@@ -467,30 +472,10 @@ class _Practicepage1State extends State<Practicepage1> {
                     ),
                   ],
                 ),
-                // textHeightBehavior:
-                //     TextHeightBehavior(applyHeightToFirstAscent: false),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
-
-          // Transform.translate(
-          //     offset: Offset(110, 503.0),
-          //     child: Container(
-          //       width: 250.0,
-          //       child: Text.rich(
-          //         TextSpan(
-          //           style: TextStyle(
-          //             fontFamily: 'ZiZhiQuXiMaiTi',
-          //             fontSize: 21,
-          //             color: const Color(0xff000000),
-          //           ),
-          //           children: [
-          //             TextSpan(text: _word),
-          //           ],
-          //         ),
-          //       ),
-          //     )),
 
           Transform.translate(
               offset: Offset(51, 513.0),
@@ -520,7 +505,7 @@ class _Practicepage1State extends State<Practicepage1> {
             child: SizedBox(
               width: 211.0,
               child: Text(
-                "${_feedback}",
+                "$_feedback",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
                   fontSize: 21,
@@ -546,6 +531,7 @@ class _Practicepage1State extends State<Practicepage1> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(41.0, 763.0),
             child: Container(
@@ -570,6 +556,7 @@ class _Practicepage1State extends State<Practicepage1> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(156.3, 775.0),
             child: FlatButton(
@@ -586,7 +573,7 @@ class _Practicepage1State extends State<Practicepage1> {
               onPressed: () {
                 _index++;
                 if (_index < _context.length) {
-                  _displayText();
+                  displayText();
                 }
                 if (_next == true) {
                   Navigator.pushNamed(context, '/practice2');
@@ -594,62 +581,6 @@ class _Practicepage1State extends State<Practicepage1> {
               },
             ),
           ),
-
-          // Transform.translate(
-          //   offset: Offset(177.0, 568.0),
-          //   child: PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.Fade,
-          //         ease: Curves.linear,
-          //         duration: 1.0,
-          //         pageBuilder: () => Practice1Wrongpage(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 38.0,
-          //       height: 33.0,
-          //       decoration: BoxDecoration(
-          //         color: const Color(0xffffffff),
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // Transform.translate(
-          //   offset: Offset(224.0, 568.0),
-          //   child: Container(
-          //     width: 37.0,
-          //     height: 33.0,
-          //     decoration: BoxDecoration(
-          //       color: const Color(0xffffffff),
-          //     ),
-          //   ),
-          // ),
-          // Transform.translate(
-          //   offset: Offset(20.0, 42.0),
-          //   child:
-          //       // Adobe XD layer: 'jiantou' (shape)
-          //       PageLink(
-          //     links: [
-          //       PageLinkInfo(
-          //         transition: LinkTransition.PushRight,
-          //         ease: Curves.easeIn,
-          //         duration: 1.0,
-          //         pageBuilder: () => IntroductionPage(),
-          //       ),
-          //     ],
-          //     child: Container(
-          //       width: 50.0,
-          //       height: 50.0,
-          //       decoration: BoxDecoration(
-          //         image: DecorationImage(
-          //           image: const AssetImage('assets/images/goback.png'),
-          //           fit: BoxFit.fill,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );

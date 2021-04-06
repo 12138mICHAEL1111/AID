@@ -24,8 +24,8 @@
                     </el-table-column>
                     <el-table-column
                     prop="axious"
-                    label="axious"
-                    width="70">
+                    label="anxious"
+                    width="75">
                     </el-table-column>
                     <el-table-column
                     prop="happy"
@@ -55,8 +55,8 @@
                         </el-table-column>
                         <el-table-column
                         prop="axious"
-                        label="axious"
-                        width="70">
+                        label="anxious"
+                        width="75">
                         </el-table-column>
                         <el-table-column
                         prop="happy"
@@ -74,11 +74,14 @@
         <span> * '1' means most positive, '5' means most negative</span>
         <hr>
         <div class='questiondeatil'>
-            <span>detail data for specific questions</span>
+            <span>detail data for specific questions:  </span>
+            <el-button type='primary' @click='exportExcel'>Export</el-button>
+            <br><br>
                 <el-table
                         :data="questionTable"
                         border
-                        style="width: 100%">
+                        style="width: 100%"
+                        id="out-table">
                         <el-table-column
                         prop="questionnumber"
                         label="question number"
@@ -156,6 +159,8 @@
 </style>
 
 <script>
+import FileSaver from 'file-saver';
+import XLSX from 'xlsx';
 export default {
     data(){
         return{
@@ -170,6 +175,15 @@ export default {
         }
     },
     methods:{
+        exportExcel(id,title){
+            title=this.userid
+            var wb = XLSX.utils.table_to_book(document.querySelector("#out-table"))
+            var wbout = XLSX.write(wb, { bookType: 'xlsx', bookSST: true, type: 'array' })
+            try {
+                FileSaver.saveAs(new Blob([wbout], { type: 'application/octet-stream' }), title+'.xlsx')
+            } catch (e) { if (typeof console !== 'undefined') console.log(e, wbout) }
+            return wbout
+        },
         async fetch(){
             this.userid=this.$route.params.id
             const categoryres = await this.$http.get(`/rest/users/getcategory/${this.userid}`)
