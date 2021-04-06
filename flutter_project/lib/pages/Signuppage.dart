@@ -122,6 +122,7 @@ class _SignuppageState extends State<Signuppage> {
             offset: Offset(69.0, 463.0),
             child: Container(
               child: TextField(
+                key: Key("EmailTextField"),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: "Email",
@@ -151,6 +152,7 @@ class _SignuppageState extends State<Signuppage> {
               offset: Offset(69.0, 561.0),
               child: Container(
                 child: TextField(
+                  key: Key("PasswordTextField"),
                   obscureText: true,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -189,6 +191,7 @@ class _SignuppageState extends State<Signuppage> {
             child: SizedBox(
               width: 119.0,
               child: FlatButton(
+                key: Key("SignUpButton"),
                 child: Text("Sign Up"),
                 color: const Color(0xfffaaf7b),
                 onPressed: submit,

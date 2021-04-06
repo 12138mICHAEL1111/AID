@@ -220,6 +220,7 @@ class _LoginpageState extends State<Loginpage> {
                 width: 160,
                 height: 40,
                 child: RaisedButton(
+                  key: Key("SignUpButton"),
                   child: Text("Sign Up"),
                   color: const Color(0xfffaaf7b),
                   onPressed: () {
