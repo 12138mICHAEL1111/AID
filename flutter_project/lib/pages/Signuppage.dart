@@ -65,8 +65,10 @@ class _SignuppageState extends State<Signuppage> {
         children: <Widget>[
           // Adobe XD layer: '007 Sunny Morning' (shape)
           Container(
-            width: 428.0,
-            height: 419.0,
+            // width: 428.0,
+            // height: 419.0,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.45,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(60.0),
@@ -79,24 +81,30 @@ class _SignuppageState extends State<Signuppage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(26.0, 136.0),
+            // offset: Offset(26.0, 136.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.06,
+                MediaQuery.of(context).size.height * 0.15),
             child: Text(
               'Create your account',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 40,
+                fontSize: MediaQuery.of(context).size.width * 0.09,
                 color: const Color(0xfff8f4f4),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(117.0, 208.0),
+            // offset: Offset(117.0, 208.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.272,
+                MediaQuery.of(context).size.height * 0.22),
             child:
                 // Adobe XD layer: 'WechatIMG1138的副本' (shape)
                 Container(
-              width: 195.0,
-              height: 180.0,
+              // width: 195.0,
+              // height: 180.0,
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  height: MediaQuery.of(context).size.height * 0.19,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/logoOfMenu.png'),
@@ -106,12 +114,14 @@ class _SignuppageState extends State<Signuppage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(49.0, 419.0),
+            // offset: Offset(49.0, 419.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.113,
+                MediaQuery.of(context).size.height * 0.45),
             child: Text(
               'Email:',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 30,
+                fontSize: MediaQuery.of(context).size.height * 0.033,
                 color: const Color(0xfff8c16f),
               ),
               textAlign: TextAlign.left,
@@ -119,7 +129,9 @@ class _SignuppageState extends State<Signuppage> {
           ),
           //Textfield for password
           Transform.translate(
-            offset: Offset(69.0, 463.0),
+            // offset: Offset(69.0, 463.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.16,
+                MediaQuery.of(context).size.height * 0.50),
             child: Container(
               child: TextField(
                 decoration: InputDecoration(
@@ -130,17 +142,19 @@ class _SignuppageState extends State<Signuppage> {
                   this.email = value;
                 },
               ),
-              width: 276.0,
-              height: 48.0,
+              width: MediaQuery.of(context).size.width * 0.64,
+              height: MediaQuery.of(context).size.height * 0.05,
             ),
           ),
           Transform.translate(
-            offset: Offset(49.0, 517.0),
+            // offset: Offset(49.0, 517.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.113,
+                MediaQuery.of(context).size.height * 0.56),
             child: Text(
               'Password:',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 30,
+                fontSize: MediaQuery.of(context).size.height * 0.033,
                 color: const Color(0xfff8c16f),
               ),
               textAlign: TextAlign.left,
@@ -148,7 +162,9 @@ class _SignuppageState extends State<Signuppage> {
           ),
           //TextField for email
           Transform.translate(
-              offset: Offset(69.0, 561.0),
+              // offset: Offset(69.0, 561.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.16,
+                  MediaQuery.of(context).size.height * 0.61),
               child: Container(
                 child: TextField(
                   obscureText: true,
@@ -160,11 +176,13 @@ class _SignuppageState extends State<Signuppage> {
                     this.password = value;
                   },
                 ),
-                width: 276.0,
-                height: 48.0,
+                width: MediaQuery.of(context).size.width * 0.64,
+                height: MediaQuery.of(context).size.height * 0.05,
               )),
           Transform.translate(
-            offset: Offset(100.0, 718.0),
+            // offset: Offset(100.0, 718.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.232,
+                MediaQuery.of(context).size.height * 0.77),
             child: PageLink(
               links: [
                 PageLinkInfo(
@@ -175,8 +193,10 @@ class _SignuppageState extends State<Signuppage> {
                 ),
               ],
               child: Container(
-                width: 197.0,
-                height: 56.0,
+                // width: 197.0,
+                // height: 56.0,
+                width: MediaQuery.of(context).size.width * 0.45,
+                height: MediaQuery.of(context).size.height * 0.06,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(23.0),
                   color: const Color(0xfffaaf7b),
@@ -185,7 +205,9 @@ class _SignuppageState extends State<Signuppage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(139.5, 723.0),
+            // offset: Offset(139.5, 723.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.324,
+                MediaQuery.of(context).size.height * 0.775),
             child: SizedBox(
               width: 119.0,
               child: FlatButton(
@@ -199,7 +221,9 @@ class _SignuppageState extends State<Signuppage> {
 
           //goback button
           Transform.translate(
-            offset: Offset(20.0, 42.0),
+            // offset: Offset(20.0, 42.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.05,
+                MediaQuery.of(context).size.height * 0.05),
             child:
                 // Adobe XD layer: 'jiantou' (shape)
                 PageLink(
