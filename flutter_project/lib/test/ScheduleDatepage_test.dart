@@ -8,11 +8,15 @@ import 'package:mockito/mockito.dart';
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 void main() {  
   final mockObserver = MockNavigatorObserver();
+  final routes = {
+    '/over': (context) => Overpage(),
+    '/date': (context) => ScheduleDatepage()
+  };
   Widget createWidgetForTesting(){
     return MaterialApp(
       initialRoute: "/date",
       navigatorObservers: [mockObserver],
-      onGenerateRoute: onGenerateRoute,
+      routes: routes
   );}
 
   testWidgets('there should be exactly 4 DatePicker in this page', (WidgetTester tester) async{
@@ -70,16 +74,9 @@ void main() {
 
   testWidgets('Can navigate to next page', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting());
-    // expect(find.byKey(Key("4")), findsOneWidget);
-    // await tester.tap(find.byKey(Key("4")));
-    // await tester.pumpAndSettle();
-    // await tester.tap(find.text('10'));
-    // await tester.tap(find.text('OK'));
-    // await tester.pumpAndSettle();
-    expect(find.text('Save'), findsOneWidget);
-    await tester.tap(find.text('Save'));
+    expect(find.byKey(Key("tapToOver")), findsOneWidget);
+    await tester.tap(find.byKey(Key("tapToOver")));
     await tester.pumpAndSettle();
-    expect(find.text('Start'), findsOneWidget);
     verify(mockObserver.didPush(any, any));
   });
 
