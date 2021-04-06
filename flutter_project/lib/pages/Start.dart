@@ -32,6 +32,7 @@ class Start extends StatelessWidget {
             child:
                 // Adobe XD layer: 'WechatIMG1138的副本' (shape)
                 PageLink(
+                  key: Key("imageToTap"),
               links: [
                 PageLinkInfo(
                   transition: LinkTransition.Fade,
