@@ -145,6 +145,7 @@ class _LoginpageState extends State<Loginpage> {
             offset: Offset(69.0, 502.0),
             child: Container(
               child: TextField(
+                key: Key("loginIDTextField"),
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: "Account ID",
@@ -173,6 +174,7 @@ class _LoginpageState extends State<Loginpage> {
             offset: Offset(69.0, 628.0),
             child: Container(
               child: TextField(
+                key:Key("LoginPasswordTextField"),
                 obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -220,6 +222,7 @@ class _LoginpageState extends State<Loginpage> {
                 width: 160,
                 height: 40,
                 child: RaisedButton(
+                  key: Key("SignUpButton"),
                   child: Text("Sign Up"),
                   color: const Color(0xfffaaf7b),
                   onPressed: () {

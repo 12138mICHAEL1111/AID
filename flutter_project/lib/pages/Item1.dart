@@ -305,6 +305,7 @@ class _Item1State extends State<Item1> {
   void displayBlank() {
     _child = TextField(
       textAlign: TextAlign.center,
+      key: Key("item1TextField"),
       decoration: InputDecoration(
           labelText: _blank,
           labelStyle: TextStyle(
