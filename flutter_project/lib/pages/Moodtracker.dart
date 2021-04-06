@@ -11,6 +11,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 class Moodtracker extends StatefulWidget {
   int itemNumber;
   int sessionNumber;
+
   Moodtracker({this.itemNumber, this.sessionNumber});
 
   @override
@@ -127,12 +128,12 @@ class _MoodtrackerState extends State<Moodtracker> {
       body: Stack(
         children: <Widget>[
           Transform.translate(
-            offset: Offset(-1.0, 0.0),
+            offset: Offset(0.0, 0.0),
             child:
                 // Adobe XD layer: '007 Sunny Morning' (shape)
                 Container(
-              width: 428.0,
-              height: 926.0,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/background2.png'),
@@ -142,10 +143,14 @@ class _MoodtrackerState extends State<Moodtracker> {
             ),
           ),
           Transform.translate(
-            offset: Offset(34.0, 155.0),
+            // offset: Offset(34.0, 155.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.079,
+                MediaQuery.of(context).size.height * 0.168),
             child: Container(
-              width: 362.0,
-              height: 676.0,
+              // width: 362.0,
+              // height: 676.0,
+              width: MediaQuery.of(context).size.width * 0.85,
+              height: MediaQuery.of(context).size.height * 0.73,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.0),
                 color: const Color(0xffffffff),
@@ -160,19 +165,23 @@ class _MoodtrackerState extends State<Moodtracker> {
             ),
           ),
           Transform.translate(
-            offset: Offset(25.0, 100.0),
+            // offset: Offset(25.0, 100.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.058,
+                MediaQuery.of(context).size.height * 0.107),
             child: Text(
               'How do you feel today？',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 33,
+                fontSize: MediaQuery.of(context).size.height * 0.036,
                 color: const Color(0xffffffff),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(34.0, 764.0),
+            // offset: Offset(34.0, 764.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.079,
+                MediaQuery.of(context).size.height * 0.83),
             // child: PageLink(
             // links: [
             //   PageLinkInfo(
@@ -183,8 +192,10 @@ class _MoodtrackerState extends State<Moodtracker> {
             //   ),
             // ],
             child: Container(
-              width: 362.0,
-              height: 67.0,
+              // width: 362.0,
+              // height: 67.0,
+              width: MediaQuery.of(context).size.width * 0.85,
+              height: MediaQuery.of(context).size.height * 0.072,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(30.0),
@@ -205,9 +216,11 @@ class _MoodtrackerState extends State<Moodtracker> {
             ),
           ),
           Transform.translate(
-              offset: Offset(156.3, 775.0),
+              // offset: Offset(156.3, 775.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.36,
+                  MediaQuery.of(context).size.height * 0.84),
               child: SizedBox(
-                  width: 116.0,
+                  width: MediaQuery.of(context).size.width * 0.28,
                   child: OutlineButton(
                     borderSide: BorderSide.none,
                     onPressed: () {
@@ -285,21 +298,23 @@ class _MoodtrackerState extends State<Moodtracker> {
                       'Next',
                       style: TextStyle(
                         fontFamily: 'ZiZhiQuXiMaiTi',
-                        fontSize: 37,
+                        fontSize: MediaQuery.of(context).size.height * 0.037,
                         color: const Color(0xffffffff),
                       ),
                       textAlign: TextAlign.center,
                     ),
                   ))),
           Transform.translate(
-            offset: Offset(149.5, 185.0),
+            // offset: Offset(149.5, 185.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.35,
+                MediaQuery.of(context).size.height * 0.199),
             child: SizedBox(
-              width: 130.0,
+              width: MediaQuery.of(context).size.width * 0.30,
               child: Text(
                 'Anxious',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 30,
+                  fontSize: MediaQuery.of(context).size.height * 0.032,
                   color: const Color.fromRGBO(32, 50, 80, 1.0),
                 ),
                 textAlign: TextAlign.center,
@@ -307,14 +322,16 @@ class _MoodtrackerState extends State<Moodtracker> {
             ),
           ),
           Transform.translate(
-            offset: Offset(149.5, 370.0),
+            // offset: Offset(149.5, 370.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.348,
+                MediaQuery.of(context).size.height * 0.4),
             child: SizedBox(
-              width: 130.0,
+              width: MediaQuery.of(context).size.width * 0.302,
               child: Text(
                 'Sad',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 30,
+                  fontSize: MediaQuery.of(context).size.height * 0.032,
                   color: const Color.fromRGBO(32, 50, 80, 1.0),
                 ),
                 textAlign: TextAlign.center,
@@ -322,14 +339,16 @@ class _MoodtrackerState extends State<Moodtracker> {
             ),
           ),
           Transform.translate(
-            offset: Offset(149.5, 555.0),
+            // offset: Offset(149.5, 555.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.348,
+                MediaQuery.of(context).size.height * 0.6),
             child: SizedBox(
-              width: 130.0,
+              width: MediaQuery.of(context).size.width * 0.3,
               child: Text(
                 'Happy',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 30,
+                  fontSize: MediaQuery.of(context).size.height * 0.032,
                   color: const Color.fromRGBO(32, 50, 80, 1.0),
                 ),
                 textAlign: TextAlign.center,
@@ -337,15 +356,17 @@ class _MoodtrackerState extends State<Moodtracker> {
             ),
           ),
           Transform.translate(
-              offset: Offset(315.0, 240.0),
+              // offset: Offset(315.0, 240.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.73,
+                  MediaQuery.of(context).size.height * 0.26),
               child: Stack(children: <Widget>[
                 ImageRadio(
                   images[4],
                   pressedImage[4],
                   controller: aController,
                   onChange: (v) => addToArrayA(1),
-                  height: 60.0,
-                  width: 60.0,
+                  width: MediaQuery.of(context).size.width * 0.14,
+                  height: MediaQuery.of(context).size.height * 0.064,
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
@@ -353,7 +374,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                     'Not at all',
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
-                      fontSize: 15,
+                      fontSize: MediaQuery.of(context).size.height * 0.016,
                       color: const Color.fromRGBO(32, 50, 80, 1.0),
                     ),
                     textAlign: TextAlign.left,
@@ -361,25 +382,31 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ),
               ])),
           Transform.translate(
-              offset: Offset(250.0, 240.0),
+              // offset: Offset(250.0, 240.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.58,
+                  MediaQuery.of(context).size.height * 0.26),
               child: ImageRadio(
                 images[3],
                 pressedImage[3],
                 controller: aController,
                 onChange: (value) => addToArrayA(2),
-                height: 60.0,
-                width: 60.0,
+                // height: 60.0,
+                // width: 60.0,
+                width: MediaQuery.of(context).size.width * 0.14,
+                height: MediaQuery.of(context).size.height * 0.064,
               )),
           Transform.translate(
-              offset: Offset(185.0, 240.0),
+              // offset: Offset(185.0, 240.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.43,
+                  MediaQuery.of(context).size.height * 0.26),
               child: Stack(children: <Widget>[
                 ImageRadio(
                   images[2],
                   pressedImage[2],
                   controller: aController,
                   onChange: (value) => addToArrayA(3),
-                  height: 60.0,
-                  width: 60.0,
+                  width: MediaQuery.of(context).size.width * 0.14,
+                  height: MediaQuery.of(context).size.height * 0.064,
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
@@ -387,7 +414,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                     'Somewhat',
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
-                      fontSize: 15,
+                      fontSize: MediaQuery.of(context).size.height * 0.016,
                       color: const Color.fromRGBO(32, 50, 80, 1.0),
                     ),
                     textAlign: TextAlign.left,
@@ -395,15 +422,17 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ),
               ])),
           Transform.translate(
-              offset: Offset(55.0, 240.0),
+              // offset: Offset(55.0, 240.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.127,
+                  MediaQuery.of(context).size.height * 0.26),
               child: Stack(children: <Widget>[
                 ImageRadio(
                   images[0],
                   pressedImage[0],
                   controller: aController,
                   onChange: (value) => addToArrayA(5),
-                  height: 60.0,
-                  width: 60.0,
+                  width: MediaQuery.of(context).size.width * 0.14,
+                  height: MediaQuery.of(context).size.height * 0.064,
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
@@ -411,7 +440,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                     'Very much',
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
-                      fontSize: 15,
+                      fontSize: MediaQuery.of(context).size.height * 0.016,
                       color: const Color.fromRGBO(32, 50, 80, 1.0),
                     ),
                     textAlign: TextAlign.left,
@@ -419,25 +448,31 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ),
               ])),
           Transform.translate(
-              offset: Offset(123.0, 243.0),
+              // offset: Offset(123.0, 243.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.286,
+                  MediaQuery.of(context).size.height * 0.262),
               child: ImageRadio(
                 images[1],
                 pressedImage[1],
                 controller: aController,
                 onChange: (value) => addToArrayA(4),
-                height: 54.0,
-                width: 53.7,
+                // height: 54.0,
+                // width: 53.7,
+                width: MediaQuery.of(context).size.width * 0.125,
+                height: MediaQuery.of(context).size.height * 0.057,
               )),
           Transform.translate(
-              offset: Offset(315.0, 425.0),
+              // offset: Offset(315.0, 425.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.735,
+                  MediaQuery.of(context).size.height * 0.459),
               child: Stack(children: <Widget>[
                 ImageRadio(
                   images[4],
                   pressedImage[4],
                   controller: sController,
                   onChange: (value) => addToArrayS(1),
-                  height: 60.0,
-                  width: 60.0,
+                  width: MediaQuery.of(context).size.width * 0.14,
+                  height: MediaQuery.of(context).size.height * 0.064,
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
@@ -445,7 +480,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                     'Not at all',
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
-                      fontSize: 15,
+                      fontSize: MediaQuery.of(context).size.height * 0.016,
                       color: const Color.fromRGBO(32, 50, 80, 1.0),
                     ),
                     textAlign: TextAlign.left,
@@ -453,25 +488,29 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ),
               ])),
           Transform.translate(
-              offset: Offset(250.0, 425.0),
+              // offset: Offset(250.0, 425.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.585,
+                  MediaQuery.of(context).size.height * 0.459),
               child: ImageRadio(
                 images[3],
                 pressedImage[3],
                 controller: sController,
                 onChange: (value) => addToArrayS(2),
-                height: 60.0,
-                width: 60.0,
+                width: MediaQuery.of(context).size.width * 0.14,
+                height: MediaQuery.of(context).size.height * 0.064,
               )),
           Transform.translate(
-              offset: Offset(185.0, 425.0),
+              // offset: Offset(185.0, 425.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.43,
+                  MediaQuery.of(context).size.height * 0.459),
               child: Stack(children: <Widget>[
                 ImageRadio(
                   images[2],
                   pressedImage[2],
                   controller: sController,
                   onChange: (value) => addToArrayS(3),
-                  height: 60.0,
-                  width: 60.0,
+                  width: MediaQuery.of(context).size.width * 0.14,
+                  height: MediaQuery.of(context).size.height * 0.064,
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
@@ -479,7 +518,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                     'Somewhat',
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
-                      fontSize: 15,
+                      fontSize: MediaQuery.of(context).size.height * 0.016,
                       color: const Color.fromRGBO(32, 50, 80, 1.0),
                     ),
                     textAlign: TextAlign.left,
@@ -487,15 +526,17 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ),
               ])),
           Transform.translate(
-              offset: Offset(55.0, 425.0),
+              // offset: Offset(55.0, 425.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.132,
+                  MediaQuery.of(context).size.height * 0.459),
               child: Stack(children: <Widget>[
                 ImageRadio(
                   images[0],
                   pressedImage[0],
                   controller: sController,
                   onChange: (value) => addToArrayS(5),
-                  height: 60.0,
-                  width: 60.0,
+                  width: MediaQuery.of(context).size.width * 0.14,
+                  height: MediaQuery.of(context).size.height * 0.064,
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
@@ -503,7 +544,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                     'Very much',
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
-                      fontSize: 15,
+                      fontSize: MediaQuery.of(context).size.height * 0.016,
                       color: const Color.fromRGBO(32, 50, 80, 1.0),
                     ),
                     textAlign: TextAlign.left,
@@ -511,33 +552,37 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ),
               ])),
           Transform.translate(
-              offset: Offset(123.0, 428.0),
+              // offset: Offset(123.0, 428.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.286,
+                  MediaQuery.of(context).size.height * 0.463),
               child: ImageRadio(
                 images[1],
                 pressedImage[1],
                 controller: sController,
                 onChange: (value) => addToArrayS(4),
-                height: 54.0,
-                width: 53.7,
+                width: MediaQuery.of(context).size.width * 0.125,
+                height: MediaQuery.of(context).size.height * 0.057,
               )),
           Transform.translate(
-              offset: Offset(315.0, 610.0),
+              // offset: Offset(315.0, 610.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.732,
+                  MediaQuery.of(context).size.height * 0.659),
               child: Stack(children: <Widget>[
                 ImageRadio(
                   images[4],
                   pressedImage[4],
                   controller: hController,
                   onChange: (value) => addToArrayH(1),
-                  height: 60.0,
-                  width: 60.0,
+                  width: MediaQuery.of(context).size.width * 0.14,
+                  height: MediaQuery.of(context).size.height * 0.064,
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
                   child: Text(
-                    'Very much', 
+                    'Very much',
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
-                      fontSize: 15,
+                      fontSize: MediaQuery.of(context).size.height * 0.016,
                       color: const Color.fromRGBO(32, 50, 80, 1.0),
                     ),
                     textAlign: TextAlign.left,
@@ -545,25 +590,29 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ),
               ])),
           Transform.translate(
-              offset: Offset(250.0, 610.0),
+              // offset: Offset(250.0, 610.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.586,
+                  MediaQuery.of(context).size.height * 0.659),
               child: ImageRadio(
                 images[3],
                 pressedImage[3],
                 controller: hController,
                 onChange: (value) => addToArrayH(2),
-                height: 60.0,
-                width: 60.0,
+                width: MediaQuery.of(context).size.width * 0.14,
+                height: MediaQuery.of(context).size.height * 0.064,
               )),
           Transform.translate(
-              offset: Offset(185.0, 610.0),
+              // offset: Offset(185.0, 610.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.43,
+                  MediaQuery.of(context).size.height * 0.659),
               child: Stack(children: <Widget>[
                 ImageRadio(
                   images[2],
                   pressedImage[2],
                   controller: hController,
                   onChange: (value) => addToArrayH(3),
-                  height: 60.0,
-                  width: 60.0,
+                  width: MediaQuery.of(context).size.width * 0.14,
+                  height: MediaQuery.of(context).size.height * 0.064,
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
@@ -571,7 +620,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                     'Somewhat',
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
-                      fontSize: 15,
+                      fontSize: MediaQuery.of(context).size.height * 0.016,
                       color: const Color.fromRGBO(32, 50, 80, 1.0),
                     ),
                     textAlign: TextAlign.left,
@@ -579,15 +628,17 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ),
               ])),
           Transform.translate(
-              offset: Offset(55.0, 610.0),
+              // offset: Offset(55.0, 610.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.128,
+                  MediaQuery.of(context).size.height * 0.659),
               child: Stack(children: <Widget>[
                 ImageRadio(
                   images[0],
                   pressedImage[0],
                   controller: hController,
                   onChange: (value) => addToArrayH(5),
-                  height: 60.0,
-                  width: 60.0,
+                  width: MediaQuery.of(context).size.width * 0.14,
+                  height: MediaQuery.of(context).size.height * 0.064,
                 ),
                 Container(
                   padding: const EdgeInsets.fromLTRB(0, 70, 0, 0),
@@ -595,7 +646,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                     'Not at all',
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
-                      fontSize: 15,
+                      fontSize: MediaQuery.of(context).size.height * 0.016,
                       color: const Color.fromRGBO(32, 50, 80, 1.0),
                     ),
                     textAlign: TextAlign.left,
@@ -603,20 +654,26 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ),
               ])),
           Transform.translate(
-              offset: Offset(123.0, 613.0),
+              // offset: Offset(123.0, 613.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.286,
+                  MediaQuery.of(context).size.height * 0.662),
               child: ImageRadio(
                 images[1],
                 pressedImage[1],
                 controller: hController,
                 onChange: (value) => addToArrayH(4),
-                height: 54.0,
-                width: 53.7,
+                width: MediaQuery.of(context).size.width * 0.125,
+                height: MediaQuery.of(context).size.height * 0.057,
               )),
           Transform.translate(
-            offset: Offset(409.0, 195.0),
+            // offset: Offset(409.0, 195.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.96,
+                MediaQuery.of(context).size.height * 0.21),
             child: Container(
-              width: 20.0,
-              height: 594.0,
+              // width: 20.0,
+              // height: 594.0,
+              width: MediaQuery.of(context).size.width * 0.046,
+              height: MediaQuery.of(context).size.height * 0.64,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.0),
