@@ -127,9 +127,9 @@ class _HomepageState extends State<Homepage> {
 
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.53528,
-                MediaQuery.of(context).size.height * 0.65376),
+                MediaQuery.of(context).size.height * 0.63),
             child: SizedBox(
-              width: 152.0,
+              width: MediaQuery.of(context).size.width * 0.4,
               child: Text(
                 '$_date' ?? "",
                 style: TextStyle(
