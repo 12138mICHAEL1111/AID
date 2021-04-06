@@ -221,7 +221,7 @@ module.exports= app=>{
                 const firstContext = Items[0].context
                 const findFirst = await req.Model.findOne({ "context": firstContext })
                 if (findFirst) {
-                    res.status(403).send({ "message": "就知道你会再点一次的!!" })
+                    res.status(403).send({ "message": "You have already added once!!" })
                 } else {
                     for (var i = 0; i < Items.length; i++) {
                         req.Model.create(Items[i])

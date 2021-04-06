@@ -81,7 +81,7 @@
                         :data="questionTable"
                         border
                         style="width: 100%"
-                        id="out-table">
+                        >
                         <el-table-column
                         prop="questionnumber"
                         label="question number"
@@ -144,6 +144,112 @@
                         </el-table-column>
                  </el-table>
         </div>
+         <el-table v-show='flag'
+                        :data="finalQuestionTable"
+                        border
+                        style="width: 100%"
+                        id="out-table">
+                        <el-table-column
+                        prop="questionnumber"
+                        label="question number"
+                        width="150">
+                        </el-table-column>
+                        <el-table-column
+                        prop="sessionnumber"
+                        label="session number"
+                        width="150">
+                        </el-table-column>
+                        <el-table-column
+                        prop="readingt"
+                        label="reading duration(s)"
+                        width="150">
+                        </el-table-column>
+                        <el-table-column
+                        prop="wordrt1"
+                        label="word reading time 1(ms)"
+                        width="150">
+                        </el-table-column>
+                         <el-table-column
+                        prop="wordac1"
+                        label="word accuracy 1"
+                        width="150">
+                        </el-table-column>
+                         <el-table-column
+                        prop="clue"
+                        label="clue required"
+                        width="150">
+                        </el-table-column>
+                         <el-table-column
+                        prop="wordrt2"
+                        label="word reading time 2(ms)"
+                        width="150">
+                        </el-table-column>
+                         <el-table-column
+                        prop="worda2"
+                        label="word accuracy 2"
+                        width="150">
+                        </el-table-column>
+                         <el-table-column
+                        prop="questionrt1"
+                        label="question reading time(ms)"
+                        width="150">
+                        </el-table-column>
+                         <el-table-column
+                        prop="questiona1"
+                        label="question accuracy 1"
+                        width="150">
+                        </el-table-column>
+                          <el-table-column
+                        prop="questionrt2"
+                        label="question reading time 2"
+                        width="150">
+                        </el-table-column>
+                         <el-table-column
+                        prop="questiona2"
+                        label="question accuracy 2"
+                        width="150">
+                        </el-table-column>
+                         <el-table-column
+                        prop="sessionmood"
+                        label="before session mood"
+                        width="150">
+                        </el-table-column>
+                            <el-table-column
+                        prop="anxious"
+                        label="anxious"
+                        width="150">
+                        </el-table-column>
+                            <el-table-column
+                        prop="happy"
+                        label="happy"
+                        width="150">
+                        </el-table-column>
+                           <el-table-column
+                        prop="sad"
+                        label="sad"
+                        width="150">
+                        </el-table-column>
+                         <el-table-column
+                        prop="aftersession"
+                        label="after session mood"
+                        width="150">
+                        </el-table-column>
+                             <el-table-column
+                        prop="anxious2"
+                        label="anxious"
+                        width="150">
+                        </el-table-column>
+                            <el-table-column
+                        prop="happy2"
+                        label="happy"
+                        width="150">
+                        </el-table-column>
+                           <el-table-column
+                        prop="sad2"
+                        label="sad"
+                        width="150">
+                        </el-table-column>
+                 </el-table>
     </div>
 </template>
 
@@ -164,6 +270,8 @@ import XLSX from 'xlsx';
 export default {
     data(){
         return{
+            finalQuestionTable:[],
+            flag:false,
             userid:"",
             category:'',
             sessionmood:{},
@@ -235,7 +343,23 @@ export default {
                     worda2=this.results[x].wordAccuracy2
                 }
                 this.questionTable.push({'questionnumber':this.results[x].trailNumber,"sessionnumber":this.results[x].sessionNumber,"readingt":this.results[x].readingDuration,"wordrt1":this.results[x].wordRT1,"wordac1":this.results[x].wordAccuracy1,"clue":this.results[x].clueRequired,"wordrt2":wordRT2,"questionrt1":this.results[x].questionRT1,"questiona1":this.results[x].questionAccuracy1,"questionrt2":questionRT2,"questiona2":questiona2,'worda2':worda2})
+                if(x==0){
+                    this.finalQuestionTable.push({'questionnumber':this.results[x].trailNumber,"sessionnumber":this.results[x].sessionNumber,"readingt":this.results[x].readingDuration,"wordrt1":this.results[x].wordRT1,"wordac1":this.results[x].wordAccuracy1,"clue":this.results[x].clueRequired,"wordrt2":wordRT2,"questionrt1":this.results[x].questionRT1,"questiona1":this.results[x].questionAccuracy1,"questionrt2":questionRT2,"questiona2":questiona2,'worda2':worda2,'sessionmood':1,'anxious':this.moodTable[0].axious,'happy':this.moodTable[0].happy,'sad':this.moodTable[0].sad,'aftersession':1,'anxious2':this.aftermoodTable[0].axious,'happy2':this.aftermoodTable[0].happy,'sad2':this.aftermoodTable[0].sad})
+                }
+                else if(x==1){
+                    this.finalQuestionTable.push({'questionnumber':this.results[x].trailNumber,"sessionnumber":this.results[x].sessionNumber,"readingt":this.results[x].readingDuration,"wordrt1":this.results[x].wordRT1,"wordac1":this.results[x].wordAccuracy1,"clue":this.results[x].clueRequired,"wordrt2":wordRT2,"questionrt1":this.results[x].questionRT1,"questiona1":this.results[x].questionAccuracy1,"questionrt2":questionRT2,"questiona2":questiona2,'worda2':worda2,'sessionmood':2,'anxious':this.moodTable[1].axious,'happy':this.moodTable[1].happy,'sad':this.moodTable[1].sad,'aftersession':2,'anxious2':this.aftermoodTable[1].axious,'happy2':this.aftermoodTable[1].happy,'sad2':this.aftermoodTable[1].sad})
+                }
+                else if(x==2){
+                     this.finalQuestionTable.push({'questionnumber':this.results[x].trailNumber,"sessionnumber":this.results[x].sessionNumber,"readingt":this.results[x].readingDuration,"wordrt1":this.results[x].wordRT1,"wordac1":this.results[x].wordAccuracy1,"clue":this.results[x].clueRequired,"wordrt2":wordRT2,"questionrt1":this.results[x].questionRT1,"questiona1":this.results[x].questionAccuracy1,"questionrt2":questionRT2,"questiona2":questiona2,'worda2':worda2,'sessionmood':3,'anxious':this.moodTable[2].axious,'happy':this.moodTable[2].happy,'sad':this.moodTable[2].sad,'aftersession':3,'anxious2':this.aftermoodTable[2].axious,'happy2':this.aftermoodTable[2].happy,'sad2':this.aftermoodTable[2].sad})
+                }
+                else if(x==3){
+                    this.finalQuestionTable.push({'questionnumber':this.results[x].trailNumber,"sessionnumber":this.results[x].sessionNumber,"readingt":this.results[x].readingDuration,"wordrt1":this.results[x].wordRT1,"wordac1":this.results[x].wordAccuracy1,"clue":this.results[x].clueRequired,"wordrt2":wordRT2,"questionrt1":this.results[x].questionRT1,"questiona1":this.results[x].questionAccuracy1,"questionrt2":questionRT2,"questiona2":questiona2,'worda2':worda2,'sessionmood':4,'anxious':this.moodTable[3].axious,'happy':this.moodTable[3].happy,'sad':this.moodTable[3].sad,'aftersession':4,'anxious2':this.aftermoodTable[3].axious,'happy2':this.aftermoodTable[3].happy,'sad2':this.aftermoodTable[3].sad})
+                }
+                else{
+                    this.finalQuestionTable.push({'questionnumber':this.results[x].trailNumber,"sessionnumber":this.results[x].sessionNumber,"readingt":this.results[x].readingDuration,"wordrt1":this.results[x].wordRT1,"wordac1":this.results[x].wordAccuracy1,"clue":this.results[x].clueRequired,"wordrt2":wordRT2,"questionrt1":this.results[x].questionRT1,"questiona1":this.results[x].questionAccuracy1,"questionrt2":questionRT2,"questiona2":questiona2,'worda2':worda2})
+                }
             }
+            
         }
     },
     created(){
