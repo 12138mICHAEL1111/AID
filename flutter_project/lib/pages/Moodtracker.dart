@@ -342,6 +342,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ImageRadio(
                   images[4],
                   pressedImage[4],
+                  key: Key("firstImageRadio"),
                   controller: aController,
                   onChange: (v) => addToArrayA(1),
                   height: 60.0,
@@ -434,6 +435,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ImageRadio(
                   images[4],
                   pressedImage[4],
+                  key: Key("secondImageRadio"),
                   controller: sController,
                   onChange: (value) => addToArrayS(1),
                   height: 60.0,
@@ -584,6 +586,7 @@ class _MoodtrackerState extends State<Moodtracker> {
                 ImageRadio(
                   images[0],
                   pressedImage[0],
+                  key: Key("thirdImageRadio"),
                   controller: hController,
                   onChange: (value) => addToArrayH(5),
                   height: 60.0,
@@ -640,12 +643,13 @@ class _MoodtrackerState extends State<Moodtracker> {
 }
 
 class ImageRadio extends StatefulWidget {
-  ImageRadio(@required this.imageUrl, @required this.imageUrl2,
+  ImageRadio(@required this.imageUrl, @required this.imageUrl2, 
       {this.isSeleted: false,
       this.controller,
       this.onChange,
+      Key key,
       this.width: 60.0,
-      this.height: 60.0});
+      this.height: 60.0}):super(key: key);
 
   bool isSeleted;
 
