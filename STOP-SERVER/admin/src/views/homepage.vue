@@ -1,28 +1,24 @@
 <template>
     <div>
-        <h2> 一键增加页面 让你有开挂一般的编程体验</h2>
-         <el-button type="primary" @click="uploadPractiseItem">一键增加practise item</el-button>
+        <h2> This is page for developers, click every button below to add questions to you loacl database </h2>
+         <el-button type="primary" @click="uploadPractiseItem">add practise item</el-button>
          <br><br>
-         <el-button type="primary" @click="uploadControlItem">一键增加control item</el-button>
+         <el-button type="primary" @click="uploadControlItem">add control item</el-button>
          <br><br>
-         <el-button type="primary" @click="uploadMinusSocial">一键增加minus social</el-button>
+         <el-button type="primary" @click="uploadMinusSocial">add minus social</el-button>
          <br><br>
-         <el-button type="primary" @click="uploadMinusRelationship">一键增加minus relationship</el-button>
+         <el-button type="primary" @click="uploadMinusRelationship">add minus relationship</el-button>
          <br><br>
-         <el-button type="primary" @click="uploadMinusFamily">一键增加minus family</el-button>
+         <el-button type="primary" @click="uploadMinusFamily">add minus family</el-button>
          <br><br>
-         <el-button type="primary" @click="uploadMinusWork">一键增加minus work</el-button>
+         <el-button type="primary" @click="uploadMinusWork">add minus work</el-button>
          <br><br>
-         <el-button type="primary" @click="uploadMinusAcademic">一键增加minus academic</el-button>
+         <el-button type="primary" @click="uploadMinusAcademic">add minus academic</el-button>
          <br><br>
-         <el-button type="primary" @click="uploadMinusHobby">一键增加minus hobby</el-button>
+         <el-button type="primary" @click="uploadMinusHobby">add minus hobby</el-button>
          <br><br>
-         <el-button type="primary" @click="uploadMinusMood">一键增加minus mood</el-button>
+         <el-button type="primary" @click="uploadMinusMood">add minus mood</el-button>
          <br><br>
-
-         <el-button type="primary" @click="testApi">接口测试</el-button>
-         <el-button type="primary" @click="testApi2">接口测试2</el-button>
-         <a>可以在admin/src/views/homepage.vue 里的testapi方法里更改接口 摁f12 console控制台查看输出</a>
     </div>
 </template>
 
@@ -34,7 +30,7 @@ export default {
              if(res.data.message=="success"){
                  this.$message({
                      type: "success",
-                     message: "添加成功!"
+                     message: "successfully added!"
                  })
              }
         },
@@ -43,7 +39,7 @@ export default {
             if(res.data.message=="success"){
                  this.$message({
                      type: "success",
-                     message: "添加成功!"
+                     message: "successfully added!"
                  })
              }
         },
@@ -52,7 +48,7 @@ export default {
             if(res.data.message=="success"){
                  this.$message({
                      type: "success",
-                     message: "添加成功!"
+                     message: "successfully added!"
                  })
              }
         },
@@ -61,7 +57,7 @@ export default {
             if(res.data.message=="success"){
                  this.$message({
                      type: "success",
-                     message: "添加成功!"
+                     message: "successfully added!"
                  })
              }
         },
@@ -70,7 +66,7 @@ export default {
             if(res.data.message=="success"){
                  this.$message({
                      type: "success",
-                     message: "添加成功!"
+                     message: "successfully added!"
                  })
              }
         },
@@ -79,7 +75,7 @@ export default {
             if(res.data.message=="success"){
                  this.$message({
                      type: "success",
-                     message: "添加成功!"
+                     message: "successfully added!"
                  })
              }
         },
@@ -88,7 +84,7 @@ export default {
             if(res.data.message=="success"){
                  this.$message({
                      type: "success",
-                     message: "添加成功!"
+                     message: "successfully added!"
                  })
              }
         },
@@ -97,7 +93,7 @@ export default {
             if(res.data.message=="success"){
                  this.$message({
                      type: "success",
-                     message: "添加成功!"
+                     message: "successfully added!"
                  })
              }
         },
@@ -106,18 +102,18 @@ export default {
             if(res.data.message=="success"){
                  this.$message({
                      type: "success",
-                     message: "添加成功!"
+                     message: "successfully added!"
                  })
              }
         },
-        async testApi(){
-            const res = await this.$http.post('/rest/users/signup',{"email":"AA001","password":'123456'})
-            console.log(res.data)
-        },
-        async testApi2(){
-             const res = await this.$http.get('/rest/controlitems')
-            console.log(res.data)
-        }
+        // async testApi(){
+        //     const res = await this.$http.post('/rest/users/signup',{"email":"AA001","password":'123456'})
+        //     console.log(res.data)
+        // },
+        // async testApi2(){
+        //      const res = await this.$http.get('/rest/controlitems')
+        //     console.log(res.data)
+        // }
     }
 }
 </script>
