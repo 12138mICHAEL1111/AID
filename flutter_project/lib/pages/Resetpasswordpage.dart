@@ -9,6 +9,7 @@ import 'package:adobe_xd/page_link.dart';
 // class Resetpasswordpage extends StatelessWidget {
 class Resetpasswordpage extends StatefulWidget {
   Map arguments;
+
   Resetpasswordpage({Key key, this.arguments}) : super(key: key);
 
   @override
@@ -23,7 +24,9 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
   String repeatNewPassword;
   Map arguments;
   bool flag = false;
+
   _ResetpasswordpageState({this.arguments});
+
   @override
   void initState() {
     super.initState();
@@ -80,8 +83,10 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
         children: <Widget>[
           // Adobe XD layer: '007 Sunny Morning' (shape)
           Container(
-            width: 428.0,
-            height: 419.0,
+            // width: 428.0,
+            // height: 419.0,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.45,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.only(
                 bottomRight: Radius.circular(60.0),
@@ -94,24 +99,30 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(68.0, 136.0),
+            // offset: Offset(68.0, 136.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.16,
+                MediaQuery.of(context).size.height * 0.15),
             child: Text(
               'Reset password',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 40,
+                fontSize: MediaQuery.of(context).size.height * 0.045,
                 color: const Color(0xfff8f4f4),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(117.0, 208.0),
+            // offset: Offset(117.0, 208.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.27,
+                MediaQuery.of(context).size.height * 0.23),
             child:
                 // Adobe XD layer: 'WechatIMG1138的副本' (shape)
                 Container(
-              width: 195.0,
-              height: 180.0,
+              // width: 195.0,
+              // height: 180.0,
+              width: MediaQuery.of(context).size.width * 0.45,
+              height: MediaQuery.of(context).size.height * 0.19,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/logoOfMenu.png'),
@@ -121,12 +132,14 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(49.0, 419.0),
+            // offset: Offset(49.0, 419.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.11,
+                MediaQuery.of(context).size.height * 0.45),
             child: Text(
               'Your ID:',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 30,
+                fontSize: MediaQuery.of(context).size.height * 0.033,
                 color: const Color(0xfff8c16f),
               ),
               textAlign: TextAlign.left,
@@ -134,7 +147,9 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
           ),
           //id textfield
           Transform.translate(
-            offset: Offset(69.0, 463.0),
+            // offset: Offset(69.0, 463.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.16,
+                MediaQuery.of(context).size.height * 0.5),
             child: Container(
               child: TextField(
                 decoration: InputDecoration(
@@ -145,24 +160,30 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
                   this.id = value;
                 },
               ),
-              width: 276.0,
-              height: 48.0,
+              // width: 276.0,
+              // height: 48.0,
+              width: MediaQuery.of(context).size.width * 0.64,
+              height: MediaQuery.of(context).size.height * 0.05,
             ),
           ),
           Transform.translate(
-            offset: Offset(49.0, 517.0),
+            // offset: Offset(49.0, 517.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.113,
+                MediaQuery.of(context).size.height * 0.56),
             child: Text(
               'Email:',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 30,
+                fontSize: MediaQuery.of(context).size.height * 0.033,
                 color: const Color(0xfff8c16f),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(69.0, 561.0),
+            // offset: Offset(69.0, 561.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.16,
+                MediaQuery.of(context).size.height * 0.61),
             child: Container(
               child: TextField(
                 decoration: InputDecoration(
@@ -173,17 +194,21 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
                   this.email = value;
                 },
               ),
-              width: 276.0,
-              height: 48.0,
+              // width: 276.0,
+              // height: 48.0,
+              width: MediaQuery.of(context).size.width * 0.64,
+              height: MediaQuery.of(context).size.height * 0.05,
             ),
           ),
           Transform.translate(
-            offset: Offset(46.0, 713.0),
+            // offset: Offset(46.0, 713.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.1070,
+                MediaQuery.of(context).size.height * 0.77),
             child: Text(
               'Repeat password:',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 30,
+                fontSize: MediaQuery.of(context).size.height * 0.032,
                 color: const Color(0xfff8c16f),
               ),
               textAlign: TextAlign.left,
@@ -191,7 +216,8 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
           ),
           //Repeat password textfield
           Transform.translate(
-            offset: Offset(69.0, 757.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.16,
+                MediaQuery.of(context).size.height * 0.82),
             child: Container(
               child: TextField(
                 obscureText: true,
@@ -203,24 +229,26 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
                   this.repeatNewPassword = value;
                 },
               ),
-              width: 276.0,
-              height: 48.0,
+              width: MediaQuery.of(context).size.width * 0.64,
+              height: MediaQuery.of(context).size.height * 0.05,
             ),
           ),
           Transform.translate(
-            offset: Offset(46.0, 615.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.1070,
+                MediaQuery.of(context).size.height * 0.67),
             child: Text(
               'New password:',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 30,
+                fontSize: MediaQuery.of(context).size.height * 0.033,
                 color: const Color(0xfff8c16f),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(69.0, 659.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.16,
+                MediaQuery.of(context).size.height * 0.71),
             child: Container(
               child: TextField(
                 obscureText: true,
@@ -232,13 +260,14 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
                   this.newPassword = value;
                 },
               ),
-              width: 276.0,
-              height: 48.0,
+              width: MediaQuery.of(context).size.width * 0.64,
+              height: MediaQuery.of(context).size.height * 0.05,
             ),
           ),
           //Reset button
           Transform.translate(
-            offset: Offset(165.0, 840.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.38,
+                MediaQuery.of(context).size.height * 0.9),
             child: RaisedButton(
               child: Text("Reset"),
               color: const Color(0xfffaaf7b),
@@ -247,7 +276,9 @@ class _ResetpasswordpageState extends State<Resetpasswordpage> {
           ),
           Container(),
           Transform.translate(
-            offset: Offset(20.0, 42.0),
+            // offset: Offset(20.0, 42.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.046,
+                MediaQuery.of(context).size.height * 0.045),
             child:
                 // Adobe XD layer: 'jiantou' (shape)
                 PageLink(
