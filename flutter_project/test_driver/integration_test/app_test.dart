@@ -2,11 +2,15 @@
 import "package:flutter_driver/flutter_driver.dart";
 import "package:test/test.dart";
 
+//Attention!!!!!!!!  These tests need to run with local server and will add users in local server!!!!
 //Please make sure your local database is up to date and it is correctly connected.
 //Before run 'flutter drive --target=lib/integration_test/app.dart' in terminal, please make sure an emulator or actual device is connected.
-//please make sure the last user ID in datebase is odd.
+// !!!!! Before run one group of test Make Sure all other tests are comment out.
+// because all these tests start from the beginning of this application!
+
 void main() {
-  group("A.I.D app test",() {
+  //please make sure the last user ID in datebase is odd.
+  group("A.I.D app test 1",() {
     FlutterDriver driver;
     
     setUpAll(()async{
@@ -171,6 +175,404 @@ void main() {
       await driver.tap(nextButton);
       await Future.delayed(Duration(seconds:2));
     },timeout:Timeout.none);
+  });
+  //please make sure the last user ID in datebase is even.
+  group("A.I.D app test 2",() {
+    FlutterDriver driver;
+    
+    setUpAll(()async{
+      driver = await FlutterDriver.connect();
+    });
 
+    tearDownAll((){
+      if(driver != null) {
+        driver.close();
+      }
+    });
+    var image = find.byValueKey("imageToTap");
+    test("Control test", () async {
+      await Future.delayed(Duration(seconds:10));
+      await driver.tap(image);
+      //this adds extra delay to better show the process;
+      await Future.delayed(Duration(seconds:5));
+      await driver.waitUntilNoTransientCallbacks();
+      await Future.delayed(Duration(seconds:5));
+      assert(find.text("Login") != null);
+      var signUp = find.byValueKey("SignUpButton");
+      assert(signUp != null);
+      print("before tap signup");
+      await driver.tap(signUp);
+      await driver.waitUntilNoTransientCallbacks();
+      print("after tap signup");
+      await Future.delayed(Duration(seconds:5));
+      assert(find.text("Login") == null);
+      var textField = find.byValueKey('EmailTextField');
+      await driver.tap(textField); 
+      await Future.delayed(Duration(seconds:1));
+      await driver.enterText('12@kcl.ac.uk'); 
+      await Future.delayed(Duration(seconds:1));
+      assert(find.text("12@kcl.ac.uk") == null);
+      await driver.waitFor(find.text('12@kcl.ac.uk'));
+      textField = find.byValueKey('PasswordTextField');
+      await Future.delayed(Duration(seconds:1));
+      await driver.tap(textField);
+      await Future.delayed(Duration(seconds:1)); 
+      await driver.enterText('123456'); 
+      await Future.delayed(Duration(seconds:3)); 
+      var signUpButton = find.byValueKey("SignUpButton");
+      await driver.tap(signUpButton);
+      print("Please remember your ID and restore the database before this user is createdif you want to proceed!!!");
+      await Future.delayed(Duration(seconds:10));
+      var nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      var text = find.byValueKey("Practice1TextField");
+      await driver.tap(text);
+      await Future.delayed(Duration(seconds:1));
+      await driver.enterText('i'); 
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      var noButton = find.text("No");
+      assert(nextButton != null);
+      await driver.tap(noButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      var socialButton = find.text("Social");
+      assert(socialButton != null);
+      await driver.tap(socialButton);
+      await Future.delayed(Duration(seconds:2));
+      var acaButton = find.text("Academic");
+      assert(acaButton != null);
+      await driver.tap(acaButton);
+      await Future.delayed(Duration(seconds:2));
+      var hobbieButton = find.text("Hobbies");
+      assert(hobbieButton != null);
+      await driver.tap(hobbieButton);
+      await Future.delayed(Duration(seconds:2));
+      var workButton = find.text("Work");
+      assert(workButton != null);
+      await driver.tap(workButton);
+      await Future.delayed(Duration(seconds:2));
+      var familyButton = find.text("Family");
+      assert(familyButton != null);
+      await driver.tap(familyButton);
+      await Future.delayed(Duration(seconds:2));
+      var relationButton = find.text("Relationships");
+      assert(relationButton != null);
+      await driver.tap(relationButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      var saveButton = find.text("Save");
+      assert(saveButton != null);
+      await driver.tap(saveButton);
+      await Future.delayed(Duration(seconds:2));
+      var startButton = find.text("Start");
+      assert(startButton != null);
+      await driver.tap(startButton);
+      await Future.delayed(Duration(seconds:2));
+      var beginButton = find.text("Let's begin!");
+      assert(beginButton != null);
+      await driver.tap(beginButton);
+      await Future.delayed(Duration(seconds:2));
+      var firstImageButton = find.byValueKey("firstImageRadio");
+      assert(firstImageButton != null);
+      await driver.tap(firstImageButton);
+      await Future.delayed(Duration(seconds:2));
+      var secondImageButton = find.byValueKey("secondImageRadio");
+      assert(secondImageButton != null);
+      await driver.tap(secondImageButton);
+      await Future.delayed(Duration(seconds:2));
+      var thirdImageButton = find.byValueKey("thirdImageRadio");
+      assert(thirdImageButton != null);
+      await driver.tap(thirdImageButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      text = find.byValueKey("item1TextField");
+      await driver.tap(text);
+      await Future.delayed(Duration(seconds:1));
+      await driver.enterText('i'); 
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      noButton = find.text("Yes");
+      assert(nextButton != null);
+      await driver.tap(noButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+    },timeout:Timeout.none);
+  });
+    
+  group("A.I.D app test 3",() {
+    FlutterDriver driver;
+    
+    setUpAll(()async{
+      driver = await FlutterDriver.connect();
+    });
+
+    tearDownAll((){
+      if(driver != null) {
+        driver.close();
+      }
+    });
+    var image = find.byValueKey("imageToTap");
+    test("login test", () async {
+      await Future.delayed(Duration(seconds:10));
+      await driver.tap(image);
+      //this adds extra delay to better show the process;
+      await Future.delayed(Duration(seconds:5));
+      await driver.waitUntilNoTransientCallbacks();
+      await Future.delayed(Duration(seconds:5));
+      assert(find.text("Login") != null);
+      var textField = find.byValueKey('loginIDTextField');
+      await driver.tap(textField); 
+      await Future.delayed(Duration(seconds:1));
+      await driver.enterText('AA004'); 
+      await Future.delayed(Duration(seconds:1));
+      await driver.waitFor(find.text('AA004'));
+      print("after id");
+      textField = find.byValueKey('LoginPasswordTextField');
+      await Future.delayed(Duration(seconds:1));
+      await driver.tap(textField);
+      await Future.delayed(Duration(seconds:1)); 
+      await driver.enterText('123456'); 
+      await Future.delayed(Duration(seconds:3)); 
+      var loginButton = find.text("Login");
+      assert(loginButton != null);
+      await driver.tap(loginButton);
+      await Future.delayed(Duration(seconds:2));
+      var beginButton = find.text("Let's begin!");
+      assert(beginButton != null);
+      await driver.tap(beginButton);
+      await Future.delayed(Duration(seconds:2));
+      var nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      var text = find.byValueKey("item1TextField");
+      await driver.tap(text);
+      await Future.delayed(Duration(seconds:1));
+      await driver.enterText('k'); 
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      var noButton = find.text("No");
+      assert(nextButton != null);
+      await driver.tap(noButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+    },timeout:Timeout.none);
+  });
+
+  //please make sure the last user ID in datebase is odd.
+  group("A.I.D app test 4",() {
+    FlutterDriver driver;
+    
+    setUpAll(()async{
+      driver = await FlutterDriver.connect();
+    });
+
+    tearDownAll((){
+      if(driver != null) {
+        driver.close();
+      }
+    });
+
+    var image = find.byValueKey("imageToTap");
+
+    test("Minus Mood test", () async {
+      await Future.delayed(Duration(seconds:10));
+      await driver.tap(image);
+      //this adds extra delay to better show the process;
+      await Future.delayed(Duration(seconds:5));
+      await driver.waitUntilNoTransientCallbacks();
+      await Future.delayed(Duration(seconds:5));
+      assert(find.text("Login") != null);
+      var signUp = find.byValueKey("SignUpButton");
+      assert(signUp != null);
+      print("before tap signup");
+      await driver.tap(signUp);
+      await driver.waitUntilNoTransientCallbacks();
+      print("after tap signup");
+      await Future.delayed(Duration(seconds:5));
+      assert(find.text("Login") == null);
+      var textField = find.byValueKey('EmailTextField');
+      await driver.tap(textField); 
+      await Future.delayed(Duration(seconds:1));
+      await driver.enterText('1234@kcl.ac.uk'); 
+      await Future.delayed(Duration(seconds:1));
+      assert(find.text("1234@kcl.ac.uk") == null);
+      await driver.waitFor(find.text('1234@kcl.ac.uk'));
+      textField = find.byValueKey('PasswordTextField');
+      await Future.delayed(Duration(seconds:1));
+      await driver.tap(textField);
+      await Future.delayed(Duration(seconds:1)); 
+      await driver.enterText('123456'); 
+      await Future.delayed(Duration(seconds:3)); 
+      var signUpButton = find.byValueKey("SignUpButton");
+      await driver.tap(signUpButton);
+      print("Please remember your ID and restore the database before this user is createdif you want to proceed!!!");
+      await Future.delayed(Duration(seconds:10));
+      var nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      var text = find.byValueKey("Practice1TextField");
+      await driver.tap(text);
+      await Future.delayed(Duration(seconds:1));
+      await driver.enterText('i'); 
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      var noButton = find.text("No");
+      assert(nextButton != null);
+      await driver.tap(noButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      var socialButton = find.text("Social");
+      assert(socialButton != null);
+      await driver.tap(socialButton);
+      await Future.delayed(Duration(seconds:2));
+      var acaButton = find.text("Academic");
+      assert(acaButton != null);
+      await driver.tap(acaButton);
+      await Future.delayed(Duration(seconds:2));
+      var hobbieButton = find.text("Hobbies");
+      assert(hobbieButton != null);
+      await driver.tap(hobbieButton);
+      await Future.delayed(Duration(seconds:2));
+      var workButton = find.text("Mood and Health");
+      assert(workButton != null);
+      await driver.tap(workButton);
+      await Future.delayed(Duration(seconds:2));
+      var familyButton = find.text("Family");
+      assert(familyButton != null);
+      await driver.tap(familyButton);
+      await Future.delayed(Duration(seconds:2));
+      var relationButton = find.text("Relationships");
+      assert(relationButton != null);
+      await driver.tap(relationButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      var saveButton = find.text("Save");
+      assert(saveButton != null);
+      await driver.tap(saveButton);
+      await Future.delayed(Duration(seconds:2));
+      var startButton = find.text("Start");
+      assert(startButton != null);
+      await driver.tap(startButton);
+      await Future.delayed(Duration(seconds:2));
+      var beginButton = find.text("Let's begin!");
+      assert(beginButton != null);
+      await driver.tap(beginButton);
+      await Future.delayed(Duration(seconds:2));
+      var firstImageButton = find.byValueKey("firstImageRadio");
+      assert(firstImageButton != null);
+      await driver.tap(firstImageButton);
+      await Future.delayed(Duration(seconds:2));
+      var secondImageButton = find.byValueKey("secondImageRadio");
+      assert(secondImageButton != null);
+      await driver.tap(secondImageButton);
+      await Future.delayed(Duration(seconds:2));
+      var thirdImageButton = find.byValueKey("thirdImageRadio");
+      assert(thirdImageButton != null);
+      await driver.tap(thirdImageButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      text = find.byValueKey("item1TextField");
+      await driver.tap(text);
+      await Future.delayed(Duration(seconds:1));
+      await driver.enterText('o'); 
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      noButton = find.text("No");
+      assert(nextButton != null);
+      await driver.tap(noButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+      nextButton = find.text("Next");
+      assert(nextButton != null);
+      await driver.tap(nextButton);
+      await Future.delayed(Duration(seconds:2));
+    },timeout:Timeout.none);
   });
 }
