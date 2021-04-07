@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_project/pages/Item1.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
 import 'package:mockito/mockito.dart';
 import 'package:dio/dio.dart';
@@ -19,6 +18,7 @@ void main() {
   Widget createWidgetForTesting({Widget child}) {
     return MaterialApp(
       home: child,
+      navigatorObservers: [mockObserver],
     );
   }
 
@@ -51,7 +51,7 @@ void main() {
       print(onPostResponse.data); // {message: Successfully mocked POST!}
     });
 
-    test('tupload category', () async {
+    test('upload category', () async {
       dioAdapter
           .onGet(pathThree)
           .reply(200, {'message': 'success'})
@@ -64,20 +64,5 @@ void main() {
       final onPostResponse = await dio.post(pathThree);
       print(onPostResponse.data); // {message: Successfully mocked POST!}
     });
-  });
-  testWidgets("item1 widgets test", (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new Item1()));
-    await tester.pumpAndSettle();
-    expect(find.text("Type in the first missing letter"), findsOneWidget);
-  });
-  testWidgets("item1 button  test", (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new Item1()));
-    await tester.pumpAndSettle();
-    expect(find.byType(FlatButton), findsOneWidget);
-  });
-  testWidgets('item1 page click test', (WidgetTester tester) async {
-    await tester.pumpWidget(new MaterialApp(home: new Item1()));
-    await tester.tap(find.byType(FlatButton));
-    await tester.pump();
   });
 }
