@@ -27,6 +27,6 @@ A part of the STOP Variants project.
   - 'web' folder contains the web app for analyzer to querying user data
 - 'flutter_project' contains the code for mobile app
 
-#### Locations of Software Components
+#### Location of deployment
 - online simulator for ios and android device without any installation: https://appetize.io/login Email: k19035556@kcl.ac.uk password: 123456 Select a device and click 'view' to run the app.
 - online website application for querying user data: https://stop-variants.herokuapp.com/
