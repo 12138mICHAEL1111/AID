@@ -266,8 +266,8 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
         children: <Widget>[
           // Adobe XD layer: 'WechatIMG1201' (shape)
           Container(
-            width: 428.0,
-            height: 926.0,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: const AssetImage('assets/images/background.jpg'),
@@ -278,14 +278,15 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
           // Adobe XD layer: 'Status Bars - iPhon…' (group)
 
           Transform.translate(
-            offset: Offset(91.3, 190.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.21332,
+                MediaQuery.of(context).size.height * 0.1864),
             child: SizedBox(
               width: 246.0,
               child: Text(
                 'Scheduler',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 47,
+                  fontSize: MediaQuery.of(context).size.height * 0.055,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
@@ -293,14 +294,15 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(-13.7, 125.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.002,
+                MediaQuery.of(context).size.height * 0.10237),
             child: SizedBox(
               width: 455.0,
               child: Text(
                 'Now you need to arrange the time \n you want to complete for your four sessions',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 20,
+                  fontSize: MediaQuery.of(context).size.height * 0.025,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
@@ -310,10 +312,11 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
 
           //white background for box
           Transform.translate(
-            offset: Offset(41.0, 292.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.0958,
+                MediaQuery.of(context).size.height * 0.302574),
             child: Container(
-              width: 346.0,
-              height: 79.0,
+              width: MediaQuery.of(context).size.width * 0.80841,
+              height: MediaQuery.of(context).size.height * 0.08998,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(26.0),
                 color: const Color(0xffffffff),
@@ -321,10 +324,11 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(41.0, 403.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.0958,
+    MediaQuery.of(context).size.height * 0.428998),
             child: Container(
-              width: 346.0,
-              height: 79.0,
+              width: MediaQuery.of(context).size.width * 0.80841,
+              height: MediaQuery.of(context).size.height * 0.08998,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(26.0),
                 color: const Color(0xffffffff),
@@ -332,10 +336,11 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(41.0, 514.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.0958,
+                MediaQuery.of(context).size.height * 0.555421),
             child: Container(
-              width: 346.0,
-              height: 79.0,
+              width: MediaQuery.of(context).size.width * 0.80841,
+              height: MediaQuery.of(context).size.height * 0.08998,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(26.0),
                 color: const Color(0xffffffff),
@@ -344,10 +349,11 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(41.0, 625.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.0958,
+                MediaQuery.of(context).size.height * 0.681845),
             child: Container(
-              width: 346.0,
-              height: 79.0,
+              width: MediaQuery.of(context).size.width * 0.80841,
+              height: MediaQuery.of(context).size.height * 0.08998,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(26.0),
                 color: const Color(0xffffffff),
@@ -355,55 +361,60 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(57.0, 313.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.13318,
+                MediaQuery.of(context).size.height * 0.326492),
             child: Text(
               'Session 1',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 29,
+                fontSize: MediaQuery.of(context).size.height * 0.031,
                 color: const Color(0xff000000),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(57.0, 426.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.13318,
+                MediaQuery.of(context).size.height * 0.45519),
             child: Text(
               'Session 2',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 29,
+                fontSize: MediaQuery.of(context).size.height * 0.031,
                 color: const Color(0xff000000),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(57.0, 646.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.13318,
+                MediaQuery.of(context).size.height * 0.70576),
             child: Text(
               'Session 4',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 29,
+                fontSize: MediaQuery.of(context).size.height * 0.031,
                 color: const Color(0xff000000),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(57.0, 535.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.13318,
+                MediaQuery.of(context).size.height * 0.57934),
             child: Text(
               'Session 3',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 29,
+                fontSize: MediaQuery.of(context).size.height * 0.031,
                 color: const Color(0xff000000),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-              offset: Offset(260, 320.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.607477,
+                  MediaQuery.of(context).size.height * 0.334465),
               child: InkWell(
                   key: Key("first"),
                   child: Row(
@@ -411,7 +422,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                     children: [
                       Text(
                         "${formatDate(_list[1], [yyyy, '-', mm, '-', dd])}",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.021),
                       ),
                       Icon(Icons.arrow_drop_down)
                     ],
@@ -420,14 +431,15 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                     _showDatePicker1(1);
                   })),
           Transform.translate(
-              offset: Offset(260, 431.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.607477,
+                  MediaQuery.of(context).size.height * 0.46089),
               child: InkWell(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
                         "${formatDate(_list[2], [yyyy, '-', mm, '-', dd])}",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.021),
                       ),
                       Icon(Icons.arrow_drop_down)
                     ],
@@ -436,7 +448,8 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                     _showDatePicker1(2);
                   })),
           Transform.translate(
-              offset: Offset(260, 542.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.607477,
+                  MediaQuery.of(context).size.height * 0.58731),
               child: InkWell(
                   key: Key("third"),
                   child: Row(
@@ -444,7 +457,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                     children: [
                       Text(
                         "${formatDate(_list[3], [yyyy, '-', mm, '-', dd])}",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.021),
                       ),
                       Icon(Icons.arrow_drop_down)
                     ],
@@ -453,7 +466,8 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                     _showDatePicker1(3);
                   })),
           Transform.translate(
-              offset: Offset(260, 653.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.607477,
+                  MediaQuery.of(context).size.height * 0.713736),
               child: InkWell(
                   key: Key("4"),
                   child: Row(
@@ -461,7 +475,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                     children: [
                       Text(
                         "${formatDate(_list[4], [yyyy, '-', mm, '-', dd])}",
-                        style: TextStyle(fontSize: 20),
+                        style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.021),
                       ),
                       Icon(Icons.arrow_drop_down)
                     ],
@@ -471,10 +485,11 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                   })),
 
           Transform.translate(
-              offset: Offset(129.0, 744.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.3014,
+                  MediaQuery.of(context).size.height * 0.81738),
               child: Container(
-                  width: 171.0,
-                  height: 62.0,
+                  width: MediaQuery.of(context).size.width * 0.39953,
+                  height: MediaQuery.of(context).size.height * 0.070615,
                   child: FlatButton(
                     onPressed: () {
                       if (!check()) {
@@ -492,17 +507,17 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                       "Save",
                       style: TextStyle(
                         fontFamily: 'ZiZhiQuXiMaiTi',
-                        fontSize: 41,
+                        fontSize: MediaQuery.of(context).size.height * 0.04,
                         color: const Color(0xfffdb56f),
                       ),
                     )),
                   ))),
 
           Transform.translate(
-            offset: Offset(0.0, 831.0),
+            offset: Offset(0.0, MediaQuery.of(context).size.height * 0.91647),
             child: Container(
-              width: 428.0,
-              height: 95.0,
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height * 0.1082,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(45.0),
@@ -513,10 +528,11 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(42.0, 849.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.09813,
+                MediaQuery.of(context).size.height * 0.93),
             child: Container(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.135514,
+              height: MediaQuery.of(context).size.height * 0.06606,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/gray_home.png'),
@@ -527,10 +543,11 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
           ),
 
           Transform.translate(
-            offset: Offset(42.0, 849.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.09813,
+                MediaQuery.of(context).size.height * 0.93),
             child: SizedBox(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.135514,
+              height: MediaQuery.of(context).size.height * 0.06606,
               child: OutlineButton(
                 borderSide: BorderSide.none,
                 splashColor: Colors.transparent,
@@ -546,12 +563,13 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
           ),
 
           Transform.translate(
-            offset: Offset(328.0, 849.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.766355,
+                MediaQuery.of(context).size.height * 0.93),
             child:
                 // Adobe XD layer: '用户' (shape)
                 Container(
-              width: 58.0,
-              height: 58.0,
+                  width: MediaQuery.of(context).size.width * 0.135514,
+                  height: MediaQuery.of(context).size.height * 0.06606,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/gray_profile.png'),
@@ -562,10 +580,11 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
           ),
 
           Transform.translate(
-            offset: Offset(328.0, 849.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.766355,
+                MediaQuery.of(context).size.height * 0.93),
             child: SizedBox(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.135514,
+              height: MediaQuery.of(context).size.height * 0.06606,
               child: OutlineButton(
                 borderSide: BorderSide.none,
                 splashColor: Colors.transparent,
@@ -583,10 +602,11 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
           ),
 
           Transform.translate(
-            offset: Offset(185.0, 850.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.432243,
+                MediaQuery.of(context).size.height * 0.93),
             child: Container(
-              width: 58.0,
-              height: 58.0,
+              width: MediaQuery.of(context).size.width * 0.135514,
+              height: MediaQuery.of(context).size.height * 0.06606,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/calendar.png'),

@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 class Item1 extends StatefulWidget {
   int itemNumber;
   int sessionNumber;
+
   Item1({this.itemNumber, this.sessionNumber}); // Start from 1 and 1
   @override
   _Item1State createState() => _Item1State(itemNumber, sessionNumber);
@@ -60,38 +61,52 @@ class _Item1State extends State<Item1> {
 
   // Time to start reading the first sentence.
   var _startReading;
+
   // Count how many time user gives input.
   var _inputTimes;
+
   // Count previous input's length.
   int _lastInputLength = 0;
+
   // Time to display blank word.
   var _wordDisplay;
 
   // Time in seconds measured from onset of first setence to click required to present the word.  (e.g. 3-30s)
   Duration _readingDuration;
+
   // Time in msec measured from onset of word display to entry click for first letter. (e.g. 100-15000)
   Duration _wordRT1;
+
   // Did user presse the correct letter? "1"=correct; "0"=incorrect.
   var _wordAccuracy1;
+
   // Did users have to make a second attempt at the word? "1"=yes; "0"=no.
   var _clueRequired;
+
   // Time to display feedback clue.
   DateTime _clueDisplay;
+
   // Did user press the correct letter? "1"=correct; "0"=incorrect. Missing if attempt 1 was correct .
   var _wordAccuracy2;
+
   // Time in msec measured from incorrect response click to second attempt click (e.g. 100-15000). Missing if attempt 1 was correct.
   Duration _wordRT2;
 
   // Count how many time user clicks option.
   var _clickTimes;
+
   // Time of fisrt clicking the option.
   DateTime _optionClicked;
+
   // Did users get the right answer? "1"=correct; "0"=incorrect.
   var _questionAccuracy1;
+
   // Time in msec measured from onset of question to first response (e.g. 100-15000).
   Duration _questionRT1;
+
   // Did users get the right answer? "1"=correct; "0"=incorrect. Missing if attempt 1 was correct.
   var _questionAccuracy2;
+
   // Time in msec measured from incorrect response click to second attempt click (e.g. 100-15000). Missing if attempt 1 was correct.
   Duration _questionRT2;
 
@@ -293,7 +308,7 @@ class _Item1State extends State<Item1> {
       TextSpan(
         style: TextStyle(
           fontFamily: 'ZiZhiQuXiMaiTi',
-          fontSize: 43,
+          fontSize: MediaQuery.of(context).size.height * 0.045,
           color: const Color(0xfffaae7c),
         ),
         text: _word,
@@ -309,7 +324,7 @@ class _Item1State extends State<Item1> {
       decoration: InputDecoration(
           labelText: _blank,
           labelStyle: TextStyle(
-            fontSize: 40,
+            fontSize: MediaQuery.of(context).size.height * 0.042,
           ),
           isDense: true,
           contentPadding: EdgeInsets.symmetric(horizontal: 50),
@@ -336,14 +351,16 @@ class _Item1State extends State<Item1> {
 
   void updateQuestion() {
     _displayQuestion = Transform.translate(
-      offset: Offset(45.9, 253.0),
+      // offset: Offset(45.9, 253.0),
+      offset: Offset(MediaQuery.of(context).size.width * 0.106,
+          MediaQuery.of(context).size.height * 0.27),
       child: SizedBox(
-        width: 320.0,
+        width: MediaQuery.of(context).size.width * 0.744,
         child: Text.rich(
           TextSpan(
             style: TextStyle(
               fontFamily: 'ZiZhiQuXiMaiTi',
-              fontSize: 21,
+              fontSize: MediaQuery.of(context).size.height * 0.023,
               color: const Color(0xff000000),
             ),
             children: [
@@ -364,10 +381,12 @@ class _Item1State extends State<Item1> {
 
   void updateOption2() {
     _displayOption2_1 = Transform.translate(
-      offset: Offset(120.6, 458.0),
+      // offset: Offset(120.6, 458.0),
+      offset: Offset(MediaQuery.of(context).size.width * 0.28,
+          MediaQuery.of(context).size.height * 0.495),
       child: FlatButton(
           minWidth: 180.0,
-          height: 50,
+          height: MediaQuery.of(context).size.height * 0.054,
           hoverColor: Color(0xfffaaf7b),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -376,7 +395,7 @@ class _Item1State extends State<Item1> {
             'Yes',
             style: TextStyle(
               fontFamily: 'ZiZhiQuXiMaiTi',
-              fontSize: 21,
+              fontSize: MediaQuery.of(context).size.height * 0.023,
               color: const Color(0xff000000),
             ),
             textAlign: TextAlign.center,
@@ -390,10 +409,12 @@ class _Item1State extends State<Item1> {
     );
 
     _displayOption2_2 = Transform.translate(
-      offset: Offset(120.6, 531.0),
+      // offset: Offset(120.6, 531.0),
+      offset: Offset(MediaQuery.of(context).size.width * 0.28,
+          MediaQuery.of(context).size.height * 0.57),
       child: FlatButton(
           minWidth: 180.0,
-          height: 50,
+          height: MediaQuery.of(context).size.height * 0.054,
           hoverColor: Color(0xfffaaf7b),
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -402,7 +423,7 @@ class _Item1State extends State<Item1> {
             'No',
             style: TextStyle(
               fontFamily: 'ZiZhiQuXiMaiTi',
-              fontSize: 21,
+              fontSize: MediaQuery.of(context).size.height * 0.023,
               color: const Color(0xff000000),
             ),
             textAlign: TextAlign.center,
@@ -508,8 +529,8 @@ class _Item1State extends State<Item1> {
         children: <Widget>[
           // Adobe XD layer: '007 Sunny Morning' (shape)
           Container(
-            width: 428.0,
-            height: 926.0,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: const AssetImage('assets/images/background2.png'),
@@ -518,10 +539,14 @@ class _Item1State extends State<Item1> {
             ),
           ),
           Transform.translate(
-            offset: Offset(41.0, 154.0),
+            // offset: Offset(41.0, 154.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.095,
+                MediaQuery.of(context).size.height * 0.166),
             child: Container(
-              width: 347.0,
-              height: 676.0,
+              // width: 347.0,
+              // height: 676.0,
+              width: MediaQuery.of(context).size.width * 0.81,
+              height: MediaQuery.of(context).size.height * 0.73,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.0),
                 color: const Color(0xffffffff),
@@ -536,10 +561,12 @@ class _Item1State extends State<Item1> {
             ),
           ),
           Transform.translate(
-            offset: Offset(0.0, 195.0),
+            offset: Offset(0.0, MediaQuery.of(context).size.height * 0.21),
             child: Container(
-              width: 20.0,
-              height: 594.0,
+              // width: 20.0,
+              // height: 594.0,
+              width: MediaQuery.of(context).size.width * 0.047,
+              height: MediaQuery.of(context).size.height * 0.64,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(30.0),
@@ -557,10 +584,11 @@ class _Item1State extends State<Item1> {
             ),
           ),
           Transform.translate(
-            offset: Offset(409.0, 195.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.951,
+                MediaQuery.of(context).size.height * 0.21),
             child: Container(
-              width: 20.0,
-              height: 594.0,
+              width: MediaQuery.of(context).size.width * 0.047,
+              height: MediaQuery.of(context).size.height * 0.64,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30.0),
@@ -579,14 +607,16 @@ class _Item1State extends State<Item1> {
           ),
 
           Transform.translate(
-            offset: Offset(27.0, 97.0),
+            // offset: Offset(27.0, 97.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.063,
+                MediaQuery.of(context).size.height * 0.104),
             child: SizedBox(
-              width: 136.0,
+              width: MediaQuery.of(context).size.width * 0.316,
               child: Text(
                 'Session ${_sessionNumber}',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 28,
+                  fontSize: MediaQuery.of(context).size.height * 0.030,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
@@ -599,9 +629,12 @@ class _Item1State extends State<Item1> {
           ),
 
           Transform.translate(
-              offset: Offset(51, 513.0),
+              // offset: Offset(51, 513.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.118,
+                  MediaQuery.of(context).size.height * 0.55),
               child: Container(
-                width: 330.0, //use the white background width
+                width: MediaQuery.of(context).size.width *
+                    0.77, //use the white background width
                 child: _child,
               )),
 
@@ -614,14 +647,16 @@ class _Item1State extends State<Item1> {
           ),
 
           Transform.translate(
-            offset: Offset(282.0, 97.0),
+            // offset: Offset(282.0, 97.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.655,
+                MediaQuery.of(context).size.height * 0.104),
             child: SizedBox(
-              width: 90.0,
+              width: MediaQuery.of(context).size.width * 0.2,
               child: Text(
                 '${_itemNumber}/18',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 28,
+                  fontSize: MediaQuery.of(context).size.height * 0.030,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
@@ -630,14 +665,16 @@ class _Item1State extends State<Item1> {
           ),
 
           Transform.translate(
-            offset: Offset(97.4, 628.0),
+            // offset: Offset(97.4, 628.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.226,
+                MediaQuery.of(context).size.height * 0.68),
             child: SizedBox(
-              width: 233.0,
+              width: MediaQuery.of(context).size.width * 0.54,
               child: Text(
                 _hint,
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 15,
+                  fontSize: MediaQuery.of(context).size.height * 0.0165,
                   color: const Color(0xffb9b9b9),
                 ),
                 textAlign: TextAlign.center,
@@ -646,10 +683,14 @@ class _Item1State extends State<Item1> {
           ),
 
           Transform.translate(
-            offset: Offset(41.0, 763.0),
+            // offset: Offset(41.0, 763.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.095,
+                MediaQuery.of(context).size.height * 0.825),
             child: Container(
-              width: 347.0,
-              height: 67.0,
+              // width: 347.0,
+              // height: 67.0,
+              width: MediaQuery.of(context).size.width * 0.81,
+              height: MediaQuery.of(context).size.height * 0.071,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(30.0),
@@ -671,14 +712,16 @@ class _Item1State extends State<Item1> {
           ),
 
           Transform.translate(
-            offset: Offset(156.3, 775.0),
+            // offset: Offset(156.3, 775.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.36,
+                MediaQuery.of(context).size.height * 0.825),
             child: FlatButton(
               color: Colors.transparent,
               child: Text(
                 'Next',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 43,
+                  fontSize: MediaQuery.of(context).size.height * 0.045,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
@@ -698,9 +741,11 @@ class _Item1State extends State<Item1> {
           ),
 
           Transform.translate(
-            offset: Offset(108.4, 685.0),
+            // offset: Offset(108.4, 685.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.25,
+                MediaQuery.of(context).size.height * 0.74),
             child: SizedBox(
-              width: 211.0,
+              width: MediaQuery.of(context).size.width * 0.49,
               child: Text(
                 "$_feedback",
                 style: TextStyle(
@@ -714,12 +759,16 @@ class _Item1State extends State<Item1> {
           ),
 
           Transform.translate(
-            offset: Offset(140.0, 107.0),
+            // offset: Offset(140.0, 107.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.325,
+                MediaQuery.of(context).size.height * 0.115),
             child:
                 // Adobe XD layer: '截屏2021-03-02 19.21.…' (shape)
                 Container(
-              width: 139.0,
-              height: 131.0,
+              // width: 139.0,
+              // height: 131.0,
+              width: MediaQuery.of(context).size.width * 0.32,
+              height: MediaQuery.of(context).size.height * 0.14,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(76.0),
                 image: DecorationImage(

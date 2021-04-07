@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:adobe_xd/pinned.dart';
+import 'package:adobe_xd/page_link.dart';
+import './Selectcategoriespage.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:dio/dio.dart';
 import '../config/Config.dart';
@@ -22,16 +24,16 @@ class _Practicepage2State extends State<Practicepage2> {
     _next = false;
     _feedback = "";
     _pressed = false;
-    getData();
+    _getData();
   }
 
-  getData() async {
+  _getData() async {
     var api = '${Config.domain}/rest/practiseitems';
     var response = await Dio().get(api);
     _answer = response.data[0]['answer2'];
   }
 
-  bool validateData(value) {
+  bool _validateData(value) {
     if (_answer == value) {
       setState(() {
         _feedback = '✔ Great, this is a good answer!';
@@ -53,8 +55,8 @@ class _Practicepage2State extends State<Practicepage2> {
         children: <Widget>[
           // Adobe XD layer: '007 Sunny Morning' (shape)
           Container(
-            width: 428.0,
-            height: 926.0,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: const AssetImage('assets/images/background2.png'),
@@ -63,10 +65,11 @@ class _Practicepage2State extends State<Practicepage2> {
             ),
           ),
           Transform.translate(
-            offset: Offset(41.0, 154.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.09,
+                MediaQuery.of(context).size.height * 0.1655914),
             child: Container(
-              width: 347.0,
-              height: 676.0,
+              width: MediaQuery.of(context).size.width * 0.807,
+              height: MediaQuery.of(context).size.height * 0.73,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30.0),
                 color: const Color(0xffffffff),
@@ -81,10 +84,10 @@ class _Practicepage2State extends State<Practicepage2> {
             ),
           ),
           Transform.translate(
-            offset: Offset(0.0, 195.0),
+            offset: Offset(0.0, MediaQuery.of(context).size.height * 0.21),
             child: Container(
-              width: 20.0,
-              height: 594.0,
+              width: MediaQuery.of(context).size.width * 0.046,
+              height: MediaQuery.of(context).size.height * 0.64,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(30.0),
@@ -101,16 +104,225 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
-
+          // Adobe XD layer: 'Status Bars - iPhon…' (group)
+          // SizedBox(
+          //   width: 428.0,
+          //   height: 44.0,
+          //   child: Stack(
+          //     children: <Widget>[
+          //       Pinned.fromSize(
+          //         bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
+          //         size: Size(428.0, 44.0),
+          //         pinLeft: true,
+          //         pinRight: true,
+          //         pinTop: true,
+          //         pinBottom: true,
+          //         child:
+          //             // Adobe XD layer: 'Status Bar' (group)
+          //             Stack(
+          //           children: <Widget>[
+          //             Pinned.fromSize(
+          //               bounds: Rect.fromLTWH(0.5, 0.0, 427.5, 44.0),
+          //               size: Size(428.0, 44.0),
+          //               pinLeft: true,
+          //               pinRight: true,
+          //               pinTop: true,
+          //               pinBottom: true,
+          //               child:
+          //                   // Adobe XD layer: 'BG' (shape)
+          //                   Container(),
+          //             ),
+          //             Pinned.fromSize(
+          //               bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
+          //               size: Size(428.0, 44.0),
+          //               pinLeft: true,
+          //               pinRight: true,
+          //               pinTop: true,
+          //               pinBottom: true,
+          //               child:
+          //                   // Adobe XD layer: 'Status Bar' (group)
+          //                   Stack(
+          //                 children: <Widget>[
+          //                   Pinned.fromSize(
+          //                     bounds: Rect.fromLTWH(0.0, 0.0, 428.0, 44.0),
+          //                     size: Size(428.0, 44.0),
+          //                     pinLeft: true,
+          //                     pinRight: true,
+          //                     pinTop: true,
+          //                     pinBottom: true,
+          //                     child:
+          //                         // Adobe XD layer: 'Bars/Status Bars/iP…' (shape)
+          //                         Container(),
+          //                   ),
+          //                   Pinned.fromSize(
+          //                     bounds: Rect.fromLTWH(388.8, 17.3, 24.3, 11.3),
+          //                     size: Size(428.0, 44.0),
+          //                     pinRight: true,
+          //                     fixedWidth: true,
+          //                     fixedHeight: true,
+          //                     child:
+          //                         // Adobe XD layer: 'Battery' (group)
+          //                         Stack(
+          //                       children: <Widget>[
+          //                         Pinned.fromSize(
+          //                           bounds: Rect.fromLTWH(0.0, 0.0, 22.0, 11.3),
+          //                           size: Size(24.3, 11.3),
+          //                           pinLeft: true,
+          //                           pinRight: true,
+          //                           pinTop: true,
+          //                           pinBottom: true,
+          //                           child:
+          //                               // Adobe XD layer: 'Border' (shape)
+          //                               Container(
+          //                             decoration: BoxDecoration(
+          //                               borderRadius:
+          //                                   BorderRadius.circular(2.67),
+          //                               border: Border.all(
+          //                                   width: 1.0,
+          //                                   color: const Color(0x59ffffff)),
+          //                             ),
+          //                           ),
+          //                         ),
+          //                         Pinned.fromSize(
+          //                           bounds: Rect.fromLTWH(23.0, 3.7, 1.3, 4.0),
+          //                           size: Size(24.3, 11.3),
+          //                           pinRight: true,
+          //                           fixedWidth: true,
+          //                           fixedHeight: true,
+          //                           child:
+          //                               // Adobe XD layer: 'Cap' (shape)
+          //                               SvgPicture.string(
+          //                             _svg_5e5um9,
+          //                             allowDrawingOutsideViewBox: true,
+          //                             fit: BoxFit.fill,
+          //                           ),
+          //                         ),
+          //                         Pinned.fromSize(
+          //                           bounds: Rect.fromLTWH(2.0, 2.0, 18.0, 7.3),
+          //                           size: Size(24.3, 11.3),
+          //                           pinLeft: true,
+          //                           pinTop: true,
+          //                           pinBottom: true,
+          //                           fixedWidth: true,
+          //                           child:
+          //                               // Adobe XD layer: 'Capacity' (shape)
+          //                               Container(
+          //                             decoration: BoxDecoration(
+          //                               borderRadius:
+          //                                   BorderRadius.circular(1.33),
+          //                               color: const Color(0xffffffff),
+          //                             ),
+          //                           ),
+          //                         ),
+          //                       ],
+          //                     ),
+          //                   ),
+          //                   Pinned.fromSize(
+          //                     bounds: Rect.fromLTWH(368.5, 17.3, 15.3, 11.0),
+          //                     size: Size(428.0, 44.0),
+          //                     pinRight: true,
+          //                     fixedWidth: true,
+          //                     fixedHeight: true,
+          //                     child:
+          //                         // Adobe XD layer: 'Wifi' (shape)
+          //                         SvgPicture.string(
+          //                       _svg_ya1094,
+          //                       allowDrawingOutsideViewBox: true,
+          //                       fit: BoxFit.fill,
+          //                     ),
+          //                   ),
+          //                   Pinned.fromSize(
+          //                     bounds: Rect.fromLTWH(337.1, 17.7, 17.0, 10.7),
+          //                     size: Size(428.0, 44.0),
+          //                     fixedWidth: true,
+          //                     fixedHeight: true,
+          //                     child:
+          //                         // Adobe XD layer: 'Cellular Connection' (shape)
+          //                         SvgPicture.string(
+          //                       _svg_gbmjcf,
+          //                       allowDrawingOutsideViewBox: true,
+          //                       fit: BoxFit.fill,
+          //                     ),
+          //                   ),
+          //                   Pinned.fromSize(
+          //                     bounds: Rect.fromLTWH(21.5, 13.0, 54.0, 21.0),
+          //                     size: Size(428.0, 44.0),
+          //                     pinLeft: true,
+          //                     fixedWidth: true,
+          //                     fixedHeight: true,
+          //                     child:
+          //                         // Adobe XD layer: 'Time Style' (group)
+          //                         Stack(
+          //                       children: <Widget>[
+          //                         Pinned.fromSize(
+          //                           bounds: Rect.fromLTWH(0.0, 0.0, 54.0, 21.0),
+          //                           size: Size(54.0, 21.0),
+          //                           pinLeft: true,
+          //                           pinRight: true,
+          //                           pinTop: true,
+          //                           pinBottom: true,
+          //                           child:
+          //                               // Adobe XD layer: 'Time - Dark' (group)
+          //                               Stack(
+          //                             children: <Widget>[
+          //                               Pinned.fromSize(
+          //                                 bounds: Rect.fromLTWH(
+          //                                     0.0, 0.0, 54.0, 21.0),
+          //                                 size: Size(54.0, 21.0),
+          //                                 pinLeft: true,
+          //                                 pinRight: true,
+          //                                 pinTop: true,
+          //                                 pinBottom: true,
+          //                                 child:
+          //                                     // Adobe XD layer: 'Time - Light backgr…' (shape)
+          //                                     Container(),
+          //                               ),
+          //                               Pinned.fromSize(
+          //                                 bounds: Rect.fromLTWH(
+          //                                     0.0, 2.0, 54.0, 18.0),
+          //                                 size: Size(54.0, 21.0),
+          //                                 pinLeft: true,
+          //                                 pinRight: true,
+          //                                 pinTop: true,
+          //                                 pinBottom: true,
+          //                                 child:
+          //                                     // Adobe XD layer: 'Time' (text)
+          //                                     Text(
+          //                                   '9:41',
+          //                                   style: TextStyle(
+          //                                     fontFamily: 'SFProText-Semibold',
+          //                                     fontSize: 15,
+          //                                     color: const Color(0xffffffff),
+          //                                     letterSpacing: -0.3,
+          //                                   ),
+          //                                   textAlign: TextAlign.center,
+          //                                 ),
+          //                               ),
+          //                             ],
+          //                           ),
+          //                         ),
+          //                       ],
+          //                     ),
+          //                   ),
+          //                 ],
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       ),
+          //     ],
+          //   ),
+          // ),
           Transform.translate(
-            offset: Offset(52.8, 82.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.12,
+                MediaQuery.of(context).size.height * 0.088),
             child: SizedBox(
-              width: 113.0,
+              width: MediaQuery.of(context).size.width * 0.26,
               child: Text(
                 'Practice ',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 25,
+                  fontSize: MediaQuery.of(context).size.height * 0.027,
                   color: const Color(0xfff7f7f7),
                 ),
                 textAlign: TextAlign.center,
@@ -118,28 +330,29 @@ class _Practicepage2State extends State<Practicepage2> {
             ),
           ),
           Transform.translate(
-            offset: Offset(52.8, 114.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.12,
+                MediaQuery.of(context).size.height * 0.122),
             child: SizedBox(
-              width: 77.0,
+              width: MediaQuery.of(context).size.width * 0.18,
               child: Text(
                 'Items',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 25,
+                  fontSize: MediaQuery.of(context).size.height * 0.027,
                   color: const Color(0xfff7f7f7),
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
-
           Transform.translate(
-            offset: Offset(144.0, 113.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.33,
+                MediaQuery.of(context).size.height * 0.121),
             child:
                 // Adobe XD layer: '截屏2021-03-01 16.20.…' (shape)
                 Container(
-              width: 148.0,
-              height: 139.8,
+              width: MediaQuery.of(context).size.width * 0.344,
+              height: MediaQuery.of(context).size.height * 0.145,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(70.0),
                 image: DecorationImage(
@@ -149,44 +362,69 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
-
           Transform.translate(
-            offset: Offset(285.3, 89.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.66,
+                MediaQuery.of(context).size.height * 0.096),
             child: SizedBox(
-              width: 84.0,
+              width: MediaQuery.of(context).size.width * 0.195,
               child: Text(
                 '2/2',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 39,
+                  fontSize: MediaQuery.of(context).size.height * 0.043,
                   color: const Color(0xfff8eaea),
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
-          
           Transform.translate(
-            offset: Offset(82.8, 258.0),
+            // offset: Offset(82.8, 258.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.19,
+                MediaQuery.of(context).size.height * 0.27),
             child: SizedBox(
-              width: 268.0,
+              width: MediaQuery.of(context).size.width * 0.62,
               child: Text(
                 'The second question：\n\n\nHave you made yourself \na cup of coffee?',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 21,
+                  fontSize: MediaQuery.of(context).size.height * 0.024,
                   color: const Color(0xff000000),
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
           ),
- 
+          // Transform.translate(
+          //   offset: Offset(109.0, 451.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.Fade,
+          //         ease: Curves.linear,
+          //         duration: 1.0,
+          //         pageBuilder: () => Practice2Wrongpage(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 218.0,
+          //       height: 41.0,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(20.0),
+          //         color: const Color(0xffffffff),
+          //         border:
+          //             Border.all(width: 1.0, color: const Color(0xff707070)),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           Transform.translate(
-            offset: Offset(120.6, 458.0),
+            // offset: Offset(120.6, 458.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.28,
+                MediaQuery.of(context).size.height * 0.49),
             child: FlatButton(
                 minWidth: 180.0,
-                height: 50,
+                height: MediaQuery.of(context).size.height * 0.052,
                 hoverColor: Color(0xfffaaf7b),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -195,21 +433,46 @@ class _Practicepage2State extends State<Practicepage2> {
                   'Yes',
                   style: TextStyle(
                     fontFamily: 'ZiZhiQuXiMaiTi',
-                    fontSize: 21,
+                    fontSize: MediaQuery.of(context).size.height * 0.022,
                     color: const Color(0xff000000),
                   ),
                   textAlign: TextAlign.center,
                 ),
                 onPressed: () {
-                  validateData("Yes");
+                  _validateData("Yes");
                 }),
           ),
-          
+          // Transform.translate(
+          //   offset: Offset(109.0, 524.0),
+          //   child: PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.Fade,
+          //         ease: Curves.linear,
+          //         duration: 1.0,
+          //         pageBuilder: () => Practice2Correctpage(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 218.0,
+          //       height: 41.0,
+          //       decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(20.0),
+          //         color: const Color(0xffffffff),
+          //         border:
+          //             Border.all(width: 1.0, color: const Color(0xff707070)),
+          //       ),
+          //     ),
+          //   ),
+          // ),
+
           Transform.translate(
-            offset: Offset(120.6, 531.0),
+            // offset: Offset(120.6, 531.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.28,
+                MediaQuery.of(context).size.height * 0.57),
             child: FlatButton(
                 minWidth: 180.0,
-                height: 50,
+                height: MediaQuery.of(context).size.height * 0.052,
                 hoverColor: Color(0xfffaaf7b),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(20))),
@@ -218,25 +481,27 @@ class _Practicepage2State extends State<Practicepage2> {
                   'No',
                   style: TextStyle(
                     fontFamily: 'ZiZhiQuXiMaiTi',
-                    fontSize: 21,
+                    fontSize: MediaQuery.of(context).size.height * 0.023,
                     color: const Color(0xff000000),
                   ),
                   textAlign: TextAlign.center,
                 ),
                 onPressed: () {
-                  validateData("No");
+                  _validateData("No");
                 }),
           ),
 
           Transform.translate(
-            offset: Offset(123.8, 596.0),
+            // offset: Offset(123.8, 596.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.28,
+                MediaQuery.of(context).size.height * 0.64),
             child: SizedBox(
-              width: 180.0,
+              width: MediaQuery.of(context).size.width * 0.42,
               child: Text(
                 'Choose an option',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 15,
+                  fontSize: MediaQuery.of(context).size.height * 0.016,
                   color: const Color(0xffb9b9b9),
                 ),
                 textAlign: TextAlign.center,
@@ -245,14 +510,16 @@ class _Practicepage2State extends State<Practicepage2> {
           ),
 
           Transform.translate(
-            offset: Offset(108.4, 685.0),
+            // offset: Offset(108.4, 685.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.25,
+                MediaQuery.of(context).size.height * 0.73),
             child: SizedBox(
-              width: 211.0,
+              width: MediaQuery.of(context).size.width * 0.49,
               child: Text(
-                "$_feedback",
+                "${_feedback}",
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 21,
+                  fontSize: MediaQuery.of(context).size.height * 0.0225,
                   color: const Color(0xfff0660e),
                 ),
                 textAlign: TextAlign.center,
@@ -261,10 +528,14 @@ class _Practicepage2State extends State<Practicepage2> {
           ),
 
           Transform.translate(
-            offset: Offset(41.0, 763.0),
+            // offset: Offset(41.0, 763.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.09,
+                MediaQuery.of(context).size.height * 0.826),
             child: Container(
-              width: 347.0,
-              height: 67.0,
+              // width: 347.0,
+              // height: 67.0,
+              width: MediaQuery.of(context).size.width * 0.807,
+              height: MediaQuery.of(context).size.height * 0.07,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
                   bottomRight: Radius.circular(30.0),
@@ -285,14 +556,16 @@ class _Practicepage2State extends State<Practicepage2> {
             ),
           ),
           Transform.translate(
-            offset: Offset(156.3, 775.0),
+            // offset: Offset(156.3, 775.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.36,
+                MediaQuery.of(context).size.height * 0.83),
             child: FlatButton(
               color: Colors.transparent,
               child: Text(
                 'Next',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 43,
+                  fontSize: MediaQuery.of(context).size.height * 0.045,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
@@ -308,6 +581,31 @@ class _Practicepage2State extends State<Practicepage2> {
               },
             ),
           ),
+          // Transform.translate(
+          //   offset: Offset(20.0, 42.0),
+          //   child:
+          //       // Adobe XD layer: 'jiantou' (shape)
+          //       PageLink(
+          //     links: [
+          //       PageLinkInfo(
+          //         transition: LinkTransition.PushRight,
+          //         ease: Curves.easeIn,
+          //         duration: 1.0,
+          //         pageBuilder: () => Practicepage1(),
+          //       ),
+          //     ],
+          //     child: Container(
+          //       width: 50.0,
+          //       height: 50.0,
+          //       decoration: BoxDecoration(
+          //         image: DecorationImage(
+          //           image: const AssetImage('assets/images/goback.png'),
+          //           fit: BoxFit.fill,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
