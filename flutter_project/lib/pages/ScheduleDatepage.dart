@@ -238,7 +238,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
   _showDatePicker1(int i) async {
     var temp = await showDatePicker(
       context: context,
-      initialDate: _list[i],
+      initialDate: DateTime.now().isAfter(_list[i]) ? DateTime.now() : _list[i],
       firstDate: DateTime.now(),
       lastDate: DateTime(2050),
       builder: (BuildContext context, Widget child) {
