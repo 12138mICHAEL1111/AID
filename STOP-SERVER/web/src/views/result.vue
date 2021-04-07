@@ -359,7 +359,9 @@ export default {
                     this.finalQuestionTable.push({'questionnumber':this.results[x].trailNumber,"sessionnumber":this.results[x].sessionNumber,"readingt":this.results[x].readingDuration,"wordrt1":this.results[x].wordRT1,"wordac1":this.results[x].wordAccuracy1,"clue":this.results[x].clueRequired,"wordrt2":wordRT2,"questionrt1":this.results[x].questionRT1,"questiona1":this.results[x].questionAccuracy1,"questionrt2":questionRT2,"questiona2":questiona2,'worda2':worda2})
                 }
             }
-            
+            if(this.results.length==0 && this.moodTable[0].axious!=''){
+                this.finalQuestionTable.push({'sessionmood':1,'anxious':this.moodTable[0].axious,'happy':this.moodTable[0].happy,'sad':this.moodTable[0].sad})
+            }
         }
     },
     created(){
