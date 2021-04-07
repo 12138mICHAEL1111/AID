@@ -184,7 +184,7 @@ class _SignuppageState extends State<Signuppage> {
           Transform.translate(
             // offset: Offset(100.0, 718.0),
             offset: Offset(MediaQuery.of(context).size.width * 0.232,
-                MediaQuery.of(context).size.height * 0.77),
+                MediaQuery.of(context).size.height * 0.765),
             child: PageLink(
               links: [
                 PageLinkInfo(
@@ -198,7 +198,7 @@ class _SignuppageState extends State<Signuppage> {
                 // width: 197.0,
                 // height: 56.0,
                 width: MediaQuery.of(context).size.width * 0.45,
-                height: MediaQuery.of(context).size.height * 0.06,
+                height: MediaQuery.of(context).size.height * 0.075,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(23.0),
                   color: const Color(0xfffaaf7b),
@@ -211,7 +211,8 @@ class _SignuppageState extends State<Signuppage> {
             offset: Offset(MediaQuery.of(context).size.width * 0.324,
                 MediaQuery.of(context).size.height * 0.775),
             child: SizedBox(
-              width: 119.0,
+              // width: 119.0,
+              width: MediaQuery.of(context).size.width * 0.277,
               child: FlatButton(
                 key: Key("SignUpButton"),
                 child: Text("Sign Up"),
