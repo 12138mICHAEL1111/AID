@@ -114,8 +114,8 @@ class _SelectPageState extends State<Selectcategoriespage> {
         children: <Widget>[
           // Adobe XD layer: 'WechatIMG1201' (shape)
           Container(
-            width: 428.0,
-            height: 926.0,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: const AssetImage('assets/images/background.jpg'),
@@ -124,26 +124,30 @@ class _SelectPageState extends State<Selectcategoriespage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(31.0, 156.0),
+            // offset: Offset(31.0, 156.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.072,
+                MediaQuery.of(context).size.height * 0.168),
             child: Text(
               'Congratulations!',
               style: TextStyle(
                 fontFamily: 'ZiZhiQuXiMaiTi',
-                fontSize: 47,
+                fontSize: MediaQuery.of(context).size.height * 0.051,
                 color: const Color(0xffffffff),
               ),
               textAlign: TextAlign.left,
             ),
           ),
           Transform.translate(
-            offset: Offset(14.9, 232.0),
+            // offset: Offset(14.9, 232.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.035,
+                MediaQuery.of(context).size.height * 0.25),
             child: SizedBox(
-              width: 398.0,
+              width: MediaQuery.of(context).size.width * 0.926,
               child: Text(
                 'You have completed your practice run. \nYou can now choose 6 most relevant categories from all 7 categories below.',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 21,
+                  fontSize: MediaQuery.of(context).size.height * 0.0225,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
@@ -152,26 +156,51 @@ class _SelectPageState extends State<Selectcategoriespage> {
           ),
           //!!!!!!!!!!!!
           Transform.translate(
-              offset: Offset(41.0, 344.0), child: cons(1, "Social")),
+              // offset: Offset(41.0, 344.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.095,
+                  MediaQuery.of(context).size.height * 0.37),
+              child: cons(1, "Social")),
           Transform.translate(
-              offset: Offset(232.0, 344.0), child: cons(2, "Academic")),
+              // offset: Offset(232.0, 344.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.54,
+                  MediaQuery.of(context).size.height * 0.37),
+              child: cons(2, "Academic")),
           Transform.translate(
-              offset: Offset(41.0, 417.0), child: cons(3, "Hobbies")),
+              // offset: Offset(41.0, 417.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.095,
+                  MediaQuery.of(context).size.height * 0.45),
+              child: cons(3, "Hobbies")),
           Transform.translate(
-              offset: Offset(41.0, 492.0), child: cons(4, "Family")),
+              // offset: Offset(41.0, 492.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.095,
+                  MediaQuery.of(context).size.height * 0.53),
+              child: cons(4, "Family")),
           Transform.translate(
-              offset: Offset(232.0, 417.0), child: cons(5, "Work")),
+              // offset: Offset(232.0, 417.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.54,
+                  MediaQuery.of(context).size.height * 0.45),
+              child: cons(5, "Work")),
           Transform.translate(
-              offset: Offset(232.0, 492.0), child: cons(6, "Relationships")),
+              // offset: Offset(232.0, 492.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.54,
+                  MediaQuery.of(context).size.height * 0.53),
+              child: cons(6, "Relationships")),
           Transform.translate(
-              offset: Offset(136.5, 565.0), child: cons(7, "Mood and Health")),
+              // offset: Offset(136.5, 565.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.317,
+                  MediaQuery.of(context).size.height * 0.61),
+              child: cons(7, "Mood and Health")),
 
           
           Transform.translate(
-            offset: Offset(120.2, 644.0),
+            // offset: Offset(120.2, 644.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.28,
+                MediaQuery.of(context).size.height * 0.7),
             child: Container(
-              width: 171.0,
-              height: 62.0,
+              // width: 171.0,
+              // height: 62.0,
+              width: MediaQuery.of(context).size.width * 0.4,
+              height: MediaQuery.of(context).size.height * 0.07,
               child: FlatButton(
                 onPressed: () {
                   if(check()) upload();
@@ -185,7 +214,7 @@ class _SelectPageState extends State<Selectcategoriespage> {
                     "Next",
                     style: TextStyle(
                       fontFamily: 'ZiZhiQuXiMaiTi',
-                      fontSize: 24,
+                      fontSize: MediaQuery.of(context).size.height * 0.027,
                       color: Colors.black,
                     ),
                     textAlign: TextAlign.center,
@@ -195,7 +224,9 @@ class _SelectPageState extends State<Selectcategoriespage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(20.0, 42.0),
+            // offset: Offset(20.0, 42.0),
+              offset: Offset(MediaQuery.of(context).size.width * 0.047,
+                  MediaQuery.of(context).size.height * 0.045),
             child:
                 // Adobe XD layer: 'jiantou' (shape)
               InkWell(
@@ -203,8 +234,10 @@ class _SelectPageState extends State<Selectcategoriespage> {
                   Navigator.of(context).pop();
                 },
                 child: Container(
-                  width: 50.0,
-                  height: 50.0,
+                  // width: 50.0,
+                  // height: 50.0,
+                  width: MediaQuery.of(context).size.width * 0.117,
+                  height: MediaQuery.of(context).size.height * 0.054,
                   decoration: BoxDecoration(
                     image: DecorationImage(
                       image: const AssetImage('assets/images/goback.png'),
