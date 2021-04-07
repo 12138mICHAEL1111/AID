@@ -46,8 +46,8 @@ class _ImagineState extends State<ItemImaginePage> {
         children: <Widget>[
           // Adobe XD layer: 'WechatIMG1201' (shape)
           Container(
-            width: 430.0,
-            height: 926.0,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: const AssetImage('assets/images/background.jpg'),
@@ -56,14 +56,16 @@ class _ImagineState extends State<ItemImaginePage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(16.0, 212.0),
+            // offset: Offset(16.0, 212.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.037,
+                MediaQuery.of(context).size.height * 0.23),
             child: SizedBox(
-              width: 396.0,
+              width: MediaQuery.of(context).size.width * 0.92,
               child: Text(
                 'Now imagine the situation \nthat you have just read and \nwhat happened next…… for example…..',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 19,
+                  fontSize: MediaQuery.of(context).size.height * 0.021,
                   color: const Color(0xffffffff),
                 ),
                 textAlign: TextAlign.center,
@@ -72,14 +74,16 @@ class _ImagineState extends State<ItemImaginePage> {
           ),
 
           Transform.translate(
-            offset: Offset(156.3, 775.0),
+            // offset: Offset(156.3, 775.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.36,
+                MediaQuery.of(context).size.height * 0.837),
             child: FlatButton(
                 color: Colors.transparent,
                 child: Text(
                   'Next',
                   style: TextStyle(
                     fontFamily: 'ZiZhiQuXiMaiTi',
-                    fontSize: 43,
+                    fontSize: MediaQuery.of(context).size.height * 0.045,
                     color: const Color(0xffffffff),
                   ),
                   textAlign: TextAlign.center,
@@ -115,24 +119,30 @@ class _ImagineState extends State<ItemImaginePage> {
                 }),
           ),
           Transform.translate(
-            offset: Offset(33.0, 329.0),
+            // offset: Offset(33.0, 329.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.076,
+                MediaQuery.of(context).size.height * 0.355),
             child: Container(
-              width: 363.0,
-              height: 76.0,
+              // width: 363.0,
+              // height: 76.0,
+              width: MediaQuery.of(context).size.width * 0.84,
+              height: MediaQuery.of(context).size.height * 0.082,
               decoration: BoxDecoration(
                 color: Colors.transparent,
               ),
             ),
           ),
           Transform.translate(
-            offset: Offset(16.0, 324.0),
+            // offset: Offset(16.0, 324.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.0372,
+                MediaQuery.of(context).size.height * 0.349),
             child: SizedBox(
-              width: 383.0,
+              width: MediaQuery.of(context).size.width * 0.9,
               child: Text(
                 '${widget.situation}',
                 style: TextStyle(
                   fontFamily: 'ZiZhiQuXiMaiTi',
-                  fontSize: 20,
+                  fontSize: MediaQuery.of(context).size.height * 0.021,
                   color: const Color(0xff000000),
                 ),
                 textAlign: TextAlign.center,
@@ -140,12 +150,16 @@ class _ImagineState extends State<ItemImaginePage> {
             ),
           ),
           Transform.translate(
-            offset: Offset(73.0, 422.0),
+            // offset: Offset(73.0, 422.0),
+            offset: Offset(MediaQuery.of(context).size.width * 0.17,
+                MediaQuery.of(context).size.height * 0.455),
             child:
                 // Adobe XD layer: 'image here' (shape)
                 Container(
-              width: 283.0,
-              height: 212.0,
+              // width: 283.0,
+              // height: 212.0,
+                  width: MediaQuery.of(context).size.width * 0.658,
+                  height: MediaQuery.of(context).size.height * 0.229,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/image place.png'),
