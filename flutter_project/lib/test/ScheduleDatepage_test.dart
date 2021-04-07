@@ -87,14 +87,5 @@ void main() {
     await tester.pumpAndSettle();
     expect(find.byType(ScheduleDatepage), findsOneWidget);
   });
-
-  testWidgets('Can navigate to next page', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting());
-    expect(find.byKey(Key("tapToOver")), findsOneWidget);
-    await tester.tap(find.byKey(Key("tapToOver")));
-    await tester.pumpAndSettle();
-    verify(mockObserver.didPush(any, any));
-  });
-
 }
 
