@@ -55,15 +55,6 @@ void main() {
     expect(rBtn, findsNothing);
   });
 
-  testWidgets('Sign up page click test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new Signuppage()));
-    await tester.pumpAndSettle();
-    final signUpBtn = find.widgetWithText(FlatButton, "Sign Up");
-    await tester.tap(signUpBtn);
-    await tester.pumpAndSettle();
-    verify(mockObserver.didPush(any, any));
-  });
-
   testWidgets('Sign up page input test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting(child: new Signuppage()));
     await tester.pumpAndSettle();

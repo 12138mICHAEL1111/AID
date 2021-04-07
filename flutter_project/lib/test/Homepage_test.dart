@@ -1,37 +1,18 @@
-import 'package:flutter/material.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_project/pages/Homepage.dart';
-import 'package:mockito/mockito.dart';
-
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+import 'package:http_mock_adapter/http_mock_adapter.dart';
 
 void main() {
-  final mockObserver = MockNavigatorObserver();
-  Widget createWidgetForTesting({Widget child}) {
-    return MaterialApp(
-      home: child,
-      navigatorObservers: [mockObserver],
-    );
-  }
+  final dio = Dio();
+  final dioAdapter = DioAdapter();
+  dio.httpClientAdapter = dioAdapter;
+  var path = '${Config.domain}/rest/users/uploadcategory';
 
-  testWidgets('home page content test', (WidgetTester tester) async {
-    await tester.pumpWidget(new MaterialApp(home: new Homepage()));
-    expect(find.text("Welcome back！"), findsOneWidget);
-    expect(
-        find.text("May you be full of sunshine\n like a sun."), findsOneWidget);
-  });
+  test('test Dio when upload category info in home page', () async {
+    dioAdapter.onPost(path).reply(200, {'message': 'success'});
 
-  testWidgets('home page button test', (WidgetTester tester) async {
-    await tester.pumpWidget(new MaterialApp(home: new Homepage()));
-    expect(find.byType(FlatButton), findsOneWidget);
-    expect(find.byType(OutlineButton), findsWidgets);
-  });
-
-  testWidgets('home page begin button click test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new Homepage()));
-    await tester.pumpAndSettle();
-    final beginBtn = find.widgetWithText(FlatButton, "Let's begin!");
-    await tester.tap(beginBtn);
-    await tester.pumpAndSettle();
+    final onPostResponse = await dio.post(path);
+    print(onPostResponse.data); // {message: Successfully mocked POST!}
   });
 }

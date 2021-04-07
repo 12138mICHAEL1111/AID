@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project/routes/Routes.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_project/pages/User.dart';
 import 'package:mockito/mockito.dart';
@@ -11,6 +12,7 @@ void main() {
     return MaterialApp(
       home: child,
       navigatorObservers: [mockObserver],
+      onGenerateRoute: onGenerateRoute,
     );
   }
 
