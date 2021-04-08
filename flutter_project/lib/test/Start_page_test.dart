@@ -14,7 +14,7 @@ void main() {
     );
   }
 
-  testWidgets('moodtracker page button test', (WidgetTester tester) async {
+  testWidgets('start page button test', (WidgetTester tester) async {
     await tester.pumpWidget(createWidgetForTesting());
     await tester.pumpAndSettle();
     var image = find.byKey(Key("imageToTap"));
