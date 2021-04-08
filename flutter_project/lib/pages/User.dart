@@ -190,6 +190,24 @@ class _UserState extends State<User> {
               textAlign: TextAlign.left,
             ),
           ),
+
+          Transform.translate(
+            offset: Offset(MediaQuery.of(context).size.width * 0.88785,
+                MediaQuery.of(context).size.height * 0.55467),
+            child:
+                // Adobe XD layer: 'write' (shape)
+                Container(
+              width: MediaQuery.of(context).size.width * 0.05374,
+              height: MediaQuery.of(context).size.height * 0.02392,
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: const AssetImage('assets/images/change.png'),
+                  fit: BoxFit.fill,
+                ),
+              ),
+            ),
+          ),
+
           Container(
             margin: EdgeInsets.fromLTRB(
                 MediaQuery.of(context).size.width * 0.8528,
@@ -214,22 +232,6 @@ class _UserState extends State<User> {
                 Navigator.pushNamed(context, '/reset',
                     arguments: {"isFromUser": true});
               },
-            ),
-          ),
-          Transform.translate(
-            offset: Offset(MediaQuery.of(context).size.width * 0.88785,
-                MediaQuery.of(context).size.height * 0.55467),
-            child:
-                // Adobe XD layer: 'write' (shape)
-                Container(
-              width: MediaQuery.of(context).size.width * 0.05374,
-              height: MediaQuery.of(context).size.height * 0.02392,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: const AssetImage('assets/images/change.png'),
-                  fit: BoxFit.fill,
-                ),
-              ),
             ),
           ),
           Transform.translate(

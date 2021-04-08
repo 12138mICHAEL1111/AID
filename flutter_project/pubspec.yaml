@@ -22,7 +22,6 @@ environment:
 
 dependencies:
   http:
-  flutter_svg: ^0.20.0-nullsafety.3
   adobe_xd: ^1.1.0+1
   dio: ^3,0.10
   fluttertoast: ^7.1.6
