@@ -29,7 +29,11 @@ A part of the STOP Variants project.
 
 #### Location of deployment
 - online simulator for ios and android device without any installation: https://appetize.io/login Email: k19035556@kcl.ac.uk password: 123456 Select a device in the dashboard and click 'view' to run the app.
-- online website application for querying and displaying user data: https://stop-variants.herokuapp.com/
+- online website application for querying and displaying user data: https://stop-variants.herokuapp.com/ You can search for sample data of user AA003
 
 #### User's credentials
+- if you are running the app on the online simulator or using the online heroku API on your local simulator, use the following credential to login in our app or sign up a new one.
+  - Account id: AA025
+  - password : 123456
+
 
