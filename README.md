@@ -24,7 +24,7 @@ A part of the STOP Variants project.
 - 'STOP-SERVER' folder for admin and web pages as well as server
   - 'admin' folder contains the admin app for developers to add data to local databse
   - 'server' folder contains the server app
-  - 'web' folder contains the web app for analyzer to querying user data
+  - 'web' folder contains the web app for analyzer to query user data
 - 'flutter_project' contains the code for mobile app
 
 #### Location of deployment
