@@ -5,12 +5,8 @@ import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_project/pages/Loginpage.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http_mock_adapter/http_mock_adapter.dart';
-import 'package:mockito/mockito.dart';
-
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
-  final mockObserver = MockNavigatorObserver();
   final dio = Dio();
   final dioAdapter = DioAdapter();
   dio.httpClientAdapter = dioAdapter;
@@ -19,7 +15,6 @@ void main() {
   Widget createWidgetForTesting({Widget child}) {
     return MaterialApp(
       home: child,
-      navigatorObservers: [mockObserver],
     );
   }
 
@@ -48,21 +43,6 @@ void main() {
     expect(raisedButton, findsWidgets);
     expect(flatButton, findsNothing);
     expect(outlineButton, findsNothing);
-  });
-
-  testWidgets('Login page click test', (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new Loginpage()));
-    await tester.pumpAndSettle();
-    final loginButton = find.widgetWithText(RaisedButton, "Login");
-    await tester.tap(loginButton);
-    await tester.pumpAndSettle();
-    final signUpButton = find.widgetWithText(RaisedButton, "Sign Up");
-    await tester.tap(signUpButton);
-    await tester.pumpAndSettle();
-    final resetButton = find.widgetWithText(RaisedButton, "Reset Password");
-    await tester.tap(resetButton);
-    await tester.pumpAndSettle();
-    verify(mockObserver.didPush(any, any));
   });
 
   testWidgets('Login page input test', (WidgetTester tester) async {

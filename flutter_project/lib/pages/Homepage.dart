@@ -4,7 +4,6 @@ import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_project/pages/Item1.dart';
 import 'package:flutter_project/pages/ScheduleDatepage.dart';
 import './User.dart';
-
 import 'Moodtracker.dart';
 
 class Homepage extends StatefulWidget {
@@ -32,6 +31,8 @@ class _HomepageState extends State<Homepage> {
     getData();
   }
 
+  // Get session and item number from database if they are null (no parameter passed in).
+  // Get user scheduled date.
   getData() async {
     _api = '${Config.domain}/rest/users/uploadcategory';
     _response = await Dio().get(_api);
@@ -57,6 +58,7 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
+  // Get date if current user has scheduled the date for current sessioin.
   getDate() async {
     var sessionTime = _response.data[0]["sessiontime"];
     if (sessionTime != null) {

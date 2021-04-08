@@ -1,15 +1,12 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter_project/pages/Homepage.dart';
-
 import '../config/Config.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-//class Loginpage extends StatelessWidget {
 class Loginpage extends StatefulWidget {
   Loginpage({
     Key key,
@@ -24,23 +21,11 @@ class _LoginpageState extends State<Loginpage> {
   String password;
   var _itemNumber;
   var _sessionNumber;
-  //var _categorySelected;
 
   @override
   void initState() {
     super.initState();
-    //_categorySelected = false;
   }
-
-  // categorySelected() async {
-  //   var api = '${Config.domain}/rest/users/uploadcategory';
-  //   var response = await Dio().get(api);
-  //   if (compareData(response.data[0]["category"], "Not selected") == false) {
-  //     _categorySelected = true;
-  //   }
-  //   print(response.data[0]["category"]);
-  //   print(compareData(response.data[0]["category"], "Not selected"));
-  // }
 
   bool compareString(String string1, String string2) {
     if (string1 == null || string2 == null) {
@@ -49,6 +34,9 @@ class _LoginpageState extends State<Loginpage> {
     return string1.toLowerCase() == string2.toLowerCase();
   }
 
+  // Login to homepage if user has selected a category before and correct credential has been provided.
+  // Else if no category selected, go and select categories.
+  // Else if incorrect credential provided, show a prompt to inform user.
   login() async {
     var api = '${Config.domain}/rest/users/login';
     var response = await Dio()
@@ -102,6 +90,7 @@ class _LoginpageState extends State<Loginpage> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.071,
                 MediaQuery.of(context).size.height * 0.039),
@@ -115,6 +104,7 @@ class _LoginpageState extends State<Loginpage> {
               textAlign: TextAlign.left,
             ),
           ),
+
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.2734,
                 MediaQuery.of(context).size.height * 0.2369),
@@ -131,6 +121,7 @@ class _LoginpageState extends State<Loginpage> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.1145,
                 MediaQuery.of(context).size.height * 0.5057),
@@ -144,6 +135,7 @@ class _LoginpageState extends State<Loginpage> {
               textAlign: TextAlign.left,
             ),
           ),
+
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.1612,
                 MediaQuery.of(context).size.height * 0.57175),
@@ -162,6 +154,7 @@ class _LoginpageState extends State<Loginpage> {
               height: MediaQuery.of(context).size.height * 0.05467,
             ),
           ),
+
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.1145,
                 MediaQuery.of(context).size.height * 0.6492),
@@ -175,12 +168,13 @@ class _LoginpageState extends State<Loginpage> {
               textAlign: TextAlign.left,
             ),
           ),
+
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.1612,
                 MediaQuery.of(context).size.height * 0.71526),
             child: Container(
               child: TextField(
-                key:Key("LoginPasswordTextField"),
+                key: Key("LoginPasswordTextField"),
                 obscureText: true,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -208,6 +202,7 @@ class _LoginpageState extends State<Loginpage> {
                   onPressed: login,
                 ),
               )),
+
           //Reset password button
           Transform.translate(
               offset: Offset(MediaQuery.of(context).size.width * 0.3037,
@@ -224,6 +219,7 @@ class _LoginpageState extends State<Loginpage> {
                   },
                 ),
               )),
+
           Transform.translate(
               offset: Offset(MediaQuery.of(context).size.width * 0.3037,
                   MediaQuery.of(context).size.height * 0.92255),
@@ -245,6 +241,3 @@ class _LoginpageState extends State<Loginpage> {
     );
   }
 }
-
-const String _svg_1kkn3b =
-    '<svg viewBox="76.0 502.0 276.0 48.0" ><path transform="translate(76.0, 502.0)" d="M 24 0 L 252 0 C 265.2548217773438 0 276 10.74516487121582 276 24 C 276 37.25483703613281 265.2548217773438 48 252 48 L 24 48 C 10.74516487121582 48 0 37.25483703613281 0 24 C 0 10.74516487121582 10.74516487121582 0 24 0 Z" fill="#f4f4f4" fill-opacity="0.95" stroke="#707070" stroke-width="1" stroke-opacity="0.95" stroke-miterlimit="4" stroke-linecap="butt" /></svg>';

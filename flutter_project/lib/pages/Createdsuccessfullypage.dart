@@ -120,7 +120,7 @@ class _CreatedsuccessfullypageState extends State<Createdsuccessfullypage> {
           Transform.translate(
             // offset: Offset(134.0, 649.0),
             offset: Offset(MediaQuery.of(context).size.width * 0.31,
-                MediaQuery.of(context).size.height * 0.7),
+                MediaQuery.of(context).size.height * 0.69),
             child: PageLink(
               links: [
                 PageLinkInfo(
@@ -134,7 +134,7 @@ class _CreatedsuccessfullypageState extends State<Createdsuccessfullypage> {
                 // width: 171.0,
                 // height: 62.0,
                 width: MediaQuery.of(context).size.width * 0.4,
-                height: MediaQuery.of(context).size.height * 0.066,
+                height: MediaQuery.of(context).size.height * 0.068,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(23.0),
                   color: const Color(0xffffffff),
@@ -152,9 +152,10 @@ class _CreatedsuccessfullypageState extends State<Createdsuccessfullypage> {
           Transform.translate(
             // offset: Offset(141.8, 654.0),
             offset: Offset(MediaQuery.of(context).size.width * 0.33,
-                MediaQuery.of(context).size.height * 0.7029),
+                MediaQuery.of(context).size.height * 0.705),
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.33,
+              height: MediaQuery.of(context).size.height * 0.03,
               child: FlatButton(
                 child: Text(
                   "Next",

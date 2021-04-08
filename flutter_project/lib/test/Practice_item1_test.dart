@@ -1,35 +1,18 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_project/pages/Practicepage1.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter_project/config/Config.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
-
-
-class MockNavigatorObserver extends Mock implements NavigatorObserver {}
+import 'package:http_mock_adapter/http_mock_adapter.dart';
 
 void main() {
-  final mockObserver = MockNavigatorObserver();
+  final dio = Dio();
+  final dioAdapter = DioAdapter();
+  dio.httpClientAdapter = dioAdapter;
+  var path = '${Config.domain}/rest/practiseitems';
 
-  Widget createWidgetForTesting({Widget child}) {
-    return MaterialApp(
-      home: child,
-    );
-  }
+  test('test Dio when upload practice items for parctice 1 page', () async {
+    dioAdapter.onPost(path).reply(200, {'message': 'success'});
 
-  testWidgets("practice item widgets test", (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new Practicepage1()));
-    await tester.pumpAndSettle();
-    expect(find.text("Type in the first missing letter"), findsOneWidget);
-  });
-
-  testWidgets("practice item button test", (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new Practicepage1()));
-    await tester.pumpAndSettle();
-    expect(find.byType(FlatButton), findsOneWidget);
-  });
-
-  testWidgets("practice item page click test", (WidgetTester tester) async {
-    await tester.pumpWidget(createWidgetForTesting(child: new Practicepage1()));
-    await tester.tap(find.byType(FlatButton));
-    await tester.pump();
+    final onPostResponse = await dio.post(path);
+    print(onPostResponse.data); // {message: Successfully mocked POST!}
   });
 }

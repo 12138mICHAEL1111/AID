@@ -20,16 +20,18 @@ class _Practicepage2State extends State<Practicepage2> {
     _next = false;
     _feedback = "";
     _pressed = false;
-    _getData();
+    getData();
   }
 
-  _getData() async {
+  // Get question information.
+  getData() async {
     var api = '${Config.domain}/rest/practiseitems';
     var response = await Dio().get(api);
     _answer = response.data[0]['answer2'];
   }
 
-  bool _validateData(value) {
+  // Validate user input with correct answer.
+  bool validateData(value) {
     if (_answer == value) {
       setState(() {
         _feedback = '✔ Great, this is a good answer!';
@@ -60,7 +62,7 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
-          
+
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.09,
                 MediaQuery.of(context).size.height * 0.1655914),
@@ -102,7 +104,7 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
-        
+
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.12,
                 MediaQuery.of(context).size.height * 0.088),
@@ -119,6 +121,7 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.12,
                 MediaQuery.of(context).size.height * 0.122),
@@ -135,12 +138,11 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.33,
                 MediaQuery.of(context).size.height * 0.121),
-            child:
-                // Adobe XD layer: '截屏2021-03-01 16.20.…' (shape)
-                Container(
+            child: Container(
               width: MediaQuery.of(context).size.width * 0.344,
               height: MediaQuery.of(context).size.height * 0.145,
               decoration: BoxDecoration(
@@ -152,6 +154,7 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
+
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.66,
                 MediaQuery.of(context).size.height * 0.096),
@@ -168,8 +171,8 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
+
           Transform.translate(
-            // offset: Offset(82.8, 258.0),
             offset: Offset(MediaQuery.of(context).size.width * 0.19,
                 MediaQuery.of(context).size.height * 0.27),
             child: SizedBox(
@@ -185,9 +188,8 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
-          
+
           Transform.translate(
-            // offset: Offset(120.6, 458.0),
             offset: Offset(MediaQuery.of(context).size.width * 0.28,
                 MediaQuery.of(context).size.height * 0.49),
             child: FlatButton(
@@ -207,12 +209,11 @@ class _Practicepage2State extends State<Practicepage2> {
                   textAlign: TextAlign.center,
                 ),
                 onPressed: () {
-                  _validateData("Yes");
+                  validateData("Yes");
                 }),
           ),
 
           Transform.translate(
-            // offset: Offset(120.6, 531.0),
             offset: Offset(MediaQuery.of(context).size.width * 0.28,
                 MediaQuery.of(context).size.height * 0.57),
             child: FlatButton(
@@ -232,12 +233,11 @@ class _Practicepage2State extends State<Practicepage2> {
                   textAlign: TextAlign.center,
                 ),
                 onPressed: () {
-                  _validateData("No");
+                  validateData("No");
                 }),
           ),
 
           Transform.translate(
-            // offset: Offset(123.8, 596.0),
             offset: Offset(MediaQuery.of(context).size.width * 0.28,
                 MediaQuery.of(context).size.height * 0.64),
             child: SizedBox(
@@ -255,7 +255,6 @@ class _Practicepage2State extends State<Practicepage2> {
           ),
 
           Transform.translate(
-            // offset: Offset(108.4, 685.0),
             offset: Offset(MediaQuery.of(context).size.width * 0.25,
                 MediaQuery.of(context).size.height * 0.73),
             child: SizedBox(
@@ -273,12 +272,9 @@ class _Practicepage2State extends State<Practicepage2> {
           ),
 
           Transform.translate(
-            // offset: Offset(41.0, 763.0),
             offset: Offset(MediaQuery.of(context).size.width * 0.09,
                 MediaQuery.of(context).size.height * 0.826),
             child: Container(
-              // width: 347.0,
-              // height: 67.0,
               width: MediaQuery.of(context).size.width * 0.807,
               height: MediaQuery.of(context).size.height * 0.07,
               decoration: BoxDecoration(
@@ -300,8 +296,8 @@ class _Practicepage2State extends State<Practicepage2> {
               ),
             ),
           ),
+
           Transform.translate(
-            // offset: Offset(156.3, 775.0),
             offset: Offset(MediaQuery.of(context).size.width * 0.36,
                 MediaQuery.of(context).size.height * 0.83),
             child: FlatButton(
