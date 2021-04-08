@@ -76,153 +76,9 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
     }
   }
 
-  void scheduleNotificationOne() async {
-    // var timeInseconds = _list(1).difference(DateTime.now()).inSecond;
-    //notificationList[1] = DateTime.now().add(Duration(seconds: timeInseconds));
-    //print(timeInseconds);
-    // notificationList[1] = DateTime.now().add(Duration(seconds: 5));
-    var scheduledNotificationdateTime = _list[1].add(Duration(seconds: 28800));
-    debugPrint(formatDate(_list[1], [yyyy, '-', mm, '-', dd]));
-    debugPrint(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
-
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'notification', 'notification', 'Channel for notification',
-        icon: 'ic_launcher',
-        sound: RawResourceAndroidNotificationSound('sound'),
-        largeIcon: DrawableResourceAndroidBitmap('ic_laucher'),
-        priority: Priority.High,
-        importance: Importance.Max);
-
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
-      sound: 'sound',
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-    );
-
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-
-    await flutterLocalNotificationsPlugin.schedule(
-        0,
-        'remainder',
-        'here is a remainder that you have tasks to do today,remember to finish them',
-        scheduledNotificationdateTime,
-        platformChannelSpecifics);
-  }
-
-  void scheduleNotificationTwo() async {
-    // var timeInseconds = _list(1).difference(DateTime.now()).inSecond;
-    //notificationList[1] = DateTime.now().add(Duration(seconds: timeInseconds));
-    //print(timeInseconds);
-    // notificationList[1] = DateTime.now().add(Duration(seconds: 5));
-    var scheduledNotificationdateTime = _list[2].add(Duration(seconds: 28800));
-    debugPrint(formatDate(_list[2], [yyyy, '-', mm, '-', dd]));
-    debugPrint(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
-
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'notification', 'notification', 'Channel for notification',
-        icon: 'ic_launcher',
-        sound: RawResourceAndroidNotificationSound('sound'),
-        largeIcon: DrawableResourceAndroidBitmap('ic_laucher'),
-        priority: Priority.High,
-        importance: Importance.Max);
-
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
-      sound: 'sound',
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-    );
-
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-
-    await flutterLocalNotificationsPlugin.schedule(
-        1,
-        'remainder',
-        'here is a remainder that you have tasks to do today,remember to finish them',
-        scheduledNotificationdateTime,
-        platformChannelSpecifics);
-  }
-
-  void scheduleNotificationThree() async {
-    // var timeInseconds = _list(1).difference(DateTime.now()).inSecond;
-    //notificationList[1] = DateTime.now().add(Duration(seconds: timeInseconds));
-    //print(timeInseconds);
-    // notificationList[1] = DateTime.now().add(Duration(seconds: 5));
-    var scheduledNotificationdateTime = _list[3].add(Duration(seconds: 28800));
-    debugPrint(formatDate(_list[3], [yyyy, '-', mm, '-', dd]));
-    debugPrint(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
-
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'notification', 'notification', 'Channel for notification',
-        icon: 'ic_launcher',
-        sound: RawResourceAndroidNotificationSound('sound'),
-        largeIcon: DrawableResourceAndroidBitmap('ic_laucher'),
-        priority: Priority.High,
-        importance: Importance.Max);
-
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
-      sound: 'sound',
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-    );
-
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-
-    await flutterLocalNotificationsPlugin.schedule(
-        2,
-        'remainder',
-        'here is a remainder that you have tasks to do today,remember to finish them',
-        scheduledNotificationdateTime,
-        platformChannelSpecifics);
-  }
-
-  void scheduleNotificationFour() async {
-    // var timeInseconds = _list(1).difference(DateTime.now()).inSecond;
-    //notificationList[1] = DateTime.now().add(Duration(seconds: timeInseconds));
-    //print(timeInseconds);
-    // notificationList[1] = DateTime.now().add(Duration(seconds: 5));
-    var scheduledNotificationdateTime = _list[4].add(Duration(seconds: 28800));
-    debugPrint(formatDate(_list[4], [yyyy, '-', mm, '-', dd]));
-    debugPrint(formatDate(DateTime.now(), [yyyy, '-', mm, '-', dd]));
-
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'notification', 'notification', 'Channel for notification',
-        icon: 'ic_launcher',
-        sound: RawResourceAndroidNotificationSound('sound'),
-        largeIcon: DrawableResourceAndroidBitmap('ic_laucher'),
-        priority: Priority.High,
-        importance: Importance.Max);
-
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails(
-      sound: 'sound',
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-    );
-
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-
-    await flutterLocalNotificationsPlugin.schedule(
-        3,
-        'remainder',
-        'here is a remainder that you have tasks to do today,remember to finish them',
-        scheduledNotificationdateTime,
-        platformChannelSpecifics);
-  }
-
   uploadRemote() async {
     var api = '${Config.domain}/rest/users/uploadsessiontime';
     var id = pref.get("userid");
-    scheduleNotificationOne();
-    scheduleNotificationTwo();
-    scheduleNotificationThree();
-    scheduleNotificationFour();
 
     await Dio().post(api, data: {
       "userid": id,
@@ -325,7 +181,7 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
           ),
           Transform.translate(
             offset: Offset(MediaQuery.of(context).size.width * 0.0958,
-    MediaQuery.of(context).size.height * 0.428998),
+                MediaQuery.of(context).size.height * 0.428998),
             child: Container(
               width: MediaQuery.of(context).size.width * 0.80841,
               height: MediaQuery.of(context).size.height * 0.08998,
@@ -422,7 +278,9 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                     children: [
                       Text(
                         "${formatDate(_list[1], [yyyy, '-', mm, '-', dd])}",
-                        style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.021),
+                        style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.021),
                       ),
                       Icon(Icons.arrow_drop_down)
                     ],
@@ -439,7 +297,9 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                     children: [
                       Text(
                         "${formatDate(_list[2], [yyyy, '-', mm, '-', dd])}",
-                        style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.021),
+                        style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.021),
                       ),
                       Icon(Icons.arrow_drop_down)
                     ],
@@ -457,7 +317,9 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                     children: [
                       Text(
                         "${formatDate(_list[3], [yyyy, '-', mm, '-', dd])}",
-                        style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.021),
+                        style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.021),
                       ),
                       Icon(Icons.arrow_drop_down)
                     ],
@@ -475,7 +337,9 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
                     children: [
                       Text(
                         "${formatDate(_list[4], [yyyy, '-', mm, '-', dd])}",
-                        style: TextStyle(fontSize: MediaQuery.of(context).size.height * 0.021),
+                        style: TextStyle(
+                            fontSize:
+                                MediaQuery.of(context).size.height * 0.021),
                       ),
                       Icon(Icons.arrow_drop_down)
                     ],
@@ -568,8 +432,8 @@ class _SchedulaerDatePageState extends State<ScheduleDatepage> {
             child:
                 // Adobe XD layer: '用户' (shape)
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.135514,
-                  height: MediaQuery.of(context).size.height * 0.06606,
+              width: MediaQuery.of(context).size.width * 0.135514,
+              height: MediaQuery.of(context).size.height * 0.06606,
               decoration: BoxDecoration(
                 image: DecorationImage(
                   image: const AssetImage('assets/images/gray_profile.png'),
